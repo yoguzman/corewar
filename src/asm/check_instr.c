@@ -29,21 +29,54 @@ static const t_op    op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
+int		valid_arg(char *str, int index_op, int nb_arg)
+{
+	if (str[0] == '%')
+	{
+		if (str[1])
+			if (str[1] == ':')
+			{
+				if (arg_is_labelchar(str + 2) == -1)
+					return (-1);
+			}
+			else
+				if (arg_is_correct(str + 1) == -1)
+					return (-1);
+		if ((op_tab[index_op].arg[nb_arg] & T_DIR) == 0)
+			return (-1);
+	}
+	else if (str[0] == 'r')
+	{
+		if (arg_is_correct(str + 1) == -1)
+			return (-1);
+		if ((op_tab[index_op].arg[nb_arg] & T_REG) == 0)
+			return (-1);
+	}
+}
 int     pars_turfu(char *instr)
 {
 	char **t_str;
 	int i_op;
+	int i;
+	int arg;
 
+	i = 0;
+	arg = 0;
 	if (!(instr))
 		return (puterr(ERR_INSTR_VIDE));
 	if (!(t_str = ft_strsplit(instr, "\t ,")))
 		return (puterr(ERR_SPLIT));
-	if ((i_op = check_name(t_str[0], op_tab)) == -1)
+	if ((i_op = check_name(t_str[i++], op_tab)) == -1)
 		return (puterr(ERR_NAME));
 	if (check_nb_arg(t_str, i_op, op_tab) == -1)
 		return (puterr(ERR_ARG));
-	if (valid_arg(t_str, i_op) == -1)
-		return (puterr(ERR_ARG_TYPE));
+	while (t_str[i])
+	{
+		if (valid_arg(t_str[i], i_op, arg) == -1)
+			return (puterr(ERR_ARG_TYPE));
+		arg++;
+		i++;
+	}
 	ft_putendl("[T_STR]");
 	ft_putendl("_______");
 	ft_print_words_tables(t_str);
@@ -55,7 +88,7 @@ int     pars_turfu(char *instr)
 int     main()
 {
 	if (pars_turfu(
-		"\t\t\t    ld        \t\t \t \t \t\t\t\t\t  %0,r5\t\t")
+			"\t\t\t    ld        \t\t \t \t \t\t\t\t\t  %0,r5\t\t")
 		== 0)
 		ft_putendl(".s correct");
 	else

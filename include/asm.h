@@ -6,7 +6,7 @@
 /*   By: abeauvoi <abeauvoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 19:25:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/01/30 19:12:54 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/01/30 19:41:04 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,6 @@ typedef  struct  s_op
 int		puterr(char *str);
 int		check_name(char *str, const t_op *op_tab);
 int		check_nb_arg(char **str, int index_op, const t_op *op_tab);
+int		arg_is_number(char *arg);
+int		arg_is_labelchar(char *arg);
 #endif
