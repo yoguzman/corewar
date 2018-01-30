@@ -1,17 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   op.c                                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2018/01/30 17:27:38 by jcoutare         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+#include "asm.h"
+#include "libft.h"
 #include "op.h"
-
 
 static const t_op    op_tab[17] =
 {
@@ -39,3 +28,47 @@ static const t_op    op_tab[17] =
 	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
+
+int		valid_arg(char *str, int index_op)
+{
+	int i;
+
+	i = 1;
+
+}
+
+int     pars_turfu(char *instr)
+{
+	char **t_str;
+	int i_op;
+	int i;
+
+	i = 0;
+	if (!(instr))
+		return (puterr(ERR_INSTR_VIDE));
+	if (!(t_str = ft_strsplit(instr, "\t ,")))
+		return (puterr(ERR_SPLIT));
+	if ((i_op = check_name(t_str[i++], op_tab)) == -1)
+		return (puterr(ERR_NAME));
+	if (check_nb_arg(t_str, i_op, op_tab) == -1)
+		return (puterr(ERR_ARG));
+	while 
+	if (valid_arg(t_str[i], i_op) == -1)
+		return (puterr(ERR_ARG_TYPE));
+	ft_putendl("[T_STR]");
+	ft_putendl("_______");
+	ft_print_words_tables(t_str);
+	ft_putendl("_______");
+	printf("kk = %d | %s\n",i_op, op_tab[i_op].name);
+	return (0);
+}
+
+int     main()
+{
+	if (pars_turfu(
+		"\t\t\t    ld        \t\t \t \t \t\t\t\t\t  %0,r5\t\t")
+		== 0)
+		ft_putendl(".s correct");
+	else
+		ft_putendl(".s incorrect");
+}
