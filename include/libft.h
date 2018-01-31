@@ -108,5 +108,6 @@ char				*ft_itoa_base_u(unsigned long long int value,
 void				ft_putstr_null(char *str);
 
 char				**realloc_tab(char **tab, char *str);
+char				**get_input(int fd, int nb_lines);
 
 #endif

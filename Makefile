@@ -22,7 +22,11 @@ LIBNAME			=		./libft/libft.a
 
 DIR_SRC			=		./src/
 
-SRCS_ASM		=		$(DIR_SRC)asm/main_asm.c									\
+SRCS_ASM		=		$(DIR_SRC)asm/main.c									\
+						$(DIR_SRC)asm/compile_champ.c							\
+						$(DIR_SRC)asm/get_champ.c								\
+						$(DIR_SRC)asm/print_champ.c								\
+
 
 SRCS_MACHINE	=		$(DIR_SRC)virtual_machine/main_virtual_machine.c			\
 
