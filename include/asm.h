@@ -6,7 +6,7 @@
 /*   By: abeauvoi <abeauvoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 19:25:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/01/30 19:41:04 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/01/31 15:41:00 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,7 @@ int		check_name(char *str, const t_op *op_tab);
 int		check_nb_arg(char **str, int index_op, const t_op *op_tab);
 int		arg_is_number(char *arg);
 int		arg_is_labelchar(char *arg);
+int		pars_turfu(char *instr);
+int		direct_is_correct(char *str);
+int		reg_is_correct(char *str);
 #endif
