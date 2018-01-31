@@ -43,7 +43,7 @@ int		get_header(char **file, t_header *header)
 
 int		get_info_file(char **file, t_header *champ, t_list **inf_line)
 {
-	get_header(file, header);
+	get_header(file, champ);
 	return (-1);
 }
 
