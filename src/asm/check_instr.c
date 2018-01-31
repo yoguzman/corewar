@@ -64,6 +64,7 @@ int		check_arg(char **t_str, int i_op, int i)
 		arg++;
 		i++;
 	}
+	return (0);
 }
 
 int     pars_turfu(char *instr, t_if *info)
@@ -91,6 +92,5 @@ int     pars_turfu(char *instr, t_if *info)
 		return (-1);
 	info->name_instr = t_str[0];
 	info->arg = t_str + 1;
-	printf("kk = %d | %s\n",i_op, op_tab[i_op].name);
 	return (0);
 }
