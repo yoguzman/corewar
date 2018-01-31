@@ -13,18 +13,20 @@
 #ifndef ASM_H
 # define ASM_H
 
+# include <libft.h>
 # include "op.h"
 
 typedef struct		s_info_line
 {
+	char			*label;
 	int				bytes_line;
 	int				cost_line;
 	char			*name_instr;
 	char			**arg;
 }					t_if;
 
-int					get_champ(char *name, t_header *champ);
-void				print_champ(t_header *champ);
-int					compile_champ(t_header *champ, char *name);
+int					get_champ(char *name, t_header *champ, t_list **inf_line);
+void				print_champ(t_header *champ, t_list *inf_line);
+int					compile_champ(t_header *champ, char *name, t_list *inf_line);
 
 #endif

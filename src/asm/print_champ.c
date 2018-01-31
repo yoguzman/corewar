@@ -11,10 +11,8 @@
 /* ************************************************************************** */
 
 #include "asm.h"
-#include <libft.h>
 
-void		print_champ(t_header *champ)
+void		print_champ(t_header *champ, t_list *inf_line)
 {
 	ft_putstr("Dumping annotated program on standard output\n");
-	(void)champ;
 }

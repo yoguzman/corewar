@@ -33,7 +33,21 @@ int		get_nb_lines(char *file)
 	return (count);
 }
 
-int		get_champ(char *name, t_header *champ)
+int		get_header(char **file, t_header *header)
+{
+//	champ->prog_name = ;
+//	champ->comment = ;
+//	champ->prog_size = 993;
+	return (0);
+}
+
+int		get_info_file(char **file, t_header *champ, t_list **inf_line)
+{
+	get_header(file, header);
+	return (-1);
+}
+
+int		get_champ(char *name, t_header *champ, t_list **inf_line)
 {
 	char	**file;
 	int		nb_lines;
@@ -49,8 +63,7 @@ int		get_champ(char *name, t_header *champ)
 		return (-1);
 	if (!(file = get_input(fd, nb_lines)))
 		return (-1);
-//	champ->prog_name = ;
-//	champ->comment = ;
-//	champ->prog_size = 993;
+	if (get_info_file(file, champ, inf_line) == -1)
+		return (-1);
 	return (0);
 }

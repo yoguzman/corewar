@@ -75,11 +75,10 @@ void		write_string(int fd, char *string, int size)
 	}
 }
 
-int			compile_champ(t_header *champ, char *name)
+int			compile_champ(t_header *champ, char *name, t_list *inf_line)
 {
 	int		dest;
 
-	(void)champ;
 	if ((dest = get_file(name)) == -1)
 		return (-1);
 	write_int(dest, COREWAR_EXEC_MAGIC);
