@@ -6,7 +6,7 @@
 /*   By: abeauvoi <abeauvoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 19:25:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/01/31 15:41:00 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/01/31 17:13:35 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@
 # define ERR_ARG "wrong number of arg\n"
 # define ERR_ARG_TYPE "wrong types of arg\n"
 
+typedef struct s_info_line
+{
+	int bytes_line;
+	int cost_line;
+	char *name_instr;
+	char **arg;
+}				t_if;
+
 typedef  struct  s_op
 {
 	char        *name;
@@ -32,12 +40,15 @@ typedef  struct  s_op
 	int         nb_jsaispasnonplus;
 }               t_op;
 
+int		arg_is_direct(char *str, int index_op, int nb_arg, const t_op *op_tab);
+int		arg_is_reg(char *str, int index_op, int nb_arg, const t_op *op_tab);
 int		puterr(char *str);
+int		puterr_noend(char *str);
 int		check_name(char *str, const t_op *op_tab);
 int		check_nb_arg(char **str, int index_op, const t_op *op_tab);
 int		arg_is_number(char *arg);
 int		arg_is_labelchar(char *arg);
-int		pars_turfu(char *instr);
+int		pars_turfu(char *instr, t_if *info);
 int		direct_is_correct(char *str);
 int		reg_is_correct(char *str);
 #endif

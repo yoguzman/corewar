@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 18:45:41 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/01/31 16:06:14 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/01/31 16:56:32 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ int		puterr(char *str)
 {
 	ft_puterr(str);
 	ft_puterr("\n");
+	return (-1);
+}
+
+int		puterr_noend(char *str)
+{
+	ft_puterr(str);
 	return (-1);
 }
 
