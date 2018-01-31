@@ -72,6 +72,7 @@ SRCS_LIB	=		$(DIR_SRC_LIB)ft_putchar.c					\
 					$(DIR_SRC_LIB)ft_strdel.c					\
 					$(DIR_SRC_LIB)ft_strmap.c					\
 					$(DIR_SRC_LIB)ft_strequ.c					\
+					$(DIR_SRC_LIB)get_input.c					\
 					$(DIR_SRC_LIB)ft_strnequ.c					\
 					$(DIR_SRC_LIB)ft_strmapi.c					\
 					$(DIR_SRC_LIB)ft_strclr.c					\

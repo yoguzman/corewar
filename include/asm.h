@@ -6,12 +6,15 @@
 /*   By: abeauvoi <abeauvoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 19:25:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/01/31 17:13:35 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/01/31 18:09:29 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASM_H
 # define ASM_H
+
+# include <libft.h>
+# include "op.h"
 
 # define USAGE "Usage: ./asm <file1>.s <file2>.s ..."
 # define ERR_INSTR_VIDE "instr empty\n"
@@ -20,13 +23,16 @@
 # define ERR_ARG "wrong number of arg\n"
 # define ERR_ARG_TYPE "wrong types of arg\n"
 
-typedef struct s_info_line
+typedef struct		s_info_line
 {
-	int bytes_line;
-	int cost_line;
-	char *name_instr;
-	char **arg;
-}				t_if;
+	char			*label;
+	int				bytes_line;
+	int				cost_line;
+	char			*name_instr;
+	char			**arg;
+}					t_if;
+
+
 
 typedef  struct  s_op
 {
@@ -40,6 +46,7 @@ typedef  struct  s_op
 	int         nb_jsaispasnonplus;
 }               t_op;
 
+char    *check_label(char *line, t_if *info_line);
 int		arg_is_direct(char *str, int index_op, int nb_arg, const t_op *op_tab);
 int		arg_is_reg(char *str, int index_op, int nb_arg, const t_op *op_tab);
 int		puterr(char *str);
@@ -51,4 +58,8 @@ int		arg_is_labelchar(char *arg);
 int		pars_turfu(char *instr, t_if *info);
 int		direct_is_correct(char *str);
 int		reg_is_correct(char *str);
+int		get_champ(char *name, t_header *champ, t_list **inf_line);
+void	print_champ(t_header *champ, t_list *inf_line);
+int		compile_champ(t_header *champ, char *name, t_list *inf_line);
+
 #endif
