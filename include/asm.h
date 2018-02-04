@@ -6,7 +6,7 @@
 /*   By: abeauvoi <abeauvoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 19:25:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/01/31 17:13:35 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/01/31 18:09:29 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef  struct  s_op
 	int         nb_jsaispasnonplus;
 }               t_op;
 
+char    *check_label(char *line, t_if *info_line);
 int		arg_is_direct(char *str, int index_op, int nb_arg, const t_op *op_tab);
 int		arg_is_reg(char *str, int index_op, int nb_arg, const t_op *op_tab);
 int		puterr(char *str);
