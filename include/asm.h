@@ -112,6 +112,6 @@ void		lld_write(t_if *info_line);
 void		lldi_write(t_if *info_line);
 void		lfork_write(t_if *info_line);
 void		aff_write(t_if *info_line);
-int			write_instr(t_if *info_line);
+void		write_instr(t_list *info_line);
 
 #endif
