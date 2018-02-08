@@ -70,6 +70,7 @@ int		get_header(char **file, t_header *header)
 int		get_info_file(char **file, t_header *champ, t_list **inf_line)
 {
 	int		bytes;
+	t_list	*tmp_list;
 	t_if	info_line;
 	t_if	*tmp;
 	int	i;
@@ -99,15 +100,14 @@ int		get_info_file(char **file, t_header *champ, t_list **inf_line)
 			bytes = 0;
 		else
 			bytes += tmp->cost_line;
-		ft_putnbr(bytes);
-		ft_putchar('\n');
 		fill_cost_line(&info_line);
 		info_line.bytes_line = bytes;
 		if (list_push_back_alloc_content(inf_line, &info_line, sizeof(t_if)) == -1)
 			return (-1);
-		while ((*inf_line)->next)
-			*inf_line = (*inf_line)->next;
-		tmp = (t_if *)(*inf_line)->content;
+		tmp_list = *inf_line;
+		while (tmp_list->next)
+			tmp_list = tmp_list->next;
+		tmp = (t_if *)tmp_list->content;
 		++i;
 	}
 	return (tmp->bytes_line + tmp->cost_line);
@@ -133,6 +133,5 @@ int		get_champ(char *name, t_header *champ, t_list **inf_line)
 	if ((ret = get_info_file(file, champ, inf_line)) == -1)
 		return (-1);
 	champ->prog_size = ret;
-	ft_putnbr(champ->prog_size);
 	return (0);
 }

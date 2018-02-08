@@ -67,6 +67,6 @@ int		main(int ac, char **av)
 		print_champ(&champ, inf_line);
 	else if (compile_champ(&champ, av[file], inf_line) == -1)
 		return (-1);
-	free_champ(&champ);
+	free_champ(&champ, inf_line);
 	return (0);
 }

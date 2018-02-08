@@ -1,6 +1,6 @@
 #include "asm.h"
 
-static const t_cost    write_tab[17] =
+static const t_write    write_tab[17] =
 {
 	{"live", &live_write},
 	{"ld", &ld_write},
@@ -21,13 +21,25 @@ static const t_cost    write_tab[17] =
 	{0, 0}
 };
 
-void		live_write(t_if *info_line)
+void		live_write(t_if *info_line, int dest)
 {
-	info_line->cost_line = 5;
+	char	i;
+	int		nb;
+
+	i = 1;
+	nb = ft_atoi(info_line->arg[0] + 1);
+	ft_putchar_fd(i, dest);
+	write_int(dest, nb);
 }
 
-void		ld_write(t_if *info_line)
+void		ld_write(t_if *info_line, int dest)
 {
+	char	i;
+
+	i = 2;
+	ft_putchar_fd(i, dest);
+	write_op_code(info_line->arg, 2);
+
 	info_line->cost_line = 3;
 	if (info_line->arg[0][0] == '%')
 		info_line->cost_line += 4;
@@ -35,7 +47,7 @@ void		ld_write(t_if *info_line)
 		info_line->cost_line += 2;
 }
 
-void		st_write(t_if *info_line)
+void		st_write(t_if *info_line, int dest)
 {
 	info_line->cost_line = 3;
 	if (info_line->arg[1][0] == 'r')
@@ -44,16 +56,16 @@ void		st_write(t_if *info_line)
 		info_line->cost_line += 2;
 }
 
-void		add_write(t_if *info_line)
+void		add_write(t_if *info_line, int dest)
 {
 	info_line->cost_line = 5;
 }
-void		sub_write(t_if *info_line)
+void		sub_write(t_if *info_line, int dest)
 {
 	info_line->cost_line = 5;
 }
 
-void		and_write(t_if *info_line)
+void		and_write(t_if *info_line, int dest)
 {
 	int		i;
 
@@ -71,7 +83,7 @@ void		and_write(t_if *info_line)
 	}
 }
 
-void		or_write(t_if *info_line)
+void		or_write(t_if *info_line, int dest)
 {
 	int		i;
 
@@ -89,7 +101,7 @@ void		or_write(t_if *info_line)
 	}
 }
 
-void		xor_write(t_if *info_line)
+void		xor_write(t_if *info_line, int dest)
 {
 	int		i;
 
@@ -106,11 +118,11 @@ void		xor_write(t_if *info_line)
 		++i;
 	}
 }
-void		zjmp_write(t_if *info_line)
+void		zjmp_write(t_if *info_line, int dest)
 {
 	info_line->cost_line = 3;
 }
-void		ldi_write(t_if *info_line)
+void		ldi_write(t_if *info_line, int dest)
 {
 	int		i;
 
@@ -128,7 +140,7 @@ void		ldi_write(t_if *info_line)
 	}
 }
 
-void		sti_write(t_if *info_line)
+void		sti_write(t_if *info_line, int dest)
 {
 	int		i;
 
@@ -146,12 +158,12 @@ void		sti_write(t_if *info_line)
 	}
 }
 
-void		fork_write(t_if *info_line)
+void		fork_write(t_if *info_line, int dest)
 {
 	info_line->cost_line = 3;
 }
 
-void		lld_write(t_if *info_line)
+void		lld_write(t_if *info_line, int dest)
 {
 	info_line->cost_line = 3;
 	if (info_line->arg[0][0] == '%')
@@ -159,7 +171,7 @@ void		lld_write(t_if *info_line)
 	else
 		info_line->cost_line += 2;
 }
-void		lldi_write(t_if *info_line)
+void		lldi_write(t_if *info_line, int dest)
 {
 	int		i;
 
@@ -177,34 +189,33 @@ void		lldi_write(t_if *info_line)
 	}
 }
 
-void		lfork_write(t_if *info_line)
+void		lfork_write(t_if *info_line, int dest)
 {
 	info_line->cost_line = 3;
 }
 
-void		aff_write(t_if *info_line)
+void		aff_write(t_if *info_line, int dest)
 {
 	info_line->cost_line = 3;
 }
-void		write_instr(t_list *inf_line)
+void		write_instr(t_list *inf_line, int dest)
 {
 	int		i;
 	t_if	*info_line;
 
-	i = 0;
 	while (inf_line)
 	{
+		i = 0;
 		info_line = (t_if *)inf_line->content;
-		while (cost_tab[i].name)
+		while (write_tab[i].name)
 		{
-			if (ft_strcmp(cost_tab[i].name, info_line->name_instr) == 0)
+			if (ft_strcmp(write_tab[i].name, info_line->name_instr) == 0)
 			{
-				write_tab[i].f(info_line);
+				write_tab[i].f(info_line, dest);
 				break ;
 			}
 			++i;
 		}
 		inf_line = inf_line->next;
 	}
-	return (-1);
 }
