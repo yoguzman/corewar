@@ -14,6 +14,24 @@
 #include "libft.h"
 #include "op.h"
 
+int		check_blank_line(char *str)
+{
+	int	i;
+	int	count;
+
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isspace(str[i]) == 1)
+			++count;
+		++i;
+	}
+	if (count == i)
+		return (0);
+	return (1);
+}
+
 int		puterr(char *str)
 {
 	ft_puterr(str);
@@ -94,4 +112,17 @@ int		check_nb_arg(char **str, int index_op, const t_op *op_tab)
 		i++;
 	}
 	return (0);
+}
+
+void	epur_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == ' ' || str[i] == '\t')
+			str[i] = 0;
+		++i;
+	}
 }

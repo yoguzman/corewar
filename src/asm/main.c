@@ -63,10 +63,10 @@ int		main(int ac, char **av)
 		return (ft_puterr("Can't read source file (null)\n"));
 	if (get_champ(av[file], &champ, &inf_line) == -1)
 		return (-1);
-//	if (a_flag)
+	if (a_flag)
 		print_champ(&champ, inf_line);
-//	else if (compile_champ(&champ, av[file]) == -1)
-//		return (-1);
-//	free_champ(&champ);
+	else if (compile_champ(&champ, av[file], inf_line) == -1)
+		return (-1);
+	free_champ(&champ);
 	return (0);
 }

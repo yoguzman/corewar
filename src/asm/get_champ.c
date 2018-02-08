@@ -33,19 +33,6 @@ int		get_nb_lines(char *file)
 	return (count);
 }
 
-void	epur_space(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == ' ' || str[i] == '\t')
-			str[i] = 0;
-		++i;
-	}
-}
-
 int		get_header(char **file, t_header *header)
 {
 	char	**tab;
@@ -82,13 +69,53 @@ int		get_header(char **file, t_header *header)
 
 int		get_info_file(char **file, t_header *champ, t_list **inf_line)
 {
+	int		bytes;
+	t_if	info_line;
+	t_if	*tmp;
+	int	i;
+
 	if (get_header(file, champ) == -1)
 		return (-1);
-	return (0);
+	i = 2;
+	tmp = NULL;
+	while (file[i])
+	{
+		ft_bzero(&info_line, sizeof(info_line));
+		if ((file[i] = check_label(file[i], &info_line)) == NULL)
+			return (-1);
+		if (file[i][0] == 0 || check_blank_line(file[i]) == 0)
+		{
+			free(file[i]);
+			++i;
+			continue ;
+		}
+		if (pars_instr(file[i], &info_line) == -1)
+		{
+			ft_puterr("error line ");
+			ft_putnbr(i + 1);
+			return (-1);
+		}
+		if (tmp == NULL)
+			bytes = 0;
+		else
+			bytes += tmp->cost_line;
+		ft_putnbr(bytes);
+		ft_putchar('\n');
+		fill_cost_line(&info_line);
+		info_line.bytes_line = bytes;
+		if (list_push_back_alloc_content(inf_line, &info_line, sizeof(t_if)) == -1)
+			return (-1);
+		while ((*inf_line)->next)
+			*inf_line = (*inf_line)->next;
+		tmp = (t_if *)(*inf_line)->content;
+		++i;
+	}
+	return (tmp->bytes_line + tmp->cost_line);
 }
 
 int		get_champ(char *name, t_header *champ, t_list **inf_line)
 {
+	int		ret;
 	char	**file;
 	int		nb_lines;
 	int		fd;
@@ -103,8 +130,9 @@ int		get_champ(char *name, t_header *champ, t_list **inf_line)
 		return (-1);
 	if (!(file = get_input(fd, nb_lines)))
 		return (-1);
-	if (get_info_file(file, champ, inf_line) == -1)
+	if ((ret = get_info_file(file, champ, inf_line)) == -1)
 		return (-1);
-	//champ->prog_size = ;
+	champ->prog_size = ret;
+	ft_putnbr(champ->prog_size);
 	return (0);
 }

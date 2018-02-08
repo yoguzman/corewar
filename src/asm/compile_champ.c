@@ -85,5 +85,6 @@ int			compile_champ(t_header *champ, char *name, t_list *inf_line)
 	write_string(dest, champ->prog_name, PROG_NAME_LENGTH + 4);
 	write_int(dest, champ->prog_size);
 	write_string(dest, champ->comment, COMMENT_LENGTH + 4);
+	write_instr(inf_line);
 	return (0);
 }

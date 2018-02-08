@@ -67,7 +67,7 @@ int		check_arg(char **t_str, int i_op, int i)
 	return (0);
 }
 
-int     pars_turfu(char *instr, t_if *info)
+int     pars_instr(char *instr, t_if *info)
 {
 	char **t_str;
 	int i_op;

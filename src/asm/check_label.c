@@ -46,6 +46,7 @@ char	*check_label(char *line, t_if *info_line)
 					return (NULL);
 				if (!(tmp = ft_strsub(line, i + 1, ft_strlen(line))))
 					return (NULL);
+				free(line);
 				return (tmp);
 			}
 			return (line);
