@@ -37,6 +37,12 @@ typedef struct	s_cost
 	void		(*f)(t_if *);
 }				t_cost;
 
+typedef struct	s_write
+{
+	char		*name;
+	void		(*f)(t_if *, int dest);
+}				t_write;
+
 typedef  struct  s_op
 {
 	char        *name;
@@ -96,22 +102,23 @@ void		lfork_cost(t_if *info_line);
 void		aff_cost(t_if *info_line);
 int			fill_cost_line(t_if *info_line);
 void		write_int(int fd, unsigned int nb);
-void		live_write(t_if *info_line);
-void		ld_write(t_if *info_line);
-void		st_write(t_if *info_line);
-void		add_write(t_if *info_line);
-void		sub_write(t_if *info_line);
-void		and_write(t_if *info_line);
-void		or_write(t_if *info_line);
-void		xor_write(t_if *info_line);
-void		zjmp_write(t_if *info_line);
-void		ldi_write(t_if *info_line);
-void		sti_write(t_if *info_line);
-void		fork_write(t_if *info_line);
-void		lld_write(t_if *info_line);
-void		lldi_write(t_if *info_line);
-void		lfork_write(t_if *info_line);
-void		aff_write(t_if *info_line);
-void		write_instr(t_list *info_line);
-
+void		live_write(t_if *info_line, int dest);
+void		ld_write(t_if *info_line, int dest);
+void		st_write(t_if *info_line, int dest);
+void		add_write(t_if *info_line, int dest);
+void		sub_write(t_if *info_line, int dest);
+void		and_write(t_if *info_line, int dest);
+void		or_write(t_if *info_line, int dest);
+void		xor_write(t_if *info_line, int dest);
+void		zjmp_write(t_if *info_line, int dest);
+void		ldi_write(t_if *info_line, int dest);
+void		sti_write(t_if *info_line, int dest);
+void		fork_write(t_if *info_line, int dest);
+void		lld_write(t_if *info_line, int dest);
+void		lldi_write(t_if *info_line, int dest);
+void		lfork_write(t_if *info_line, int dest);
+void		aff_write(t_if *info_line, int dest);
+void		write_instr(t_list *info_line, int dest);
+void		write_short(int fd, unsigned short nb);
+void		write_op_code(char **arg, int nb_arg);
 #endif

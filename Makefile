@@ -31,6 +31,7 @@ SRCS_ASM		=		$(DIR_SRC)asm/main.c									\
 						$(DIR_SRC)asm/check_instr.c								\
 						$(DIR_SRC)asm/check_arg.c								\
 						$(DIR_SRC)asm/fill_cost_line.c							\
+						$(DIR_SRC)asm/write_instr.c								\
 
 
 SRCS_MACHINE	=		$(DIR_SRC)virtual_machine/main_virtual_machine.c			\

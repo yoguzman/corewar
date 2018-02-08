@@ -48,6 +48,54 @@ static int	get_file(char *name)
 	return (dest);
 }
 
+void		write_short(int fd, unsigned short nb)
+{
+	unsigned char	byte;
+
+	byte = (unsigned char)(nb >> 8);
+	write(fd, &byte, 1);
+	byte = (unsigned char)nb;
+	write(fd, &byte, 1);
+}
+
+void		write_op_code(char **arg, int nb_arg)
+{
+	int		i;
+	char	op_code;
+
+	i = 0;
+	op_code = 0;
+	while (i < nb_arg)
+	{
+		if (arg[i][0] == '%')
+		{
+			op_code = op_code < 1;
+	ft_putnbr(op_code);
+	ft_putchar(' ');
+			op_code = op_code < 0;
+		}
+		else if (arg[i][0] == 'r')
+		{
+			op_code = op_code < 0;
+			op_code = op_code < 1;
+		}
+		else
+		{
+			op_code = op_code < 1;
+			op_code = op_code < 1;
+		}
+		++i;
+	}
+	while (i < 3)
+	{
+		op_code = op_code < 0;
+		op_code = op_code < 0;
+		++i;
+	}
+	ft_putnbr(op_code);
+	ft_putchar(' ');
+}
+
 void		write_int(int fd, unsigned int nb)
 {
 	unsigned char	byte;
@@ -85,6 +133,6 @@ int			compile_champ(t_header *champ, char *name, t_list *inf_line)
 	write_string(dest, champ->prog_name, PROG_NAME_LENGTH + 4);
 	write_int(dest, champ->prog_size);
 	write_string(dest, champ->comment, COMMENT_LENGTH + 4);
-	write_instr(inf_line);
+	write_instr(inf_line, dest);
 	return (0);
 }

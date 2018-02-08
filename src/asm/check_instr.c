@@ -67,6 +67,50 @@ int		check_arg(char **t_str, int i_op, int i)
 	return (0);
 }
 
+void	check_comment(char **t_str)
+{
+  int i;
+
+  i = 0;
+  while (t_str[i])
+    {
+      if (t_str[i][0] == '#')
+	{
+	  if (t_str[i][1])
+	    t_str[i] = 0;
+	  else if (t_str[i + 1])
+	    {
+	      t_str[i] = 0;
+	      t_str[i + 1] = 0;
+	    }
+	}
+      i++;
+    }
+}
+
+void	check_comment2(char **t_str)
+{
+  int i;
+  int j;
+
+  i = 0;
+  while (t_str[i])
+    {
+      j = 0;
+      while (t_str[i][j])
+	{
+	  if (t_str[i][j] == '#')
+	    {
+	      t_str[i][j] = 0;
+	      if (t_str[i + 1])
+		t_str[i + 1] = 0;
+	    }
+	  j++;
+	}
+      i++;
+    }
+}
+
 int     pars_instr(char *instr, t_if *info)
 {
 	char **t_str;
@@ -79,7 +123,10 @@ int     pars_instr(char *instr, t_if *info)
 	if (!(t_str = ft_strsplit(instr, "\t ,")))
 		return (puterr(ERR_SPLIT));
 	if (ft_tablen(t_str) == 1)
-		return (puterr("Syntax error at token ENDLINE"));
+	  return (puterr("Syntax error at token ENDLINE"));
+	check_comment(t_str);
+	check_comment2(t_str);
+	ft_print_words_tables(t_str);
 	if ((i_op = check_name(t_str[i++], op_tab)) == -1)
 	{
 		puterr_noend("Invalid instruction at token instruction ");
