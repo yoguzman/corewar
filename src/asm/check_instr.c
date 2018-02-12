@@ -111,7 +111,7 @@ void	check_comment2(char **t_str)
     }
 }
 
-int     pars_instr(char *instr, t_if *info)
+int     pars_instr(char *instr, t_if *info, int line)
 {
 	char **t_str;
 	int i_op;
@@ -126,11 +126,12 @@ int     pars_instr(char *instr, t_if *info)
 	  return (puterr("Syntax error at token ENDLINE"));
 	check_comment(t_str);
 	check_comment2(t_str);
-	ft_print_words_tables(t_str);
 	if ((i_op = check_name(t_str[i++], op_tab)) == -1)
 	{
 		puterr_noend("Invalid instruction at token instruction ");
-		puterr(t_str[i - 1]);
+		puterr_noend(t_str[i - 1]);
+		puterr_noend(" at line ");
+		puterr(ft_itoa(line));
 		return (-1);
 	}
 	if (check_nb_arg(t_str, i_op, op_tab) == -1)

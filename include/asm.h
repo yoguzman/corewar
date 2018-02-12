@@ -64,7 +64,7 @@ int			check_name(char *str, const t_op *op_tab);
 int			check_nb_arg(char **str, int index_op, const t_op *op_tab);
 int			arg_is_number(char *arg);
 int			arg_is_labelchar(char *arg);
-int			pars_instr(char *instr, t_if *info);
+int			pars_instr(char *instr, t_if *info, int line);
 int			direct_is_correct(char *str);
 int			reg_is_correct(char *str);
 int			get_champ(char *name, t_header *champ, t_list **inf_line);

@@ -38,19 +38,19 @@ int		get_header(char **file, t_header *header)
 	char	**tab;
 
 	if ((tab = ft_strsplit(file[0], "\"")) == NULL)
-		return (ft_puterr("function ft_split fail in get header\n"));
+		return (ft_puterr("function ft_splited fail in get header\n"));
 	epur_space(tab[0]);
 	if (tab == NULL || tab[0] == NULL || ft_strcmp(tab[0], ".name"))
 		return (ft_puterr(".name needed in header\n"));
 	if (tab[1] == NULL || tab[2] != NULL)
 		return (ft_puterr(".name needed just one name\n"));
 	if (ft_strlen(tab[1]) > PROG_NAME_LENGTH || ft_strlen(tab[1]) < 1)
-		return (ft_puterr("Prog name need char between 1 to PROG_NAME_LENGTH\n"));
+		return (ft_puterr("Program name need char between 1 to PROG_NAME_LENGTH\n"));
 	ft_strcpy(header->prog_name, tab[1]);
 	free(tab[0]);
 	free(tab);
 	if ((tab = ft_strsplit(file[1], "\t\"")) == NULL)
-		return (ft_puterr("function ft_split fail in get header\n"));
+		return (ft_puterr("function ft_split failed in get header\n"));
 	epur_space(tab[0]);
 	if (tab == NULL || tab[0] == NULL || ft_strcmp(tab[0], ".comment"))
 		return (ft_puterr(".comment needed in header\n"));
@@ -90,12 +90,8 @@ int		get_info_file(char **file, t_header *champ, t_list **inf_line)
 			++i;
 			continue ;
 		}
-		if (pars_instr(file[i], &info_line) == -1)
-		{
-			ft_puterr("error line ");
-			ft_putnbr(i + 1);
+		if (pars_instr(file[i], &info_line, i + 1) == -1)
 			return (-1);
-		}
 		if (tmp == NULL)
 			bytes = 0;
 		else

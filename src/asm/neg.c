@@ -21,11 +21,3 @@ int	neg(unsigned short neg)
   lol.bneg[1] = first_octet;
   return (lol.neg);
 }
-
-int	main(void)
-{
-  int tamer;
-
-  tamer = 510;
-  printf("> %d\n", neg(tamer));
-}
