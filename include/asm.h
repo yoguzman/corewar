@@ -13,8 +13,7 @@
 # define ASM_H
 
 # include <libft.h>
-# include "op.h"
-
+# include "op.h" 
 # define USAGE "Usage: ./asm <file1>.s <file2>.s ..."
 # define ERR_INSTR_VIDE "instr empty"
 # define ERR_SPLIT "malloc strsplit kc"
@@ -43,7 +42,7 @@ typedef struct	s_write
 	void		(*f)(t_if *, int dest);
 }				t_write;
 
-typedef  struct  s_op
+typedef struct	s_op
 {
 	char        *name;
 	int         nb_arg;
@@ -54,6 +53,12 @@ typedef  struct  s_op
 	int         nb_jsaispas;
 	int         nb_jsaispasnonplus;
 }               t_op;
+
+typedef union	u_neg
+{
+				unsigned short neg;
+				unsigned char bneg[2];
+}				t_neg;
 
 char    	*check_label(char *line, t_if *info_line);
 int			arg_is_direct(char *str, int index_op, int nb_arg, const t_op *op_tab);
@@ -118,7 +123,9 @@ void		lld_write(t_if *info_line, int dest);
 void		lldi_write(t_if *info_line, int dest);
 void		lfork_write(t_if *info_line, int dest);
 void		aff_write(t_if *info_line, int dest);
-void		write_instr(t_list *info_line, int dest);
+int			write_instr(t_list *inf_line, int dest);
 void		write_short(int fd, unsigned short nb);
-void		write_op_code(char **arg, int nb_arg);
+void		write_op_code(char **arg, int nb_arg, int dest);
+int			neg_to_neg(unsigned short neg);
+
 #endif

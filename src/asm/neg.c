@@ -2,13 +2,7 @@
 #include "libft.h"
 #include "op.h"
 
-typedef	union u_neg
-{
-  unsigned short neg;
-  unsigned char bneg[2];
-}	     t_neg;
-  
-int	neg(unsigned short neg)
+int	neg_to_neg(unsigned short neg)
 {
   int first_octet;
   int second_octet;

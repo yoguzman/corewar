@@ -58,7 +58,7 @@ void		write_short(int fd, unsigned short nb)
 	write(fd, &byte, 1);
 }
 
-void		write_op_code(char **arg, int nb_arg)
+void		write_op_code(char **arg, int nb_arg, int dest)
 {
 	int		i;
 	char	op_code;
@@ -69,31 +69,27 @@ void		write_op_code(char **arg, int nb_arg)
 	{
 		if (arg[i][0] == '%')
 		{
-			op_code = op_code < 1;
-	ft_putnbr(op_code);
-	ft_putchar(' ');
-			op_code = op_code < 0;
+			op_code = op_code << 2;
+			op_code += 2;
 		}
 		else if (arg[i][0] == 'r')
 		{
-			op_code = op_code < 0;
-			op_code = op_code < 1;
+			op_code = op_code << 2;
+			op_code += 1;
 		}
 		else
 		{
-			op_code = op_code < 1;
-			op_code = op_code < 1;
+			op_code = op_code << 2;
+			op_code += 3;
 		}
 		++i;
 	}
-	while (i < 3)
+	while (i <= 3)
 	{
-		op_code = op_code < 0;
-		op_code = op_code < 0;
+		op_code = op_code << 2;
 		++i;
 	}
-	ft_putnbr(op_code);
-	ft_putchar(' ');
+	ft_putchar_fd(op_code, dest);
 }
 
 void		write_int(int fd, unsigned int nb)
@@ -133,6 +129,7 @@ int			compile_champ(t_header *champ, char *name, t_list *inf_line)
 	write_string(dest, champ->prog_name, PROG_NAME_LENGTH + 4);
 	write_int(dest, champ->prog_size);
 	write_string(dest, champ->comment, COMMENT_LENGTH + 4);
-	write_instr(inf_line, dest);
+	if (write_instr(inf_line, dest) == -1)
+		return (-1);
 	return (0);
 }
