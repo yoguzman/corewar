@@ -32,6 +32,16 @@ int		check_blank_line(char *str)
 	return (1);
 }
 
+int		ft_tablen(char **tab)
+{
+	int i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
+}
+
 int		puterr(char *str)
 {
 	ft_puterr(str);
