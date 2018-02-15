@@ -192,7 +192,7 @@ void		ldi_write(t_if *info_line, int dest)
 		if (info_line->arg[i][0] == 'r')
 			ft_putchar_fd(ft_atoi(info_line->arg[i] + 1), dest);
 		else if (info_line->arg[i][0] == '%')
-			write_short(dest, ft_atoi(info_line->arg[i] + i));
+			write_short(dest, ft_atoi(info_line->arg[i] + 1));
 		else
 			write_short(dest, ft_atoi(info_line->arg[i]));
 		++i;
@@ -207,7 +207,7 @@ void		sti_write(t_if *info_line, int dest)
 	i = 1;
 	ft_putchar_fd(11, dest);
 	write_op_code(info_line->arg, 3, dest);
-	ft_putchar_fd(ft_atoi(info_line->arg[1] + 1), dest);
+	ft_putchar_fd(ft_atoi(info_line->arg[0] + 1), dest);
 	while (i != 3)
 	{
 		if (info_line->arg[i][0] == 'r')
