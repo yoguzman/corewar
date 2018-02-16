@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 17:51:11 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/01/31 18:20:47 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/02/16 16:31:51 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include "libft.h"
 #include "op.h"
 
-int		ft_islabel(int c)
+int				ft_islabel(int c)
 {
-	char *str;
-	int i;
+	char		*str;
+	int			i;
 
 	str = LABEL_CHARS;
 	i = 0;
@@ -30,10 +30,10 @@ int		ft_islabel(int c)
 	return (0);
 }
 
-char	*check_label(char *line, t_if *info_line)
+char			*check_label(char *line, t_if *info_line)
 {
-	char *tmp;
-	int i;
+	char		*tmp;
+	int			i;
 
 	i = 0;
 	while (line[i])

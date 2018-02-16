@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_instr.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/16 14:27:43 by jcoutare          #+#    #+#             */
+/*   Updated: 2018/02/16 16:31:03 by jcoutare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 #include "libft.h"
 #include "op.h"
 
-static const t_op    op_tab[17] =
+static const t_op		g_op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2},
@@ -23,21 +35,21 @@ static const t_op    op_tab[17] =
 	{0, 0, {0}, 0}
 };
 
-int		valid_arg(char *str, int index_op, int nb_arg)
+int				valid_arg(char *str, int index_op, int nb_arg)
 {
-	int ret;
+	int			ret;
 
-	if ((ret = arg_is_direct(str, index_op, nb_arg, op_tab)) < 0)
+	if ((ret = arg_is_direct(str, index_op, nb_arg, g_op_tab)) < 0)
 		return (ret);
-	if ((ret = arg_is_reg(str, index_op, nb_arg, op_tab)) < 0)
+	if ((ret = arg_is_reg(str, index_op, nb_arg, g_op_tab)) < 0)
 		return (ret);
 	return (0);
 }
 
-int		check_arg(char **t_str, int i_op, int i)
+int				check_arg(char **t_str, int i_op, int i)
 {
-	int ret;
-	int arg;
+	int			ret;
+	int			arg;
 
 	arg = 0;
 	while (t_str[i])
@@ -49,13 +61,12 @@ int		check_arg(char **t_str, int i_op, int i)
 		arg++;
 		i++;
 	}
-	ft_putnbr(i);
 	return (0);
 }
 
-int	check_comment(char **t_str)
+int				check_comment(char **t_str)
 {
-	int i;
+	int			i;
 
 	i = 0;
 	while (t_str[i])
@@ -77,11 +88,11 @@ int	check_comment(char **t_str)
 	return (0);
 }
 
-int	check_comment2(char **t_str)
+int				check_comment2(char **t_str)
 {
-	int onlycomment;
-	int i;
-	int j;
+	int			onlycomment;
+	int			i;
+	int			j;
 
 	onlycomment = 0;
 	i = 0;
@@ -105,11 +116,11 @@ int	check_comment2(char **t_str)
 	return (0);
 }
 
-int     pars_instr(char *instr, t_if *info, int line)
+int				pars_instr(char *instr, t_if *info, int line)
 {
-	char **t_str;
-	int i_op;
-	int i;
+	char		**t_str;
+	int			i_op;
+	int			i;
 
 	i = 0;
 	if (!(instr))
@@ -122,22 +133,10 @@ int     pars_instr(char *instr, t_if *info, int line)
 		return (1);
 	if (ft_tablen(t_str) == 1)
 		return (puterr("Syntax error at token ENDLINE"));
-	if ((i_op = check_name(t_str[i++], op_tab)) == -1)
-	{
-		puterr_noend("Invalid instruction at token instruction ");
-		puterr_noend(t_str[i - 1]);
-		puterr_noend(" at line ");
-		puterr(ft_itoa(line));
-		return (-1);
-	}
-	if (check_nb_arg(t_str, i_op, op_tab) == -1)
-	{
-		ft_putstr(instr);
-		puterr_noend("At line ");
-		puterr_noend(ft_itoa(line));
-		puterr_noend(" ");
-		return (puterr(ERR_ARG));
-	}
+	if ((i_op = check_name(t_str[i++], g_op_tab)) == -1)
+		return (print_error_name(t_str, line, i));
+	if (check_nb_arg(t_str, i_op, g_op_tab) == -1)
+		return (print_error_nb_arg(instr, line));
 	if (check_arg(t_str, i_op, i) == -1)
 		return (-1);
 	info->name_instr = t_str[0];

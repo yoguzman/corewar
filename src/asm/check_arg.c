@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 15:37:31 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/01/31 17:42:49 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/02/16 14:27:16 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int		reg_is_correct(char *str)
 		i++;
 	}
 	return (0);
-
 }
 
 int		check_op_tab(int index_op, int nb_arg, int type, const t_op *op_tab)
@@ -55,6 +54,7 @@ int		check_op_tab(int index_op, int nb_arg, int type, const t_op *op_tab)
 	}
 	return (0);
 }
+
 int		arg_is_reg(char *str, int index_op, int nb_arg, const t_op *op_tab)
 {
 	if (str[0] == 'r')
@@ -90,12 +90,13 @@ int		arg_is_direct(char *str, int index_op, int nb_arg, const t_op *op_tab)
 				}
 			}
 			else
+			{
 				if (direct_is_correct(str + 1) == -1)
 				{
 					puterr_noend("Lexical error ");
 					return (puterr(str));
 				}
-
+			}
 		}
 		if (check_op_tab(index_op, nb_arg, T_DIR, op_tab) == -1)
 			return (-1);

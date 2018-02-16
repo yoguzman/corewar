@@ -6,7 +6,7 @@
 #    By: yguzman <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 11:38:09 by yguzman           #+#    #+#              #
-#    Updated: 2018/01/25 18:37:42 by abeauvoi         ###   ########.fr        #
+#    Updated: 2018/02/16 16:18:23 by jcoutare         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -23,6 +23,7 @@ LIBNAME			=		./libft/libft.a
 DIR_SRC			=		./src/
 
 SRCS_ASM		=		$(DIR_SRC)asm/main.c									\
+						$(DIR_SRC)asm/tools4.c									\
 						$(DIR_SRC)asm/compile_champ.c							\
 						$(DIR_SRC)asm/get_champ.c								\
 						$(DIR_SRC)asm/print_champ.c								\

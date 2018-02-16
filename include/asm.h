@@ -5,7 +5,7 @@
 /*   By: abeauvoi <abeauvoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 19:25:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/01/31 18:09:29 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/02/16 16:25:23 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -13,7 +13,7 @@
 # define ASM_H
 
 # include <libft.h>
-# include "op.h" 
+# include "op.h"
 # define USAGE "Usage: ./asm <file1>.s <file2>.s ..."
 # define ERR_INSTR_VIDE "instr empty"
 # define ERR_SPLIT "malloc strsplit kc"
@@ -56,6 +56,8 @@ typedef union		u_neg
 					unsigned char bneg[2];
 }					t_neg;
 
+int					print_error_nb_arg(char *instr, int line);
+int					print_error_name(char **t_str, int line, int i);
 char    			*check_label(char *line, t_if *info_line);
 int					arg_is_direct(char *str, int index_op, int nb_arg,
 									const t_op *op_tab);
