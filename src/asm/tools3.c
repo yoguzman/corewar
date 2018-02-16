@@ -1,6 +1,5 @@
 #include "asm.h"
 #include "libft.h"
-#include "op.h"
 
 int	neg_to_neg(unsigned short neg)
 {
@@ -15,3 +14,4 @@ int	neg_to_neg(unsigned short neg)
   lol.bneg[1] = first_octet;
   return (lol.neg);
 }
+

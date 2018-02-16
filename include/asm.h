@@ -129,5 +129,7 @@ int					write_instr(t_list *inf_line, int dest);
 void				write_short(int fd, unsigned short nb);
 void				write_op_code(char **arg, int nb_arg, int dest);
 int					neg_to_neg(unsigned short neg);
+int					print_usage(void);
+int					get_nb_lines(char *file);
 
 #endif

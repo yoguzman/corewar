@@ -45,7 +45,7 @@ int		get_header(char **file, t_header *header)
 	if (tab[1] == NULL || tab[2] != NULL)
 		return (ft_puterr(".name needed just one name\n"));
 	if (ft_strlen(tab[1]) > PROG_NAME_LENGTH || ft_strlen(tab[1]) < 1)
-		return (ft_puterr("Program name need char between 1 to PROG_NAME_LENGTH\n"));
+		return (ft_puterr("Name need char between 1 to PROG_NAME_LENGTH\n"));
 	ft_strcpy(header->prog_name, tab[1]);
 	free(tab[0]);
 	free(tab);
@@ -68,7 +68,7 @@ int		get_info_file(char **file, t_header *champ, t_list **inf_line)
 	t_list	*tmp_list;
 	t_if	info_line;
 	t_if	*tmp;
-	int	i;
+	int		i;
 	int		ret;
 
 	if (get_header(file, champ) == -1)
@@ -89,7 +89,11 @@ int		get_info_file(char **file, t_header *champ, t_list **inf_line)
 		if ((ret = pars_instr(file[i], &info_line, i + 1)) == -1)
 			return (-1);
 		else if (ret == 1)
+		{
+			free(file[i]);
+			++i;
 			continue ;
+		}
 		if (tmp == NULL)
 			bytes = 0;
 		else

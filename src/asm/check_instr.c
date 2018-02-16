@@ -49,91 +49,98 @@ int		check_arg(char **t_str, int i_op, int i)
 		arg++;
 		i++;
 	}
+	ft_putnbr(i);
 	return (0);
 }
 
 int	check_comment(char **t_str)
 {
-  int i;
+	int i;
 
-  i = 0;
-  while (t_str[i])
-    {
-      if (t_str[i][0] == '#')
+	i = 0;
+	while (t_str[i])
 	{
-	  if (t_str[i][1])
-	    t_str[i] = 0;
-	  else if (t_str[i + 1])
-	    {
-	      t_str[i] = 0;
-	      t_str[i + 1] = 0;
-	    }
-	  if (i == 0)
-	    return (1);
+		if (t_str[i][0] == '#')
+		{
+			if (t_str[i][1])
+				t_str[i] = 0;
+			else if (t_str[i + 1])
+			{
+				t_str[i] = 0;
+				t_str[i + 1] = 0;
+			}
+			if (i == 0)
+				return (1);
+		}
+		i++;
 	}
-      i++;
-    }
-  return (0);
+	return (0);
 }
 
 int	check_comment2(char **t_str)
 {
-  int onlycomment;
-  int i;
-  int j;
+	int onlycomment;
+	int i;
+	int j;
 
-  onlycomment = 0;
-  i = 0;
-  while (t_str[i])
-    {
-      j = 0;
-      while (t_str[i][j])
+	onlycomment = 0;
+	i = 0;
+	while (t_str[i])
 	{
-	  if (t_str[i][j] == '#')
-	    {
-	      t_str[i][j] = 0;
-	      if (t_str[i + 1])
-		t_str[i + 1] = 0;
-	      if (i == 0)
-		return (1);
-	    }
-	  j++;
+		j = 0;
+		while (t_str[i][j])
+		{
+			if (t_str[i][j] == '#')
+			{
+				t_str[i][j] = 0;
+				if (t_str[i + 1])
+					t_str[i + 1] = 0;
+				if (i == 0)
+					return (1);
+			}
+			j++;
+		}
+		i++;
 	}
-      i++;
-    }
-  return (0);
+	return (0);
 }
 
 int     pars_instr(char *instr, t_if *info, int line)
 {
-  char **t_str;
-  int i_op;
-  int i;
+	char **t_str;
+	int i_op;
+	int i;
 
-  i = 0;
-  if (!(instr))
-    return (puterr(ERR_INSTR_VIDE));
-  if (!(t_str = ft_strsplit(instr, "\t ,")))
-    return (puterr(ERR_SPLIT));
-  if (check_comment(t_str) == 1)
-    return (1);
-  if (check_comment2(t_str) == 1)
-    return (1);
-  if (ft_tablen(t_str) == 1)
-    return (puterr("Syntax error at token ENDLINE"));
-  if ((i_op = check_name(t_str[i++], op_tab)) == -1)
-    {
-  puterr_noend("Invalid instruction at token instruction ");
-  puterr_noend(t_str[i - 1]);
-  puterr_noend(" at line ");
-  puterr(ft_itoa(line));
-  return (-1);
-}
-  if (check_nb_arg(t_str, i_op, op_tab) == -1)
-    return (puterr(ERR_ARG));
-  if (check_arg(t_str, i_op, i) == -1)
-    return (-1);
-  info->name_instr = t_str[0];
-  info->arg = t_str + 1;
-  return (0);
+	i = 0;
+	if (!(instr))
+		return (puterr(ERR_INSTR_VIDE));
+	if (!(t_str = ft_strsplit(instr, "\t ,")))
+		return (puterr(ERR_SPLIT));
+	if (check_comment(t_str) == 1)
+		return (1);
+	if (check_comment2(t_str) == 1)
+		return (1);
+	if (ft_tablen(t_str) == 1)
+		return (puterr("Syntax error at token ENDLINE"));
+	if ((i_op = check_name(t_str[i++], op_tab)) == -1)
+	{
+		puterr_noend("Invalid instruction at token instruction ");
+		puterr_noend(t_str[i - 1]);
+		puterr_noend(" at line ");
+		puterr(ft_itoa(line));
+		return (-1);
+	}
+	if (check_nb_arg(t_str, i_op, op_tab) == -1)
+	{
+		ft_putstr(instr);
+		puterr_noend("At line ");
+		puterr_noend(ft_itoa(line));
+		puterr_noend(" ");
+		return (puterr(ERR_ARG));
+	}
+	if (check_arg(t_str, i_op, i) == -1)
+		return (-1);
+	info->name_instr = t_str[0];
+	info->arg = t_str + 1;
+	return (0);
 }

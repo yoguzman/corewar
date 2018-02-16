@@ -13,15 +13,6 @@
 #include <libft.h>
 #include "asm.h"
 
-int		print_usage(void)
-{
-	ft_putstr("Usage: ./asm [-a] <sourcefile.s>\n");
-	ft_putstr("    -a : Instead of creating a .cor file, ");
-	ft_putstr("outputs a stripped and annotated ");
-	ft_putstr("version of the code to the standard output\n");
-	return (0);
-}
-
 void	get_a_flag(int ac, char **av, int *file, int *a_flag)
 {
 	int	n;
@@ -43,11 +34,6 @@ void	get_a_flag(int ac, char **av, int *file, int *a_flag)
 	*file = n;
 }
 
-void	free_champ(t_header *champ, t_list *inf_line)
-{
-	(void)champ;
-}
-
 int		main(int ac, char **av)
 {
 	t_header	champ;
@@ -67,6 +53,5 @@ int		main(int ac, char **av)
 		print_champ(&champ, inf_line);
 	else if (compile_champ(&champ, av[file], inf_line) == -1)
 		return (-1);
-	free_champ(&champ, inf_line);
 	return (0);
 }
