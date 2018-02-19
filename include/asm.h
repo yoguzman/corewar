@@ -56,6 +56,28 @@ typedef union		u_neg
 					unsigned char bneg[2];
 }					t_neg;
 
+int					get_info_file_loop(char **file, int *i, t_if info_line);
+void					lfork_cost(t_if *info_line);
+void					lldi_cost(t_if *info_line);
+void					lld_cost(t_if *info_line);
+void					fork_cost(t_if *info_line);
+void					sti_cost(t_if *info_line);
+void					ldi_cost(t_if *info_line);
+void					zjmp_cost(t_if *info_line);
+void					xor_cost(t_if *info_line);
+void					or_cost(t_if *info_line);
+void					and_cost(t_if *info_line);
+void					sub_cost(t_if *info_line);
+void					live_cost(t_if *info_line);
+void					ld_cost(t_if *info_line);
+void					st_cost(t_if *info_line);
+void					add_cost(t_if *info_line);
+void					write_short(int fd, unsigned short nb);
+void					write_op_code(char **arg, int nb_arg, int dest);
+void					write_string(int fd, char *string, int size);
+void					write_int(int fd, unsigned int nb);
+int					check_comment2(char **t_str);
+int					check_comment(char **t_str);
 int					print_error_nb_arg(char *instr, int line);
 int					print_error_name(char **t_str, int line, int i);
 char    			*check_label(char *line, t_if *info_line);

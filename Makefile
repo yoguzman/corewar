@@ -24,8 +24,14 @@ DIR_SRC			=		./src/
 
 SRCS_ASM		=		$(DIR_SRC)asm/main.c									\
 						$(DIR_SRC)asm/tools4.c									\
+						$(DIR_SRC)asm/write_instr1.c							\
+						$(DIR_SRC)asm/check_comment.c							\
 						$(DIR_SRC)asm/compile_champ.c							\
 						$(DIR_SRC)asm/get_champ.c								\
+						$(DIR_SRC)asm/cost.c								\
+						$(DIR_SRC)asm/get_champ2.c								\
+						$(DIR_SRC)asm/cost2.c								\
+						$(DIR_SRC)asm/cost3.c								\
 						$(DIR_SRC)asm/print_champ.c								\
 						$(DIR_SRC)asm/check_label.c								\
 						$(DIR_SRC)asm/tools.c									\

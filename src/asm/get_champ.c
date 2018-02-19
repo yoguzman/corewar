@@ -64,51 +64,37 @@ int		get_header(char **file, t_header *header)
 
 int		get_info_file(char **file, t_header *champ, t_list **inf_line)
 {
-	int		bytes;
-	t_list	*tmp_list;
-	t_if	info_line;
-	t_if	*tmp;
-	int		i;
-	int		ret;
+  int		tab[2];
+  t_list	*tmp_list;
+  t_if	info_line;
+  t_if	*tmp;
+  int		i;
 
-	if (get_header(file, champ) == -1)
-		return (-1);
-	i = 2;
-	tmp = NULL;
-	while (file[i])
-	{
-		ft_bzero(&info_line, sizeof(info_line));
-		if ((file[i] = check_label(file[i], &info_line)) == NULL)
-			return (-1);
-		if (file[i][0] == 0 || check_blank_line(file[i]) == 0)
-		{
-			free(file[i]);
-			++i;
-			continue ;
-		}
-		if ((ret = pars_instr(file[i], &info_line, i + 1)) == -1)
-			return (-1);
-		else if (ret == 1)
-		{
-			free(file[i]);
-			++i;
-			continue ;
-		}
-		if (tmp == NULL)
-			bytes = 0;
-		else
-			bytes += tmp->cost_line;
-		fill_cost_line(&info_line);
-		info_line.bytes_line = bytes;
-		if (list_push_back_alloc_content(inf_line, &info_line, sizeof(t_if)) == -1)
-			return (-1);
-		tmp_list = *inf_line;
-		while (tmp_list->next)
-			tmp_list = tmp_list->next;
-		tmp = (t_if *)tmp_list->content;
-		++i;
-	}
-	return (tmp->bytes_line + tmp->cost_line);
+  if (get_header(file, champ) == -1)
+    return (-1);
+  i = 2; 
+  tmp = NULL;
+  while (file[i])
+    {
+      if ((tab[0] = get_info_file_loop(file, &i, info_line)) == -1)
+	return (-1);
+      else if (tab[0] == 1)
+	continue ;
+      if (tmp == NULL)
+	tab[1] = 0; // bytes
+      else
+	tab[1] += tmp->cost_line; // bytes
+      fill_cost_line(&info_line);
+      info_line.bytes_line = tab[1]; // bytes
+      if (list_push_back_alloc_content(inf_line, &info_line, sizeof(t_if)) == -1)
+	return (-1);
+      tmp_list = *inf_line;
+      while (tmp_list->next)
+	tmp_list = tmp_list->next;
+      tmp = (t_if *)tmp_list->content;
+      ++i;
+    }
+  return (tmp->bytes_line + tmp->cost_line);
 }
 
 int		get_champ(char *name, t_header *champ, t_list **inf_line)
