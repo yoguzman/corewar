@@ -56,7 +56,8 @@ typedef union		u_neg
 					unsigned char bneg[2];
 }					t_neg;
 
-int					get_info_file_loop(char **file, int *i, t_if info_line);
+int					get_info_file_loop2(t_list **tmp_list, t_list **inf_line, t_if *info_line, t_if **tmp);
+int					get_info_file_loop(char **file, int *i, t_if *info_line);
 void					lfork_cost(t_if *info_line);
 void					lldi_cost(t_if *info_line);
 void					lld_cost(t_if *info_line);

@@ -74,24 +74,18 @@ int		get_info_file(char **file, t_header *champ, t_list **inf_line)
     return (-1);
   i = 2; 
   tmp = NULL;
+  tmp_list = NULL;
   while (file[i])
     {
-      if ((tab[0] = get_info_file_loop(file, &i, info_line)) == -1)
+      if ((tab[0] = get_info_file_loop(file, &i, &info_line)) == -1)
 	return (-1);
       else if (tab[0] == 1)
 	continue ;
-      if (tmp == NULL)
-	tab[1] = 0; // bytes
-      else
-	tab[1] += tmp->cost_line; // bytes
+      tab[1] = (tmp == NULL ? 0 : tab[1] + tmp->cost_line);
       fill_cost_line(&info_line);
-      info_line.bytes_line = tab[1]; // bytes
-      if (list_push_back_alloc_content(inf_line, &info_line, sizeof(t_if)) == -1)
+      info_line.bytes_line = tab[1];
+      if (get_info_file_loop2(&tmp_list, inf_line, &info_line, &tmp) == -1)
 	return (-1);
-      tmp_list = *inf_line;
-      while (tmp_list->next)
-	tmp_list = tmp_list->next;
-      tmp = (t_if *)tmp_list->content;
       ++i;
     }
   return (tmp->bytes_line + tmp->cost_line);
