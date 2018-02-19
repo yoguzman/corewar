@@ -6,7 +6,7 @@ int		print_usage(void)
 	ft_putstr("    -a : Instead of creating a .cor file, ");
 	ft_putstr("outputs a stripped and annotated ");
 	ft_putstr("version of the code to the standard output\n");
-	return (0);
+	return (-1);
 }
 
 int		check_blank_line(char *str)

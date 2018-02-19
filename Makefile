@@ -28,7 +28,6 @@ SRCS_ASM		=		$(DIR_SRC)asm/main.c									\
 						$(DIR_SRC)asm/write_instr4.c							\
 						$(DIR_SRC)asm/write_instr3.c							\
 						$(DIR_SRC)asm/write_instr1.c							\
-						$(DIR_SRC)asm/check_comment.c							\
 						$(DIR_SRC)asm/compile_champ.c							\
 						$(DIR_SRC)asm/get_champ.c								\
 						$(DIR_SRC)asm/islabel.c								\

@@ -75,10 +75,6 @@ int				pars_instr(char *instr, t_if *info, int line)
 		return (puterr(ERR_INSTR_VIDE));
 	if (!(t_str = ft_strsplit(instr, "\t ,")))
 		return (puterr(ERR_SPLIT));
-	if (check_comment(t_str) == 1)
-		return (1);
-	if (check_comment2(t_str) == 1)
-		return (1);
 	if (ft_tablen(t_str) == 1)
 		return (puterr("Syntax error at token ENDLINE"));
 	if ((i_op = check_name(t_str[i++], g_op_tab)) == -1)

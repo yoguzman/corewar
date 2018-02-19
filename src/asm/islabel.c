@@ -31,21 +31,25 @@ t_list		*go_first(t_list *list)
 	return (list);
 }
 
-int			is_label(t_if *here, t_list *list)
+void		init_while_label(char **str_tmp, t_if *here, int i[3])
+{
+	*str_tmp = here->arg[i[1]];
+	i[0] = (here->arg[i[1]][0] == '%' ? i[0] + 1 : i[0]);
+}
+
+int			is_label(t_if *here, t_list *list, int line)
 {
 	char	*str_tmp;
 	t_list	*tmp;
 	int		i[3];
 
 	ft_bzero(i, 12);
-	while (here->arg[i[1]])
+	while (here->arg[i[1]] && ((i[0] = 0) == 0))
 	{
-		str_tmp = here->arg[i[1]];
-		if (here->arg[i[1]][0] == '%')
-			i[0] += 1;
+		tmp = go_first(list);
+		init_while_label(&str_tmp, here, i);
 		if (here->arg[i[1]][i[0]] == ':')
 		{
-			tmp = go_first(list);
 			while (tmp)
 			{
 				if ((i[2] = modif_label(here, str_tmp, i, tmp)) == -1)
@@ -54,6 +58,8 @@ int			is_label(t_if *here, t_list *list)
 					break ;
 				tmp = tmp->next;
 			}
+			if (tmp == NULL)
+				return (print_error_label(here->name_instr, line));
 		}
 		++i[1];
 	}

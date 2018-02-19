@@ -15,7 +15,7 @@
 #include <fcntl.h>
 #include "asm.h"
 
-int		get_nb_lines(char *file)
+int			get_nb_lines(char *file)
 {
 	int		fd;
 	int		count;
@@ -33,7 +33,7 @@ int		get_nb_lines(char *file)
 	return (count);
 }
 
-int		get_header(char **file, t_header *header)
+int			get_header(char **file, t_header *header)
 {
 	char	**tab;
 
@@ -62,36 +62,36 @@ int		get_header(char **file, t_header *header)
 	return (0);
 }
 
-int		get_info_file(char **file, t_header *champ, t_list **inf_line)
+int			get_info_file(char **file, t_header *champ, t_list **inf_line)
 {
-  int		tab[2];
-  t_list	*tmp_list;
-  t_if	info_line;
-  t_if	*tmp;
-  int		i;
+	int		tab[2];
+	t_list	*tmp_list;
+	t_if	info_line;
+	t_if	*tmp;
+	int		i;
 
-  if (get_header(file, champ) == -1)
-    return (-1);
-  i = 2; 
-  tmp = NULL;
-  tmp_list = NULL;
-  while (file[i])
-    {
-      if ((tab[0] = get_info_file_loop(file, &i, &info_line)) == -1)
-	return (-1);
-      else if (tab[0] == 1)
-	continue ;
-      tab[1] = (tmp == NULL ? 0 : tab[1] + tmp->cost_line);
-      fill_cost_line(&info_line);
-      info_line.bytes_line = tab[1];
-      if (get_info_file_loop2(&tmp_list, inf_line, &info_line, &tmp) == -1)
-	return (-1);
-      ++i;
-    }
-  return (tmp->bytes_line + tmp->cost_line);
+	if (get_header(file, champ) == -1)
+		return (-1);
+	i = 2; 
+	tmp = NULL;
+	tmp_list = NULL;
+	while (file[i])
+	{
+		if ((tab[0] = get_info_file_loop(file, &i, &info_line)) == -1)
+			return (-1);
+		else if (tab[0] == 1)
+			continue ;
+		tab[1] = (tmp == NULL ? 0 : tab[1] + tmp->cost_line);
+		fill_cost_line(&info_line);
+		info_line.bytes_line = tab[1];
+		if (get_info_file_loop2(&tmp_list, inf_line, &info_line, &tmp) == -1)
+			return (-1);
+		++i;
+	}
+	return (tmp->bytes_line + tmp->cost_line);
 }
 
-int		get_champ(char *name, t_header *champ, t_list **inf_line)
+int			get_champ(char *name, t_header *champ, t_list **inf_line)
 {
 	int		ret;
 	char	**file;

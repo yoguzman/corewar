@@ -30,14 +30,17 @@ void		aff_write(t_if *info_line, int dest)
 int		write_instr(t_list *inf_line, int dest)
 {
 	int		i;
+	int		j;
 	t_if	*info_line;
 
+	j = 0;
 	while (inf_line)
 	{
 		i = 0;
 		info_line = (t_if *)inf_line->content;
-		if (is_label(info_line, inf_line) == -1)
+		if (is_label(info_line, inf_line, j) == -1)
 			return (-1);
+		++j;
 		while (write_tab[i].name)
 		{
 			if (ft_strcmp(write_tab[i].name, info_line->name_instr) == 0)

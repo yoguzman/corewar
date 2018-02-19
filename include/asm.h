@@ -56,51 +56,16 @@ typedef union		u_neg
 					unsigned char bneg[2];
 }					t_neg;
 
-t_list					*go_first(t_list *list);
-int					is_label(t_if *here, t_list *list);
+t_list				*go_first(t_list *list);
+int					is_label(t_if *here, t_list *list, int line);
 int					modif_label(t_if *here, char *str_tmp, int i[3], t_list *tmp);
 int					get_file2(char *new, int *dest);
-void					sti_write(t_if *info_line, int dest);
-void					fork_write(t_if *info_line, int dest);
-void					lldi_write(t_if *info_line, int dest);
-void					lld_write(t_if *info_line, int dest);
-void					lfork_write(t_if *info_line, int dest);
-void					zjmp_write(t_if *info_line, int dest);
-void					ldi_write(t_if *info_line, int dest);
-void					and_write(t_if *info_line, int dest);
-void					or_write(t_if *info_line, int dest);
-void					xor_write(t_if *info_line, int dest);
-void					add_write(t_if *info_line, int dest);
-void					st_write(t_if *info_line, int dest);
-void					ld_write(t_if *info_line, int dest);
-void					live_write(t_if *info_line, int dest);
-void					sub_write(t_if *info_line, int dest);
 int					get_info_file_loop2(t_list **tmp_list, t_list **inf_line, t_if *info_line, t_if **tmp);
 int					get_info_file_loop(char **file, int *i, t_if *info_line);
-void					lfork_cost(t_if *info_line);
-void					lldi_cost(t_if *info_line);
-void					lld_cost(t_if *info_line);
-void					fork_cost(t_if *info_line);
-void					sti_cost(t_if *info_line);
-void					ldi_cost(t_if *info_line);
-void					zjmp_cost(t_if *info_line);
-void					xor_cost(t_if *info_line);
-void					or_cost(t_if *info_line);
-void					and_cost(t_if *info_line);
-void					sub_cost(t_if *info_line);
-void					live_cost(t_if *info_line);
-void					ld_cost(t_if *info_line);
-void					st_cost(t_if *info_line);
-void					add_cost(t_if *info_line);
-void					write_short(int fd, unsigned short nb);
-void					write_op_code(char **arg, int nb_arg, int dest);
-void					write_string(int fd, char *string, int size);
-void					write_int(int fd, unsigned int nb);
-int					check_comment2(char **t_str);
-int					check_comment(char **t_str);
 int					print_error_nb_arg(char *instr, int line);
+void				write_string(int dest, char *prog_name, int lenght);
 int					print_error_name(char **t_str, int line, int i);
-char    			*check_label(char *line, t_if *info_line);
+char    			*check_label(char *line, t_if *info_line, int j);
 int					arg_is_direct(char *str, int index_op, int nb_arg,
 									const t_op *op_tab);
 int					arg_is_reg(char *str, int index_op, int nb_arg,
@@ -175,5 +140,6 @@ void				write_op_code(char **arg, int nb_arg, int dest);
 int					neg_to_neg(unsigned short neg);
 int					print_usage(void);
 int					get_nb_lines(char *file);
+int					print_error_label(char *str, int line);
 
 #endif
