@@ -72,6 +72,8 @@ int			get_info_file(char **file, t_header *champ, t_list **inf_line)
 
 	if (get_header(file, champ) == -1)
 		return (-1);
+	free(file[0]);
+	free(file[1]);
 	i = 2; 
 	tmp = NULL;
 	tmp_list = NULL;
