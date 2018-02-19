@@ -56,6 +56,25 @@ typedef union		u_neg
 					unsigned char bneg[2];
 }					t_neg;
 
+t_list					*go_first(t_list *list);
+int					is_label(t_if *here, t_list *list);
+int					modif_label(t_if *here, char *str_tmp, int i[3], t_list *tmp);
+int					get_file2(char *new, int *dest);
+void					sti_write(t_if *info_line, int dest);
+void					fork_write(t_if *info_line, int dest);
+void					lldi_write(t_if *info_line, int dest);
+void					lld_write(t_if *info_line, int dest);
+void					lfork_write(t_if *info_line, int dest);
+void					zjmp_write(t_if *info_line, int dest);
+void					ldi_write(t_if *info_line, int dest);
+void					and_write(t_if *info_line, int dest);
+void					or_write(t_if *info_line, int dest);
+void					xor_write(t_if *info_line, int dest);
+void					add_write(t_if *info_line, int dest);
+void					st_write(t_if *info_line, int dest);
+void					ld_write(t_if *info_line, int dest);
+void					live_write(t_if *info_line, int dest);
+void					sub_write(t_if *info_line, int dest);
 int					get_info_file_loop2(t_list **tmp_list, t_list **inf_line, t_if *info_line, t_if **tmp);
 int					get_info_file_loop(char **file, int *i, t_if *info_line);
 void					lfork_cost(t_if *info_line);
