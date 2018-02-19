@@ -15,6 +15,17 @@
 #include "libft.h"
 #include "asm.h"
 
+int	get_file2(char *new, int *dest)
+{
+  if ((*dest = open(new, O_CREAT | O_WRONLY | O_TRUNC,
+		   S_IRUSR | S_IWUSR)) == -1)
+    return (ft_puterr("Open failed"));
+  ft_putstr("Writing output program to ");
+  ft_putstr(new);
+  ft_putstr("\n");
+  return (0);
+}
+
 static int	get_file(char *name)
 {
 	int		n;
@@ -38,12 +49,8 @@ static int	get_file(char *name)
 			new[n] = name[n];
 		ft_strcpy(&new[n], ".cor");
 	}
-	if ((dest = open(new, O_CREAT | O_WRONLY | O_TRUNC,
-					S_IRUSR | S_IWUSR)) == -1)
-		return (ft_puterr("Open failed"));
-	ft_putstr("Writing output program to ");
-	ft_putstr(new);
-	ft_putstr("\n");
+	if (get_file2(new, &dest) == -1)
+	  return (-1);
 	free(new);
 	return (dest);
 }
