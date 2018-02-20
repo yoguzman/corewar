@@ -77,5 +77,6 @@ int			compile_champ(t_header *champ, char *name, t_list *inf_line)
 	ft_putstr(new_file);
 	ft_putstr("\n");
 	free(new_file);
+	close(dest);
 	return (0);
 }

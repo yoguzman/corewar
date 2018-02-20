@@ -83,7 +83,19 @@ int				pars_instr(char *instr, t_if *info, int line)
 		return (print_error_nb_arg(instr, line));
 	if (check_arg(t_str, i_op, i) == -1)
 		return (-1);
-	info->name_instr = t_str[0];
-	info->arg = t_str + 1;
+	if ((info->name_instr = ft_strdup(t_str[0])) == NULL)
+		return (-1);
+	i = 1;
+	if ((info->arg = malloc(sizeof(char *) * 4)) == NULL)
+		return (-1);
+	while (t_str[i])
+	{
+		if ((info->arg[i - 1] = ft_strdup(t_str[i])) == NULL)
+			return (-1);
+		++i;
+	}
+	free(t_str[0]);
+	free(t_str);
+	info->arg[i - 1] = NULL;
 	return (0);
 }

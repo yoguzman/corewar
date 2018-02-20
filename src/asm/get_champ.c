@@ -26,7 +26,10 @@ int			get_nb_lines(char *file)
 		return (-1);
 	count = 0;
 	while ((ret = get_next_line(fd, &line)) == 1)
+	{
+		free(line);
 		count += 1;
+	}
 	if (ret == -1)
 		return (-1);
 	close(fd);
@@ -88,8 +91,10 @@ int			get_info_file(char **file, t_header *champ, t_list **inf_line)
 		info_line.bytes_line = tab[1];
 		if (get_info_file_loop2(&tmp_list, inf_line, &info_line, &tmp) == -1)
 			return (-1);
+		free(file[i]);
 		++i;
 	}
+	free(file);
 	return (tmp->bytes_line + tmp->cost_line);
 }
 

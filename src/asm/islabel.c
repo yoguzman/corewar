@@ -9,6 +9,7 @@ int			modif_label(t_if *here, char *str_tmp, int i[3], t_list *tmp)
 	if (inf->label != NULL && (ft_strcmp(inf->label,
 								here->arg[i[1]] + 1 + i[0]) == 0))
 	{
+		free(here->arg[i[1]]);
 		if ((here->arg[i[1]] =
 				ft_itoa(inf->bytes_line - here->bytes_line)) == NULL)
 			return (-1);
@@ -17,6 +18,7 @@ int			modif_label(t_if *here, char *str_tmp, int i[3], t_list *tmp)
 			str_tmp[1] = 0;
 			if ((save = ft_strjoin(str_tmp, here->arg[i[1]])) == NULL)
 				return (-1);
+			free(here->arg[i[1]]);
 			here->arg[i[1]] = save;
 		}
 		return (1);

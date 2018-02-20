@@ -36,5 +36,6 @@ char			**get_input(int fd, int nb_lines)
 		ft_puterr("get_next_line failed");
 		return (NULL);
 	}
+	close(fd);
 	return (input);
 }

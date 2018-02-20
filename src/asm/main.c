@@ -34,6 +34,24 @@ void	get_a_flag(int ac, char **av, int *file, int *a_flag)
 	*file = n;
 }
 
+void		free_lesbails(t_list *inf_line)
+{
+	t_list	*tmp;
+	t_if	*blbl;
+
+	while (inf_line)
+	{
+		tmp = inf_line->next;
+		blbl = inf_line->content;
+		free(blbl->label);
+		free(blbl->name_instr);
+		free(blbl->arg[0]);
+		free(blbl->arg);
+		free(inf_line);
+		inf_line = tmp;
+	}
+}
+
 int		main(int ac, char **av)
 {
 	t_header	champ;
@@ -53,5 +71,7 @@ int		main(int ac, char **av)
 		print_champ(&champ, inf_line);
 	else if (compile_champ(&champ, av[file], inf_line) == -1)
 		return (-1);
+	free_lesbails(inf_line);
+	while (1);
 	return (0);
 }
