@@ -38,17 +38,27 @@ void		free_lesbails(t_list *inf_line)
 {
 	t_list	*tmp;
 	t_if	*blbl;
+	int		i;
+	int		j;
 
+	j = 0;
 	while (inf_line)
 	{
 		tmp = inf_line->next;
 		blbl = inf_line->content;
 		free(blbl->label);
 		free(blbl->name_instr);
-		free(blbl->arg[0]);
+		i = 0;
+		while (blbl->arg[i])
+		{
+			free(blbl->arg[i]);
+			++i;
+		}
 		free(blbl->arg);
+		free(blbl);
 		free(inf_line);
 		inf_line = tmp;
+		++j;
 	}
 }
 
