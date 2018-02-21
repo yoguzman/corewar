@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/21 06:48:58 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/21 17:36:15 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # define E1 "Invalid player's magic"
 # define E2 "Prog_size is >= to MAX_CHAMP_SIZE"
 # define THIS_PLAYER vm->player_table[vm->pid]
+# define DIGITS "0123456789ABCDEF"
 
 /*
 ** 2.Typedefs
@@ -59,8 +60,8 @@ typedef	struct	s_champ
 
 typedef struct	s_corewar
 {
-	unsigned char	arena[MEM_SIZE];
 	t_champ			player_table[MAX_PLAYERS - 1];
+	unsigned char	arena[MEM_SIZE];
 	int				pid;
 	unsigned int	players;
 	unsigned int	dump_limit;
