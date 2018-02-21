@@ -6,76 +6,105 @@
 #    By: yguzman <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 11:38:09 by yguzman           #+#    #+#              #
-#    Updated: 2018/01/25 18:37:42 by abeauvoi         ###   ########.fr        #
+#    Updated: 2018/02/21 06:39:57 by abeauvoi         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-CC				=	clang
+#
+# Binaries
+#
 
-NAME_ASM		=		./ASM
+ASM	= ./asm
+COREWAR	= ./corewar
 
-NAME_MACHINE	=		./Virtual_Machine
+#
+# Directories
+#
 
-LIBFT			=		libft
+LIB_DIR	= libft
+OBJ_DIR = obj
+SRC_DIR	= src
+ASM_DIR	= asm
+COREWAR_DIR	= virtual_machine
+VPATH	= $(addprefix $(SRC_DIR)/,$(COREWAR_DIR) $(ASM_DIR))
 
-LIBNAME			=		./libft/libft.a
+#
+# Sources
+#
 
-DIR_SRC			=		./src/
+SRCS_ASM	= 
+SRCS_COREWAR	= main.c parse_argv.c print_usage.c print_error_and_exit.c \
+		  ft_isdigitstr.c load_champion.c update_player_count.c
 
-SRCS_ASM		=		$(DIR_SRC)asm/main_asm.c									\
+OBJS_ASM	= $(addprefix $(OBJ_DIR)/, $(SRCS_ASM:.c=.o))
+OBJS_COREWAR	= $(addprefix $(OBJ_DIR)/, $(SRCS_COREWAR:.c=.o))
 
-SRCS_MACHINE	=		$(DIR_SRC)virtual_machine/main_virtual_machine.c			\
+#
+# Build
+#
 
-OBJS_ASM		=		$(SRCS_ASM:.c=.o)
-OBJS_MACHINE	=		$(SRCS_MACHINE:.c=.o)
+LFLAGS	= -L$(LIB_DIR) -lft -lncurses
+CFLAGS	+= -Iinclude
+CFLAGS	+= -Wall -Wextra -Werror
+COMP	= $(CC) $(CFLAGS) -o $@ -c $<
+LINK	= $(CC) $(LFLAGS) -o $@ $(filter-out $(LIB) $(OBJ_DIR), $^)
+LIB	= libft.a
 
-CFLAGS			+=		-Iinclude
-CFLAGS			+=		-Wall -Wextra -g -g3
+#
+# Output
+#
 
-RM				=		rm -f
+ECHO	= printf
+NAME	= "\033[35m[ "$@" ]-->\033[0m"
+SUCCESS	= "\033[33;32m["$@"]\n\033[0m"
+FAILURE	= "\033[31m["$@"]\n\033[0m"
 
-LIB				=		./libft/libft.a
+#
+# Rules
+#
 
-ECHO			=		printf
+all: $(ASM) $(COREWAR)
 
-all				:		$(NAME_ASM) $(NAME_MACHINE)
+debug: CFLAGS += -fsanitize=address -g3
+debug: all
 
-$(LIBFT)		:		$(LIBNAME)
+$(LIB):
+	@make -C $(LIB_DIR)
 
-$(LIBNAME)		:
-						@make -C ./libft
+$(OBJ_DIR):
+	@mkdir -p $@
 
-$(NAME_ASM)		:		$(LIBFT) $(OBJS_ASM)
-						@$(ECHO) "\033[35m[~~~~COMPILATION PROJECT VIRTUAL MACHINE~~~~]\n\033[0m"
-						@$(CC) -o $(NAME_ASM) -Llibft -lft -lncurses $(OBJS_ASM) && $(ECHO) "\033[33;32m["$@"]\n\033[0m" || $(ECHO) "\033[31m["$@"]\n\033[0m"
+$(ASM): $(LIB) $(OBJ_DIR) $(OBJS_ASM)
+	@$(ECHO) $(NAME) 
+	@$(LINK) && $(ECHO) $(SUCCESS) || $(ECHO) $(FAILURE)
 
-$(NAME_MACHINE)	:		$(LIBFT) $(NAME) $(OBJS_MACHINE)
-						@$(ECHO) "\033[35m[~~~~COMPILATION PROJECT ASM ~~~~]\n\033[0m"
-						@$(CC) -o $(NAME_MACHINE) -Llibft -lft -lncurses $(OBJS_MACHINE) && $(ECHO) "\033[33;32m["$@"]\n\033[0m" || $(ECHO) "\033[31m["$@"]\n\033[0m"
+$(COREWAR): $(LIB) $(OBJ_DIR) $(OBJS_COREWAR)
+	@$(ECHO) $(NAME) 
+	@$(LINK) && $(ECHO) $(SUCCESS) || $(ECHO) $(FAILURE)
 
-%.o				:		%.c
-						@$(ECHO) "\033[35m[~~~Comipilation obj //project~~~]-->\033[0m"
-						@$(CC) $(CFLAGS) -o $@ -c $< && $(ECHO) "\033[33;32m ["$@"]\n\033[0m" || $(ECHO) "\033[31m ["$@"]\n\033[0m"
+$(OBJ_DIR)/%.o: %.c
+	@$(ECHO) $(NAME)
+	@$(COMP) && $(ECHO) $(SUCCESS) || $(ECHO) $(FAILURE)
 
-clean_lib		:
-						@make -C libft clean
+clean:
+	@make -C $(LIB_DIR) $@
+	@$(ECHO) "\033[31m[ "$@" ]\n\033[0m"
+	@$(RM) $(OBJS_COREWAR)
+	@$(RM) $(OBJS_ASM)
+	@rm -fr $(OBJ_DIR) 2> /dev/null || true
 
-clean			:		clean_lib
-						@$(ECHO) "\033[31m[~~~~~~Supression des .o //project~~~~~~]\n\033[0m"
-						@$(RM) $(OBJS_MACHINE)
-						@$(RM) $(OBJS_ASM)
+fclean_lib:
+	@make -C $(LIB_DIR) fclean
 
-fclean_lib		:
-						@make -C libft fclean
+fclean: fclean_lib
+	@$(ECHO) "\033[31m[ clean ]\n\033[0m"
+	@$(RM) $(OBJS_COREWAR)
+	@$(RM) $(OBJS_ASM)
+	@rm -fr $(OBJ_DIR) 2> /dev/null || true
+	@$(ECHO) "\033[31m[ fclean ]\n\033[0m"
+	@$(RM) $(COREWAR)
+	@$(RM) $(ASM)
 
-fclean			:		fclean_lib
-						@$(ECHO) "\033[31m[~~~~~~Supression des .o //project~~~~~~]\n\033[0m"
-						@$(RM) $(OBJS_MACHINE)
-						@$(RM) $(OBJS_ASM)
-						@$(ECHO) "\033[31m[~~~~Supression du Binaire~~~~]\n\033[0m"
-						@$(RM) $(NAME_MACHINE)
-						@$(RM) $(NAME_ASM)
+re: fclean all
 
-re				:		fclean all
-
-.PHONY			:		all clean flean re
+.PHONY: all clean flean re
