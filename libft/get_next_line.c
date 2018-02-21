@@ -110,7 +110,7 @@ int					read_buff_size(int fd, t_list *elem, char **line)
 		if (ret == 1)
 			return (1);
 	}
-	if (ret == 0 && *line)
+	if (ret > 0 && *line)
 		if ((ret = read_buff_size(fd, elem, line)) == -1)
 			return (-1);
 	return (ret == -1 ? -1 : 0);

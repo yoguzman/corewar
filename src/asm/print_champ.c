@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_champ.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/25 17:08:29 by adauchy           #+#    #+#             */
-/*   Updated: 2018/01/25 19:34:18 by abeauvoi         ###   ########.fr       */
+/*   Created: 2018/01/30 05:06:41 by adauchy           #+#    #+#             */
+/*   Updated: 2018/01/30 05:19:59 by adauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
-#include <libft.h>
+#include "asm.h"
 
-int			main(int ac, char **av)
+void		print_champ(t_header *champ, t_list *inf_line)
 {
-	if (ac == 1 || (ac == 2 && !ft_strcmp(av[1], "-h")))
-		return (ft_puterr(USAGE));
-	compiler(av[1]);
-	return (0);
+	ft_putstr("Dumping annotated program on standard output\n");
 }

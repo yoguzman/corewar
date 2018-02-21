@@ -6,7 +6,7 @@
 #    By: yguzman <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 11:38:09 by yguzman           #+#    #+#              #
-#    Updated: 2018/02/21 06:39:57 by abeauvoi         ###   ########.fr        #
+#    Updated: 2018/02/16 16:18:23 by jcoutare         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -32,9 +32,31 @@ VPATH	= $(addprefix $(SRC_DIR)/,$(COREWAR_DIR) $(ASM_DIR))
 # Sources
 #
 
-SRCS_ASM	= 
-SRCS_COREWAR	= main.c parse_argv.c print_usage.c print_error_and_exit.c \
-		  ft_isdigitstr.c load_champion.c update_player_count.c
+SRCS_ASM		=		main_a.c							\
+						tools4.c							\
+						write_instr2.c						\
+						write_instr4.c						\
+						write_instr3.c						\
+						write_instr1.c						\
+						compile_champ.c						\
+						get_champ.c							\
+						islabel.c							\
+						cost.c								\
+						get_champ2.c						\
+						cost2.c								\
+						cost3.c								\
+						print_champ.c						\
+						check_label.c						\
+						tools.c								\
+						tools2.c							\
+						check_instr.c						\
+						check_arg.c							\
+						fill_cost_line.c					\
+						write_instr.c						\
+						tools3.c							\
+
+SRCS_COREWAR	=		main.c parse_argv.c print_usage.c print_error_and_exit.c \
+						ft_isdigitstr.c load_champion.c update_player_count.c
 
 OBJS_ASM	= $(addprefix $(OBJ_DIR)/, $(SRCS_ASM:.c=.o))
 OBJS_COREWAR	= $(addprefix $(OBJ_DIR)/, $(SRCS_COREWAR:.c=.o))
@@ -42,10 +64,9 @@ OBJS_COREWAR	= $(addprefix $(OBJ_DIR)/, $(SRCS_COREWAR:.c=.o))
 #
 # Build
 #
-
 LFLAGS	= -L$(LIB_DIR) -lft -lncurses
 CFLAGS	+= -Iinclude
-CFLAGS	+= -Wall -Wextra -Werror
+CFLAGS	+= -Wall -Wextra
 COMP	= $(CC) $(CFLAGS) -o $@ -c $<
 LINK	= $(CC) $(LFLAGS) -o $@ $(filter-out $(LIB) $(OBJ_DIR), $^)
 LIB	= libft.a
