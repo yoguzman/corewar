@@ -15,7 +15,7 @@
 
 static void	init_vm(t_corewar *vm)
 {
-	ft_bzero(&vm, sizeof(vm));
+	ft_bzero(vm, sizeof(*vm));
 	vm->pid = -1;
 }
 

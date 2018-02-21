@@ -60,7 +60,7 @@ typedef	struct	s_champ
 typedef struct	s_corewar
 {
 	unsigned char	arena[MEM_SIZE];
-	t_champ			player_table[MAX_PLAYERS - 1];
+	t_champ			player_table[MAX_PLAYERS];
 	int				pid;
 	unsigned int	players;
 	unsigned int	dump_limit;

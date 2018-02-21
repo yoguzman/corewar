@@ -24,6 +24,8 @@ void		*ft_memcpy(void *dest, const void *src, size_t n)
 	while (i < n)
 	{
 		*buff1 = *buff;
+		printf("%u\n", *buff);
+		ft_putchar(' ');
 		buff = buff + 1;
 		buff1 = buff1 + 1;
 		++i;
