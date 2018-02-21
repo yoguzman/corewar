@@ -82,6 +82,5 @@ int		main(int ac, char **av)
 	else if (compile_champ(&champ, av[file], inf_line) == -1)
 		return (-1);
 	free_lesbails(inf_line);
-	while (1);
 	return (0);
 }
