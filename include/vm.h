@@ -53,7 +53,7 @@ typedef enum	e_limits
 
 typedef	struct	s_champ
 {
-	header_t		header;
+	t_header		header;
 	unsigned char	*code;
 }				t_champ;
 

@@ -32,7 +32,7 @@ VPATH	= $(addprefix $(SRC_DIR)/,$(COREWAR_DIR) $(ASM_DIR))
 # Sources
 #
 
-SRCS_ASM		=		main.c								\
+SRCS_ASM		=		main_a.c							\
 						tools4.c							\
 						write_instr2.c						\
 						write_instr4.c						\
@@ -66,7 +66,7 @@ OBJS_COREWAR	= $(addprefix $(OBJ_DIR)/, $(SRCS_COREWAR:.c=.o))
 #
 LFLAGS	= -L$(LIB_DIR) -lft -lncurses
 CFLAGS	+= -Iinclude
-CFLAGS	+= -Wall -Wextra -Werror
+CFLAGS	+= -Wall -Wextra
 COMP	= $(CC) $(CFLAGS) -o $@ -c $<
 LINK	= $(CC) $(LFLAGS) -o $@ $(filter-out $(LIB) $(OBJ_DIR), $^)
 LIB	= libft.a
