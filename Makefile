@@ -6,7 +6,7 @@
 #    By: yguzman <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 11:38:09 by yguzman           #+#    #+#              #
-#    Updated: 2018/02/16 16:18:23 by jcoutare         ###   ########.fr        #
+#    Updated: 2018/02/21 18:43:45 by abeauvoi         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -55,8 +55,10 @@ SRCS_ASM		=		main_a.c							\
 						write_instr.c						\
 						tools3.c							\
 
-SRCS_COREWAR	=		main.c parse_argv.c print_usage.c print_error_and_exit.c \
-						ft_isdigitstr.c load_champion.c update_player_count.c
+SRCS_COREWAR	= main.c parse_argv.c print_usage.c print_error_and_exit.c \
+		  ft_isdigitstr.c load_champion.c update_player_count.c \
+		  print_mem.c
+
 
 OBJS_ASM	= $(addprefix $(OBJ_DIR)/, $(SRCS_ASM:.c=.o))
 OBJS_COREWAR	= $(addprefix $(OBJ_DIR)/, $(SRCS_COREWAR:.c=.o))

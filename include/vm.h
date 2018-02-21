@@ -6,13 +6,14 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/21 17:36:15 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/21 19:30:53 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VM_H
 # define VM_H
 
+# include <stddef.h>
 # include "op.h"
 
 /*
@@ -49,7 +50,7 @@
 typedef enum	e_limits
 {
 	DUMP_DEFAULT = 80000,
-	HEADER_SIZE = 2 * sizeof(int) + PROG_NAME_LENGTH + COMMENT_LENGTH
+	HEADER_SIZE = 2 * sizeof(int) + PROG_NAME_LENGTH + COMMENT_LENGTH + 6
 }				t_limits;
 
 typedef	struct	s_champ
@@ -60,11 +61,12 @@ typedef	struct	s_champ
 
 typedef struct	s_corewar
 {
-	t_champ			player_table[MAX_PLAYERS - 1];
+	t_champ			player_table[MAX_PLAYERS];
 	unsigned char	arena[MEM_SIZE];
 	int				pid;
 	unsigned int	players;
 	unsigned int	dump_limit;
+	unsigned char	lookup[16];
 }				t_corewar;
 
 /* 
@@ -78,12 +80,13 @@ const char	**load_champion(const char *argv[], t_corewar *vm);
 
 /* Output */
 
-void	print_usage(void);
-void	print_error_and_exit(const char *msg);
+void		print_usage(void);
+void		print_error_and_exit(const char *msg);
+void		print_mem(unsigned char *mem, size_t mem_size);
 
 /* Utils */
 
-int		ft_isdigitstr(const char *s);
-void	update_player_count(t_corewar *vm);
+int			ft_isdigitstr(const char *s);
+void		update_player_count(t_corewar *vm);
 
 #endif
