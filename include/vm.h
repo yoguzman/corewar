@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/23 03:46:15 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/23 14:35:55 by adauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,11 @@ typedef struct	s_corewar
 ** 3.Definitions
 */
 
-/* Core */
+/* Engine */
+
+int			engine(t_corewar *vm);
+
+/* Initialisation */
 
 void		parse_argv(const char *argv[], t_corewar *vm);
 const char	**load_champion(const char *argv[], t_corewar *vm);

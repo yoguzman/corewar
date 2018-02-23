@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:42:57 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/23 04:39:17 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/23 14:40:19 by adauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int			main(int argc, const char *argv[])
 	else
 	{
 		init_vm(argv, &vm);
+		engine(&vm);
 		clear_data(&vm);
 	}
 	return (0);
