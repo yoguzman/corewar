@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 01:01:17 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/21 06:20:01 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/23 01:56:44 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static const char	**save_dump_limit(const char *argv[], t_corewar *vm)
 	vm->dump_limit = ft_atoi(argv[1]);
 	if (vm->dump_limit > INT_MAX)
 	{
-		/*ft_printf("Corewar: Error: %s isn't a valid dump limit, \
-				set to default value %u cycles\n", dump_limit, DUMP_DEFAULT);*/
+		/*printf("Corewar: Error: %s isn't a valid dump limit, "
+				"set to default value %u cycles\n", argv[1], DUMP_DEFAULT);*/
 		vm->dump_limit = DUMP_DEFAULT;
 	}
 	return (&argv[2]);
@@ -37,9 +37,9 @@ static const char	**set_champion_number(const char *argv[], t_corewar *vm)
 {
 	if (!ft_isdigitstr(argv[1]))
 		return (&argv[1]);
-	vm->pid = ft_atoi(argv[1]);
-	if (vm->pid > MAX_PLAYERS - 1)
-		vm->pid = vm->players;
+	vm->player_id = ft_atoi(argv[1]) - 1;
+	if (vm->player_id > MAX_PLAYERS - 1 || THIS_PLAYER.code != NULL)
+		vm->player_id = get_empty_slot(vm->player_table);
 	return (&argv[2]);
 }
 
@@ -52,7 +52,7 @@ void				parse_argv(const char *argv[], t_corewar *vm)
 	exec_opt[0] = save_dump_limit;
 	exec_opt[1] = init_visual_mode; 
 	exec_opt[2] = set_champion_number;
-	while (argv != NULL)
+	while (*argv != NULL)
 	{
 		arg = *argv;
 		if (*arg == '-')
