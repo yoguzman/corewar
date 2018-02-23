@@ -6,26 +6,30 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 18:09:42 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/21 19:51:29 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/22 19:15:01 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include "libft.h"
 
-void	print_mem(unsigned char *mem, size_t mem_size)
+void	print_mem(void *mem, size_t mem_size)
 {
+	unsigned char	*a;
+
+	a = (unsigned char *)mem;
 	while (mem_size--)
 	{
-		if (*mem < 32 || *mem > 126)
+		if (*a < 32 || *a > 126)
 		{
 			ft_putchar('\\');
-			ft_putchar('X');
-			ft_putchar(DIGITS[*mem & 0XF]);
-			ft_putchar(DIGITS[(*mem >> 4) & 0xFF]);
+			ft_putchar('x');
+			ft_putchar(DIGITS[*a >> 4]);
+			ft_putchar(DIGITS[*a & 0xf]);
 		}
 		else
-			ft_putchar(*mem);
-		++mem;
+			ft_putchar(*a);
+		++a;
 	}
+	ft_putchar('\n');
 }

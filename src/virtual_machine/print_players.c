@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_player_count.c                              :+:      :+:    :+:   */
+/*   print_players.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/21 06:37:30 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/22 22:08:35 by abeauvoi         ###   ########.fr       */
+/*   Created: 2018/02/22 20:41:07 by abeauvoi          #+#    #+#             */
+/*   Updated: 2018/02/22 21:27:18 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "vm.h"
 
-void	update_player_count(t_corewar *vm)
+void	print_players(t_player player_table[MAX_PLAYERS])
 {
 	unsigned char	i;
 
-	vm->players = 0;
 	i = 0;
+	printf("!!!!!!! AND TODAY'S MATCHUP IS ... !!!!!!!\n");
 	while (i < MAX_PLAYERS)
 	{
-		if (vm->player_table[i].code != NULL)
-			++vm->players;
+		if (player_table[i].code != NULL)
+		{
+			printf(">> Player %u :\n"
+					"\t\\__ Name : \"%s\"\n"
+					"\t\\__ Size : %u bytes\n"
+					"\t\\__ Comment : (\"%s\")\n", i + 1,
+					player_table[i].header.prog_name,
+					player_table[i].header.prog_size,
+					player_table[i].header.comment);
+		}
 		++i;
 	}
 }

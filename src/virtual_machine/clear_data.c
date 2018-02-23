@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_player_count.c                              :+:      :+:    :+:   */
+/*   clear_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/21 06:37:30 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/22 22:08:35 by abeauvoi         ###   ########.fr       */
+/*   Created: 2018/02/22 20:04:52 by abeauvoi          #+#    #+#             */
+/*   Updated: 2018/02/22 20:14:07 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "vm.h"
 
-void	update_player_count(t_corewar *vm)
+void	free_champions(t_player player_table[MAX_PLAYERS])
 {
 	unsigned char	i;
 
-	vm->players = 0;
 	i = 0;
 	while (i < MAX_PLAYERS)
 	{
-		if (vm->player_table[i].code != NULL)
-			++vm->players;
+		free(player_table[i].code);
 		++i;
 	}
+}
+
+void	clear_data(t_corewar *vm)
+{
+	free_champions(vm->player_table);
 }
