@@ -42,13 +42,13 @@ typedef struct		s_write
 	void			(*f)(t_if *, int dest);
 }					t_write;
 
-typedef struct		s_op
+typedef struct		s_op_a
 {
 	char			*name;
 	int				nb_arg;
 	int				arg[3];
 	int				nb_instr;
-}					t_op;
+}					t_op_a;
 
 typedef union		u_neg
 {
@@ -67,13 +67,12 @@ void				write_string(int dest, char *prog_name, int lenght);
 int					print_error_name(char **t_str, int line, int i);
 char    			*check_label(char *line, t_if *info_line, int j);
 int					arg_is_direct(char *str, int index_op, int nb_arg,
-									const t_op *op_tab);
+									const t_op_a *op_tab);
 int					arg_is_reg(char *str, int index_op, int nb_arg,
-									const t_op *op_tab);
+									const t_op_a *op_tab);
 int					puterr(char *str);
 int					puterr_noend(char *str);
-int					check_name(char *str, const t_op *op_tab);
-int					check_nb_arg(char **str, int index_op, const t_op *op_tab);
+int					check_name(char *str, const t_op_a *op_tab);
 int					arg_is_number(char *arg);
 int					arg_is_labelchar(char *arg);
 int					pars_instr(char *instr, t_if *info, int line);
@@ -89,17 +88,17 @@ int					puterr(char *str);
 int					puterr_noend(char *str);
 int					arg_is_labelchar(char *arg);
 int					arg_is_number(char *arg);
-int					check_name(char *str, const t_op *op_tab);
-int					check_nb_arg(char **str, int index_op, const t_op *op_tab);
+int					check_name(char *str, const t_op_a *op_tab);
+int					check_nb_arg(char **str, int index_op, const t_op_a *op_tab);
 void				epur_space(char *str);
 int					direct_is_correct(char *str);
 int					reg_is_correct(char *str);
 int					check_op_tab(int index_op, int nb_arg, int type,
-									const t_op *op_tab);
+									const t_op_a *op_tab);
 int					arg_is_direct(char *str, int index_op, int nb_arg,
-									const t_op *op_tab);
+									const t_op_a *op_tab);
 int					arg_is_reg(char *str, int index_op, int nb_arg,
-									const t_op *op_tab);
+									const t_op_a *op_tab);
 void				live_cost(t_if *info_line);
 void				ld_cost(t_if *info_line);
 void				st_cost(t_if *info_line);
