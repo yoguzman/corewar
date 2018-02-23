@@ -6,7 +6,7 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 14:22:57 by adauchy           #+#    #+#             */
-/*   Updated: 2018/02/23 16:17:36 by yguzman          ###   ########.fr       */
+/*   Updated: 2018/02/23 16:30:46 by yguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ int			engine(t_corewar *vm)
 			SI le cycle_to_exec arrive a son terme
 		    	EXECUTION instruction
 				incrementer le pc du nombre d octet de linstruction
-		 Si NCURSES ACTIVE
-		     NCURSES
-		 Si (DUMP ACTIVE ET cycles = dump_limit)
-		    dump et EXIT
-	} 
+		Si NCURSES ACTIVE
+			NCURSES
+		Si (DUMP ACTIVE ET cycles = dump_limit)
+			dump et EXIT
+	}
 	AFFICHER LE PODIUM
 	*/
 	return (0);
