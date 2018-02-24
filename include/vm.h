@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/23 14:35:55 by adauchy          ###   ########.fr       */
+/*   Updated: 2018/02/24 20:11:59 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ void		dump_arena(unsigned char arena[MEM_SIZE]);
 /* Utils */
 
 int			ft_isdigitstr(const char *s);
-void		update_player_count(t_corewar *vm);
 void		switch_endianness(void *mem, size_t mem_size);
 int			get_empty_slot(t_player player_table[MAX_PLAYERS]);
 
