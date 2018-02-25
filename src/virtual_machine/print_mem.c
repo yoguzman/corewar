@@ -6,14 +6,14 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 18:09:42 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/22 19:15:01 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/25 20:09:06 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include "libft.h"
 
-void	print_mem(void *mem, size_t mem_size)
+void	print_mem(void *mem, uint64_t mem_size)
 {
 	unsigned char	*a;
 

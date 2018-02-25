@@ -6,20 +6,20 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:43:48 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/22 19:15:14 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/25 20:22:24 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	switch_endianness(void *mem, size_t mem_size)
+void	switch_endianness(void *mem, uint64_t mem_size)
 {
-	unsigned char	*a;
-	unsigned char	*b;
-	unsigned char	swap;
+	uint8_t	*a;
+	uint8_t	*b;
+	uint8_t	swap;
 
-	a = (unsigned char *)mem;
-	b = (unsigned char *)mem + mem_size;
+	a = (uint8_t *)mem;
+	b = (uint8_t *)mem + mem_size;
 	while (a < --b)
 	{
 		swap = *a;

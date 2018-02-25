@@ -6,17 +6,17 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 14:22:57 by adauchy           #+#    #+#             */
-/*   Updated: 2018/02/23 16:30:46 by yguzman          ###   ########.fr       */
+/*   Updated: 2018/02/25 20:20:02 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "vm.h"
 
-int			engine(t_corewar *vm)
+int32_t			engine(t_corewar *vm)
 {
+	print_processes(vm->mh = init_heap(vm->player_table));
 /*
-	* Remplir la liste chainee des process
 	while (TOUT LE MONDE NEST PAS DANS LA MORT)
 	{
 		

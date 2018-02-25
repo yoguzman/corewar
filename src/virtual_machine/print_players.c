@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 20:41:07 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/22 21:27:18 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/25 20:20:56 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	print_players(t_player player_table[MAX_PLAYERS])
 {
-	unsigned char	i;
+	uint8_t	i;
 
 	i = 0;
 	printf("!!!!!!! AND TODAY'S MATCHUP IS ... !!!!!!!\n");
