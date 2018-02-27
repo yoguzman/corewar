@@ -6,17 +6,16 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 14:22:57 by adauchy           #+#    #+#             */
-/*   Updated: 2018/02/25 20:20:02 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/27 18:37:36 by adauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "vm.h"
-
+/*
 int32_t			engine(t_corewar *vm)
 {
 	print_processes(vm->mh = init_heap(vm->player_table));
-/*
 	while (TOUT LE MONDE NEST PAS DANS LA MORT)
 	{
 		
@@ -44,5 +43,20 @@ int32_t			engine(t_corewar *vm)
 	}
 	AFFICHER LE PODIUM
 	*/
+}
+
+int			engine(t_corewar *vm)
+{
+	(void)vm;
+	int		count;
+
+	count = 0;
+	while (count < 1)
+	{
+		print_ncurses(vm);
+		count += 1;
+	}
+	getch();
+	endwin();
 	return (0);
 }

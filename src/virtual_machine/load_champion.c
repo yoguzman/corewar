@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 04:53:22 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/25 20:10:10 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/27 18:23:28 by adauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,15 @@ const char		**load_champion(const char *argv[], t_corewar *vm)
 	return (&argv[1]);
 }
 
-void			load_champions_in_arena(t_corewar *vm)
+int				load_champions_in_arena(t_corewar *vm)
 {
 	size_t	i;
 	size_t	offset;
+	size_t	n;
 
 	i = 0;
 	offset = 0;
+//	ft_bzero(vm->print_data, sizeof(vm->print_data));
 	while (i < MAX_PLAYERS)
 	{
 		if (vm->player_table[i].code != NULL)
@@ -89,8 +91,13 @@ void			load_champions_in_arena(t_corewar *vm)
 			ft_memcpy(&vm->arena[offset], vm->player_table[i].code,
 					vm->player_table[i].header.prog_size);
 			vm->player_table[i].load_address = i;
+			n = -1;
+			while (++n < vm->player_table[i].header.prog_size)
+				vm->print_data[n + offset] = i + 1;
+			vm->player_table[i].load_index = i;
 			offset += (MEM_SIZE / vm->players);
 		}
 		++i;
 	}
+	return (0);
 }
