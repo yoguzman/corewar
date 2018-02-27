@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/27 18:35:30 by adauchy          ###   ########.fr       */
+/*   Updated: 2018/02/27 18:42:03 by adauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef	struct	s_player
 	t_header	header;
 	uint8_t		*code;
 	uint32_t	load_address;
+	uint32_t	load_index;
 	int				last_live;
 	int				current_live;
 	int				last_breakdown;
@@ -109,7 +110,7 @@ typedef struct	s_corewar
 	int				nb_processes;
 	char			*print_data;
 	t_player	player_table[MAX_PLAYERS];
-	uint8_t		arena[MEM_SIZE];
+	uint8_t		*arena;
 	int32_t		player_id;
 	uint32_t	players;
 	uint32_t	dump_limit;

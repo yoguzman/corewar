@@ -6,7 +6,7 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 14:22:57 by adauchy           #+#    #+#             */
-/*   Updated: 2018/02/27 18:37:36 by adauchy          ###   ########.fr       */
+/*   Updated: 2018/02/27 18:39:26 by adauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int32_t			engine(t_corewar *vm)
 			dump et EXIT
 	}
 	AFFICHER LE PODIUM
-	*/
 }
+	*/
 
 int			engine(t_corewar *vm)
 {
