@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 04:53:22 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/21 06:45:24 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/21 17:36:22 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ const char		**load_champion(const char *argv[], t_corewar *vm)
 	if ((fd = open(argv[0], O_RDONLY)) == -1
 			|| read(fd, buf, HEADER_SIZE) == - 1)
 		print_error_and_exit(NULL);
+	ft_putendl(argv[0]);
 	if (vm->pid == -1)
 		vm->pid = vm->players++;
 	ft_memcpy(&THIS_PLAYER, buf, HEADER_SIZE);
+	ft_putnbr_base(THIS_PLAYER.header.magic, DIGITS);
 	if (THIS_PLAYER.header.magic != COREWAR_EXEC_MAGIC)
 		print_error_and_exit(E1);
 	if (THIS_PLAYER.header.prog_size >= CHAMP_MAX_SIZE)
