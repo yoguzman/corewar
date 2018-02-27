@@ -1,36 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error_and_exit.c                             :+:      :+:    :+:   */
+/*   clear_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/21 05:14:16 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/22 20:20:54 by abeauvoi         ###   ########.fr       */
+/*   Created: 2018/02/22 20:04:52 by abeauvoi          #+#    #+#             */
+/*   Updated: 2018/02/25 20:18:29 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <errno.h>
 #include <stdlib.h>
-#include "libft.h"
 #include "vm.h"
 
-void	clean_print_err_exit(const char *msg,
-		t_player player_table[MAX_PLAYERS])
+void	free_champions(t_player player_table[MAX_PLAYERS])
 {
-	free_champions(player_table);
-	print_error_and_exit(msg);
+	uint8_t	i;
+
+	i = 0;
+	while (i < MAX_PLAYERS)
+	{
+		free(player_table[i].code);
+		++i;
+	}
 }
 
-void	print_error_and_exit(const char *msg)
+void	free_processes(t_mh *mh)
 {
-	if (msg)
+	uint32_t	i;
+
+	i = 0;
+	while (i < mh->pos)
 	{
-		ft_putstr_fd(ERR_STR, 2);
-		ft_putendl_fd(msg, 2);
+		free(mh->tab[i]);
+		++i;
 	}
-	else
-		perror(ERR_STR);
-	exit(EXIT_FAILURE);
+}
+
+void	free_min_heap(t_mh **mh)
+{
+	free_processes(*mh);
+	free((*mh)->tab);
+	free(*mh);
+	*mh = NULL;
+}
+
+void	clear_data(t_corewar *vm)
+{
+	free_champions(vm->player_table);
+	if (vm->mh)
+		free_min_heap(&(vm->mh));
 }

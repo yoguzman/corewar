@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 18:45:41 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/01/31 18:15:01 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/02/23 13:54:43 by yguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		arg_is_number(char *arg)
 }
 
 
-int		check_name(char *str, const t_op *op_tab)
+int		check_name(char *str, const t_op_a *op_tab)
 {
 	int i;
 
@@ -69,7 +69,7 @@ int		check_name(char *str, const t_op *op_tab)
 	return (-1);
 }
 
-int		check_nb_arg(char **str, int index_op, const t_op *op_tab)
+int		check_nb_arg(char **str, int index_op, const t_op_a *op_tab)
 {
 	int i;
 

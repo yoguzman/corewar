@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 14:27:43 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/02/16 16:31:03 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/02/23 14:06:55 by yguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "op.h"
 
-static const t_op		g_op_tab[17] =
+static const t_op_a		g_op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2},
