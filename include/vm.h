@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/25 20:15:22 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/27 16:58:48 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 # define PT(x)	player_table[x]
 # define CTE(x) x->cycles_to_exec
 # define DIGITS "0123456789abcdef"
-# define OPT_STR "dvn"
+# define OPT_STR "adnv"
 # define LCHILD(x) ((x << 1) + 1)
 # define RCHILD(x) ((x << 1) + 2)
 # define PARENT(x) ((x - 1) >> 1)
@@ -79,43 +79,15 @@ typedef	struct	s_player
 	uint32_t	load_address;
 }				t_player;
 
-typedef struct	s_process	t_proc;
-
-struct			s_process
+typedef struct	s_process
 {
-# if REG_SIZE == 1
-	uint8_t		reg[REG_NUMBER];
-
-# elif REG_SIZE == 2
-	uint16_t	reg[REG_NUMBER];
-
-# elif REG_SIZE == 4
 	uint32_t	reg[REG_NUMBER];
-
-# else
-	uint64_t	reg[REG_NUMBER];
-
-# endif
-
-# if MEM_SIZE >= 0 && MEM_SIZE <= UCHAR_MAX
-	uint8_t		pc;
-
-# elif MEM_SIZE > UCHAR_MAX && MEM_SIZE <= USHRT_MAX
-	uint16_t	pc;
-
-# elif MEM_SIZE > USHRT_MAX && MEM_SIZE <= UINT_MAX
 	uint32_t	pc;
-
-# else
-	uint64_t	pc;
-
-# endif
-
 	uint8_t		carry;
 	uint8_t		player_id;
 	uint16_t	cycles_to_exec;
 	uint16_t	lives;
-};
+}				t_proc;
 
 typedef struct	s_min_heap
 {

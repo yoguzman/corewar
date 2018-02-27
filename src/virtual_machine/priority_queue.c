@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 20:45:02 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/25 20:13:45 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/27 17:10:42 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,41 +41,46 @@ void	insert(t_mh *mh, t_proc *entry)
 {
 	uint32_t	i;
 	uint32_t	parent;
+	t_proc		**parent;
 
 	if (mh->pos == mh->size)
 	{
 		mh->size <<= 1;
 		if (!(mh->tab = realloc(mh->tab, sizeof(void *) * mh->size)))
 			return ;
-		ft_bzero(&mh->tab[mh->pos], mh->pos);
+		ft_bzero(mh->tab + mh->pos, sizeof(void *) * mh->pos);
 	}
 	i = mh->pos++;
-	parent = PARENT(i);
-	while (i != 0 && CTE(mh->tab[parent]) > CTE(entry))
+	while (i != 0 && CTE(*(parent = mh->tab + PARENT(i))) > CTE(entry))
 	{
-		mh->tab[i] = mh->tab[parent];
+		mh->tab[i] = *parent;
 		i = PARENT(i);
-		parent = PARENT(i);
 	}
 	mh->tab[i] = entry;
 }
 
 void	heapify(t_mh *mh, uint32_t i)
 {
-	uint32_t	smallest;
-	uint32_t	left;
-	uint32_t	right;
+	t_proc	**smallest;
+	t_proc	**left;
+	t_proc	**right;
+	t_proc	**parent;
 
-	left = LCHILD(i);
-	right = RCHILD(i);
-	smallest = left < mh->size
-		&& CTE(mh->tab[left]) < CTE(mh->tab[i]) ? left : i;
-	if (right < mh->size && CTE(mh->tab[right]) < CTE(mh->tab[smallest]))
+	left = mh->tab + LCHILD(i);
+	right = mh->tab + RCHILD(i);
+	parent = mh->tab + i;
+	if (left - mh->tab < mh->size && CTE(*left) < CTE(*parent)
+			|| (CTE(*left) == CTE(*parent) && PID(*left) < PID(*parent)))
+		smallest = left;
+	else
+		smallest = i;
+	if (right - mh->tab < mh->size && CTE(*right) < CTE(*smallest)
+			|| (CTE(*right) == CTE(*smallest) && PID(*right) < PID(*smallest)))
 		smallest = right;
-	if (smallest != i)
+	if (smallest - mh->tab != i)
 	{
-		swap_process(&(mh->tab[i]), &(mh->tab[smallest]));
-		heapify(mh, smallest);
+		swap_process(parent, smallest);
+		heapify(mh, smallest - mh->tab);
 	}
 }
 
