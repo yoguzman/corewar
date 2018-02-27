@@ -6,13 +6,14 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/23 14:35:55 by adauchy          ###   ########.fr       */
+/*   Updated: 2018/02/27 17:39:57 by adauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VM_H
 # define VM_H
 
+# include <curses.h>
 # include <stddef.h>
 # include "op.h"
 
@@ -70,10 +71,15 @@ typedef	struct	s_player
 	t_header		header;
 	unsigned char	*code;
 	unsigned int	load_index;
+	int				last_live;
+	int				current_live;
+	int				last_breakdown;
+	int				current_breakdown;
 }				t_player;
 
 typedef struct	s_process
 {
+	unsigned char		index;
 	unsigned char		registers[REG_NUMBER][REG_SIZE];
 	unsigned char		pc[REG_SIZE];
 	unsigned int		carry;
@@ -85,8 +91,13 @@ typedef struct	s_process
 
 typedef struct	s_corewar
 {
+	int				paused;
+	int				cycles_sec;
+	int				cycle_count;
+	int				nb_processes;
 	t_player		player_table[MAX_PLAYERS];
-	unsigned char	arena[MEM_SIZE];
+	unsigned char	*arena;
+	char			*print_data;
 	int				player_id;
 	unsigned int	players;
 	unsigned int	dump_limit;
@@ -100,12 +111,14 @@ typedef struct	s_corewar
 /* Engine */
 
 int			engine(t_corewar *vm);
+void		print_ncurses(t_corewar *vm);
+void		print_breakdown(t_corewar *vm);
 
 /* Initialisation */
 
 void		parse_argv(const char *argv[], t_corewar *vm);
 const char	**load_champion(const char *argv[], t_corewar *vm);
-void		load_champions_in_arena(t_corewar *vm);
+int			load_champions_in_arena(t_corewar *vm);
 
 /* Output */
 

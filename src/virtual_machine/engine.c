@@ -6,18 +6,17 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 14:22:57 by adauchy           #+#    #+#             */
-/*   Updated: 2018/02/23 15:06:31 by adauchy          ###   ########.fr       */
+/*   Updated: 2018/02/27 16:41:24 by adauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "vm.h"
-
+/*
 int			engine(t_corewar *vm)
 {
-/*
 	* Remplir la liste chainee des process
-	while (TOUT LE MONDE NEST PAS DANS LA MORT)
+	while (TOUT LE MONDE EST VIVANT)
 	{
 		
 		 * cycle_to_die--
@@ -36,7 +35,22 @@ int			engine(t_corewar *vm)
 		 Si (DUMP ACTIVE ET cycles = dump_limit)
 		    dump et EXIT
 	} 
-	AFFICHER LE PODIUM
-	*/
+	AFFICHER LE PODIUM	
+	return (0);
+}*/
+
+int			engine(t_corewar *vm)
+{
+	(void)vm;
+	int		count;
+
+	count = 0;
+	while (count < 1)
+	{
+		print_ncurses(vm);
+		count += 1;
+	}
+	getch();
+	endwin();
 	return (0);
 }

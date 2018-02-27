@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 20:04:52 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/22 20:14:07 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/24 15:29:15 by adauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,6 @@ void	free_champions(t_player player_table[MAX_PLAYERS])
 void	clear_data(t_corewar *vm)
 {
 	free_champions(vm->player_table);
+	free(vm->print_data);
+	free(vm->arena);
 }
