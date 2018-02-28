@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/27 18:42:03 by adauchy          ###   ########.fr       */
+/*   Updated: 2018/02/28 13:30:23 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,10 @@
 
 # define THIS_PLAYER vm->player_table[vm->player_id]
 # define PT(x)	player_table[x]
-# define CTE(x) x->cycles_to_exec
+# define CTE(x) (x)->cycles_to_exec
+# define PID(x) (x)->pid
 # define DIGITS "0123456789abcdef"
-# define OPT_STR "adnv"
+# define OPT_STR "dvna"
 # define LCHILD(x) ((x << 1) + 1)
 # define RCHILD(x) ((x << 1) + 2)
 # define PARENT(x) ((x - 1) >> 1)
@@ -69,6 +70,7 @@
 
 typedef enum	e_limits
 {
+	OPTIONS = 4,
 	DUMP_DEFAULT = 80000,
 	HEADER_SIZE = 4 * sizeof(int32_t) + PROG_NAME_LENGTH + COMMENT_LENGTH
 }				t_limits;
@@ -93,6 +95,7 @@ typedef struct	s_process
 	uint8_t		player_id;
 	uint16_t	cycles_to_exec;
 	uint16_t	lives;
+	uint32_t	pid;
 }				t_proc;
 
 typedef struct	s_min_heap

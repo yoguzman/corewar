@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 20:45:02 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/27 17:10:42 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/27 18:49:38 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ t_mh	*init_heap(t_player player_table[MAX_PLAYERS])
 void	insert(t_mh *mh, t_proc *entry)
 {
 	uint32_t	i;
-	uint32_t	parent;
 	t_proc		**parent;
 
 	if (mh->pos == mh->size)
@@ -69,13 +68,15 @@ void	heapify(t_mh *mh, uint32_t i)
 	left = mh->tab + LCHILD(i);
 	right = mh->tab + RCHILD(i);
 	parent = mh->tab + i;
-	if (left - mh->tab < mh->size && CTE(*left) < CTE(*parent)
-			|| (CTE(*left) == CTE(*parent) && PID(*left) < PID(*parent)))
+	if (left - mh->tab < (long)mh->size
+			&& (CTE(*left) < CTE(*parent)
+			|| (CTE(*left) == CTE(*parent) && PID(*left) < PID(*parent))))
 		smallest = left;
 	else
-		smallest = i;
-	if (right - mh->tab < mh->size && CTE(*right) < CTE(*smallest)
-			|| (CTE(*right) == CTE(*smallest) && PID(*right) < PID(*smallest)))
+		smallest = parent;
+	if (right - mh->tab < (long)mh->size
+			&& (CTE(*right) < CTE(*smallest)
+			|| (CTE(*right) == CTE(*smallest) && PID(*right) < PID(*smallest))))
 		smallest = right;
 	if (smallest - mh->tab != i)
 	{

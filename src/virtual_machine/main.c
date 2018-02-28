@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:42:57 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/27 18:22:25 by adauchy          ###   ########.fr       */
+/*   Updated: 2018/02/27 18:48:40 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	init_vm(const char *argv[], t_corewar *vm)
 	vm->player_id = -1;
 	parse_argv(argv + 1, vm);
 //	print_players(vm->player_table);
-	update_player_count(vm);
 	if (load_champions_in_arena(vm) == -1)
 		return (-1);
 //	dump_arena(vm->arena);
