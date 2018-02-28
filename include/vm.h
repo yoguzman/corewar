@@ -85,6 +85,7 @@ typedef	struct	s_player
 	int			current_live;
 	int			last_breakdown;
 	int			current_breakdown;
+	char		die;
 }				t_player;
 
 typedef struct	s_process
@@ -162,6 +163,9 @@ void		clear_data(t_corewar *vm);
 void		free_champions(t_player player_table[MAX_PLAYERS]);
 void		free_processes(t_mh *mh);
 void		free_min_heap(t_mh **mh);
+
+/* Check live et check cycle to die */
+void		check_cycle_to_die(t_corewar *vm);
 
 /* Instructions */
 
