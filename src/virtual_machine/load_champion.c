@@ -83,7 +83,6 @@ int				load_champions_in_arena(t_corewar *vm)
 
 	i = 0;
 	offset = 0;
-//	ft_bzero(vm->print_data, sizeof(vm->print_data));
 	while (i < MAX_PLAYERS)
 	{
 		if (vm->player_table[i].code != NULL)
@@ -94,7 +93,7 @@ int				load_champions_in_arena(t_corewar *vm)
 			n = -1;
 			while (++n < vm->player_table[i].header.prog_size)
 				vm->print_data[n + offset] = i + 1;
-			vm->player_table[i].load_index = i;
+			vm->player_table[i].load_address = offset;
 			offset += (MEM_SIZE / vm->players);
 		}
 		++i;

@@ -92,7 +92,7 @@ void		print_ncurses(t_corewar *vm)
 	mvvline(0, 196, ' ', 68);
 	mvvline(0, 253, ' ', 68);
 	attroff(COLOR_PAIR(42));
-	print_arena(vm->arena, vm->print_data);
 	print_panel(vm);
+	print_arena(vm->arena, vm->print_data);
 	refresh();
 }

@@ -15,6 +15,7 @@
 
 static int	init_vm(const char *argv[], t_corewar *vm)
 {
+	ft_bzero(vm, sizeof(*vm));
 	vm->players = 0;
 	vm->cycles_sec = 50;
 	vm->cycle_count = 0;
@@ -28,10 +29,10 @@ static int	init_vm(const char *argv[], t_corewar *vm)
 	vm->paused = 1;
 	vm->player_id = -1;
 	parse_argv(argv + 1, vm);
-//	print_players(vm->player_table);
+	if (vm->visual == 0)
+		print_players(vm->player_table);
 	if (load_champions_in_arena(vm) == -1)
 		return (-1);
-//	dump_arena(vm->arena);
 	vm->nb_processes = vm->players + 1;
 	return (0);
 }
@@ -73,7 +74,8 @@ int			main(int argc, const char *argv[])
 	{
 		if (init_vm(argv, &vm) == -1)
 			return (-1);
-		init_print_data(&vm);
+		if (vm.visual == 1)
+			init_print_data(&vm);
 		engine(&vm);
 		clear_data(&vm);
 	}

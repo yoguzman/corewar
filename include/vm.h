@@ -14,6 +14,7 @@
 # define VM_H
 
 # include <curses.h>
+# include <unistd.h>
 # include <stddef.h>
 # include <inttypes.h>
 # include <limits.h>
@@ -80,11 +81,10 @@ typedef	struct	s_player
 	t_header	header;
 	uint8_t		*code;
 	uint32_t	load_address;
-	uint32_t	load_index;
-	int				last_live;
-	int				current_live;
-	int				last_breakdown;
-	int				current_breakdown;
+	int			last_live;
+	int			current_live;
+	int			last_breakdown;
+	int			current_breakdown;
 }				t_player;
 
 typedef struct	s_process
@@ -92,9 +92,9 @@ typedef struct	s_process
 	uint32_t	reg[REG_NUMBER];
 	uint32_t	pc;
 	uint8_t		carry;
+	int			current_live;
 	uint8_t		player_id;
 	uint16_t	cycles_to_exec;
-	uint16_t	lives;
 	uint32_t	pid;
 }				t_proc;
 
@@ -107,17 +107,20 @@ typedef struct	s_min_heap
 
 typedef struct	s_corewar
 {
-	int				paused;
-	int				cycles_sec;
-	int				cycle_count;
-	int				nb_processes;
-	char			*print_data;
+	int			paused;
+	int			cycles_sec;
+	uint32_t	cycle_count;
+	int			nb_processes;
+	int			cycle_to_die;
+	int			cycle_to_die_max;
+	char		*print_data;
 	t_player	player_table[MAX_PLAYERS];
 	uint8_t		*arena;
 	int32_t		player_id;
 	uint32_t	players;
 	uint32_t	dump_limit;
 	t_mh		*mh;
+	int			visual;
 }				t_corewar;
 
 /* 

@@ -52,4 +52,5 @@ void	clear_data(t_corewar *vm)
 		free_min_heap(&(vm->mh));
 	free(vm->print_data);
 	free(vm->arena);
+	endwin();
 }

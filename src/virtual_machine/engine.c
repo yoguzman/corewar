@@ -47,16 +47,40 @@ int32_t			engine(t_corewar *vm)
 
 int			engine(t_corewar *vm)
 {
-	(void)vm;
-	int		count;
-
-	count = 0;
-	while (count < 1)
+	while (42)
 	{
-		print_ncurses(vm);
-		count += 1;
+		++(vm->cycle_count);
+		--(vm->cycle_to_die);
+
+
+
+		/* fonction check_cycle_to_die */
+		if (vm->cycle_to_die == 0)
+		{
+			//ret = check_live_player(); // a creer (check les lives et les resets a 0)
+			//check_live_process(); // a creer(check les lives et les resets a 0)
+			//if (ret >= NBR_LIVE) // a creer
+			//	vm->cycle_to_die_max -= CYCLE_DELTA;
+			vm->cycle_to_die = vm->cycle_to_die_max;
+		}
+		/* fonction end */
+
+		/* fonction exec_instr */
+
+		/* fonction end */
+
+		/* fonction visual_option */
+		if (vm->visual == 1)
+			print_ncurses(vm);
+		if (vm->dump_limit > 0 && vm->dump_limit == vm->cycle_count)
+		{
+			dump_arena(vm->arena);
+			clear_data(vm);
+			exit(EXIT_SUCCESS);
+		}
+		/* fonction end */
+
 	}
 	getch();
-	endwin();
 	return (0);
 }

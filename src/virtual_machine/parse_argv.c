@@ -29,7 +29,7 @@ static const char	**save_dump_limit(const char *argv[], t_corewar *vm)
 static const char	**init_visual_mode(const char *argv[], t_corewar *vm)
 {
 	(void)argv;
-	(void)vm;
+	vm->visual = 1;
 	return (&argv[1]);
 }
 
