@@ -48,8 +48,8 @@ void		check_cycle_to_die(t_corewar *vm)
 //	{
 		ret = check_live_player(vm->player_table);
 		//check_live_process(vm->mh); // a creer(check les lives et les resets a 0)
-		//if (ret >= NBR_LIVE) // a creer
-		//	vm->cycle_to_die_max -= CYCLE_DELTA;
+		if (ret >= NBR_LIVE)
+			vm->cycle_to_die_max -= CYCLE_DELTA;
 		vm->cycle_to_die = vm->cycle_to_die_max;
 //	}
 }
