@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:42:57 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/27 18:48:40 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/28 18:48:33 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int			main(int argc, const char *argv[])
 	t_corewar	vm;
 
 	if (argc == 1 || (argc == 2 && (!ft_strcmp(argv[1], "-u")
-				|| !ft_strcmp(argv[1], "-usage")
-				|| !ft_strcmp(argv[1], "-h")
-				|| !ft_strcmp(argv[1], "-help"))))
+									|| !ft_strcmp(argv[1], "-usage")
+									|| !ft_strcmp(argv[1], "-h")
+									|| !ft_strcmp(argv[1], "-help"))))
 		print_usage();
 	else
 	{

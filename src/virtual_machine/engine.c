@@ -6,7 +6,7 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 14:22:57 by adauchy           #+#    #+#             */
-/*   Updated: 2018/02/27 18:39:26 by adauchy          ###   ########.fr       */
+/*   Updated: 2018/02/28 20:03:13 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int32_t			engine(t_corewar *vm)
 	print_processes(vm->mh = init_heap(vm->player_table));
 	while (TOUT LE MONDE NEST PAS DANS LA MORT)
 	{
-		
+
 		cycle_to_die--
 		SI cycle_to_die == 0
 			verification de la vivance des champions
@@ -43,10 +43,11 @@ int32_t			engine(t_corewar *vm)
 	}
 	AFFICHER LE PODIUM
 }
-	*/
+*/
 
 int			engine(t_corewar *vm)
 {
+	int tamer = 0;
 	while (42)
 	{
 		++(vm->cycle_count);
@@ -66,7 +67,11 @@ int			engine(t_corewar *vm)
 		/* fonction end */
 
 		/* fonction exec_instr */
-
+		if (tamer == 0)
+		{
+			mabite(vm);
+			tamer++;
+		}
 		/* fonction end */
 
 		/* fonction visual_option */

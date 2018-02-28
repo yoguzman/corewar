@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/28 13:30:23 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/28 19:22:07 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ typedef struct	s_corewar
 	int			visual;
 }				t_corewar;
 
-/* 
+/*
 ** 3.Definitions
 */
 
@@ -165,6 +165,8 @@ void		free_min_heap(t_mh **mh);
 
 /* Instructions */
 
+void		mabite(t_corewar *vm);
+
 /* priority_queue.c */
 
 t_mh		*init_heap(t_player player_table[MAX_PLAYERS]);
@@ -176,6 +178,6 @@ void		delete_min(t_mh *mh);
 
 void		swap_process(t_proc **a, t_proc **b);
 t_proc		*spawn_process(uint64_t load_address, uint8_t player_id);
-void		kill_process(t_mh *mh, uint32_t index);	
+void		kill_process(t_mh *mh, uint32_t index);
 
 #endif

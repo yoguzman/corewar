@@ -6,7 +6,7 @@
 #    By: yguzman <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 11:38:09 by yguzman           #+#    #+#              #
-#    Updated: 2018/02/27 18:36:33 by adauchy          ###   ########.fr        #
+#    Updated: 2018/02/28 19:23:47 by jcoutare         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -55,7 +55,7 @@ SRCS_ASM		=		main_a.c							\
 						write_instr.c						\
 						tools3.c							\
 
-SRCS_COREWAR	= main.c op.c print_usage.c print_error_and_exit.c \
+SRCS_COREWAR	= main.c instr.c op.c print_usage.c print_error_and_exit.c \
 		ft_isdigitstr.c load_champion.c parse_argv.c \
 		print_mem.c switch_endianness.c clear_data.c print_players.c \
 		dump_arena.c engine.c process.c priority_queue.c \
