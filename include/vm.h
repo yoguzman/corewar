@@ -123,6 +123,12 @@ typedef struct	s_corewar
 	int			visual;
 }				t_corewar;
 
+typedef struct s_instr
+{
+  void            (*tab_instr[16])(t_corewar *vm, t_proc *lol, struct s_instr *instr);
+  char			val_arg[3];
+}	       t_instr;
+
 /*
 ** 3.Definitions
 */
