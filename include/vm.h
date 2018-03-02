@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/28 19:22:07 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/02 19:10:34 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,11 @@ typedef struct	s_corewar
 
 typedef struct s_instr
 {
-  void            (*tab_instr[16])(t_corewar *vm, t_proc *lol, struct s_instr *instr);
-  char			val_arg[3];
+	void            (*tab_instr[16])(t_corewar *vm, t_proc *lol, struct s_instr *instr);
+	int			val_arg[3];
+	int							opcode;
+	unsigned long long			param[3];
+	t_op			*op_tab;
 }	       t_instr;
 
 /*
@@ -144,6 +147,7 @@ void		print_breakdown(t_corewar *vm);
 void		parse_argv(const char *argv[], t_corewar *vm);
 const char	**load_champion(const char *argv[], t_corewar *vm);
 int			load_champions_in_arena(t_corewar *vm);
+void		init_op_tab(t_op *g_op_tab, t_instr *instr);
 
 /* Output */
 
