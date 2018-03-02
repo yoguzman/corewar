@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 20:45:02 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/27 18:49:38 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/01 17:37:48 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ t_mh	*init_heap(t_player player_table[MAX_PLAYERS])
 	t_mh	*mh;
 	int32_t	i;
 
-	if (!(mh = (t_mh *)malloc(sizeof(*mh)))
-			|| !(mh->tab = (t_proc **)malloc(sizeof(void *) * 4)))
+	if (!(mh = (t_mh *)malloc(sizeof(*mh))))
+		return (NULL);
+	ft_bzero(mh, sizeof(*mh));
+	if (!(mh->tab = (t_proc **)malloc(sizeof(void *) * 4)))
 		return (NULL);
 	mh->size = 4;
 	i = 4;
