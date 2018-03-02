@@ -6,16 +6,14 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:44:10 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/02/28 20:04:49 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/02 19:19:56 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 #include "vm.h"
 #include "libft.h"
-
-static const t_op    op_tab[17] =
-{
+static const  t_op g_op_tab[17] =  {
         {"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
         {"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
         {"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},
@@ -41,119 +39,103 @@ static const t_op    op_tab[17] =
         {0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-void	avance_pc(t_corewar *vm, t_proc *lol, t_instr *instr)
-{
-
-}
-
 void	zjmp(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-  
+
 }
-
-int	check_params(unsigned char *parameter_type, unsigned char parameter_count, char *val_arg)
-{
-  int i;
-  int j;
-
-  j = 2;
-  i = 0;
-  
-  while (i < parameter_count)
-    {
-      if (parameter_type[i] & val_arg[i] == 0)
-	  return (-1);
-      i++;
-    }
-  return (0);
-}
-
-int 	*get_octet(char octet, char *val_arg, int opcode)
-{
-  char mask;
-  int ret;
-  int i;
-
-  i = 2;
-  mask = 3;
-  while (i >= 0)
-    {
-      octet = octet >> 2;
-      ret = octet & mask;
-      if (ret == 3)
-	ret = ret + 1;
-      val_arg[i] = ret;
-      i--;
-    }
-  if (check_params(op_tab[opcode].parameter_types, op_tab[opcode].parameter_count, val_arg) == -1)
-    {
-      printf("FAIL IN CHECK_PARAMS\n");
-    }
-  return (val_arg);
-}
-
 
 void	ld(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-  int arg[2];
-  int i = 0;
 
-  get_octet(vm->arena[lol->pc], instr->val_arg, 2);
-  lol->pc++;
-  arg[0] = vm->arena[lol->pc];
-  if (instr->val_arg[0] == T_DIR)
-    {
-      while (++i < DIR_SIZE)
-	{
-	  ++lol->pc;
-	  arg[0] += vm->arena[lol->pc];
-	}
-      lol->pc += 1;
-      ft_putstr("\nfirst_parametre = ");
-      ft_putnbr(arg[0]);
-       
-    }
-  else if (instr->val_arg[0] == T_REG)
-    {
-      instr->tab_instr[0](vm, lol, instr);
-      return ;
-    }
-  else if (instr->val_arg[0] == T_IND)
-    lol->pc += IND_SIZE; 
-  ft_putstr("\nregistre = ");
-  arg[1] = vm->arena[lol->pc];
-  ft_putnbr(arg[1]);
-  if (arg[1] > 15)
-    {
-      instr->tab_instr[0](vm, lol, instr);
-      return ;
-    }  
-  lol->reg[arg[1]] += arg[0];
-  lol->carry = 1;
-  lol->pc += 1;
 }
 
-void	init_tab_instr(void (*tab_instr[16])(t_corewar *vm, t_proc *lol, t_instr *instr))
+void	init_tab_instr(void (*tab_instr[16])(t_corewar *vm,
+											 t_proc *lol, t_instr *instr))
 {
-	tab_instr[0] = &avance_pc;
-	tab_instr[2] = &ld;
-	tab_instr[9] = &zjmp;
+//	tab_instr[0] = &live;
+	tab_instr[1] = &ld;
+	tab_instr[8] = &zjmp;
 }
+
+
+int	check_params(unsigned char const parameter_type[3], unsigned char parameter_count,
+				 int *val_arg)
+{
+	int i;
+
+	i = 0;
+	while (i < parameter_count)
+	{
+		if ((parameter_type[i] & val_arg[i]) == 0)
+				return (-1);
+		i++;
+    }
+	if (i < 2)
+		if (val_arg[2] != 0)
+			return (-1);
+	return (0);
+}
+
+int		get_octet(char octet, t_instr *instr)
+{
+	char mask;
+	int ret;
+	int i;
+
+	i = 2;
+	mask = 3;
+	while (i >= 0)
+    {
+		octet = octet >> 2;
+		ret = octet & mask;
+		if (ret == 3)
+			ret = ret + 1;
+		instr->val_arg[i] = ret;
+		i--;
+    }
+	if (check_params(instr->op_tab[instr->opcode].parameter_types,
+					 instr->op_tab[instr->opcode].parameter_count, instr->val_arg) == -1)
+    {
+		printf(">>>>>>>%s\n", instr->op_tab[instr->opcode].name);
+		printf("FAIL IN CHECK_PARAMS\n");
+		return (-1);
+	}
+	return (0);
+}
+
+void	la_balade(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+	int tojump;
+	int i;
+
+	tojump = 0;
+	i = 0;
+	while (i < 3)
+	{
+		if (instr->val_arg[i] == T_REG)
+			lol->pc += T_REG;
+		else if (instr->val_arg[i] == T_DIR)
+			lol->pc += DIR_SIZE;
+		else if (instr->val_arg[i] == T_IND)
+			lol->pc += IND_SIZE;
+		i++;
+	}
+	lol->pc++;
+}
+
 
 void	mabite(t_corewar *vm)
 {
-  t_proc		lol;
-  t_instr		instr;
-  int			opcode;
-	
-  lol.pc = 0;
-  init_tab_instr(instr.tab_instr);
-  while (42)
-    {
-      opcode= vm->arena[lol.pc];
-      lol.pc++;
-      ft_putstr("\n opcode = ");
-      ft_putnbr(opcode);
-      instr.tab_instr[opcode](vm, &lol, &instr);
-    }
+	t_proc		lol;
+	t_instr		instr;
+
+	init_op_tab(g_op_tab, &instr);
+	lol.pc = 0;
+	init_tab_instr(instr.tab_instr);
+	instr.opcode = vm->arena[lol.pc] - 1;
+	lol.pc++;
+	ft_putstr("\nopcode = ");
+	ft_putnbr(instr.opcode + 1);
+	ft_putchar('\n');
+	get_data(vm, &lol, &instr);
 }
