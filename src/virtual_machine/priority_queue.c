@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 20:45:02 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/02 21:12:37 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/02 22:20:34 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ t_mh	*init_heap(t_player player_table[MAX_PLAYERS], uint64_t *total_proc)
 	int32_t	i;
 
 	if (!(mh = (t_mh *)malloc(sizeof(*mh)))
-			|| !(mh->tab = (t_proc **)malloc(sizeof(void *) * START)))
+			|| !(mh->tab = (t_proc **)malloc(sizeof(void *) * START_HEAP_SIZE)))
 		return (NULL);
-	mh->size = START;
+	mh->size = START_HEAP_SIZE;
 	i = 0;
 	while (i < MAX_PLAYERS)
 	{
@@ -93,7 +93,7 @@ void	delete_min(t_mh *mh)
 {
 	if (mh->pos)
 	{
-		free(mh->tab[index]);
+		free(mh->tab[0]);
 		mh->tab[0] = mh->tab[--(mh->pos)];
 		heapify(mh, 0);
 	}

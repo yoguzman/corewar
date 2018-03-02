@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/02 19:23:53 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/02 22:20:11 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef enum	e_limits
 {
 	OPTIONS = 4,
 	DUMP_DEFAULT = 80000,
+	START_HEAP_SIZE = 10000,
 	HEADER_SIZE = 4 * sizeof(int32_t) + PROG_NAME_LENGTH + COMMENT_LENGTH
 }				t_limits;
 
@@ -137,8 +138,6 @@ typedef struct	s_corewar
 
 typedef struct s_instr
 {
-  void            (*tab_instr[16])(t_corewar *vm, t_proc *lol, struct s_instr *instr);
-  char			val_arg[3];
 	void            (*tab_instr[16])(t_corewar *vm, t_proc *lol, struct s_instr *instr);
 	int			val_arg[3];
 	int							opcode;
@@ -210,7 +209,8 @@ void		mabite(t_corewar *vm);
 ** priority_queue.c
 */
 
-t_mh		*init_heap(t_player player_table[MAX_PLAYERS]);
+t_mh		*init_heap(t_player player_table[MAX_PLAYERS],
+		uint64_t *total_proc);
 void		insert(t_mh *mh, t_proc *entry);
 void		heapify(t_mh *mh, uint32_t i);
 void		delete_min(t_mh *mh);
@@ -221,7 +221,8 @@ void		delete_any(t_mh *mh, uint32_t i);
 */
 
 void		swap_process(t_proc **a, t_proc **b);
-t_proc		*spawn_process(uint64_t load_address, uint8_t player_id);
+t_proc		*spawn_process(uint64_t load_address, uint8_t player_id,
+		uint64_t *total_proc);
 void		kill_process(t_mh *mh, uint32_t index);
 
 #endif
