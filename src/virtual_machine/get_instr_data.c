@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 17:24:23 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/02 17:27:12 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/02 19:25:12 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		get_data(t_corewar *vm, t_proc *lol, t_instr *instr)
 		return (0);
 	}
 	lol->pc++; //PCK ON A RECUP LOCTET DE CODAGE
-	while (i < op_tab[instr->opcode].parameter_count)
+	while (i < instr->op_tab[instr->opcode].parameter_count)
 	{
 		if (instr->val_arg[i] == T_REG)
 			get_reg(vm, lol, instr, i);
@@ -54,6 +54,6 @@ int		get_data(t_corewar *vm, t_proc *lol, t_instr *instr)
 			get_ind(vm, lol, instr, i);
 		i++;
 	}
-	instr->tab_instr[instr->opcode](vm, &lol, &instr);
+	instr->tab_instr[instr->opcode](vm, lol, instr);
 	return (0);
 }

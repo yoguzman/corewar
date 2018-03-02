@@ -6,14 +6,14 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:44:10 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/02 19:09:18 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/02 19:19:56 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 #include "vm.h"
 #include "libft.h"
-static const  t_op op_tab[17] =  {
+static const  t_op g_op_tab[17] =  {
         {"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
         {"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
         {"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},
@@ -58,7 +58,7 @@ void	init_tab_instr(void (*tab_instr[16])(t_corewar *vm,
 }
 
 
-int	check_params(unsigned char *parameter_type, unsigned char parameter_count,
+int	check_params(unsigned char const parameter_type[3], unsigned char parameter_count,
 				 int *val_arg)
 {
 	int i;
@@ -129,10 +129,7 @@ void	mabite(t_corewar *vm)
 	t_proc		lol;
 	t_instr		instr;
 
-	init_op_tab(op_tab, &instr);
-	ft_putstr("AFHADFGJSDHFGSDJHFGSDJHFV");
-	ft_putstr(instr.op_tab[0].name);
-	ft_putstr("lol");
+	init_op_tab(g_op_tab, &instr);
 	lol.pc = 0;
 	init_tab_instr(instr.tab_instr);
 	instr.opcode = vm->arena[lol.pc] - 1;
@@ -140,5 +137,5 @@ void	mabite(t_corewar *vm)
 	ft_putstr("\nopcode = ");
 	ft_putnbr(instr.opcode + 1);
 	ft_putchar('\n');
-	//get_data(vm, &lol, &instr);
+	get_data(vm, &lol, &instr);
 }

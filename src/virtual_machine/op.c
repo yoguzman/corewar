@@ -6,14 +6,14 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2018/03/02 19:09:07 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/02 19:17:19 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 #include "vm.h"
 
-void		init_op_tab(t_op *g_op_tab, t_instr *instr)
+void		init_op_tab(const t_op g_op_tab[17], t_instr *instr)
 {
 	instr->op_tab = g_op_tab;
 }

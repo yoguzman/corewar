@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/02 19:10:34 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/02 19:23:53 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@
 # define U_4 "\t--hidden\t:	Hidden memory layout\n"
 # define USAGE U_1 U_2 U_5 U_6 U_3 U_4
 
-/* Error messages */
+/*
+** Error messages
+*/
 
 # define ERR_STR "Corewar: Error: "
 # define E0 "Unrecognized option"
@@ -49,7 +51,9 @@
 # define E3 "Invalid file extension"
 # define E4 "Too many players"
 
-/* Misc. */
+/*
+** Misc.
+*/
 
 # define THIS_PLAYER vm->player_table[vm->player_id]
 # define PT(x)	player_table[x]
@@ -57,9 +61,17 @@
 # define PID(x) (x)->pid
 # define DIGITS "0123456789abcdef"
 # define OPT_STR "dvna"
+
+/*
+** Calculations
+*/
 # define LCHILD(x) ((x << 1) + 1)
 # define RCHILD(x) ((x << 1) + 2)
 # define PARENT(x) ((x - 1) >> 1)
+# define SWP32A(nb) ((nb & 0xff000000) >> 24) | ((nb >> 0x00ff0000) >> 8)
+# define SWP32B(nb) ((nb & 0x0000ff00) << 8) | (nb << 24)
+# define SWAP32(nb) SWP32A(nb) | SWP32B(nb)
+# define SWAP16(nb) ((nb & 0xff) >> 8) | (nb << 8)
 
 /*
 ** 2.Typedefs
@@ -129,27 +141,33 @@ typedef struct s_instr
 	int			val_arg[3];
 	int							opcode;
 	unsigned long long			param[3];
-	t_op			*op_tab;
+	const t_op			*op_tab;
 }	       t_instr;
 
 /*
 ** 3.Definitions
 */
 
-/* Engine */
+/*
+** Engine
+*/
 
 int32_t		engine(t_corewar *vm);
 void		print_ncurses(t_corewar *vm);
 void		print_breakdown(t_corewar *vm);
 
-/* Initialisation */
+/*
+** Initialisation
+*/
 
 void		parse_argv(const char *argv[], t_corewar *vm);
 const char	**load_champion(const char *argv[], t_corewar *vm);
 int			load_champions_in_arena(t_corewar *vm);
-void		init_op_tab(t_op *g_op_tab, t_instr *instr);
+void		init_op_tab(const t_op g_op_tab[17], t_instr *instr);
 
-/* Output */
+/*
+** Output
+*/
 
 void		print_usage(void);
 void		print_error_and_exit(const char *msg);
@@ -160,31 +178,43 @@ void		print_players(t_player player_table[MAX_PLAYERS]);
 void		dump_arena(uint8_t arena[MEM_SIZE]);
 void		print_processes(t_mh *mh);
 
-/* Utils */
+/*
+** Utils
+*/
 
 int			ft_isdigitstr(const char *s);
 void		switch_endianness(void *mem, uint64_t mem_size);
 int			get_empty_slot(t_player player_table[MAX_PLAYERS]);
 
-/* Data clearance */
+/*
+** Data clearance
+*/
 
 void		clear_data(t_corewar *vm);
 void		free_champions(t_player player_table[MAX_PLAYERS]);
 void		free_processes(t_mh *mh);
 void		free_min_heap(t_mh **mh);
 
-/* Instructions */
-
+/*
+** Instructions
+*/
+int			get_octet(char octet, t_instr *instr);
+void		la_balade(t_corewar *vm, t_proc *lol, t_instr *instr);
+int			get_data(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		mabite(t_corewar *vm);
 
-/* priority_queue.c */
+/*
+** priority_queue.c
+*/
 
 t_mh		*init_heap(t_player player_table[MAX_PLAYERS]);
 void		insert(t_mh *mh, t_proc *entry);
 void		heapify(t_mh *mh, uint32_t i);
 void		delete_min(t_mh *mh);
 
-/* process.c */
+/*
+** process.c
+*/
 
 void		swap_process(t_proc **a, t_proc **b);
 t_proc		*spawn_process(uint64_t load_address, uint8_t player_id);
