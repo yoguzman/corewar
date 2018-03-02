@@ -37,9 +37,3 @@ static const t_op    op_tab[17] =
 	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
-
-int		main()
-{
-	ft_putnbr(op_tab[1].parameter_types[0]);
-	return (0);
-}
