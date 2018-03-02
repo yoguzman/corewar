@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 16:14:54 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/02 16:14:59 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:25:56 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ t_mh		*init_heap(t_player player_table[MAX_PLAYERS]);
 void		insert(t_mh *mh, t_proc *entry);
 void		heapify(t_mh *mh, uint32_t i);
 void		delete_min(t_mh *mh);
+void		delete_any(t_mh *mh, uint32_t i);
 
 /*
 ** process.c

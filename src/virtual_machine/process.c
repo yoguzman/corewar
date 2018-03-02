@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 16:15:57 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/25 20:16:01 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:30:59 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	swap_process(t_proc **a, t_proc **b)
 	*b = *a;
 }
 
-t_proc	*spawn_process(uint64_t load_address, uint8_t player_id)
+t_proc	*spawn_process(uint64_t load_address, uint8_t player_id,
+		uint64_t *total_proc)
 {
 	t_proc	*new;
 
@@ -33,6 +34,7 @@ t_proc	*spawn_process(uint64_t load_address, uint8_t player_id)
 	ft_bzero(new, sizeof(*new));
 	new->pc = load_address;
 	new->reg[0] = player_id;
+	new->pid = (*total_proc)++;
 	return (new);
 }
 
