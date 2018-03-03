@@ -103,7 +103,8 @@ typedef struct	s_min_heap
 {
 	t_proc		**tab;
 	uint64_t	size;
-	uint32_t	pos;
+	uint64_t	pos;
+	uint64_t	count;
 }				t_mh;
 
 typedef struct	s_corewar

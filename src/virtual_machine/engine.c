@@ -44,8 +44,19 @@ int32_t			engine(t_corewar *vm)
 }
 	*/
 
-void		loop_instr(t_corewar *vm)
+void			loop_instr(t_corewar *vm, t_mh *mh)
 {
+	uint64_t	i;
+
+	while (mh->tab[0]->cycles_to_exec - count > 0)
+		++count;
+	//exec_instr
+	i = 0;
+	while (mh->tab[i]->cycles_to_exec - count == 0)
+	{
+		//exec_instr
+		++i;
+	}
 }
 
 void		visual_option(t_corewar *vm)
@@ -63,15 +74,14 @@ void		visual_option(t_corewar *vm)
 int			engine(t_corewar *vm)
 {
 	vm->mh = init_heap(vm->player_table);
-	print_processes(vm->mh);
-	while (42)
+	while (vm->mh->pos > 0)
 	{
 		++(vm->cycle_count);
 		--(vm->cycle_to_die);
 
 		check_cycle_to_die(vm);
 
-		loop_instr(vm);
+		loop_instr(vm, vm->mh);
 
 		visual_option(vm);
 
