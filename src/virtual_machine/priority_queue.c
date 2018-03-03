@@ -74,13 +74,13 @@ void	heapify(t_mh *mh, uint32_t i)
 	left = mh->tab + LCHILD(i);
 	right = mh->tab + RCHILD(i);
 	parent = mh->tab + i;
-	if (left - mh->tab < (long)mh->size
+	if (LCHILD(i) <= mh->pos && left - mh->tab < (long)mh->size
 			&& (CTE(*left) < CTE(*parent)
 			|| (CTE(*left) == CTE(*parent) && PID(*left) > PID(*parent))))
 		smallest = left;
 	else
 		smallest = parent;
-	if (right - mh->tab < (long)mh->size
+	if (RCHILD(i) <= mh->pos && right - mh->tab < (long)mh->size
 			&& (CTE(*right) < CTE(*smallest)
 			|| (CTE(*right) == CTE(*smallest) && PID(*right) > PID(*smallest))))
 		smallest = right;
