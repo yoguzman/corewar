@@ -41,7 +41,6 @@ static const  t_op g_op_tab[17] =  {
 /*
 int32_t			engine(t_corewar *vm)
 {
-	print_processes(vm->mh = init_heap(vm->player_table));
 	while (TOUT LE MONDE NEST PAS DANS LA MORT)
 	{
 
@@ -71,47 +70,56 @@ int32_t			engine(t_corewar *vm)
 }
 */
 
+void			loop_instr(t_corewar *vm, t_mh *mh)
+{
+	uint64_t	i;
+
+	while (mh->tab[0]->cycles_to_exec - mh->count > 0)
+		++(mh->count);
+	//exec_instr
+	i = 0;
+	while (mh->tab[i]->cycles_to_exec - mh->count == 0)
+	{
+		//exec_instr
+		++i;
+	}
+}
+
+void		visual_option(t_corewar *vm)
+{
+	if (vm->visual == 1)
+		print_ncurses(vm);
+	if (vm->dump_limit > 0 && vm->dump_limit == vm->cycle_count)
+	{
+		dump_arena(vm->arena);
+		clear_data(vm);
+		exit(EXIT_SUCCESS);
+	}
+}
+
 int			engine(t_corewar *vm)
 {
-	int tamer = 0;
-	init_op_tab(g_op_tab, &instr);
-	while (42)
+	int		tamer=0;
+	t_instr	instr;
+
+	init_instr(&instr, vm);
+	while (vm->mh->pos > 0)
 	{
 		++(vm->cycle_count);
 		--(vm->cycle_to_die);
 
+		check_cycle_to_die(vm);
 
-
-		/* fonction check_cycle_to_die */
-		if (vm->cycle_to_die == 0)
-		{
-			//ret = check_live_player(); // a creer (check les lives et les resets a 0)
-			//check_live_process(); // a creer(check les lives et les resets a 0)
-			//if (ret >= NBR_LIVE) // a creer
-			//	vm->cycle_to_die_max -= CYCLE_DELTA;
-			vm->cycle_to_die = vm->cycle_to_die_max;
-		}
-		/* fonction end */
+		loop_instr(vm, vm->mh);
 
 		/* fonction exec_instr */
 		if (tamer == 0)
 		{
-			mabite(vm);
+			mabite(vm, &instr);
 			tamer++;
 		}
-		/* fonction end */
 
-		/* fonction visual_option */
-		if (vm->visual == 1)
-			print_ncurses(vm);
-		if (vm->dump_limit > 0 && vm->dump_limit == vm->cycle_count)
-		{
-			dump_arena(vm->arena);
-			clear_data(vm);
-			exit(EXIT_SUCCESS);
-		}
-		/* fonction end */
-
+		visual_option(vm);
 	}
 	getch();
 	return (0);

@@ -13,7 +13,6 @@ void			check_live_process(t_mh *mh)
 			mh->tab[i]->current_live = 0;
 		++i;
 	}
-	ft_putchar('\n');
 }
 
 int				check_live_player(t_player player_table[MAX_PLAYERS])
@@ -45,10 +44,10 @@ void		check_cycle_to_die(t_corewar *vm)
 {
 	int		ret;
 
-	if (vm->cycle_to_die == 0)
-	{
+//	if (vm->cycle_to_die == 0)
+//	{
 		ret = check_live_player(vm->player_table);
-		check_live_process(vm->mh);
+		check_live_process(vm->mh); // a creer(check les lives et les resets a 0)
 		if (ret >= NBR_LIVE)
 			vm->cycle_to_die_max -= CYCLE_DELTA;
 		vm->cycle_to_die = vm->cycle_to_die_max;
