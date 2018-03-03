@@ -18,7 +18,6 @@ void	get_reg(t_corewar *vm, t_proc *lol, t_instr *instr,
 				int i)
 {
 	instr->param[i] = vm->arena[lol->pc];
-	printf("registre = %llu\n", instr->param[i]);
 	lol->pc += T_REG;
 }
 
