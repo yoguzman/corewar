@@ -98,6 +98,7 @@ typedef	struct	s_player
 	int			current_live;
 	int			last_breakdown;
 	int			current_breakdown;
+	char		die;
 }				t_player;
 
 typedef struct	s_process
@@ -115,7 +116,8 @@ typedef struct	s_min_heap
 {
 	t_proc		**tab;
 	uint64_t	size;
-	uint32_t	pos;
+	uint64_t	pos;
+	uint64_t	count;
 }				t_mh;
 
 typedef struct	s_corewar
@@ -134,6 +136,7 @@ typedef struct	s_corewar
 	uint32_t	dump_limit;
 	t_mh		*mh;
 	int			visual;
+	uint64_t	total_proc;
 }				t_corewar;
 
 typedef struct s_instr
@@ -165,6 +168,7 @@ void		parse_argv(const char *argv[], t_corewar *vm);
 const char	**load_champion(const char *argv[], t_corewar *vm);
 int			load_champions_in_arena(t_corewar *vm);
 void		init_op_tab(const t_op g_op_tab[17], t_instr *instr);
+int			init_instr(t_instr *instr, t_corewar *vm);
 
 /*
 ** Output
@@ -196,14 +200,18 @@ void		free_champions(t_player player_table[MAX_PLAYERS]);
 void		free_processes(t_mh *mh);
 void		free_min_heap(t_mh **mh);
 
-/*
-** Instructions
-*/
+/* Check live et check cycle to die */
+
+void		check_cycle_to_die(t_corewar *vm);
+
+/* Instructions */
 
 int			get_octet(char octet, t_instr *instr);
 void		la_balade(t_corewar *vm, t_proc *lol, t_instr *instr);
 int			get_data(t_corewar *vm, t_proc *lol, t_instr *instr);
-void		mabite(t_corewar *vm);
+void		mabite(t_corewar *vm, t_instr *instr);
+void		zjmp(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		ld(t_corewar *vm, t_proc *lol, t_instr *instr);
 
 /*
 ** priority_queue.c
