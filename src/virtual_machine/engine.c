@@ -75,6 +75,10 @@ int			engine(t_corewar *vm)
 	init_instr(&instr, vm);
 	while (vm->mh->pos > 0)
 	{
+		ft_putnbr(vm->cycle_count);
+		ft_putchar(' ');
+		ft_putnbr(vm->cycle_to_die);
+		ft_putchar('\n');
 		++(vm->cycle_count);
 		--(vm->cycle_to_die);
 		++(vm->mh->count);

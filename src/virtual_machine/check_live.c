@@ -10,8 +10,10 @@ void			check_live_process(t_mh *mh)
 		if (mh->tab[i]->current_live == 0)
 			delete_any(mh, i);
 		else
+		{
 			mh->tab[i]->current_live = 0;
-		++i;
+			++i;
+		}
 	}
 }
 
@@ -43,6 +45,7 @@ int				check_live_player(t_player player_table[MAX_PLAYERS])
 void		check_cycle_to_die(t_corewar *vm)
 {
 	int		ret;
+
 
 	if (vm->cycle_to_die == 0)
 	{
