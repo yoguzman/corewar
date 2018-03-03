@@ -45,19 +45,15 @@ int32_t			engine(t_corewar *vm)
 }
 */
 
-void			loop_instr(t_corewar *vm, t_mh *mh)
+void			loop_instr(t_corewar *vm, t_mh *mh, t_instr *instr)
 {
 	uint64_t	i;
 
-	while (mh->tab[0]->cycles_to_exec - mh->count > 0)
-		++(mh->count);
-	//exec_instr
+	if (mh->tab[0]->cycles_to_exec - mh->count > 0)
+		return ;
 	i = 0;
 	while (mh->tab[i]->cycles_to_exec - mh->count == 0)
-	{
-		//exec_instr
-		++i;
-	}
+		exec_instr(vm, instr, mh->tab[i], &i);
 }
 
 void		visual_option(t_corewar *vm)
@@ -74,7 +70,6 @@ void		visual_option(t_corewar *vm)
 
 int			engine(t_corewar *vm)
 {
-	int		tamer=0;
 	t_instr	instr;
 
 	init_instr(&instr, vm);
@@ -82,17 +77,12 @@ int			engine(t_corewar *vm)
 	{
 		++(vm->cycle_count);
 		--(vm->cycle_to_die);
+		++(vm->mh->count);
 
 		check_cycle_to_die(vm);
 
-		loop_instr(vm, vm->mh);
+		loop_instr(vm, vm->mh, &instr);
 
-		/* fonction exec_instr */
-		if (tamer == 0)
-		{
-			mabite(vm, &instr);
-			tamer++;
-		}
 
 		visual_option(vm);
 	}

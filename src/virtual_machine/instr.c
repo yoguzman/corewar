@@ -63,11 +63,7 @@ int		get_octet(char octet, t_instr *instr)
     }
 	if (check_params(instr->op_tab[instr->opcode].parameter_types,
 					 instr->op_tab[instr->opcode].parameter_count, instr->val_arg) == -1)
-    {
-		printf(">>>>>>>%s\n", instr->op_tab[instr->opcode].name);
-		printf("FAIL IN CHECK_PARAMS\n");
 		return (-1);
-	}
 	return (0);
 }
 
@@ -92,15 +88,24 @@ void	la_balade(t_corewar *vm, t_proc *lol, t_instr *instr)
 }
 
 
-void	mabite(t_corewar *vm, t_instr *instr)
+void	exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc, uint64_t *i)
 {
-	t_proc		lol;
-
-	lol.pc = 0;
-	instr->opcode = vm->arena[lol.pc] - 1;
-	lol.pc++;
-	ft_putstr("\nopcode = ");
-	ft_putnbr(instr->opcode + 1);
-	ft_putchar('\n');
-	get_data(vm, &lol, instr);
+	instr->opcode = vm->arena[proc->pc] - 1;
+	++(proc->pc);
+	if (instr->opcode > 15)
+	{
+		++(*i);
+		return ;
+	}
+	if (instr->op_tab[instr->opcode].parameter_count != 1)
+		get_data(vm, proc, instr);
+	else
+		get_one_arg(vm, proc, instr);
+	instr->tab_instr[instr->opcode](vm, proc, instr);
+	if (instr->opcode <= 15)
+	{
+		proc->cycles_to_exec = instr->op_tab[instr->opcode].cycles_to_exec;
+		heapify(vm->mh, *i);
+	}
+	++(*i);
 }

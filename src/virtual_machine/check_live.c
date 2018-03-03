@@ -7,9 +7,9 @@ void			check_live_process(t_mh *mh)
 	i = 0;
 	while (i < mh->pos)
 	{
-	//	if (mh->tab[i]->current_live == 0)
-	//		destroy_process(mh);
-	//	else
+		if (mh->tab[i]->current_live == 0)
+			delete_any(mh, i);
+		else
 			mh->tab[i]->current_live = 0;
 		++i;
 	}
@@ -44,12 +44,12 @@ void		check_cycle_to_die(t_corewar *vm)
 {
 	int		ret;
 
-//	if (vm->cycle_to_die == 0)
-//	{
+	if (vm->cycle_to_die == 0)
+	{
 		ret = check_live_player(vm->player_table);
-		check_live_process(vm->mh); // a creer(check les lives et les resets a 0)
+		check_live_process(vm->mh);
 		if (ret >= NBR_LIVE)
 			vm->cycle_to_die_max -= CYCLE_DELTA;
 		vm->cycle_to_die = vm->cycle_to_die_max;
-//	}
+	}
 }

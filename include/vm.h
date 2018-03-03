@@ -139,14 +139,14 @@ typedef struct	s_corewar
 	uint64_t	total_proc;
 }				t_corewar;
 
-typedef struct s_instr
+typedef struct			s_instr
 {
-	void            (*tab_instr[16])(t_corewar *vm, t_proc *lol, struct s_instr *instr);
-	int			val_arg[3];
-	int							opcode;
-	unsigned long long			param[3];
+	void				(*tab_instr[16])(t_corewar *vm, t_proc *lol, struct s_instr *instr);
+	int					val_arg[3];
+	unsigned char		opcode;
+	unsigned long long	param[3];
 	const t_op			*op_tab;
-}	       t_instr;
+}						t_instr;
 
 /*
 ** 3.Definitions
@@ -209,9 +209,10 @@ void		check_cycle_to_die(t_corewar *vm);
 int			get_octet(char octet, t_instr *instr);
 void		la_balade(t_corewar *vm, t_proc *lol, t_instr *instr);
 int			get_data(t_corewar *vm, t_proc *lol, t_instr *instr);
-void		mabite(t_corewar *vm, t_instr *instr);
+void		exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc, uint64_t *i);
 void		zjmp(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		ld(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		get_one_arg(t_corewar *vm, t_proc *lol, t_instr *instr);
 
 /*
 ** priority_queue.c
