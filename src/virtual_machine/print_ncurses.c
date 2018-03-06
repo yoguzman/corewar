@@ -95,4 +95,5 @@ void		print_ncurses(t_corewar *vm)
 	print_panel(vm);
 	print_arena(vm->arena, vm->print_data);
 	refresh();
+	sleep(1);
 }
