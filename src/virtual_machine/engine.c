@@ -13,38 +13,6 @@
 #include "libft.h"
 #include "vm.h"
 
-/*
-int32_t			engine(t_corewar *vm)
-{
-	while (TOUT LE MONDE NEST PAS DANS LA MORT)
-	{
-
-		cycle_to_die--
-		SI cycle_to_die == 0
-			verification de la vivance des champions
-		Si NBR_LIVE est atteint
-			CYCLE_TO_DIE -= CYCLE_DELTA
-		cycle_to_dye = CYCLE_TO_DIE
-		cycle++
-		On va dans chaque proc
-			SI nous ne sommes pas sur une instructions connu
-				incrementer le pc de 1 octets
-			SI on arrive sur une instruction
-				set cycles_to_exec
-			SI on est sur une instruction
-				on decremente les cycles_to_exec
-			SI le cycle_to_exec arrive a son terme
-		    	EXECUTION instruction
-				incrementer le pc du nombre d octet de linstruction
-		Si NCURSES ACTIVE
-			NCURSES
-		Si (DUMP ACTIVE ET cycles = dump_limit)
-			dump et EXIT
-	}
-	AFFICHER LE PODIUM
-}
-*/
-
 void			loop_instr(t_corewar *vm, t_mh *mh, t_instr *instr)
 {
 	uint64_t	i;
@@ -52,7 +20,10 @@ void			loop_instr(t_corewar *vm, t_mh *mh, t_instr *instr)
 	if (mh->tab[0]->cycles_to_exec - mh->count > 0)
 		return ;
 	i = 0;
-	while (mh->tab[i]->cycles_to_exec - mh->count == 0)
+	ft_putchar('A');
+	ft_putnbr(mh->pos);
+	ft_putchar('B');
+	while (i < mh->pos && mh->tab[i]->cycles_to_exec - mh->count == 0)
 		exec_instr(vm, instr, mh->tab[i], &i);
 }
 
@@ -68,21 +39,48 @@ void		visual_option(t_corewar *vm)
 	}
 }
 
+void				set_exec_to_cycle(t_corewar *vm, t_mh *mh, t_instr *instr)
+{
+	uint64_t		i;
+	unsigned char	op_code;
+
+	i = 0;
+	while (i < mh->pos)
+	{
+		op_code = 0;
+		op_code = vm->arena[mh->tab[i]->pc] - 1;
+		if (op_code <= 15)
+		{
+			mh->tab[i]->cycles_to_exec = instr->op_tab[op_code].cycles_to_exec;
+		}
+		++i;
+	}
+	heapify(mh, 0);
+}
+
 int			engine(t_corewar *vm)
 {
 	t_instr	instr;
 
 	init_instr(&instr, vm);
+	set_exec_to_cycle(vm, vm->mh, &instr);
+//	uint64_t		i;
+//
+//	i = 0;
+//	while (i < vm->mh->pos)
+//	{
+//		ft_putnbr(vm->mh->tab[i]->cycles_to_exec);
+//		ft_putchar(' ');
+//		++i;
+//	}
 	while (vm->mh->pos > 0)
 	{
-		ft_putnbr(vm->cycle_count);
-		ft_putchar(' ');
-		ft_putnbr(vm->cycle_to_die);
-		ft_putchar('\n');
 		++(vm->cycle_count);
 		--(vm->cycle_to_die);
 		++(vm->mh->count);
 
+		ft_putnbr(vm->cycle_count);
+		ft_putchar('\n');
 		check_cycle_to_die(vm);
 
 		loop_instr(vm, vm->mh, &instr);

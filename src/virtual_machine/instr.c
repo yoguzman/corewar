@@ -14,7 +14,7 @@
 #include "vm.h"
 #include "libft.h"
 
-void	zjmp(t_corewar *vm, t_proc *lol, t_instr *instr)
+void	live(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 
 }
@@ -24,7 +24,75 @@ void	ld(t_corewar *vm, t_proc *lol, t_instr *instr)
 
 }
 
+void	st(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
 
+}
+
+void	add(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+
+}
+
+void	sub(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+
+}
+
+void	ft_and(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+
+}
+
+void	ft_or(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+
+}
+
+void	ft_xor(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+
+}
+
+void	zjmp(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+
+}
+
+void	ldi(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+
+}
+
+void	sti(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+
+}
+
+void	ft_fork(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+
+}
+
+void	lld(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+
+}
+
+void	lldi(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+
+}
+
+void	ft_lfork(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+
+}
+
+void	aff(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+
+}
 
 int	check_params(unsigned char const parameter_type[3], unsigned char parameter_count,
 				 int *val_arg)
@@ -91,6 +159,16 @@ void	la_balade(t_corewar *vm, t_proc *lol, t_instr *instr)
 void	exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc, uint64_t *i)
 {
 	instr->opcode = vm->arena[proc->pc] - 1;
+	ft_putstr("ancien ");
+	ft_putstr("id : ");
+	ft_putnbr(proc->reg[0]);
+	ft_putstr(" ");
+	ft_putstr("instr : ");
+	ft_putnbr(instr->opcode);
+	ft_putstr(" ");
+	ft_putstr("cycle exec : ");
+	ft_putnbr(proc->cycles_to_exec);
+	ft_putstr("\n");
 	++(proc->pc);
 	if (instr->opcode > 15)
 	{
@@ -102,10 +180,21 @@ void	exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc, uint64_t *i)
 	else
 		get_one_arg(vm, proc, instr);
 	instr->tab_instr[instr->opcode](vm, proc, instr);
+	instr->opcode = vm->arena[proc->pc] - 1;
 	if (instr->opcode <= 15)
 	{
-		proc->cycles_to_exec = instr->op_tab[instr->opcode].cycles_to_exec;
+		proc->cycles_to_exec = instr->op_tab[instr->opcode].cycles_to_exec + vm->mh->count;
 		heapify(vm->mh, *i);
 	}
+	ft_putstr("nouveau ");
+	ft_putstr("id : ");
+	ft_putnbr(proc->reg[0]);
+	ft_putstr(" ");
+	ft_putstr("instr : ");
+	ft_putnbr(instr->opcode);
+	ft_putstr(" ");
+	ft_putstr("cycle exec : ");
+	ft_putnbr(proc->cycles_to_exec);
+	ft_putstr("\n");
 	++(*i);
 }

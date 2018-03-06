@@ -141,7 +141,7 @@ typedef struct	s_corewar
 
 typedef struct			s_instr
 {
-	void				(*tab_instr[16])(t_corewar *vm, t_proc *lol, struct s_instr *instr);
+	void				(*tab_instr[17])(t_corewar *vm, t_proc *lol, struct s_instr *instr);
 	int					val_arg[3];
 	unsigned char		opcode;
 	unsigned long long	param[3];
@@ -210,8 +210,22 @@ int			get_octet(char octet, t_instr *instr);
 void		la_balade(t_corewar *vm, t_proc *lol, t_instr *instr);
 int			get_data(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc, uint64_t *i);
-void		zjmp(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		live(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		ld(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		st(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		add(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		sub(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		ft_and(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		ft_or(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		ft_xor(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		zjmp(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		ldi(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		sti(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		ft_fork(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		lld(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		lldi(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		ft_lfork(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		aff(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		get_one_arg(t_corewar *vm, t_proc *lol, t_instr *instr);
 
 /*

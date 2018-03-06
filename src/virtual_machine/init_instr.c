@@ -30,9 +30,23 @@ static const  t_op g_op_tab[17] =  {
 void	init_tab_instr(void (*tab_instr[16])(t_corewar *vm,
 					 t_proc *lol, t_instr *instr))
 {
-//	tab_instr[0] = &live;
+	tab_instr[0] = &live;
 	tab_instr[1] = &ld;
+	tab_instr[2] = &st;
+	tab_instr[3] = &add;
+	tab_instr[4] = &sub;
+	tab_instr[5] = &ft_and;
+	tab_instr[6] = &ft_or;
+	tab_instr[7] = &ft_xor;
 	tab_instr[8] = &zjmp;
+	tab_instr[9] = &ldi;
+	tab_instr[10] = &sti;
+	tab_instr[11] = &ft_fork;
+	tab_instr[12] = &lld;
+	tab_instr[13] = &lldi;
+	tab_instr[14] = &ft_lfork;
+	tab_instr[15] = &add;
+	tab_instr[16] = NULL;
 }
 
 int		init_instr(t_instr *instr, t_corewar *vm)
