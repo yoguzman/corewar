@@ -19,7 +19,7 @@
 ** Processes are initially spawned in descending order
 */
 
-t_mh	*init_heap(t_player player_table[MAX_PLAYERS], uint64_t *total_proc)
+t_mh	*init_heap(t_player player_table[MAX_PLAYERS], uint64_t *total_proc, t_corewar *vm, t_instr *instr)
 {
 	t_mh	*mh;
 	int32_t	i;
@@ -34,12 +34,16 @@ t_mh	*init_heap(t_player player_table[MAX_PLAYERS], uint64_t *total_proc)
 	while (i < MAX_PLAYERS)
 	{
 		if (player_table[i].code != NULL)
-			mh->tab[mh->pos++] = spawn_process(player_table[i].load_address, i,
+		{
+			mh->tab[mh->pos] = spawn_process(player_table[i].load_address, i,
 					total_proc);
+			if (vm->arena[mh->tab[mh->pos]->pc] - 1 <= 15)
+				mh->tab[mh->pos]->cycles_to_exec = instr->op_tab[vm->arena[mh->tab[mh->pos]->pc] - 1].cycles_to_exec;
+			heapify(mh, mh->pos);
+			++mh->pos;
+		}
 		++i;
 	}
-	heapify(mh, 1);
-	heapify(mh, 1);
 	return (mh);
 }
 
@@ -107,10 +111,8 @@ void	delete_any(t_mh *mh, uint32_t i)
 {
 	if (mh->pos)
 	{
-		//casse tout
 		//free(mh->tab[i]);
 		mh->tab[i] = mh->tab[--(mh->pos)];
-		ft_putstr("asdf");
 		heapify(mh, i);
 	}
 	else

@@ -233,7 +233,7 @@ void		get_one_arg(t_corewar *vm, t_proc *lol, t_instr *instr);
 */
 
 t_mh		*init_heap(t_player player_table[MAX_PLAYERS],
-		uint64_t *total_proc);
+		uint64_t *total_proc, t_corewar *vm, t_instr *instr);
 void		insert(t_mh *mh, t_proc *entry);
 void		heapify(t_mh *mh, uint32_t i);
 void		delete_min(t_mh *mh);

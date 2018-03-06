@@ -34,7 +34,9 @@ t_proc	*spawn_process(uint64_t load_address, uint8_t player_id,
 	ft_bzero(new, sizeof(*new));
 	new->pc = load_address;
 	new->reg[0] = player_id;
-	new->pid = (*total_proc)++;
+	ft_putnbr(*total_proc);
+	new->pid = *total_proc;
+	++*total_proc;
 	return (new);
 }
 

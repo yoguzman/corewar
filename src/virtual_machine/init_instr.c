@@ -52,8 +52,8 @@ void	init_tab_instr(void (*tab_instr[16])(t_corewar *vm,
 int		init_instr(t_instr *instr, t_corewar *vm)
 {
 	init_op_tab(g_op_tab, instr);
-	vm->mh = init_heap(vm->player_table, &(vm->total_proc));
 	init_tab_instr(instr->tab_instr);
+	vm->mh = init_heap(vm->player_table, &(vm->total_proc), vm, instr);
 	vm->cycle_to_die_max = CYCLE_TO_DIE;
 	vm->cycle_to_die = vm->cycle_to_die_max;
 	return (0);

@@ -158,21 +158,21 @@ void	la_balade(t_corewar *vm, t_proc *lol, t_instr *instr)
 
 void	exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc, uint64_t *i)
 {
-	instr->opcode = vm->arena[proc->pc] - 1;
-	ft_putstr("ancien ");
-	ft_putstr("id : ");
+	ft_putstr("\nCycle actuel = ");
+	ft_putnbr(vm->mh->count);
+	ft_putstr(" id process = ");
 	ft_putnbr(proc->reg[0]);
-	ft_putstr(" ");
-	ft_putstr("instr : ");
-	ft_putnbr(instr->opcode);
-	ft_putstr(" ");
-	ft_putstr("cycle exec : ");
-	ft_putnbr(proc->cycles_to_exec);
-	ft_putstr("\n");
+	ft_putstr(" code instr = ");
+	ft_putnbr(vm->arena[proc->pc]);
+	ft_putstr(" cycle_to_exec : ");
+	ft_putnbr(proc->cycles_to_exec - vm->mh->count);
+
+	instr->opcode = vm->arena[proc->pc] - 1;
 	++(proc->pc);
 	if (instr->opcode > 15)
 	{
 		++(*i);
+		++(proc->cycles_to_exec);
 		return ;
 	}
 	if (instr->op_tab[instr->opcode].parameter_count != 1)
@@ -184,17 +184,12 @@ void	exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc, uint64_t *i)
 	if (instr->opcode <= 15)
 	{
 		proc->cycles_to_exec = instr->op_tab[instr->opcode].cycles_to_exec + vm->mh->count;
+	ft_putstr(" nouveau ");
+	ft_putstr(" code instr = ");
+	ft_putnbr(vm->arena[proc->pc]);
+	ft_putstr(" cycle_to_exec : ");
+	ft_putnbr(proc->cycles_to_exec - vm->mh->count);
 		heapify(vm->mh, *i);
 	}
-	ft_putstr("nouveau ");
-	ft_putstr("id : ");
-	ft_putnbr(proc->reg[0]);
-	ft_putstr(" ");
-	ft_putstr("instr : ");
-	ft_putnbr(instr->opcode);
-	ft_putstr(" ");
-	ft_putstr("cycle exec : ");
-	ft_putnbr(proc->cycles_to_exec);
-	ft_putstr("\n");
 	++(*i);
 }
