@@ -16,15 +16,69 @@
 
 void	zjmp(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-
+  //depuis le lol-pc - l instruction ?
+  if (lol->carry == 1)
+    lol->pc = lol->pc + (instr->param[0] % IDX_MOD);
 }
+
+
+void	st(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+  /* si param[1] == REG
+     lol->reg[instr->param[1]] = lol->reg[instr->param[0]];;
+     else
+    ecrit a lol->reg[instr->param[0]]; a lol->pcc + instr->pram[1] % IDX MOD
+  if (to_load)
+  lol->carry = 1 */
+}
+
+void	aff(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+}
+
+void	ldi(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+}
+
 
 void	ld(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
+  lol->reg[instr->param[1]] = instr->param[0];
+    lol->carry = 1;
+}
 
+void	add(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+  
+  lol->reg[instr->param[2]] = lol->reg[instr->param[0]] + lol->reg[instr->param[1]];
+    lol->carry = 1;
 }
 
 
+void	sub(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+  lol->reg[instr->param[2]] = lol->reg[instr->param[0]] - lol->reg[instr->param[1]];
+    lol->carry = 1;
+}
+
+
+void	and(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+  lol->reg[instr->param[2]] = instr->param[0] & instr->param[1];
+    lol->carry = 1;
+}
+
+void	or(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+  instr->param[0] | instr->param[1];
+  lol->reg[instr->param[2]] = instr->param[0] | instr->param[1];
+}
+
+void	xor(t_corewar *vm, t_proc *lol, t_instr *instr)
+{
+  lol->reg[instr->param[2]] = instr->param[0] ^ instr->param[1];
+  lol->carry = 1;
+}
 
 int	check_params(unsigned char const parameter_type[3], unsigned char parameter_count,
 				 int *val_arg)
