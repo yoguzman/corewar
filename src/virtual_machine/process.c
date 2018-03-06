@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 16:15:57 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/02 17:30:59 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/06 18:09:50 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	swap_process(t_proc **a, t_proc **b)
 
 	tmp = *a;
 	*a = *b;
-	*b = *a;
+	*b = tmp;
 }
 
 t_proc	*spawn_process(uint64_t load_address, uint8_t player_id,

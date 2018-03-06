@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 20:45:02 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/03 14:30:23 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/06 18:19:57 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,34 +19,52 @@
 ** Processes are initially spawned in descending order
 */
 
-t_mh	*init_heap(t_player player_table[MAX_PLAYERS], uint64_t *total_proc)
+static void	*fail_alloc(t_mh *mh)
+{
+	int	i;
+
+	if (mh->tab)
+	{
+		i = 0;
+		while (i < mh->pos)
+		{
+			free(mh->tab[i]);
+			++i;
+		}
+		free(mh->tab);
+	}
+	free(mh);
+	return (NULL);
+}
+
+t_mh		*init_heap(t_player player_table[MAX_PLAYERS], uint64_t *total_proc)
 {
 	t_mh	*mh;
+	t_proc	*process;
 	int32_t	i;
 
 	if (!(mh = (t_mh *)malloc(sizeof(*mh))))
 		return (NULL);
 	ft_bzero(mh, sizeof(*mh));
 	if (!(mh->tab = (t_proc **)malloc(sizeof(void *) * START_HEAP_SIZE)))
-	{
-		free(mh);
-		return (NULL);
-	}
+		return (fail_alloc(mh));
 	mh->size = START_HEAP_SIZE;
 	i = 0;
 	while (i < MAX_PLAYERS)
 	{
 		if (player_table[i].code != NULL)
-			mh->tab[mh->pos++] = spawn_process(player_table[i].load_address, i,
-					total_proc);
+		{
+			if (!(process = spawn_process(player_table[i].load_address, i,
+							total_proc)))
+				return (fail_alloc(mh));
+			insert(mh, process);
+		}
 		++i;
 	}
-	heapify(mh, 1);
-	heapify(mh, 1);
 	return (mh);
 }
 
-void	insert(t_mh *mh, t_proc *entry)
+void		insert(t_mh *mh, t_proc *entry)
 {
 	uint32_t	i;
 	t_proc		**parent;
@@ -67,7 +85,7 @@ void	insert(t_mh *mh, t_proc *entry)
 	mh->tab[i] = entry;
 }
 
-void	heapify(t_mh *mh, uint32_t i)
+void		heapify(t_mh *mh, uint32_t i)
 {
 	t_proc	**smallest;
 	t_proc	**left;
@@ -94,7 +112,7 @@ void	heapify(t_mh *mh, uint32_t i)
 	}
 }
 
-void	delete_min(t_mh *mh)
+void		delete_min(t_mh *mh)
 {
 	if (mh->pos)
 	{
@@ -106,7 +124,7 @@ void	delete_min(t_mh *mh)
 		free(mh->tab);
 }
 
-void	delete_any(t_mh *mh, uint32_t i)
+void		delete_any(t_mh *mh, uint32_t i)
 {
 	if (mh->pos)
 	{
