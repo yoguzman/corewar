@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/02 22:20:11 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/06 12:42:00 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,16 +215,16 @@ void		ld(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		st(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		add(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		sub(t_corewar *vm, t_proc *lol, t_instr *instr);
-void		ft_and(t_corewar *vm, t_proc *lol, t_instr *instr);
-void		ft_or(t_corewar *vm, t_proc *lol, t_instr *instr);
-void		ft_xor(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		and(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		or(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		xor(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		zjmp(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		ldi(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		sti(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		ft_fork(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		lld(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		lldi(t_corewar *vm, t_proc *lol, t_instr *instr);
-void		ft_lfork(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		lfork(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		aff(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		get_one_arg(t_corewar *vm, t_proc *lol, t_instr *instr);
 

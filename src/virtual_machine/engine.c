@@ -6,7 +6,7 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 14:22:57 by adauchy           #+#    #+#             */
-/*   Updated: 2018/02/28 20:03:13 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/06 12:46:32 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ int			engine(t_corewar *vm)
 		--(vm->cycle_to_die);
 		++(vm->mh->count);
 
-		ft_putnbr(vm->cycle_count);
-		ft_putchar('\n');
+//		ft_putnbr(vm->cycle_count);
+		//	ft_putchar('\n');
 		check_cycle_to_die(vm);
 
 		loop_instr(vm, vm->mh, &instr);
