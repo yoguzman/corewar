@@ -204,10 +204,14 @@ void		free_min_heap(t_mh **mh);
 
 void		check_cycle_to_die(t_corewar *vm);
 
+/* reset */
+
+void		reset_pc(uint32_t pc);
+
 /* Instructions */
 
 int			get_octet(char octet, t_instr *instr);
-void		la_balade(t_corewar *vm, t_proc *lol, t_instr *instr);
+void		la_balade(t_proc *lol, t_instr *instr);
 int			get_data(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc, uint64_t *i);
 void		live(t_corewar *vm, t_proc *lol, t_instr *instr);

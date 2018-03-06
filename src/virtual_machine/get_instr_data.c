@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 17:24:23 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/02 19:25:12 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/06 12:29:00 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	swap_16(unsigned long long *nb)
 void	get_param(t_corewar *vm, t_proc *lol, t_instr *instr,
 					int i)
 {
-	int		j;
+	int	j;
 
 	j = 0;
 	instr->param[i] = 0;
@@ -61,7 +61,7 @@ int		get_data(t_corewar *vm, t_proc *lol, t_instr *instr)
 
 	if (get_octet(vm->arena[lol->pc], instr) == -1)
 	{
-		la_balade(vm , lol, instr);
+		la_balade(lol, instr);
 		return (0);
 	}
 	lol->pc++;

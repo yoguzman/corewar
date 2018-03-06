@@ -16,42 +16,70 @@
 
 void	live(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-
+	/*
+  //depuis le lol-pc - l instruction ?
+  if (lol->carry == 1)
+    lol->pc = lol->pc + (instr->param[0] % IDX_MOD);
+  */
 }
 
 void	ld(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-
+	/*
+  lol->reg[instr->param[1]] = instr->param[0];
+    lol->carry = 1;
+	*/
 }
 
 void	st(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-
+  /* si param[1] == REG
+     lol->reg[instr->param[1]] = lol->reg[instr->param[0]];;
+     else
+    ecrit a lol->reg[instr->param[0]]; a lol->pcc + instr->pram[1] % IDX MOD
+  if (to_load)
+  lol->carry = 1 */
 }
 
 void	add(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-
+	/*
+  lol->reg[instr->param[2]] = lol->reg[instr->param[0]] + lol->reg[instr->param[1]];
+    lol->carry = 1;
+	*/
 }
+
 
 void	sub(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-
+	/*
+  lol->reg[instr->param[2]] = lol->reg[instr->param[0]] - lol->reg[instr->param[1]];
+    lol->carry = 1;
+	*/
 }
 
 void	ft_and(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-
+	/*
+lol->reg[instr->param[2]] = instr->param[0] & instr->param[1];
+  lol->carry = 1;
+  */
 }
 
 void	ft_or(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-
+	/*
+  instr->param[0] | instr->param[1];
+  lol->reg[instr->param[2]] = instr->param[0] | instr->param[1];
+  */
 }
 
 void	ft_xor(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-
+	/*
+  lol->reg[instr->param[2]] = instr->param[0] ^ instr->param[1];
+  lol->carry = 1;
+  */
 }
 
 void	zjmp(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -135,7 +163,7 @@ int		get_octet(char octet, t_instr *instr)
 	return (0);
 }
 
-void	la_balade(t_corewar *vm, t_proc *lol, t_instr *instr)
+void	la_balade(t_proc *lol, t_instr *instr)
 {
 	int tojump;
 	int i;
@@ -155,7 +183,6 @@ void	la_balade(t_corewar *vm, t_proc *lol, t_instr *instr)
 	lol->pc++;
 }
 
-
 void	exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc, uint64_t *i)
 {
 	ft_putstr("\nCycle actuel = ");
@@ -169,27 +196,28 @@ void	exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc, uint64_t *i)
 
 	instr->opcode = vm->arena[proc->pc] - 1;
 	++(proc->pc);
-	if (instr->opcode > 15)
+	reset_pc(proc->pc);
+	if (instr->opcode <= 15)
 	{
-		++(*i);
-		++(proc->cycles_to_exec);
-		return ;
+		if (instr->op_tab[instr->opcode].parameter_count != 1)
+			get_data(vm, proc, instr);
+		else
+			get_one_arg(vm, proc, instr);
+		reset_pc(proc->pc);
+		instr->tab_instr[instr->opcode](vm, proc, instr);
 	}
-	if (instr->op_tab[instr->opcode].parameter_count != 1)
-		get_data(vm, proc, instr);
-	else
-		get_one_arg(vm, proc, instr);
-	instr->tab_instr[instr->opcode](vm, proc, instr);
 	instr->opcode = vm->arena[proc->pc] - 1;
 	if (instr->opcode <= 15)
 	{
 		proc->cycles_to_exec = instr->op_tab[instr->opcode].cycles_to_exec + vm->mh->count;
-	ft_putstr(" nouveau ");
-	ft_putstr(" code instr = ");
-	ft_putnbr(vm->arena[proc->pc]);
-	ft_putstr(" cycle_to_exec : ");
-	ft_putnbr(proc->cycles_to_exec - vm->mh->count);
-		heapify(vm->mh, *i);
+		ft_putstr(" nouveau ");
+		ft_putstr(" code instr = ");
+		ft_putnbr(vm->arena[proc->pc]);
+		ft_putstr(" cycle_to_exec : ");
+		ft_putnbr(proc->cycles_to_exec - vm->mh->count);
+		ft_putchar('\n');
 	}
+	else
+		proc->cycles_to_exec += 1;
 	++(*i);
 }
