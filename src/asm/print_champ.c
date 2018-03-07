@@ -76,19 +76,31 @@ int			get_instruction_code(char *instruction)
 void		print_oct_arg(t_if *info)
 {
 	int		i;
+	int		buff;
+	int		decal;
 	int		j;
-	int		mask;
 
-	j = 0;
 	i = 0;
-	mask = 0x000000FF
+	info->mask = 3;
+	decal = 6;
 	while (info->arg[i])
 	{
-
+		if ((buff = ((info->op_code >> decal) & info->mask)) == 0)
+			break ;
 		if (info->arg[i][0] == 'r')
+			info->conv.nb = ft_atoi((info->arg[i] + 1));
+		else
+			info->conv.nb = ft_atoi((info->arg[i]));
+		j = 0;
+		if (buff == 3)
+			++buff;
+		printf(" buff = %d", buff);
+		while (j < buff)
+		{
+			printf("%-3d ", info->conv.nb_oct[j]);
 			++j;
-		info->conv.nb = ft_atoi((info->arg[i] + 1));
-		printf("%-3d ", info->conv.nb);
+		}
+		decal -= 2;
 		++i;
 	}
 }

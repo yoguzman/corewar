@@ -31,6 +31,7 @@ typedef struct		s_info_line
 {
 	char			*label;
 	unsigned char	op_code;
+	int				mask;
 	int				bytes_line;
 	int				cost_line;
 	char			*name_instr;
