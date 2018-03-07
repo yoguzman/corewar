@@ -1,5 +1,4 @@
 #include "op.h"
-#include "vm.h"
 
 static const t_op		g_op_tab[17] =
 {
@@ -28,34 +27,38 @@ static const t_op		g_op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0, {0, 0, 0}}
 };
 
-void	init_tab_instr(void (*tab_instr[16])(t_corewar *vm,
-					 t_proc *lol, t_instr *instr))
+int			replace_cod_oct(unsigned char octet, unsigned char op_code)
 {
-	tab_instr[0] = &live;
-	tab_instr[1] = &ld;
-	tab_instr[2] = &st;
-	tab_instr[3] = &add;
-	tab_instr[4] = &sub;
-	tab_instr[5] = &ft_and;
-	tab_instr[6] = &ft_or;
-	tab_instr[7] = &ft_xor;
-	tab_instr[8] = &zjmp;
-	tab_instr[9] = &ldi;
-	tab_instr[10] = &sti;
-	tab_instr[11] = &ft_fork;
-	tab_instr[12] = &lld;
-	tab_instr[13] = &lldi;
-	tab_instr[14] = &ft_lfork;
-	tab_instr[15] = &add;
-	tab_instr[16] = NULL;
-}
+	int		i;
+	int		mask;
+	int		decal;
+	int		replace[6];
 
-int		init_instr(t_instr *instr, t_corewar *vm)
-{
-	init_op_tab(g_op_tab, instr);
-	init_tab_instr(instr->tab_instr);
-	vm->mh = init_heap(vm->player_table, &(vm->total_proc), vm, instr);
-	vm->cycle_to_die_max = CYCLE_TO_DIE;
-	vm->cycle_to_die = vm->cycle_to_die_max;
-	return (0);
+	i = 0;
+	mask = 3;
+	decal = 6;
+	replace[0] = 192;
+	replace[1] = 48;
+	replace[2] = 12;
+	replace[3] = 64;
+	replace[4] = 16;
+	replace[5] = 4;
+	while (i < 3)
+	{
+		if (((op_code <= 15) &&
+					(((octet >> decal) & mask) == 2 ||
+					 ((octet >> decal) & mask) == 3)) &&
+				(i < g_op_tab[op_code].parameter_count) &&
+				((g_op_tab[op_code].rep[i] == 1) ||
+				 (g_op_tab[op_code].rep[i] == 2 && ((octet >> decal) & mask) == 3)))
+		{
+			if (((octet >> decal) & mask) == 2)
+				octet = octet | replace[i];
+			else if (((octet >> decal) & mask) == 3)
+				octet = octet ^ replace[i + 3];
+		}
+		++i;
+		decal -= 2;
+	}
+	return (octet);
 }

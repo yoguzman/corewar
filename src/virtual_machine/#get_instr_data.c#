@@ -25,7 +25,7 @@ void	get_param(t_corewar *vm, t_proc *lol, t_instr *instr,
 	{
 		if (j != 0)
 			instr->param[i] <<= 8;
-		instr->param[i] += vm->arena[lol->pc];
+		instr->param[i] += vm->arena[lol->pc];[
 		++lol->pc;
 		++j;
 	}

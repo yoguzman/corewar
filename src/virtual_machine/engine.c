@@ -6,7 +6,7 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 14:22:57 by adauchy           #+#    #+#             */
-/*   Updated: 2018/02/28 20:03:13 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/07 11:03:14 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ void			loop_instr(t_corewar *vm, t_mh *mh, t_instr *instr)
 {
 	uint64_t	i;
 
-	ft_putstr("\ncycle en cours = ");
-	ft_putnbr(vm->cycle_count);
-	ft_putstr("\ncheck loop instr pid = ");
-	ft_putnbr(mh->tab[0]->pid);
-	ft_putstr(" cycle_to_exec= ");
-	ft_putnbr(mh->tab[0]->cycles_to_exec);
-	ft_putchar('\n');
+//	ft_putstr("\ncycle en cours = ");
+//	ft_putnbr(vm->cycle_count);
+//	ft_putstr("\ncheck loop instr pid = ");
+//	ft_putnbr(mh->tab[0]->pid);
+//	ft_putstr(" cycle_to_exec= ");
+//	ft_putnbr(mh->tab[0]->cycles_to_exec);
+//	ft_putchar('\n');
 	if (mh->tab[0]->cycles_to_exec - mh->count > 0)
 		return ;
 	i = 0;
 	while (i < mh->pos && mh->tab[i]->cycles_to_exec - mh->count == 0)
 	{
-		ft_putstr("b;b");
+		//ft_putstr("b;b");
 		exec_instr(vm, instr, mh->tab[i], &i);
 	}
 	while (i > 0)
@@ -41,14 +41,14 @@ void			loop_instr(t_corewar *vm, t_mh *mh, t_instr *instr)
 	uint64_t j;
 
 	j = 0;
-	ft_putchar('\n');
+//	ft_putchar('\n');
 	while (j < vm->mh->pos)
 	{
-		ft_putnbr(vm->mh->tab[j]->cycles_to_exec);
-		ft_putchar(' ');
+		//	ft_putnbr(vm->mh->tab[j]->cycles_to_exec);
+		//ft_putchar(' ');
 		++j;
 	}
-	ft_putchar('\n');
+	//ft_putchar('\n');
 }
 
 void		visual_option(t_corewar *vm)

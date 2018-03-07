@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/03/02 18:44:32 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/07 13:41:16 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@ typedef struct		s_op
 	char			*long_name;
 	unsigned char	changes_carry;
 	unsigned char	uses_index; /* switch ind_size p-e ... */
+	unsigned char   rep[3];
 }					t_op;
+
+int				replace_cod_oct(unsigned char octet, unsigned char op_code);
 
 #endif
