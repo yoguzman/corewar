@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/07 18:14:37 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/07 19:33:40 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@
 # define SWP32B(nb) ((nb & 0x0000ff00) << 8) | (nb << 24)
 # define SWAP32(nb) SWP32A(nb) | SWP32B(nb)
 # define SWAP16(nb) ((nb & 0xff) >> 8) | (nb << 8)
+# define INC_PC(pc, inc) ((pc + inc) % MEM_SIZE)
 
 /*
 ** 2.Typedefs

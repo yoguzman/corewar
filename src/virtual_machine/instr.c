@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:44:10 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/07 15:33:02 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/07 19:32:19 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ void	exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc, uint64_t *i)
 	//ft_putstr(" cycle_to_exec : ");
 	//ft_putnbr(proc->cycles_to_exec - vm->mh->count);
 	instr->opcode = vm->arena[proc->pc] - 1;
-	++(proc->pc);
+	++(proc->pc); /* proc->pc = (proc->pc + 1) % MEM_SIZE; */
 	reset_pc(proc->pc);
 	if (instr->opcode <= 15)
 	{
