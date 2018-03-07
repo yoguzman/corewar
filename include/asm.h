@@ -21,13 +21,21 @@
 # define ERR_ARG "wrong number of arg"
 # define ERR_ARG_TYPE "wrong types of arg"
 
+typedef union		u_convert_oct
+{
+	char			nb_oct[4];
+	int				nb;
+}					t_conv_oct;
+
 typedef struct		s_info_line
 {
 	char			*label;
+	unsigned char	op_code;
 	int				bytes_line;
 	int				cost_line;
 	char			*name_instr;
 	char			**arg;
+	t_conv_oct		conv;
 }					t_if;
 
 typedef struct		s_cost
@@ -80,7 +88,7 @@ int					pars_instr(char *instr, t_if *info, int line);
 int					direct_is_correct(char *str);
 int					reg_is_correct(char *str);
 int					get_champ(char *name, t_header *champ, t_list **inf_line);
-void				print_champ(t_header *champ, t_list *inf_line);
+int					print_champ(t_header *champ, t_list *inf_line);
 int					compile_champ(t_header *champ, char *name,
 									t_list *inf_line);
 void				epur_space(char *str);

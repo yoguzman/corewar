@@ -66,7 +66,7 @@ OBJS_COREWAR	= $(addprefix $(OBJ_DIR)/, $(SRCS_COREWAR:.c=.o))
 #
 LFLAGS	= -L$(LIB_DIR) -lft -lncurses
 CFLAGS	+= -Iinclude
-CFLAGS	+= -Wall -Wextra
+CFLAGS	+= -Wall -Wextra -g -g3
 COMP	= $(CC) $(CFLAGS) -o $@ -c $<
 LINK	= $(CC) $(LFLAGS) -o $@ $(filter-out $(LIB) $(OBJ_DIR), $^)
 LIB	= libft.a

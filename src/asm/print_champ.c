@@ -73,34 +73,63 @@ int			get_instruction_code(char *instruction)
 	return (-1);
 }
 
-void		print_champ(t_header *champ, t_list *inf_line)
+void		print_oct_arg(t_if *info)
+{
+	int		i;
+	int		j;
+	int		mask;
+
+	j = 0;
+	i = 0;
+	mask = 0x000000FF
+	while (info->arg[i])
+	{
+
+		if (info->arg[i][0] == 'r')
+			++j;
+		info->conv.nb = ft_atoi((info->arg[i] + 1));
+		printf("%-3d ", info->conv.nb);
+		++i;
+	}
+}
+
+int			print_champ(t_header *champ, t_list *inf_line)
 {
 	t_if	*info;
 	int		count;
-	
+	int		j;
+
 	ft_putstr("Dumping annotated program on standard output\n");
 	printf("Program size : %d bytes\n", champ->prog_size);
 	printf("NAME : \"%s\"\n", champ->prog_name);
 	printf("Comment : \"%s\"\n\n", champ->comment);
+	j = 0;
 	while (inf_line)
 	{
 		info = (t_if*)(inf_line->content);
 		if (info->label)
 			printf("%-11d:    %s:\n", info->bytes_line, info->label);
 		printf("%-5d(%-3d) :        %-10s", info->bytes_line,
-				            info->cost_line, info->name_instr);
+				info->cost_line, info->name_instr);
 		count = -1;
 		while (info->arg[++count])
 			printf("%-18s", info->arg[count]);
 		printf("\n");
 		printf("%20s%-4d", " ", get_instruction_code(info->name_instr) + 1);
+		if (is_label(info, inf_line, j) == -1)
+			return (-1);
+		++j;
 		if (ft_strcmp("live", info->name_instr) && ft_strcmp("zjmp", info->name_instr) &&
-			ft_strcmp("fork", info->name_instr) && ft_strcmp("lfork", info->name_instr))
-			printf("%-6d\n", get_op_code(info->arg));
+				ft_strcmp("fork", info->name_instr) && ft_strcmp("lfork", info->name_instr))
+		{
+			info->op_code = get_op_code(info->arg);
+			printf("%-6d", info->op_code);
+			print_oct_arg(info);
+		}
 		else
-			printf("%6s\n", " ");
-		printf("%20s%s\n", " ", "-------------------------");
+			printf("%6s", " ");
 		inf_line = inf_line->next;
 		printf("\n");
 	}
+	return (0);
 }

@@ -78,7 +78,10 @@ int		main(int ac, char **av)
 	if (get_champ(av[file], &champ, &inf_line) == -1)
 		return (-1);
 	if (a_flag)
-		print_champ(&champ, inf_line);
+	{
+		if (print_champ(&champ, inf_line) == -1)
+			return (-1);
+	}
 	else if (compile_champ(&champ, av[file], inf_line) == -1)
 		return (-1);
 	free_lesbails(inf_line);
