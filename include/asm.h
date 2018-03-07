@@ -23,7 +23,7 @@
 
 typedef union		u_convert_oct
 {
-	char			nb_oct[4];
+	unsigned char	nb_oct[4];
 	int				nb;
 }					t_conv_oct;
 
@@ -50,14 +50,6 @@ typedef struct		s_write
 	char			*name;
 	void			(*f)(t_if *, int dest);
 }					t_write;
-
-typedef struct		s_op
-{
-	char			*name;
-	int				nb_arg;
-	int				arg[3];
-	int				nb_instr;
-}					t_op;
 
 typedef union		u_neg
 {

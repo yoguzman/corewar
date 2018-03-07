@@ -73,7 +73,28 @@ int			get_instruction_code(char *instruction)
 	return (-1);
 }
 
-void		print_oct_arg(t_if *info)
+void		print_arg(t_if *info, int count)
+{
+	int		i;
+	int		decal;
+
+	i = 0;
+	info->mask = 3;
+	decal = 6;
+	while (info->arg[i])
+	{
+		if (info->arg[i][0] == 'r' || info->arg[i][0] == '%')
+			info->conv.nb = ft_atoi((info->arg[i] + 1));
+		else
+			info->conv.nb = ft_atoi((info->arg[i]));
+		printf("%-3d ", info->conv.nb);
+		printf("  ");
+		decal -= 2;
+		++i;
+	}
+}
+
+void		print_oct_arg(t_if *info, int count)
 {
 	int		i;
 	int		buff;
@@ -83,26 +104,31 @@ void		print_oct_arg(t_if *info)
 	i = 0;
 	info->mask = 3;
 	decal = 6;
+	info->op_code = replace_cod_oct(info->op_code, count);
 	while (info->arg[i])
 	{
 		if ((buff = ((info->op_code >> decal) & info->mask)) == 0)
 			break ;
-		if (info->arg[i][0] == 'r')
+		if (info->arg[i][0] == 'r' || info->arg[i][0] == '%')
 			info->conv.nb = ft_atoi((info->arg[i] + 1));
 		else
 			info->conv.nb = ft_atoi((info->arg[i]));
 		j = 0;
 		if (buff == 3)
 			++buff;
-		printf(" buff = %d", buff);
 		while (j < buff)
 		{
 			printf("%-3d ", info->conv.nb_oct[j]);
 			++j;
 		}
+		while (++j < 5)
+			printf("%-4c", ' ');
+		printf("  ");
 		decal -= 2;
 		++i;
 	}
+	printf("\n");
+	print_arg(info, count);
 }
 
 int			print_champ(t_header *champ, t_list *inf_line)
@@ -136,7 +162,7 @@ int			print_champ(t_header *champ, t_list *inf_line)
 		{
 			info->op_code = get_op_code(info->arg);
 			printf("%-6d", info->op_code);
-			print_oct_arg(info);
+			print_oct_arg(info, get_instruction_code(info->name_instr));
 		}
 		else
 			printf("%6s", " ");

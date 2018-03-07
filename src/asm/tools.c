@@ -76,7 +76,7 @@ int		check_nb_arg(char **str, int index_op, const t_op *op_tab)
 	i = 1;
 	while (str[i])
 	{
-		if (i > op_tab[index_op].nb_arg)
+		if (i > op_tab[index_op].parameter_count)
 			return (-1);
 		i++;
 	}

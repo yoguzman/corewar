@@ -79,4 +79,19 @@ typedef struct		s_header
 	char				comment[COMMENT_LENGTH + 1];
 }					t_header;
 
+typedef struct        s_op
+{
+	char            *name;
+	unsigned char    parameter_count;
+	unsigned char    parameter_types[3];
+	unsigned char    op_code;
+	unsigned short   cycles_to_exec;
+	char           	 *long_name;
+	unsigned char    changes_carry;
+	unsigned char    uses_index; /* switch ind_size p-e ... */
+	unsigned char	rep[3];
+}                    t_op;
+
+int					replace_cod_oct(unsigned char octet, unsigned char op_code);
+
 #endif

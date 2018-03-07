@@ -54,6 +54,7 @@ SRCS_ASM		=		main_a.c							\
 						fill_cost_line.c					\
 						write_instr.c						\
 						tools3.c							\
+						replace_cod_oct.c					\
 
 SRCS_COREWAR	=		main.c parse_argv.c print_usage.c print_error_and_exit.c \
 						ft_isdigitstr.c load_champion.c update_player_count.c

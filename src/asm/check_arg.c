@@ -44,7 +44,7 @@ int		reg_is_correct(char *str)
 
 int		check_op_tab(int index_op, int nb_arg, int type, const t_op *op_tab)
 {
-	if ((op_tab[index_op].arg[nb_arg] & type) == 0)
+	if ((op_tab[index_op].parameter_types[nb_arg] & type) == 0)
 	{
 		puterr_noend("Invalid parameter type ");
 		puterr_noend(ft_itoa(nb_arg));

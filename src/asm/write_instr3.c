@@ -85,4 +85,3 @@ void		ldi_write(t_if *info_line, int dest)
 	}
 	ft_putchar_fd(ft_atoi(info_line->arg[2] + 1), dest);
 }
-
