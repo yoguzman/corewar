@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 20:45:02 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/06 18:19:57 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/07 18:11:13 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,13 @@ void		heapify(t_mh *mh, uint32_t i)
 	left = mh->tab + LCHILD(i);
 	right = mh->tab + RCHILD(i);
 	parent = mh->tab + i;
-	if (left - mh->tab < (long)mh->pos
+	if (LCHILD(i) < (long)mh->pos
 			&& (CTE(*left) < CTE(*parent)
 			|| (CTE(*left) == CTE(*parent) && PID(*left) > PID(*parent))))
 		smallest = left;
 	else
 		smallest = parent;
-	if (right - mh->tab < (long)mh->pos
+	if (RCHILD(i) < (long)mh->pos
 			&& (CTE(*right) < CTE(*smallest)
 			|| (CTE(*right) == CTE(*smallest) && PID(*right) > PID(*smallest))))
 		smallest = right;
@@ -113,18 +113,6 @@ void		heapify(t_mh *mh, uint32_t i)
 		swap_process(parent, smallest);
 		heapify(mh, smallest - mh->tab);
 	}
-}
-
-void		delete_min(t_mh *mh)
-{
-	if (mh->pos)
-	{
-		free(mh->tab[0]);
-		mh->tab[0] = mh->tab[--(mh->pos)];
-		heapify(mh, 0);
-	}
-	else
-		free(mh->tab);
 }
 
 void		delete_any(t_mh *mh, uint32_t i)

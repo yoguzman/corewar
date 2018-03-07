@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/02 22:20:11 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/07 18:13:45 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@
 /*
 ** Calculations
 */
+
 # define LCHILD(x) ((x << 1) + 1)
 # define RCHILD(x) ((x << 1) + 2)
 # define PARENT(x) ((x - 1) >> 1)
