@@ -33,10 +33,12 @@ t_list		*go_first(t_list *list)
 	return (list);
 }
 
-void		init_while_label(char **str_tmp, t_if *here, int i[3])
+int			init_while_label(char **str_tmp, t_if *here, int i[3])
 {
-	*str_tmp = here->arg[i[1]];
+	if ((*str_tmp = ft_strdup(here->arg[i[1]])) == NULL)
+		return (-1);
 	i[0] = (here->arg[i[1]][0] == '%' ? i[0] + 1 : i[0]);
+	return (0);
 }
 
 int			is_label(t_if *here, t_list *list, int line)
@@ -63,6 +65,7 @@ int			is_label(t_if *here, t_list *list, int line)
 			if (tmp == NULL)
 				return (print_error_label(here->name_instr, line));
 		}
+		free(str_tmp);
 		++i[1];
 	}
 	return (0);
