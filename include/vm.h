@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/08 16:14:40 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/08 21:18:23 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,6 @@
 # define LCHILD(x) ((x << 1) + 1)
 # define RCHILD(x) ((x << 1) + 2)
 # define PARENT(x) ((x - 1) >> 1)
-# define SWP32A(nb) ((nb & 0xff000000) >> 24) | ((nb >> 0x00ff0000) >> 8)
-# define SWP32B(nb) ((nb & 0x0000ff00) << 8) | (nb << 24)
-# define SWAP32(nb) SWP32A(nb) | SWP32B(nb)
-# define SWAP16(nb) ((nb & 0xff) >> 8) | (nb << 8)
-# define INC_PC(pc, inc) ((pc + inc) % MEM_SIZE)
 
 /*
 ** 2.Typedefs
@@ -233,6 +228,7 @@ void		lldi(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		ft_lfork(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		aff(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		get_one_arg(t_corewar *vm, t_proc *lol, t_instr *instr);
+int			reg_test(t_proc *lol, t_instr *instr, uint8_t i);
 
 /*
 ** priority_queue.c
