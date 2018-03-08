@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   replace_cod_oct.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/08 16:26:25 by jcoutare          #+#    #+#             */
+/*   Updated: 2018/03/08 16:26:27 by jcoutare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "op.h"
 
 static const t_op		g_op_tab[17] =
@@ -27,6 +39,16 @@ static const t_op		g_op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0, {0, 0, 0}}
 };
 
+void		init_replace(int *replace)
+{
+	replace[0] = 192;
+	replace[1] = 48;
+	replace[2] = 12;
+	replace[3] = 64;
+	replace[4] = 16;
+	replace[5] = 4;
+}
+
 int			replace_cod_oct(unsigned char octet, unsigned char op_code)
 {
 	int		i;
@@ -35,12 +57,7 @@ int			replace_cod_oct(unsigned char octet, unsigned char op_code)
 
 	i = 0;
 	decal = 6;
-	replace[0] = 192;
-	replace[1] = 48;
-	replace[2] = 12;
-	replace[3] = 64;
-	replace[4] = 16;
-	replace[5] = 4;
+	init_replace(replace);
 	while (i < 3)
 	{
 		if (((op_code <= 15) &&

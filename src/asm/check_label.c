@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 17:51:11 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/08 14:54:59 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/08 15:15:26 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char			*check_label(char *line, t_if *info_line, int j)
 			{
 				if (info_line->label != NULL)
 				{
-					printf("Redefinition Label in line %d", j);
+					ft_printf("Redefinition Label in line %d", j);
 					return (ft_puterr_null("\n"));
 				}
 				if (!(tmp = ft_strsub(line, i + 1, ft_strlen(line) - (i + 1)))

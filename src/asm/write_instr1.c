@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   write_instr1.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/08 15:52:12 by jcoutare          #+#    #+#             */
+/*   Updated: 2018/03/08 15:55:40 by jcoutare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <unistd.h>
 #include <fcntl.h>
@@ -14,21 +25,16 @@ void		write_short(int fd, unsigned short nb)
 	write(fd, &byte, 1);
 }
 
-void		write_op_code(char **arg, int nb_arg, int dest)
+char		mateub(int *i, char op_code, char **arg, int nb_arg)
 {
-	int		i;
-	char	op_code;
-
-	i = 0;
-	op_code = 0;
-	while (i < nb_arg)
+	while (*i < nb_arg)
 	{
-		if (arg[i][0] == '%')
+		if (arg[*i][0] == '%')
 		{
 			op_code = op_code << 2;
 			op_code += 2;
 		}
-		else if (arg[i][0] == 'r')
+		else if (arg[*i][0] == 'r')
 		{
 			op_code = op_code << 2;
 			op_code += 1;
@@ -38,8 +44,19 @@ void		write_op_code(char **arg, int nb_arg, int dest)
 			op_code = op_code << 2;
 			op_code += 3;
 		}
-		++i;
+		++*i;
 	}
+	return (op_code);
+}
+
+void		write_op_code(char **arg, int nb_arg, int dest)
+{
+	int		i;
+	char	op_code;
+
+	i = 0;
+	op_code = 0;
+	op_code = mateub(&i, op_code, arg, nb_arg);
 	while (i <= 3)
 	{
 		op_code = op_code << 2;
@@ -74,4 +91,3 @@ void		write_string(int fd, char *string, int size)
 		n += 1;
 	}
 }
-

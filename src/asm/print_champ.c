@@ -6,37 +6,17 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 05:06:41 by adauchy           #+#    #+#             */
-/*   Updated: 2018/02/23 07:25:00 by adauchy          ###   ########.fr       */
+/*   Updated: 2018/03/08 16:21:47 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 #include <stdio.h>
 
-static const char	*print_tab[16] =
-{
-	"live",
-	"ld",
-	"st",
-	"add",
-	"sub",
-	"and",
-	"or",
-	"xor",
-	"zjmp",
-	"ldi",
-	"sti",
-	"fork",
-	"lld",
-	"lldi",
-	"lfork",
-	"aff"
-};
-
 static unsigned char	get_op_code(char **arg)
 {
-	int				i;
-	unsigned char	op_code;
+	int					i;
+	unsigned char		op_code;
 
 	i = 0;
 	op_code = 0;
@@ -59,113 +39,45 @@ static unsigned char	get_op_code(char **arg)
 	return (op_code);
 }
 
-int			get_instruction_code(char *instruction)
+void					print_info_begin(t_if *info)
 {
-	int		n;
-
-	n = 0;
-	while (n < 16)
-	{
-		if (!ft_strcmp(instruction, print_tab[n]))
-			return (n);
-		n += 1;
-	}
-	return (-1);
-}
-
-void		print_arg(t_if *info)
-{
-	int		i;
-	int		decal;
-
-	i = 0;
-	info->mask = 3;
-	decal = 6;
-	while (info->arg[i])
-	{
-		if (info->arg[i][0] == 'r' || info->arg[i][0] == '%')
-			info->conv.nb = ft_atoi((info->arg[i] + 1));
-		else
-			info->conv.nb = ft_atoi((info->arg[i]));
-		printf("%-18d", info->conv.nb);
-		decal -= 2;
-		++i;
-	}
-	printf("\n");
-}
-
-void		print_oct_arg(t_if *info)
-{
-	int		i;
-	int		buff;
-	int		decal;
-	int		j;
-
-	i = 0;
-	info->mask = 3;
-	decal = 6;
-	while (info->arg[i])
-	{
-		if ((buff = ((info->op_code >> decal) & info->mask)) == 0)
-			break ;
-		if (info->arg[i][0] == 'r' || info->arg[i][0] == '%')
-			info->conv.nb = ft_atoi((info->arg[i] + 1));
-		else
-			info->conv.nb = ft_atoi((info->arg[i]));
-		if (buff == 3)
-			++buff;
-		--buff;
-		j = buff;
-		while (buff >= 0)
-		{
-			printf("%-3d ", info->conv.nb_oct[buff]);
-			--buff;
-		}
-		while (++j < 4)
-			printf("%-4c", ' ');
-		printf("  ");
-		decal -= 2;
-		++i;
-	}
-	printf("\n");
-}
-
-void		print_info_begin(t_if *info)
-{
-	int		count;
+	int					count;
 
 	if (info->label)
-		printf("%-11d:    %s:\n", info->bytes_line, info->label);
-	printf("%-5d(%-3d) :        %-10s", info->bytes_line,
+		ft_printf("%-11d:    %s:\n", info->bytes_line, info->label);
+	ft_printf("%-5d(%-3d) :        %-10s", info->bytes_line,
 			info->cost_line, info->name_instr);
 	count = -1;
 	while (info->arg[++count])
-		printf("%-18s", info->arg[count]);
-	printf("\n");
-	printf("%20s%-4d", " ", get_instruction_code(info->name_instr) + 1);
+		ft_printf("%-18s", info->arg[count]);
+	ft_printf("\n");
+	ft_printf("%20s%-4d", " ", get_instruction_code(info->name_instr) + 1);
 }
 
-void		print_header_a(t_header *champ)
+int						truc(t_if *info)
 {
-	ft_putstr("Dumping annotated program on standard output\n");
-	printf("Program size : %d bytes\n", champ->prog_size);
-	printf("Name : \"%s\"\n", champ->prog_name);
-	printf("Comment : \"%s\"\n\n", champ->comment);
-}
-
-void		print_info_arg(t_if *info)
-{
-	if (ft_strcmp("live", info->name_instr) && ft_strcmp("zjmp", info->name_instr) &&
-			ft_strcmp("fork", info->name_instr) && ft_strcmp("lfork", info->name_instr))
+	if (ft_strcmp("live", info->name_instr)
+		&& ft_strcmp("zjmp", info->name_instr) &&
+			ft_strcmp("fork", info->name_instr) &&
+		ft_strcmp("lfork", info->name_instr))
 	{
 		info->op_code = get_op_code(info->arg);
-		printf("%-6d", info->op_code);
-		info->op_code = replace_cod_oct(info->op_code, get_instruction_code(info->name_instr));
+		ft_printf("%-6d", info->op_code);
+		info->op_code = replace_cod_oct(info->op_code,
+										get_instruction_code(info->name_instr));
 		print_oct_arg(info);
-		printf("                    %-2d  %-6d", get_instruction_code(info->name_instr) + 1, get_op_code(info->arg));
+		ft_printf("                    %-2d  %-6d",
+				get_instruction_code(info->name_instr) + 1,
+				get_op_code(info->arg));
 		print_arg(info);
+		return (1);
 	}
-	else
+	return (0);
+}
+
+void					print_info_arg(t_if *info)
+{
+	if (truc(info) == 0)
 	{
 		printf("%6s", " ");
 		if (ft_strcmp("live", info->name_instr) == 0)
@@ -173,15 +85,16 @@ void		print_info_arg(t_if *info)
 		else
 			info->op_code = (T_DIR << 6);
 		print_oct_arg(info);
-		printf("                    %-2d  %-6s", get_instruction_code(info->name_instr) + 1, " ");
+		ft_printf("                    %-2d  %-6s",
+				get_instruction_code(info->name_instr) + 1, " ");
 		print_arg(info);
 	}
 }
 
-int			print_champ(t_header *champ, t_list *inf_line)
+int						print_champ(t_header *champ, t_list *inf_line)
 {
-	t_if	*info;
-	int		j;
+	t_if				*info;
+	int					j;
 
 	j = 0;
 	print_header_a(champ);
@@ -194,7 +107,7 @@ int			print_champ(t_header *champ, t_list *inf_line)
 		++j;
 		print_info_arg(info);
 		inf_line = inf_line->next;
-		printf("\n");
+		ft_printf("\n");
 	}
 	return (0);
 }
