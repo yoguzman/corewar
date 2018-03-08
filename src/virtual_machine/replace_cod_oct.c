@@ -88,7 +88,7 @@ int			check_encoding_byte(unsigned char byte, unsigned char op_code)
 	is_valid = 0;
 	while (i < g_op_tab[op_code].parameter_count)
 	{
-		inc_pc += ((byte >> shift) & 3)
+		inc_pc += ((byte >> shift) & 3);
 		++i;
 	}
 	return (inc_pc);
