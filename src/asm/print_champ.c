@@ -131,41 +131,57 @@ void		print_oct_arg(t_if *info, int count)
 	print_arg(info, count);
 }
 
-int			print_champ(t_header *champ, t_list *inf_line)
+void		print_info_begin(t_if *info)
 {
-	t_if	*info;
 	int		count;
-	int		j;
 
+	if (info->label)
+		printf("%-11d:    %s:\n", info->bytes_line, info->label);
+	printf("%-5d(%-3d) :        %-10s", info->bytes_line,
+			info->cost_line, info->name_instr);
+	count = -1;
+	while (info->arg[++count])
+		printf("%-18s", info->arg[count]);
+	printf("\n");
+	printf("%20s%-4d", " ", get_instruction_code(info->name_instr) + 1);
+}
+
+void		print_header_a(t_header *champ)
+{
 	ft_putstr("Dumping annotated program on standard output\n");
 	printf("Program size : %d bytes\n", champ->prog_size);
 	printf("NAME : \"%s\"\n", champ->prog_name);
 	printf("Comment : \"%s\"\n\n", champ->comment);
+}
+
+void		print_info_arg(t_if *info)
+{
+	if (ft_strcmp("live", info->name_instr) && ft_strcmp("zjmp", info->name_instr) &&
+			ft_strcmp("fork", info->name_instr) && ft_strcmp("lfork", info->name_instr))
+	{
+		info->op_code = get_op_code(info->arg);
+		printf("%-6d", info->op_code);
+		print_oct_arg(info, get_instruction_code(info->name_instr));
+	}
+	else
+		printf("%6s", " ");
+}
+
+int			print_champ(t_header *champ, t_list *inf_line)
+{
+	t_if	*info;
+	int		j;
+
 	j = 0;
+	print_header_a(champ);
 	while (inf_line)
 	{
 		info = (t_if*)(inf_line->content);
-		if (info->label)
-			printf("%-11d:    %s:\n", info->bytes_line, info->label);
-		printf("%-5d(%-3d) :        %-10s", info->bytes_line,
-				info->cost_line, info->name_instr);
-		count = -1;
-		while (info->arg[++count])
-			printf("%-18s", info->arg[count]);
-		printf("\n");
-		printf("%20s%-4d", " ", get_instruction_code(info->name_instr) + 1);
+		print_info_begin(info);
 		if (is_label(info, inf_line, j) == -1)
 			return (-1);
 		++j;
-		if (ft_strcmp("live", info->name_instr) && ft_strcmp("zjmp", info->name_instr) &&
-				ft_strcmp("fork", info->name_instr) && ft_strcmp("lfork", info->name_instr))
-		{
-			info->op_code = get_op_code(info->arg);
-			printf("%-6d", info->op_code);
-			print_oct_arg(info, get_instruction_code(info->name_instr));
-		}
-		else
-			printf("%6s", " ");
+		print_info_arg();
 		inf_line = inf_line->next;
 		printf("\n");
 	}

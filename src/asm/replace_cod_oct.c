@@ -30,12 +30,10 @@ static const t_op		g_op_tab[17] =
 int			replace_cod_oct(unsigned char octet, unsigned char op_code)
 {
 	int		i;
-	int		mask;
 	int		decal;
 	int		replace[6];
 
 	i = 0;
-	mask = 3;
 	decal = 6;
 	replace[0] = 192;
 	replace[1] = 48;
@@ -46,15 +44,15 @@ int			replace_cod_oct(unsigned char octet, unsigned char op_code)
 	while (i < 3)
 	{
 		if (((op_code <= 15) &&
-			(((octet >> decal) & mask) == 2 ||
-			((octet >> decal) & mask) == 3)) &&
+			(((octet >> decal) & 3) == 2 ||
+			((octet >> decal) & 3) == 3)) &&
 			(i < g_op_tab[op_code].parameter_count) &&
 			((g_op_tab[op_code].rep[i] == 1) ||
-			(g_op_tab[op_code].rep[i] == 2 && ((octet >> decal) & mask) == 3)))
+			(g_op_tab[op_code].rep[i] == 2 && ((octet >> decal) & 3) == 3)))
 		{
-			if (((octet >> decal) & mask) == 2)
+			if (((octet >> decal) & 3) == 2)
 				octet = octet | replace[i];
-			else if (((octet >> decal) & mask) == 3)
+			else if (((octet >> decal) & 3) == 3)
 				octet = octet ^ replace[i + 3];
 		}
 		++i;
