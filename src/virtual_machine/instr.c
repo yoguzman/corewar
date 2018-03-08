@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:44:10 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/07 19:32:19 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/08 13:54:51 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	live(t_corewar *vm, t_proc *lol, t_instr *instr)
 
 void	ld(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-	lol->reg[instr->param[1]] += 42;
+	lol->reg[instr->param[1] - 1] = instr->param[0] ;
     lol->carry = 1;
 }
 
@@ -84,24 +84,29 @@ void	ldi(t_corewar *vm, t_proc *lol, t_instr *instr)
 
 void	sti(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-	int pc = 0;
-	int to_jump = 0;
+	int to_jump;
+	int some_arg;
 
-	if (instr->val_arg[1] == T_DIR)
+	to_jump = 0;
+	some_arg = 0;
+	some_arg = instr->val_arg[0] + instr->val_arg[1] + instr->val_arg[2] + 2;
+	if (instr->val_arg[1] == T_DIR || instr->val_arg[1] == T_IND)
 		to_jump += instr->param[1];
 	else
-		to_jump += lol->reg[instr->param[1]];
-	if (instr->val_arg[2] == T_DIR)
+		to_jump += lol->reg[instr->param[1] - 1];
+	if (instr->val_arg[2] == T_DIR || instr->val_arg[2] == T_IND)
 		to_jump += instr->param[2];
 	else
-		to_jump += lol->reg[instr->param[2]];
-	pc += to_jump + 14;
-	reset_pc(pc);
-	vm->arena[pc++] = ((char) (lol->reg[instr->param[0]] & 0xFF000000) >> 24);
-	vm->arena[pc++] = ((char) (lol->reg[instr->param[0]] & 0x00FF0000) >> 16);
-    vm->arena[pc++] = ((char) (lol->reg[instr->param[0]] & 0x0000FF00) >> 8);
-    vm->arena[pc++] = ((char) (lol->reg[instr->param[0]] & 0x000000FF));
-
+		to_jump += lol->reg[instr->param[2] -1];
+	to_jump = (lol->pc - some_arg + to_jump) % IDX_MOD;
+	vm->arena[to_jump++] = ((char)
+							(lol->reg[instr->param[0] - 1] & 0xFF000000) >> 24);
+	vm->arena[to_jump++] = ((char)
+							(lol->reg[instr->param[0] - 1] & 0x00FF0000) >> 16);
+    vm->arena[to_jump++] = ((char)
+							(lol->reg[instr->param[0] - 1] & 0x0000FF00) >> 8);
+    vm->arena[to_jump++] = ((char)
+							(lol->reg[instr->param[0] - 1] & 0x000000FF));
 }
 
 void	ft_fork(t_corewar *vm, t_proc *lol, t_instr *instr)
