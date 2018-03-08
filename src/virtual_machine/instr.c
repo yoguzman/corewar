@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:44:10 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/08 16:15:10 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/08 21:17:20 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 
 void	live(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
+	if (instr->param[0] < MAX_PLAYERS)
+	{
+		vm->player_table[instr->param[0]].current_live++;
+		lol->current_live++;
+	}
 	/*
   //depuis le lol-pc - l instruction ?
   if (lol->carry == 1)
@@ -25,12 +30,42 @@ void	live(t_corewar *vm, t_proc *lol, t_instr *instr)
 
 void	ld(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-	lol->reg[instr->param[1] - 1] = instr->param[0] ;
+	int	tot_bytes_param;
+	int	offset;
+
+	tot_bytes_param = instr->val_arg[0] + instr->val_arg[1] + 2;
+	offset = (lol->pc - tot_bytes_param) + (instr->param[0] % IDX_MOD);
+	lol->reg[instr->param[1] - 1] = vm->arena[offset] << 24;
+	offset = (offset + 1) % MEM_SIZE;
+	lol->reg[instr->param[1] - 1] |= vm->arena[offset] << 16;
+	offset = (offset + 1) % MEM_SIZE;
+	lol->reg[instr->param[1] - 1] |= vm->arena[offset] << 8;
+	offset = (offset + 1) % MEM_SIZE;
+	lol->reg[instr->param[1] - 1] |= vm->arena[offset];
     lol->carry = 1;
 }
 
 void	st(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
+	int	offset;
+
+	if (instr->val_arg[1] == T_REG)
+		lol->reg[instr->param[1] - 1] = lol->reg[instr->param[0] - 1];
+	else
+	{
+		offset = lol->pc + (instr->param[1] % IDX_MOD);
+		vm->arena[offset] = ((char)
+				(lol->reg[instr->param[0] - 1] & 0xFF000000) >> 24);
+		offset = (offset + 1) % MEM_SIZE;
+		vm->arena[offset] = ((char)
+				(lol->reg[instr->param[0] - 1] & 0xFF0000) >> 16);
+		offset = (offset + 1) % MEM_SIZE;
+		vm->arena[offset] = ((char)
+				(lol->reg[instr->param[0] - 1] & 0xFF00) >> 8);
+		offset = (offset + 1) % MEM_SIZE;
+		vm->arena[offset] = ((char)
+				(lol->reg[instr->param[0] - 1] & 0xFF));
+	}
   /* si param[1] == REG
      lol->reg[instr->param[1]] = lol->reg[instr->param[0]];;
      else
@@ -41,97 +76,188 @@ void	st(t_corewar *vm, t_proc *lol, t_instr *instr)
 
 void	add(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-
-	  lol->reg[instr->param[2]] = lol->reg[instr->param[0]] + lol->reg[instr->param[1]];
-	  lol->carry = 1;
+	(void)vm;
+	lol->reg[instr->param[2] - 1] =
+		lol->reg[instr->param[0]] + lol->reg[instr->param[1]];
+	lol->carry = 1;
 }
 
 
 void	sub(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-	lol->reg[instr->param[2]] = lol->reg[instr->param[0]] - lol->reg[instr->param[1]];
+	(void)vm;
+	lol->reg[instr->param[2] - 1] =
+		lol->reg[instr->param[0]] - lol->reg[instr->param[1]];
     lol->carry = 1;
+}
+
+int		reg_test(t_proc *lol, t_instr *instr, uint8_t i)
+{
+	if (instr->val_arg[i] == T_REG)
+		return (lol->reg[instr->param[i] - 1]);
+	return (instr->param[i]);
 }
 
 void	ft_and(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-	lol->reg[instr->param[2]] = instr->param[0] & instr->param[1];
+	(void)vm;
+	lol->reg[instr->param[2] - 1] =
+		reg_test(lol, instr, 0) & reg_test(lol, instr, 1);
 	lol->carry = 1;
 }
 
 void	ft_or(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-  lol->reg[instr->param[2]] = instr->param[0] | instr->param[1];
+	(void)vm;
+	lol->reg[instr->param[2] - 1] =
+		reg_test(lol, instr, 0) | reg_test(lol, instr, 1);
+	lol->carry = 1;
 }
 
 void	ft_xor(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-	lol->reg[instr->param[2]] = instr->param[0] ^ instr->param[1];
+	(void)vm;
+	lol->reg[instr->param[2]] =
+		reg_test(lol, instr, 0) ^ reg_test(lol, instr, 1);
 	lol->carry = 1;
 
 }
 
 void	zjmp(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
+	(void)vm;
     if (lol->carry == 1)
         lol->pc = lol->pc + (instr->param[0] % IDX_MOD);
 }
 
 void	ldi(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
+	int	offset;
 
+	offset = lol->pc
+		- (instr->val_arg[0] + instr->val_arg[1] + instr->val_arg[2] + 2)
+		+ ((reg_test(lol, instr, 0) + reg_test(lol, instr, 1)) % IDX_MOD);
+	lol->reg[instr->param[2] - 1] = vm->arena[offset] << 24;
+	offset = (offset + 1) % MEM_SIZE;
+	lol->reg[instr->param[2] - 1] |= vm->arena[offset] << 16;
+	offset = (offset + 1) % MEM_SIZE;
+	lol->reg[instr->param[2] - 1] |= vm->arena[offset] << 8;
+	offset = (offset + 1) % MEM_SIZE;
+	lol->reg[instr->param[2] - 1] |= vm->arena[offset];
+	lol->carry = 1;
 }
 
 void	sti(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	int to_jump;
-	int some_arg;
+	int tot_bytes_params;
+//	int	diff;
 
 	to_jump = 0;
-	some_arg = 0;
-	some_arg = instr->val_arg[0] + instr->val_arg[1] + instr->val_arg[2] + 2;
-	if (instr->val_arg[1] == T_DIR || instr->val_arg[1] == T_IND)
-		to_jump += instr->param[1];
-	else
-		to_jump += lol->reg[instr->param[1] - 1];
-	if (instr->val_arg[2] == T_DIR || instr->val_arg[2] == T_IND)
-		to_jump += instr->param[2];
-	else
-		to_jump += lol->reg[instr->param[2] -1];
-	to_jump = (lol->pc - some_arg + to_jump) % IDX_MOD;
-	vm->arena[to_jump++] = ((char)
-							(lol->reg[instr->param[0] - 1] & 0xFF000000) >> 24);
-	vm->arena[to_jump++] = ((char)
-							(lol->reg[instr->param[0] - 1] & 0x00FF0000) >> 16);
-    vm->arena[to_jump++] = ((char)
-							(lol->reg[instr->param[0] - 1] & 0x0000FF00) >> 8);
-    vm->arena[to_jump++] = ((char)
-							(lol->reg[instr->param[0] - 1] & 0x000000FF));
+	tot_bytes_params =
+		instr->val_arg[0] + instr->val_arg[1] + instr->val_arg[2] + 2;
+	to_jump += reg_test(lol, instr, 1);
+	to_jump += reg_test(lol, instr, 2);
+	to_jump = (lol->pc - tot_bytes_params + to_jump) % IDX_MOD;
+	// ou alors to_jump = (lol->pc - tot_bytes_params) + (to_jump % IDX_MOD);
+//	diff = MEM_SIZE - to_jump;
+//	if (diff >= REG_SIZE)
+//	{
+		vm->arena[to_jump/*++*/] = ((char)
+				(lol->reg[instr->param[0] - 1] & 0xFF000000) >> 24);
+		to_jump = (to_jump + 1) % MEM_SIZE;
+		vm->arena[to_jump/*++*/] = ((char)
+				(lol->reg[instr->param[0] - 1] & 0x00FF0000) >> 16);
+		to_jump = (to_jump + 1) % MEM_SIZE;
+		vm->arena[to_jump/*++*/] = ((char)
+				(lol->reg[instr->param[0] - 1] & 0x0000FF00) >> 8);
+		to_jump = (to_jump + 1) % MEM_SIZE;
+		vm->arena[to_jump] = ((char)
+				(lol->reg[instr->param[0] - 1] & 0x000000FF));
+//	}
+//	else
+//	{
+//		shift = 24;
+//		while (diff--)
+//		{
+//			vm->arena[to_jump++] = ((char)
+//					(lol->reg[instr->param[0] - 1] & (0xFF << shift)) >> shift);
+//			shift -= 8;
+//		}
+//		to_jump = 0;
+//		while (shift >= 0)
+//		{
+//			vm->arena[to_jump++] = ((char)
+//					(lol->reg[instr->param[0] - 1] & (0xFF << shift)) >> shift);
+//			shift -= 8;
+//		}
+//	}
+//	/* j'aime l'humour */
 }
 
 void	ft_fork(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
+	t_proc	*child;
 
+	if (!(child = (t_proc *)malloc(sizeof(*proc))))
+		exit(EXIT_FAILURE); /* a la DSK */
+	//lol->carry = 1; ?
+	ft_memcpy(child, lol, sizeof(*lol));
+	child->pc = lol->pc + (instr->param[0] % IDX_MOD);
+	insert(vm->mh, child);
 }
 
 void	lld(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
+	int	tot_bytes_param;
+	int	offset;
 
+	tot_bytes_param = instr->val_arg[0] + instr->val_arg[1] + 2;
+	offset = lol->pc - tot_bytes_param + instr->param[0];
+	lol->reg[instr->param[1] - 1] = vm->arena[offset] << 24;
+	offset = (offset + 1) % MEM_SIZE;
+	lol->reg[instr->param[1] - 1] |= vm->arena[offset] << 16;
+	offset = (offset + 1) % MEM_SIZE;
+	lol->reg[instr->param[1] - 1] |= vm->arena[offset] << 8;
+	offset = (offset + 1) % MEM_SIZE;
+	lol->reg[instr->param[1] - 1] |= vm->arena[offset];
+    lol->carry = 1;
+	
 }
 
 void	lldi(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
+	int	offset;
+
+	offset = lol->pc
+		- (instr->val_arg[0] + instr->val_arg[1] + instr->val_arg[2] + 2)
+		+ reg_test(lol, instr, 0) + reg_test(lol, instr, 1);
+	lol->reg[instr->param[2] - 1] = vm->arena[offset] << 24;
+	offset = (offset + 1) % MEM_SIZE;
+	lol->reg[instr->param[2] - 1] |= vm->arena[offset] << 16;
+	offset = (offset + 1) % MEM_SIZE;
+	lol->reg[instr->param[2] - 1] |= vm->arena[offset] << 8;
+	offset = (offset + 1) % MEM_SIZE;
+	lol->reg[instr->param[2] - 1] |= vm->arena[offset];
+	lol->carry = 1;
 
 }
 
 void	ft_lfork(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
+	t_proc	*child;
 
+	if (!(child = (t_proc *)malloc(sizeof(*proc))))
+		exit(EXIT_FAILURE); /* a la DSK */
+	lol->carry = 1;
+	ft_memcpy(child, lol, sizeof(*lol));
+	child->pc = lol->pc + instr->param[0];
+	insert(vm->mh, child);
 }
 
 void	aff(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-
+	ft_putchar(lol->reg[instr->param[0] - 1] % 256);
 }
 
 int	check_params(unsigned char const parameter_type[3], unsigned char parameter_count,
