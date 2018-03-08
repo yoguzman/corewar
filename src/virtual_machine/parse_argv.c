@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 01:01:17 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/23 01:56:44 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/28 13:29:56 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static const char	**save_dump_limit(const char *argv[], t_corewar *vm)
 static const char	**init_visual_mode(const char *argv[], t_corewar *vm)
 {
 	(void)argv;
-	(void)vm;
+	vm->visual = 1;
 	return (&argv[1]);
 }
 
@@ -47,7 +47,7 @@ void				parse_argv(const char *argv[], t_corewar *vm)
 {
 	const char	*arg;
 	const char	*opt;
-	const char	**(*exec_opt[3])(const char *[], t_corewar *);
+	const char	**(*exec_opt[OPTIONS])(const char *[], t_corewar *);
 
 	exec_opt[0] = save_dump_limit;
 	exec_opt[1] = init_visual_mode; 

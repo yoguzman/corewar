@@ -6,17 +6,17 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 21:50:33 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/22 23:32:14 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/25 20:19:29 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "vm.h"
 
-void	dump_arena(unsigned char arena[MEM_SIZE])
+void	dump_arena(uint8_t arena[MEM_SIZE])
 {
-	int	i;
-	int	j;
+	uint32_t	i;
+	uint32_t	j;
 
 	i = 0;
 	while (i < MEM_SIZE)
