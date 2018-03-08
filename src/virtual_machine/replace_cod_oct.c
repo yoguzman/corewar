@@ -62,34 +62,3 @@ int			replace_cod_oct(unsigned char octet, unsigned char op_code)
 	}
 	return (octet);
 }
-
-/*
- **				reg | dir | ind
- ** ---------------------------
- ** encoding	 01 |  10 | 11
- ** TYPE		 1  |  2  | 4
- ** INC_VAL		 1  |  4  | 2
- */
-
-int			check_encoding_byte(unsigned char byte, unsigned char op_code)
-{
-	int		i;
-	int		inc_pc;
-	int		shift;
-	int		inc_val[3];
-	int		is_valid;
-
-	i = 0;
-	inc_pc = 0;
-	shift = 6;
-	inc_val[0] = T_REG;
-	inc_val[1] = T_DIR;
-	inc_val[2] = T_IND;
-	is_valid = 0;
-	while (i < g_op_tab[op_code].parameter_count)
-	{
-		inc_pc += ((byte >> shift) & 3)
-		++i;
-	}
-	return (inc_pc);
-}
