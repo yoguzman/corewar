@@ -6,7 +6,7 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 14:22:57 by adauchy           #+#    #+#             */
-/*   Updated: 2018/03/07 11:03:14 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/08 15:57:22 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 void			loop_instr(t_corewar *vm, t_mh *mh, t_instr *instr)
 {
-	uint64_t	i;
-
 //	ft_putstr("\ncycle en cours = ");
 //	ft_putnbr(vm->cycle_count);
 //	ft_putstr("\ncheck loop instr pid = ");
@@ -26,18 +24,11 @@ void			loop_instr(t_corewar *vm, t_mh *mh, t_instr *instr)
 //	ft_putchar('\n');
 	if (mh->tab[0]->cycles_to_exec - mh->count > 0)
 		return ;
-	i = 0;
-	while (i < mh->pos && mh->tab[i]->cycles_to_exec - mh->count == 0)
+	while (mh->pos > 0 && mh->tab[0]->cycles_to_exec - mh->count == 0)
 	{
 		//ft_putstr("b;b");
-		exec_instr(vm, instr, mh->tab[i], &i);
+		exec_instr(vm, instr, mh->tab[0]);
 	}
-	while (i > 0)
-	{
-		heapify(mh, i);
-		--i;
-	}
-	heapify(mh, i);
 	uint64_t j;
 
 	j = 0;

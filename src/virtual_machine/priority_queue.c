@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 20:45:02 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/07 18:11:13 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/08 16:00:08 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,4 +125,20 @@ void		delete_any(t_mh *mh, uint32_t i)
 	}
 	else
 		free(mh->tab);
+}
+
+t_proc		*pop_min(t_mh *mh)
+{
+	t_proc	*p;
+
+	p = NULL;
+	if (mh->pos)
+	{
+		p = mh->tab[0];
+		mh->tab[0] = mh->tab[--(mh->pos)];
+		heapify(mh, 0);
+	}
+	else
+		free(mh->tab);
+	return (p);
 }

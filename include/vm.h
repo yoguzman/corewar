@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/07 19:33:40 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/08 16:14:40 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,7 @@ void		reset_pc(uint32_t pc);
 int			get_octet(char octet, t_instr *instr);
 void		la_balade(t_proc *lol, t_instr *instr);
 int			get_data(t_corewar *vm, t_proc *lol, t_instr *instr);
-void		exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc, uint64_t *i);
+void		exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc);
 void		live(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		ld(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		st(t_corewar *vm, t_proc *lol, t_instr *instr);
@@ -243,6 +243,7 @@ t_mh		*init_heap(t_player player_table[MAX_PLAYERS],
 void		insert(t_mh *mh, t_proc *entry);
 void		heapify(t_mh *mh, uint32_t i);
 void		delete_any(t_mh *mh, uint32_t i);
+t_proc		*pop_min(t_mh *mh);
 
 /*
 ** process.c

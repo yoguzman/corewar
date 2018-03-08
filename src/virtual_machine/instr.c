@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:44:10 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/08 13:54:51 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/08 16:15:10 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ void	la_balade(t_proc *lol, t_instr *instr)
 	lol->pc++;
 }
 
-void	exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc, uint64_t *i)
+void	exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc)
 {
 	//ft_putstr("\nCycle actuel = ");
 	//ft_putnbr(vm->mh->count);
@@ -206,8 +206,7 @@ void	exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc, uint64_t *i)
 	//ft_putstr(" cycle_to_exec : ");
 	//ft_putnbr(proc->cycles_to_exec - vm->mh->count);
 	instr->opcode = vm->arena[proc->pc] - 1;
-	++(proc->pc); /* proc->pc = (proc->pc + 1) % MEM_SIZE; */
-	reset_pc(proc->pc);
+	proc->pc = (proc->pc + 1) % MEM_SIZE;
 	if (instr->opcode <= 15)
 	{
 		printf("instr = %s\n", instr->op_tab[instr->opcode].name);
@@ -215,7 +214,6 @@ void	exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc, uint64_t *i)
 			get_data(vm, proc, instr);
 		else
 			get_one_arg(vm, proc, instr);
-		reset_pc(proc->pc);
 		instr->tab_instr[instr->opcode](vm, proc, instr);
 		printf("%s > GOOD\n", instr->op_tab[instr->opcode].name);
 	}
@@ -232,5 +230,6 @@ void	exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc, uint64_t *i)
 	}
 	else
 		proc->cycles_to_exec += 1;
-	++(*i);
+	proc = pop_min(vm->mh);
+	insert(vm->mh, proc);
 }
