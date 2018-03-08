@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 15:37:31 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/02/23 13:56:45 by yguzman          ###   ########.fr       */
+/*   Updated: 2018/03/08 15:13:21 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int		reg_is_correct(char *str)
 	return (0);
 }
 
-int		check_op_tab(int index_op, int nb_arg, int type, const t_op_a *op_tab)
+int		check_op_tab(int index_op, int nb_arg, int type, const t_op *op_tab)
 {
-	if ((op_tab[index_op].arg[nb_arg] & type) == 0)
+	if ((op_tab[index_op].parameter_types[nb_arg] & type) == 0)
 	{
 		puterr_noend("Invalid parameter type ");
 		puterr_noend(ft_itoa(nb_arg));
@@ -55,7 +55,7 @@ int		check_op_tab(int index_op, int nb_arg, int type, const t_op_a *op_tab)
 	return (0);
 }
 
-int		arg_is_reg(char *str, int index_op, int nb_arg, const t_op_a *op_tab)
+int		arg_is_reg(char *str, int index_op, int nb_arg, const t_op *op_tab)
 {
 	if (str[0] == 'r')
 	{
@@ -75,7 +75,7 @@ int		arg_is_reg(char *str, int index_op, int nb_arg, const t_op_a *op_tab)
 	return (0);
 }
 
-int		arg_is_direct(char *str, int index_op, int nb_arg, const t_op_a *op_tab)
+int		arg_is_direct(char *str, int index_op, int nb_arg, const t_op *op_tab)
 {
 	if (str[0] == '%')
 	{

@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/03/07 13:41:16 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/08 15:07:42 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,20 @@ typedef struct		s_header
 	char				comment[COMMENT_LENGTH + 1];
 }					t_header;
 
-typedef struct		s_op
+typedef struct        s_op
 {
-	char			*name;
-	unsigned char	parameter_count;
-	unsigned char	parameter_types[3];
-	unsigned char	op_code;
-	unsigned short	cycles_to_exec;
-	char			*long_name;
-	unsigned char	changes_carry;
-	unsigned char	uses_index; /* switch ind_size p-e ... */
-	unsigned char   rep[3];
-}					t_op;
+	char            *name;
+	unsigned char    parameter_count;
+	unsigned char    parameter_types[3];
+	unsigned char    op_code;
+	unsigned short   cycles_to_exec;
+	char           	 *long_name;
+	unsigned char    changes_carry;
+	unsigned char    uses_index; /* switch ind_size p-e ... */
+	unsigned char	rep[3];
+}                    t_op;
 
-int				replace_cod_oct(unsigned char octet, unsigned char op_code);
+int					replace_cod_oct(unsigned char octet, unsigned char op_code);
+
 
 #endif

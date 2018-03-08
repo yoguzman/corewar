@@ -55,6 +55,7 @@ SRCS_ASM		=		main_a.c							\
 						fill_cost_line.c					\
 						write_instr.c						\
 						tools3.c							\
+						replace_cod_oct.c					\
 
 SRCS_COREWAR	= main.c instr.c op.c print_usage.c print_error_and_exit.c \
 		ft_isdigitstr.c load_champion.c parse_argv.c \
@@ -72,7 +73,7 @@ OBJS_COREWAR	= $(addprefix $(OBJ_DIR)/, $(SRCS_COREWAR:.c=.o))
 
 LFLAGS	= -L$(LIB_DIR) -lft -lncurses
 CFLAGS	+= -Iinclude
-CFLAGS	+= -Wall -Wextra -g -O3
+CFLAGS	+= -Wall -Wextra -g -g3
 COMP	= $(CC) $(CFLAGS) -o $@ -c $<
 LINK	= $(CC) $(LFLAGS) -o $@ $(filter-out $(LIB) $(OBJ_DIR), $^)
 LIB	= libft.a

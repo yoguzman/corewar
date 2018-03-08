@@ -1,11 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */ /*                                                    +:+ +:+         +:+     */
+/*   asm.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: abeauvoi <abeauvoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 19:25:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/16 16:25:23 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/08 15:11:15 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +22,22 @@
 # define ERR_ARG "wrong number of arg"
 # define ERR_ARG_TYPE "wrong types of arg"
 
+typedef union		u_convert_oct
+{
+	unsigned char	nb_oct[4];
+	int				nb;
+}					t_conv_oct;
+
 typedef struct		s_info_line
 {
 	char			*label;
+	unsigned char	op_code;
+	int				mask;
 	int				bytes_line;
 	int				cost_line;
 	char			*name_instr;
 	char			**arg;
+	t_conv_oct		conv;
 }					t_if;
 
 typedef struct		s_cost
@@ -41,14 +51,6 @@ typedef struct		s_write
 	char			*name;
 	void			(*f)(t_if *, int dest);
 }					t_write;
-
-typedef struct		s_op_a
-{
-	char			*name;
-	int				nb_arg;
-	int				arg[3];
-	int				nb_instr;
-}					t_op_a;
 
 typedef union		u_neg
 {
@@ -67,19 +69,19 @@ void				write_string(int dest, char *prog_name, int lenght);
 int					print_error_name(char **t_str, int line, int i);
 char    			*check_label(char *line, t_if *info_line, int j);
 int					arg_is_direct(char *str, int index_op, int nb_arg,
-									const t_op_a *op_tab);
+									const t_op *op_tab);
 int					arg_is_reg(char *str, int index_op, int nb_arg,
-									const t_op_a *op_tab);
+									const t_op *op_tab);
 int					puterr(char *str);
 int					puterr_noend(char *str);
-int					check_name(char *str, const t_op_a *op_tab);
+int					check_name(char *str, const t_op *op_tab);
 int					arg_is_number(char *arg);
 int					arg_is_labelchar(char *arg);
 int					pars_instr(char *instr, t_if *info, int line);
 int					direct_is_correct(char *str);
 int					reg_is_correct(char *str);
 int					get_champ(char *name, t_header *champ, t_list **inf_line);
-void				print_champ(t_header *champ, t_list *inf_line);
+int					print_champ(t_header *champ, t_list *inf_line);
 int					compile_champ(t_header *champ, char *name,
 									t_list *inf_line);
 void				epur_space(char *str);
@@ -88,17 +90,17 @@ int					puterr(char *str);
 int					puterr_noend(char *str);
 int					arg_is_labelchar(char *arg);
 int					arg_is_number(char *arg);
-int					check_name(char *str, const t_op_a *op_tab);
-int					check_nb_arg(char **str, int index_op, const t_op_a *op_tab);
+int					check_name(char *str, const t_op *op_tab);
+int					check_nb_arg(char **str, int index_op, const t_op *op_tab);
 void				epur_space(char *str);
 int					direct_is_correct(char *str);
 int					reg_is_correct(char *str);
 int					check_op_tab(int index_op, int nb_arg, int type,
-									const t_op_a *op_tab);
+									const t_op *op_tab);
 int					arg_is_direct(char *str, int index_op, int nb_arg,
-									const t_op_a *op_tab);
+									const t_op *op_tab);
 int					arg_is_reg(char *str, int index_op, int nb_arg,
-									const t_op_a *op_tab);
+									const t_op *op_tab);
 void				live_cost(t_if *info_line);
 void				ld_cost(t_if *info_line);
 void				st_cost(t_if *info_line);
