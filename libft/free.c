@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_player_count.c                              :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yguzman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/21 06:37:30 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/22 22:08:35 by abeauvoi         ###   ########.fr       */
+/*   Created: 2017/10/06 16:54:20 by yguzman           #+#    #+#             */
+/*   Updated: 2017/10/06 16:56:13 by yguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm.h"
+#include "printf.h"
+#include <stdlib.h>
 
-void	update_player_count(t_corewar *vm)
+void			free_all(t_dt *dt)
 {
-	unsigned char	i;
-
-	vm->players = 0;
-	i = 0;
-	while (i < MAX_PLAYERS)
-	{
-		if (vm->player_table[i].code != NULL)
-			++vm->players;
-		++i;
-	}
+	free(dt->all_conv);
+	free(dt->all_attr);
+	free(dt->all_modif_conv);
 }

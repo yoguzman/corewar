@@ -6,17 +6,23 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:42:57 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/21 06:17:30 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/02/23 04:39:17 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "vm.h"
+#include <stdio.h>
 
-static void	init_vm(t_corewar *vm)
+static void	init_vm(const char *argv[], t_corewar *vm)
 {
-	ft_bzero(&vm, sizeof(vm));
-	vm->pid = -1;
+	ft_bzero(vm, sizeof(*vm));
+	vm->player_id = -1;
+	parse_argv(argv + 1, vm);
+	print_players(vm->player_table);
+	update_player_count(vm);
+	load_champions_in_arena(vm);
+	dump_arena(vm->arena);
 }
 
 int			main(int argc, const char *argv[])
@@ -30,8 +36,8 @@ int			main(int argc, const char *argv[])
 		print_usage();
 	else
 	{
-		init_vm(&vm);
-		parse_argv(argv, &vm);
+		init_vm(argv, &vm);
+		clear_data(&vm);
 	}
 	return (0);
 }

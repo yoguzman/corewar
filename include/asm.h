@@ -1,11 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */ /*                                                    +:+ +:+         +:+     */
+/*   asm.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: abeauvoi <abeauvoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 19:25:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/16 16:25:23 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/08 15:11:15 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +75,6 @@ int					arg_is_reg(char *str, int index_op, int nb_arg,
 int					puterr(char *str);
 int					puterr_noend(char *str);
 int					check_name(char *str, const t_op *op_tab);
-int					check_nb_arg(char **str, int index_op, const t_op *op_tab);
 int					arg_is_number(char *arg);
 int					arg_is_labelchar(char *arg);
 int					pars_instr(char *instr, t_if *info, int line);

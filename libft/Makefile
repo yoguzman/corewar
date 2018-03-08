@@ -6,7 +6,7 @@
 #    By: yguzman <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 11:38:09 by yguzman           #+#    #+#              #
-#    Updated: 2017/10/10 14:53:13 by yguzman          ###   ########.fr        #
+#    Updated: 2018/02/22 18:02:28 by abeauvoi         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -98,7 +98,18 @@ SRCS_LIB	=		$(DIR_SRC_LIB)ft_putchar.c					\
 					$(DIR_SRC_LIB)ft_atoi.c						\
 					$(DIR_SRC_LIB)ft_strlcat.c					\
 					$(DIR_SRC_LIB)ft_strsplit.c					\
-					$(DIR_SRC_LIB)realloc_tab.c
+					$(DIR_SRC_LIB)realloc_tab.c					\
+					$(DIR_SRC_LIB)ft_printf.c					\
+					$(DIR_SRC_LIB)ft_printf_next.c				\
+					$(DIR_SRC_LIB)go_all_attr.c					\
+					$(DIR_SRC_LIB)go_width.c					\
+					$(DIR_SRC_LIB)go_preci.c					\
+					$(DIR_SRC_LIB)convert.c						\
+					$(DIR_SRC_LIB)move_move.c					\
+					$(DIR_SRC_LIB)free.c						\
+					$(DIR_SRC_LIB)convert_2.c					\
+					$(DIR_SRC_LIB)find_all_flag.c				\
+					$(DIR_SRC_LIB)init.c
 
 OBJS_LIB	=		$(SRCS_LIB:.c=.o)
 

@@ -6,7 +6,7 @@
 #    By: yguzman <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 11:38:09 by yguzman           #+#    #+#              #
-#    Updated: 2018/02/16 16:18:23 by jcoutare         ###   ########.fr        #
+#    Updated: 2018/03/08 15:08:55 by jcoutare         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -56,8 +56,11 @@ SRCS_ASM		=		main_a.c							\
 						tools3.c							\
 						replace_cod_oct.c					\
 
-SRCS_COREWAR	=		main.c parse_argv.c print_usage.c print_error_and_exit.c \
-						ft_isdigitstr.c load_champion.c update_player_count.c
+SRCS_COREWAR	= main.c op.c print_usage.c print_error_and_exit.c \
+		  ft_isdigitstr.c load_champion.c parse_argv.c update_player_count.c \
+		  print_mem.c switch_endianness.c clear_data.c print_players.c \
+		  dump_arena.c
+
 
 OBJS_ASM	= $(addprefix $(OBJ_DIR)/, $(SRCS_ASM:.c=.o))
 OBJS_COREWAR	= $(addprefix $(OBJ_DIR)/, $(SRCS_COREWAR:.c=.o))
@@ -65,6 +68,7 @@ OBJS_COREWAR	= $(addprefix $(OBJ_DIR)/, $(SRCS_COREWAR:.c=.o))
 #
 # Build
 #
+
 LFLAGS	= -L$(LIB_DIR) -lft -lncurses
 CFLAGS	+= -Iinclude
 CFLAGS	+= -Wall -Wextra -g -g3
