@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 14:27:43 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/02/16 16:31:03 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/08 15:05:42 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ int				check_arg(char **t_str, int i_op, int i)
 		i++;
 	}
 	return (0);
+}
+
+int				bordel()
+{
+
 }
 
 int				pars_instr(char *instr, t_if *info, int line)

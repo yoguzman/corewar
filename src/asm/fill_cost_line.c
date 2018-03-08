@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fill_cost_line.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/08 15:02:31 by jcoutare          #+#    #+#             */
+/*   Updated: 2018/03/08 15:03:49 by jcoutare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
-static const t_cost    cost_tab[17] =
+static const t_cost		g_cost_tab[17] =
 {
 	{"live", &live_cost},
 	{"ld", &ld_cost},
@@ -31,11 +43,11 @@ int			fill_cost_line(t_if *info_line)
 	int		i;
 
 	i = 0;
-	while (cost_tab[i].name)
+	while (g_cost_tab[i].name)
 	{
-		if (ft_strcmp(cost_tab[i].name, info_line->name_instr) == 0)
+		if (ft_strcmp(g_cost_tab[i].name, info_line->name_instr) == 0)
 		{
-			cost_tab[i].f(info_line);
+			g_cost_tab[i].f(info_line);
 			return (0);
 		}
 		++i;

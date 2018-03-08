@@ -6,7 +6,7 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 05:08:25 by adauchy           #+#    #+#             */
-/*   Updated: 2018/02/16 16:49:45 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/08 15:01:56 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,27 @@
 #include "libft.h"
 #include "asm.h"
 
-int	get_file2(char *new, int *dest)
+int				get_file2(char *new, int *dest)
 {
-  if ((*dest = open(new, O_CREAT | O_WRONLY | O_TRUNC,
-		   S_IRUSR | S_IWUSR)) == -1)
-    return (ft_puterr("Open failed"));
-  return (0);
+	if ((*dest = open(new, O_CREAT | O_WRONLY | O_TRUNC,
+					S_IRUSR | S_IWUSR)) == -1)
+		return (ft_puterr("Open failed"));
+	return (0);
 }
 
-static int	get_file(char *name)
+static int		get_file(char *name)
 {
-	int		dest;
+	int			dest;
 
 	if (get_file2(name, &dest) == -1)
-	  return (-1);
+		return (-1);
 	return (dest);
 }
 
-char		*create_new_file(char *name)
+char			*create_new_file(char *name)
 {
-	char	*new;
-	int		n;
+	char		*new;
+	int			n;
 
 	if (!ft_strstr(name, ".s"))
 	{
@@ -58,10 +58,10 @@ char		*create_new_file(char *name)
 	return (new);
 }
 
-int			compile_champ(t_header *champ, char *name, t_list *inf_line)
+int				compile_champ(t_header *champ, char *name, t_list *inf_line)
 {
-	int		dest;
-	char	*new_file;
+	int			dest;
+	char		*new_file;
 
 	if ((new_file = create_new_file(name)) == NULL)
 		return (-1);
