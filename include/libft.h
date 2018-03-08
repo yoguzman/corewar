@@ -15,6 +15,7 @@
 
 # define BUFF_SIZE 1024
 # include <stdlib.h>
+# include "printf.h"
 
 typedef struct		s_list
 {
