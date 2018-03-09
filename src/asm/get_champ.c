@@ -65,6 +65,17 @@ int			get_header(char **file, t_header *header)
 	return (0);
 }
 
+void		*init_info_file(char **file, int *i, t_if **tmp, t_header *champ)
+{
+	if (get_header(file, champ) == -1)
+		exit(EXIT_FAILURE);
+	free(file[0]);
+	free(file[1]);
+	*i = 2;
+	*tmp = NULL;
+	return (NULL);
+}
+
 int			get_info_file(char **file, t_header *champ, t_list **inf_line)
 {
 	int		tab[2];
@@ -73,13 +84,7 @@ int			get_info_file(char **file, t_header *champ, t_list **inf_line)
 	t_if	*tmp;
 	int		i;
 
-	if (get_header(file, champ) == -1)
-		return (-1);
-	free(file[0]);
-	free(file[1]);
-	i = 2;
-	tmp = NULL;
-	tmp_list = NULL;
+	tmp_list = (t_list *)init_info_file(file, &i, &tmp, champ);
 	while (file[i])
 	{
 		if ((tab[0] = get_info_file_loop(file, &i, &info_line)) == -1)
