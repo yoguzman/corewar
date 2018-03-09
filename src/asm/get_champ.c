@@ -6,7 +6,7 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 05:03:44 by adauchy           #+#    #+#             */
-/*   Updated: 2018/01/30 06:42:33 by adauchy          ###   ########.fr       */
+/*   Updated: 2018/03/08 15:49:15 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int			get_info_file(char **file, t_header *champ, t_list **inf_line)
 		return (-1);
 	free(file[0]);
 	free(file[1]);
-	i = 2; 
+	i = 2;
 	tmp = NULL;
 	tmp_list = NULL;
 	while (file[i])

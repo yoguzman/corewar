@@ -6,7 +6,7 @@
 #    By: yguzman <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 11:38:09 by yguzman           #+#    #+#              #
-#    Updated: 2018/03/07 13:45:07 by jcoutare         ###   ########.fr        #
+#    Updated: 2018/03/08 16:05:29 by jcoutare         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -46,6 +46,7 @@ SRCS_ASM		=		main_a.c							\
 						cost2.c								\
 						cost3.c								\
 						print_champ.c						\
+						print_champ2.c						\
 						check_label.c						\
 						tools.c								\
 						tools2.c							\

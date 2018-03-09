@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 14:27:43 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/08 15:13:49 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/08 15:23:06 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,22 @@ int				check_arg(char **t_str, int i_op, int i)
 	return (0);
 }
 
-int				bordel()
+int				bordel(t_if *info, char **t_str)
 {
+	int			i;
+
+	i = 1;
+	if ((info->arg = malloc(sizeof(char *) * 4)) == NULL)
+		return (-1);
+	while (t_str[i])
+	{
+		if ((info->arg[i - 1] = ft_strdup(t_str[i])) == NULL)
+			return (-1);
+		++i;
+	}
+	free(t_str[0]);
+	free(t_str);
+	info->arg[i - 1] = NULL;
 	return (0);
 }
 
@@ -96,17 +110,7 @@ int				pars_instr(char *instr, t_if *info, int line)
 		return (-1);
 	if ((info->name_instr = ft_strdup(t_str[0])) == NULL)
 		return (-1);
-	i = 1;
-	if ((info->arg = malloc(sizeof(char *) * 4)) == NULL)
+	if (bordel(info, t_str) == -1)
 		return (-1);
-	while (t_str[i])
-	{
-		if ((info->arg[i - 1] = ft_strdup(t_str[i])) == NULL)
-			return (-1);
-		++i;
-	}
-	free(t_str[0]);
-	free(t_str);
-	info->arg[i - 1] = NULL;
 	return (0);
 }

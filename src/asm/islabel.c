@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 15:04:26 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/08 15:04:28 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/08 15:28:44 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,20 @@ int			modif_label(t_if *here, char *str_tmp, int i[3], t_list *tmp)
 	return (0);
 }
 
-t_list		*go_first(t_list *list)
-{
-	while (list->prev)
-		list = list->prev;
-	return (list);
-}
-
 int			init_while_label(char **str_tmp, t_if *here, int i[3])
 {
 	if ((*str_tmp = ft_strdup(here->arg[i[1]])) == NULL)
 		return (-1);
 	i[0] = (here->arg[i[1]][0] == '%' ? i[0] + 1 : i[0]);
 	return (0);
+}
+
+t_list		*go_first(t_list *list, char **str_tmp, t_if *here, int i[3])
+{
+	while (list->prev)
+		list = list->prev;
+	init_while_label(str_tmp, here, i);
+	return (list);
 }
 
 int			is_label(t_if *here, t_list *list, int line)
@@ -62,8 +63,7 @@ int			is_label(t_if *here, t_list *list, int line)
 	ft_bzero(i, 12);
 	while (here->arg[i[1]] && ((i[0] = 0) == 0))
 	{
-		tmp = go_first(list);
-		init_while_label(&str_tmp, here, i);
+		tmp = go_first(list, &str_tmp, here, i);
 		if (here->arg[i[1]][i[0]] == ':')
 		{
 			while (tmp)

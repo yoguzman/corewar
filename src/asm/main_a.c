@@ -6,16 +6,16 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/28 21:29:31 by adauchy           #+#    #+#             */
-/*   Updated: 2018/01/30 06:47:06 by adauchy          ###   ########.fr       */
+/*   Updated: 2018/03/08 15:30:38 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 #include "asm.h"
 
-void	get_a_flag(int ac, char **av, int *file, int *a_flag)
+void			get_a_flag(int ac, char **av, int *file, int *a_flag)
 {
-	int	n;
+	int			n;
 
 	n = 1;
 	*a_flag = 0;
@@ -34,12 +34,12 @@ void	get_a_flag(int ac, char **av, int *file, int *a_flag)
 	*file = n;
 }
 
-void		free_lesbails(t_list *inf_line)
+void			free_lesbails(t_list *inf_line)
 {
-	t_list	*tmp;
-	t_if	*blbl;
-	int		i;
-	int		j;
+	t_list		*tmp;
+	t_if		*blbl;
+	int			i;
+	int			j;
 
 	j = 0;
 	while (inf_line)
@@ -62,12 +62,12 @@ void		free_lesbails(t_list *inf_line)
 	}
 }
 
-int		main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	t_header	champ;
-	int		a_flag;
-	int		file;
-	t_list	*inf_line;
+	int			a_flag;
+	int			file;
+	t_list		*inf_line;
 
 	if (ac == 1)
 		return (print_usage());

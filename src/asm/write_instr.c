@@ -1,6 +1,18 @@
-#include "asm.h" 
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   write_instr.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/08 15:49:28 by jcoutare          #+#    #+#             */
+/*   Updated: 2018/03/08 15:50:49 by jcoutare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static const t_write    write_tab[17] =
+#include "asm.h"
+
+static const t_write	g_write_tab[17] =
 {
 	{"live", &live_write},
 	{"ld", &ld_write},
@@ -21,17 +33,18 @@ static const t_write    write_tab[17] =
 	{0, 0}
 };
 
-void		aff_write(t_if *info_line, int dest)
+void			aff_write(t_if *info_line, int dest)
 {
 	ft_putchar_fd(16, dest);
 	write_op_code(info_line->arg, 1, dest);
 	ft_putchar_fd(ft_atoi(info_line->arg[1] + 1), dest);
 }
-int		write_instr(t_list *inf_line, int dest)
+
+int				write_instr(t_list *inf_line, int dest)
 {
-	int		i;
-	int		j;
-	t_if	*info_line;
+	int			i;
+	int			j;
+	t_if		*info_line;
 
 	j = 0;
 	while (inf_line)
@@ -41,11 +54,11 @@ int		write_instr(t_list *inf_line, int dest)
 		if (is_label(info_line, inf_line, j) == -1)
 			return (-1);
 		++j;
-		while (write_tab[i].name)
+		while (g_write_tab[i].name)
 		{
-			if (ft_strcmp(write_tab[i].name, info_line->name_instr) == 0)
+			if (ft_strcmp(g_write_tab[i].name, info_line->name_instr) == 0)
 			{
-				write_tab[i].f(info_line, dest);
+				g_write_tab[i].f(info_line, dest);
 				break ;
 			}
 			++i;

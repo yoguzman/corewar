@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 18:45:41 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/08 15:12:30 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/08 15:45:10 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "libft.h"
 #include "op.h"
 
-int		arg_is_labelchar(char *arg)
+int				arg_is_labelchar(char *arg)
 {
-	char *str;
-	int i;
-	int j;
-	int good;
+	char		*str;
+	int			i;
+	int			j;
+	int			good;
 
 	i = 0;
 	str = LABEL_CHARS;
@@ -40,9 +40,9 @@ int		arg_is_labelchar(char *arg)
 	return (0);
 }
 
-int		arg_is_number(char *arg)
+int				arg_is_number(char *arg)
 {
-	int i;
+	int			i;
 
 	i = 0;
 	while (arg[i])
@@ -54,10 +54,9 @@ int		arg_is_number(char *arg)
 	return (0);
 }
 
-
-int		check_name(char *str, const t_op *op_tab)
+int				check_name(char *str, const t_op *op_tab)
 {
-	int i;
+	int			i;
 
 	i = 0;
 	while (i < 16)
@@ -69,9 +68,9 @@ int		check_name(char *str, const t_op *op_tab)
 	return (-1);
 }
 
-int		check_nb_arg(char **str, int index_op, const t_op *op_tab)
+int				check_nb_arg(char **str, int index_op, const t_op *op_tab)
 {
-	int i;
+	int			i;
 
 	i = 1;
 	while (str[i])
@@ -83,9 +82,9 @@ int		check_nb_arg(char **str, int index_op, const t_op *op_tab)
 	return (0);
 }
 
-void	epur_space(char *str)
+void			epur_space(char *str)
 {
-	int	i;
+	int			i;
 
 	i = 0;
 	while (str[i])
