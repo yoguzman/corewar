@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:44:10 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/08 21:17:20 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/09 15:19:34 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	live(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	if (instr->param[0] < MAX_PLAYERS)
 	{
-		vm->player_table[instr->param[0]].current_live++;
-		lol->current_live++;
+		++vm->player_table[instr->param[0]].current_live;
+		++lol->current_live;
 	}
 	/*
   //depuis le lol-pc - l instruction ?
@@ -199,7 +199,7 @@ void	ft_fork(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	t_proc	*child;
 
-	if (!(child = (t_proc *)malloc(sizeof(*proc))))
+	if (!(child = (t_proc *)malloc(sizeof(*child))))
 		exit(EXIT_FAILURE); /* a la DSK */
 	//lol->carry = 1; ?
 	ft_memcpy(child, lol, sizeof(*lol));
@@ -247,7 +247,7 @@ void	ft_lfork(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	t_proc	*child;
 
-	if (!(child = (t_proc *)malloc(sizeof(*proc))))
+	if (!(child = (t_proc *)malloc(sizeof(*child))))
 		exit(EXIT_FAILURE); /* a la DSK */
 	lol->carry = 1;
 	ft_memcpy(child, lol, sizeof(*lol));
@@ -257,6 +257,7 @@ void	ft_lfork(t_corewar *vm, t_proc *lol, t_instr *instr)
 
 void	aff(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
+	(void)vm;
 	ft_putchar(lol->reg[instr->param[0] - 1] % 256);
 }
 

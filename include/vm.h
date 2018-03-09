@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/08 21:18:23 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/09 14:32:11 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@
 # define OPT_STR "dvna"
 
 /*
-** Calculations
+** Heap Calculations
 */
 
 # define LCHILD(x) ((x << 1) + 1)
@@ -138,7 +138,8 @@ typedef struct	s_corewar
 
 typedef struct			s_instr
 {
-	void				(*tab_instr[17])(t_corewar *vm, t_proc *lol, struct s_instr *instr);
+	void				(*tab_instr[17])(t_corewar *vm, t_proc *lol,
+			struct s_instr *instr);
 	int					val_arg[3];
 	unsigned char		opcode;
 	unsigned long long	param[3];
