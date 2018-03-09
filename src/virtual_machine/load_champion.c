@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 04:53:22 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/09 14:32:20 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/09 15:33:19 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ const char	**load_champion(const char *argv[], t_corewar *vm)
 
 int			load_champions_in_arena(t_corewar *vm)
 {
-	int	i;
-	int	offset;
-	int	n;
+	int				i;
+	int				offset;
+	unsigned int	n;
 
 	i = 0;
 	offset = 0;

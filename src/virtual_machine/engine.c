@@ -6,15 +6,17 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 14:22:57 by adauchy           #+#    #+#             */
-/*   Updated: 2018/03/08 15:57:22 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/09 19:49:22 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "libft.h"
 #include "vm.h"
 
 void			loop_instr(t_corewar *vm, t_mh *mh, t_instr *instr)
 {
+	t_proc	*proc;
 //	ft_putstr("\ncycle en cours = ");
 //	ft_putnbr(vm->cycle_count);
 //	ft_putstr("\ncheck loop instr pid = ");
@@ -22,24 +24,15 @@ void			loop_instr(t_corewar *vm, t_mh *mh, t_instr *instr)
 //	ft_putstr(" cycle_to_exec= ");
 //	ft_putnbr(mh->tab[0]->cycles_to_exec);
 //	ft_putchar('\n');
-	if (mh->tab[0]->cycles_to_exec - mh->count > 0)
+	if (mh->tab[0]->cycles_to_exec - vm->cycle_count > 0)
 		return ;
-	while (mh->pos > 0 && mh->tab[0]->cycles_to_exec - mh->count == 0)
+	proc = pop_min(mh);
+	while (mh->pos > 0 && proc->cycles_to_exec - vm->cycle_count == 0)
 	{
-		//ft_putstr("b;b");
-		exec_instr(vm, instr, mh->tab[0]);
+		exec_instr(vm, instr, proc);
+		insert(mh, proc);
+		proc = pop_min(mh);
 	}
-	uint64_t j;
-
-	j = 0;
-//	ft_putchar('\n');
-	while (j < vm->mh->pos)
-	{
-		//	ft_putnbr(vm->mh->tab[j]->cycles_to_exec);
-		//ft_putchar(' ');
-		++j;
-	}
-	//ft_putchar('\n');
 }
 
 void		visual_option(t_corewar *vm)
@@ -62,8 +55,8 @@ int			engine(t_corewar *vm)
 	while (vm->mh->pos > 0)
 	{
 		++(vm->cycle_count);
+		printf("Cycle %u\nProcesses %llu\n", vm->cycle_count, vm->total_proc);
 		--(vm->cycle_to_die);
-		++(vm->mh->count);
 
 		check_cycle_to_die(vm);
 		if (vm->mh->pos == 0)

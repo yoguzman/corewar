@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 20:45:02 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/08 16:00:08 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/09 19:24:58 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static void	*fail_alloc(t_mh *mh)
 	return (NULL);
 }
 
-t_mh	*init_heap(t_player player_table[MAX_PLAYERS], uint64_t *total_proc, t_corewar *vm, t_instr *instr)
+t_mh	*init_heap(t_player player_table[MAX_PLAYERS], uint64_t *total_proc,
+		t_corewar *vm, t_instr *instr)
 {
 	t_mh	*mh;
 	t_proc	*process;
@@ -58,7 +59,8 @@ t_mh	*init_heap(t_player player_table[MAX_PLAYERS], uint64_t *total_proc, t_core
 							total_proc)))
 				return (fail_alloc(mh));
 			if (vm->arena[process->pc] - 1 <= 15)
-				process->cycles_to_exec = instr->op_tab[vm->arena[process->pc] - 1].cycles_to_exec;
+				process->cycles_to_exec =
+					instr->op_tab[vm->arena[process->pc] - 1].cycles_to_exec;
 			insert(mh, process);
 			heapify(mh, mh->pos);
 		}
@@ -131,14 +133,8 @@ t_proc		*pop_min(t_mh *mh)
 {
 	t_proc	*p;
 
-	p = NULL;
-	if (mh->pos)
-	{
-		p = mh->tab[0];
-		mh->tab[0] = mh->tab[--(mh->pos)];
-		heapify(mh, 0);
-	}
-	else
-		free(mh->tab);
+	p = mh->tab[0];
+	mh->tab[0] = mh->tab[--(mh->pos)];
+	heapify(mh, 0);
 	return (p);
 }

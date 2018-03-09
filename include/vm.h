@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/09 14:32:11 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/09 19:34:02 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ typedef struct			s_instr
 	unsigned char		opcode;
 	unsigned long long	param[3];
 	const t_op			*op_tab;
+	uint32_t			save_pc;
 }						t_instr;
 
 /*
@@ -201,10 +202,6 @@ void		free_min_heap(t_mh **mh);
 /* Check live et check cycle to die */
 
 void		check_cycle_to_die(t_corewar *vm);
-
-/* reset */
-
-void		reset_pc(uint32_t pc);
 
 /* Instructions */
 
