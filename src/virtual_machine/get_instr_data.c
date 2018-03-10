@@ -26,14 +26,18 @@ void	get_param(t_corewar *vm, t_proc *lol, t_instr *instr,
 		instr->param[i] += vm->arena[lol->pc];
 		lol->pc = (lol->pc + 1) % MEM_SIZE;
 		++j;
-		instr->param[i] <<= 8;
+		if (j < instr->val_arg[i])
+			instr->param[i] <<= 8;
 	}
 }
 
 void	get_one_arg(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-	instr->val_arg[0] =
-		instr->op_tab[instr->opcode].parameter_types[instr->opcode];
+	if (instr->opcode == 1)
+		instr->val_arg[0] = 4;
+	else
+		instr->val_arg[0] = 2;
+
 	get_param(vm, lol, instr, 0);
 }
 

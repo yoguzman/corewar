@@ -26,12 +26,11 @@ void			loop_instr(t_corewar *vm, t_mh *mh, t_instr *instr)
 //	ft_putchar('\n');
 	if (mh->tab[0]->cycles_to_exec - vm->cycle_count > 0)
 		return ;
-	proc = pop_min(mh);
-	while (mh->pos > 0 && proc->cycles_to_exec - vm->cycle_count == 0)
+	while (mh->pos > 0 && mh->tab[0]->cycles_to_exec - vm->cycle_count == 0)
 	{
+		proc = pop_min(mh);
 		exec_instr(vm, instr, proc);
 		insert(mh, proc);
-		proc = pop_min(mh);
 	}
 }
 
@@ -55,7 +54,7 @@ int			engine(t_corewar *vm)
 	while (vm->mh->pos > 0)
 	{
 		++(vm->cycle_count);
-		printf("Cycle %u\nProcesses %llu\n", vm->cycle_count, vm->total_proc);
+	//	printf("Cycle %u\nProcesses %llu\n", vm->cycle_count, vm->total_proc);
 		--(vm->cycle_to_die);
 
 		check_cycle_to_die(vm);
@@ -63,8 +62,6 @@ int			engine(t_corewar *vm)
 			break ;
 
 		loop_instr(vm, vm->mh, &instr);
-
-
 		visual_option(vm);
 	}
 	getch();

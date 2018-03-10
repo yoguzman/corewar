@@ -11,7 +11,7 @@ void			check_live_process(t_mh *mh)
 			delete_any(mh, i);
 		else
 		{
-			mh->tab[i]->current_live = 0;
+				mh->tab[i]->current_live = 0;
 			++i;
 		}
 	}

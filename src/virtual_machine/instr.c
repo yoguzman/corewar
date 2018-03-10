@@ -19,8 +19,8 @@ void	live(t_corewar *vm, t_proc *lol, t_instr *instr)
 	if (instr->param[0] < MAX_PLAYERS)
 	{
 		++vm->player_table[instr->param[0]].current_live;
-		++lol->current_live;
 	}
+	++lol->current_live;
 }
 
 void	ld(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -35,7 +35,7 @@ void	ld(t_corewar *vm, t_proc *lol, t_instr *instr)
 	lol->reg[instr->param[1] - 1] |= vm->arena[offset] << 8;
 	offset = (offset + 1) % MEM_SIZE;
 	lol->reg[instr->param[1] - 1] |= vm->arena[offset];
-    lol->carry = lol->reg[instr->param[2] - 1] == 0;
+    lol->carry = lol->reg[instr->param[1] - 1] == 0;
 }
 
 void	st(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -159,6 +159,8 @@ void	ft_fork(t_corewar *vm, t_proc *lol, t_instr *instr)
 		exit(EXIT_FAILURE);
 	ft_memcpy(child, lol, sizeof(*lol));
 	child->pc = (instr->save_pc + (instr->param[0] % IDX_MOD)) % MEM_SIZE;
+//	ft_putnbr(instr->param[0]);
+//	ft_putchar(' ');
 	insert(vm->mh, child);
 }
 
@@ -275,26 +277,26 @@ void	la_balade(t_proc *lol, t_instr *instr)
 
 void	exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc)
 {
-	//ft_putstr("\nCycle actuel = ");
-	//ft_putnbr(vm->mh->count);
-	//ft_putstr(" id process = ");
-	//ft_putnbr(proc->reg[0]);
-	//ft_putstr(" code instr = ");
-	//ft_putnbr(vm->arena[proc->pc]);
-	//ft_putstr(" cycle_to_exec : ");
-	//ft_putnbr(proc->cycles_to_exec - vm->mh->count);
+//	ft_putstr("\nCycle actuel = ");
+//	ft_putnbr(vm->mh->count);
+//	ft_putstr(" id process = ");
+//	ft_putnbr(proc->reg[0]);
+//	ft_putstr(" code instr = ");
+//	ft_putnbr(vm->arena[proc->pc]);
+//	ft_putstr(" cycle_to_exec : ");
+//	ft_putnbr(proc->cycles_to_exec - vm->mh->count);
 	instr->opcode = vm->arena[proc->pc] - 1;
 	instr->save_pc = proc->pc;
 	proc->pc = (proc->pc + 1) % MEM_SIZE;
 	if (instr->opcode <= 15)
 	{
-		printf("P\t%u | %s\n", proc->pid, instr->op_tab[instr->opcode].name);
-		if (instr->op_tab[instr->opcode].parameter_count != 1)
+//		printf("P\t%u | %s\n", proc->pid, instr->op_tab[instr->opcode].name);
+		if (instr->op_tab[instr->opcode].parameter_count != 1 || instr->opcode == 15)
 			get_data(vm, proc, instr);
 		else
 			get_one_arg(vm, proc, instr);
 		instr->tab_instr[instr->opcode](vm, proc, instr);
-		printf("%s > GOOD\n", instr->op_tab[instr->opcode].name);
+//		printf("%s > GOOD\n", instr->op_tab[instr->opcode].name);
 	}
 	instr->opcode = vm->arena[proc->pc] - 1;
 	if (instr->opcode <= 15)
