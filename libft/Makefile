@@ -122,65 +122,78 @@ ECHO		=		printf
 all			:		$(NAME)
 
 $(NAME)	:			$(OBJS_LIB)
-					@$(ECHO) "\033[35m[~~~~~~COMPILATION LIBFTPRINTF~~~~~~]\n\033[0m"
+					@$(ECHO) "\033[35m[~~~~~~COMPILATION LIBFT~~~~~~]\n\033[0m"
 					@$(ARRC) $(NAME) $(OBJS_LIB) && $(ECHO) "\033[33;32m["$@"]\n\033[0m" && $(RANLIB) $(NAME) || $(ECHO) "\033[31m"$@"\n\033[0m"
 
 %.o			:		%.c
-					@$(ECHO) "\033[35m[~~~Comipilation obj //libftprintf~~~]-->\033[0m"
+					@$(ECHO) "\033[35m[~~~Comipilation obj //libft~~~]-->\033[0m"
 					@$(CC) $(CFLAGS) -o $@ -c $< && $(ECHO) "\033[33;32m ["$@"]\n\033[0m" || $(ECHO) "\033[31m ["$@"]\n\033[0m"
 
 clean		:
-					@$(ECHO) "\033[31m[~~~~~~Supression des .o //libftprintf~~~~~~]\n\033[0m"
+					@$(ECHO) "\033[31m[~~~~~~Supression des .o //libft-~~~~~]\n\033[0m"
 					@$(RM) $(OBJS_LIB)
 
 fclean		:
-					@$(ECHO) "\033[31m[~~~~~~Supression des .o //libftprintf~~~~~~]\n\033[0m"
+					@$(ECHO) "\033[31m[~~~~~~Supression des .o //libft~~~~~~]\n\033[0m"
 					@$(RM) $(OBJS_LIB)
-					@$(ECHO) "\033[31m[~~~~Supression de libftprintf.a~~~~]\n\033[0m"
-					@$(RM) $(NAME)
+					@$(ECHO) "\033[31m[~~~~Supression de libft.a~~~~]\n\033[0m"
+				@$(RM) $(NAME)
 
 re			:		fclean all
 
 
 depend		:		$(SRCS) $(SRCS_LIB)
-					@makedepend -- -Y../include/ -- $^ 2> /dev/null
+					@makedepend -- -Y../include/ -- $^ 2. /dev/null
 
 .PHONY		:		all clean flean re
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
-ft_itoa_base.o: ../include/libft.h
-ft_itoa_base_u.o: ../include/libft.h
-ft_listpush_back_double.o: ../include/libft.h
-ft_lstadd_double.o: ../include/libft.h
-ft_reallocfake.o: ../include/libft.h
-get_next_line.o: ../include/libft.h
-free_elem_lst.o: ../include/libft.h
-ft_lstnew.o: ../include/libft.h
-ft_lstdelone.o: ../include/libft.h
-ft_lstdel_double.o: ../include/libft.h
-ft_lstdel.o: ../include/libft.h
-ft_strjoin.o: ../include/libft.h
-ft_lstadd.o: ../include/libft.h
-ft_strtrim.o: ../include/libft.h
-ft_getenv.o: ../include/libft.h
-ft_lstiter.o: ../include/libft.h
-ft_lstmap.o: ../include/libft.h
-ft_puterr.o: ../include/libft.h
-ft_putstr.o: ../include/libft.h
-ft_putstr_fd.o: ../include/libft.h
-ft_putendl_fd.o: ../include/libft.h
-ft_putnbr_fd.o: ../include/libft.h
-ft_putendl.o: ../include/libft.h
-ft_print_words_tables.o: ../include/libft.h
-ft_strmap.o: ../include/libft.h
-ft_strmapi.o: ../include/libft.h
-ft_strncat.o: ../include/libft.h
-ft_itoa.o: ../include/libft.h
-ft_strlcpy.o: ../include/libft.h
-ft_putnbr.o: ../include/libft.h
-ft_strcat.o: ../include/libft.h
-ft_putnbr_base.o: ../include/libft.h
-ft_strdup.o: ../include/libft.h
-ft_strlcat.o: ../include/libft.h
-ft_strsplit.o: ../include/libft.h
+ft_itoa_base.o: ../include/libft.h ../include/printf.h
+ft_itoa_base_u.o: ../include/libft.h ../include/printf.h
+ft_listpush_back_double.o: ../include/libft.h ../include/printf.h
+ft_lstadd_double.o: ../include/libft.h ../include/printf.h
+ft_reallocfake.o: ../include/libft.h ../include/printf.h
+get_next_line.o: ../include/libft.h ../include/printf.h
+free_elem_lst.o: ../include/libft.h ../include/printf.h
+ft_lstnew.o: ../include/libft.h ../include/printf.h
+ft_lstdelone.o: ../include/libft.h ../include/printf.h
+ft_lstdel_double.o: ../include/libft.h ../include/printf.h
+ft_lstdel.o: ../include/libft.h ../include/printf.h
+ft_strjoin.o: ../include/libft.h ../include/printf.h
+ft_lstadd.o: ../include/libft.h ../include/printf.h
+ft_strtrim.o: ../include/libft.h ../include/printf.h
+ft_getenv.o: ../include/libft.h ../include/printf.h
+ft_lstiter.o: ../include/libft.h ../include/printf.h
+ft_lstmap.o: ../include/libft.h ../include/printf.h
+ft_puterr.o: ../include/libft.h ../include/printf.h
+ft_putstr.o: ../include/libft.h ../include/printf.h
+ft_putstr_fd.o: ../include/libft.h ../include/printf.h
+ft_putendl_fd.o: ../include/libft.h ../include/printf.h
+ft_putnbr_fd.o: ../include/libft.h ../include/printf.h
+ft_putendl.o: ../include/libft.h ../include/printf.h
+ft_print_words_tables.o: ../include/libft.h ../include/printf.h
+ft_strmap.o: ../include/libft.h ../include/printf.h
+get_input.o: ../include/libft.h ../include/printf.h
+ft_strmapi.o: ../include/libft.h ../include/printf.h
+ft_strncat.o: ../include/libft.h ../include/printf.h
+ft_itoa.o: ../include/libft.h ../include/printf.h
+ft_strlcpy.o: ../include/libft.h ../include/printf.h
+ft_putnbr.o: ../include/libft.h ../include/printf.h
+ft_strcat.o: ../include/libft.h ../include/printf.h
+ft_putnbr_base.o: ../include/libft.h ../include/printf.h
+ft_strdup.o: ../include/libft.h ../include/printf.h
+ft_strlcat.o: ../include/libft.h ../include/printf.h
+ft_strsplit.o: ../include/libft.h ../include/printf.h
+realloc_tab.o: ../include/libft.h ../include/printf.h
+ft_printf.o: ../include/libft.h ../include/printf.h
+ft_printf_next.o: ../include/libft.h ../include/printf.h
+go_all_attr.o: ../include/libft.h ../include/printf.h
+go_width.o: ../include/libft.h ../include/printf.h
+go_preci.o: ../include/libft.h ../include/printf.h
+convert.o: ../include/libft.h ../include/printf.h
+move_move.o: ../include/printf.h
+free.o: ../include/printf.h
+convert_2.o: ../include/libft.h ../include/printf.h
+find_all_flag.o: ../include/libft.h ../include/printf.h
+init.o: ../include/printf.h ../include/libft.h

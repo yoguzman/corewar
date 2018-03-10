@@ -136,4 +136,84 @@ fclean: fclean_lib
 
 re: fclean all
 
+depend		:		./src/asm/$(SRCS_ASM) ./src/virtual_machine/$(SRCS_COREWAR)
+	@makedepend -- -Yinclude/ -- $^ 2> /dev/null
+
 .PHONY: all clean flean re
+
+# DO NOT DELETE THIS LINE -- make depend depends on it.
+
+obj/main_a.o: include/libft.h include/printf.h include/asm.h include/op.h
+obj/tools4.o: include/asm.h include/libft.h include/printf.h include/op.h
+obj/write_instr2.o: include/asm.h include/libft.h include/printf.h
+obj/write_instr2.o: include/op.h
+obj/write_instr4.o: include/asm.h include/libft.h include/printf.h
+obj/write_instr4.o: include/op.h
+obj/write_instr3.o: include/asm.h include/libft.h include/printf.h
+obj/write_instr3.o: include/op.h
+obj/write_instr1.o: include/libft.h include/printf.h include/asm.h
+obj/write_instr1.o: include/op.h
+obj/compile_champ.o: include/libft.h include/printf.h include/asm.h
+obj/compile_champ.o: include/op.h
+obj/get_champ.o: include/libft.h include/printf.h include/asm.h
+obj/get_champ.o: include/op.h
+obj/islabel.o: include/asm.h include/libft.h include/printf.h
+obj/islabel.o: include/op.h
+obj/cost.o: include/asm.h include/libft.h include/printf.h include/op.h
+obj/get_champ2.o: include/libft.h include/printf.h include/asm.h
+obj/get_champ2.o: include/op.h
+obj/cost2.o: include/asm.h include/libft.h include/printf.h include/op.h
+obj/cost3.o: include/asm.h include/libft.h include/printf.h include/op.h
+obj/print_champ.o: include/asm.h include/libft.h include/printf.h
+obj/print_champ.o: include/op.h
+obj/print_champ2.o: include/asm.h include/libft.h include/printf.h
+obj/print_champ2.o: include/op.h
+obj/check_label.o: include/asm.h include/libft.h include/printf.h
+obj/check_label.o: include/op.h
+obj/tools.o: include/asm.h include/libft.h include/printf.h include/op.h
+obj/tools2.o: include/libft.h include/printf.h
+obj/check_instr.o: include/asm.h include/libft.h include/printf.h
+obj/check_instr.o: include/op.h
+obj/replace_cod_oct.o: include/op.h
+obj/check_arg.o: include/asm.h include/libft.h include/printf.h
+obj/check_arg.o: include/op.h
+obj/fill_cost_line.o: include/asm.h include/libft.h include/printf.h
+obj/fill_cost_line.o: include/op.h
+obj/write_instr.o: include/asm.h include/libft.h include/printf.h
+obj/write_instr.o: include/op.h
+obj/tools3.o: include/asm.h include/libft.h include/printf.h include/op.h
+obj/main.o: include/libft.h include/printf.h include/vm.h
+obj/main.o: include/op.h
+obj/instr.o: include/op.h include/vm.h include/libft.h
+obj/instr.o: include/printf.h
+obj/op.o: include/op.h include/vm.h
+obj/print_usage.o: include/libft.h include/printf.h
+obj/print_usage.o: include/vm.h include/op.h
+obj/print_error_and_exit.o: include/libft.h include/printf.h
+obj/print_error_and_exit.o: include/vm.h include/op.h
+obj/ft_isdigitstr.o: include/libft.h include/printf.h
+obj/load_champion.o: include/libft.h include/printf.h
+obj/load_champion.o: include/vm.h include/op.h
+obj/parse_argv.o: include/libft.h include/printf.h
+obj/parse_argv.o: include/vm.h include/op.h
+obj/print_mem.o: include/vm.h include/op.h include/libft.h
+obj/print_mem.o: include/printf.h
+obj/switch_endianness.o: include/vm.h include/op.h
+obj/clear_data.o: include/vm.h include/op.h
+obj/print_players.o: include/vm.h include/op.h
+obj/dump_arena.o: include/vm.h include/op.h
+obj/engine.o: include/libft.h include/printf.h include/vm.h
+obj/engine.o: include/op.h
+obj/process.o: include/libft.h include/printf.h include/vm.h
+obj/process.o: include/op.h
+obj/priority_queue.o: include/libft.h include/printf.h
+obj/priority_queue.o: include/vm.h include/op.h
+obj/print_ncurses.o: include/libft.h include/printf.h
+obj/print_ncurses.o: include/vm.h include/op.h
+obj/print_breakdown.o: include/libft.h include/printf.h
+obj/print_breakdown.o: include/vm.h include/op.h
+obj/check_live.o: include/vm.h include/op.h
+obj/get_instr_data.o: include/vm.h include/op.h
+obj/get_instr_data.o: include/libft.h include/printf.h
+obj/init_instr.o: include/op.h include/vm.h
+obj/reset_pc.o: include/op.h
