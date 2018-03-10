@@ -45,8 +45,9 @@ int				valid_arg(char *str, int index_op, int nb_arg)
 {
 	int			ret;
 
-	if ((ret = arg_is_direct(str, index_op, nb_arg, g_op_tab)) < 0)
-		return (ret);
+	if (str[0] != 'r')
+		if ((ret = arg_is_direct(str, index_op, nb_arg, g_op_tab)) < 0)
+			return (ret);
 	if ((ret = arg_is_reg(str, index_op, nb_arg, g_op_tab)) < 0)
 		return (ret);
 	return (0);

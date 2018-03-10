@@ -143,7 +143,8 @@ void					write_short(int fd, unsigned short nb);
 void					write_op_code(char **arg, int nb_arg, int dest);
 int						neg_to_neg(unsigned short neg);
 int						print_usage(void);
-int						get_nb_lines(char *file);
+int						get_nb_lines(char *name);
 int						print_error_label(char *str, int line);
+int						julien_pu_le_caca(char *str, int i);
 
 #endif

@@ -30,6 +30,7 @@ int		print_error_name(char **t_str, int line, int i)
 	puterr_noend(t_str[i - 1]);
 	puterr_noend(" at line ");
 	ft_putnbr(line);
+	puterr_noend("\n");
 	return (-1);
 }
 
@@ -40,4 +41,25 @@ int		print_error_nb_arg(char *instr, int line)
 	ft_putnbr(line);
 	puterr_noend(" ");
 	return (puterr(ERR_ARG));
+}
+
+int		julien_pu_le_caca(char *str, int i)
+{
+	if (str[i] == ':')
+	{
+		if (arg_is_labelchar(str + i + 1) == -1)
+		{
+			puterr_noend("Lexical error ");
+			return (puterr(str));
+		}
+	}
+	else
+	{
+		if (direct_is_correct(str + i) == -1)
+		{
+			puterr_noend("Lexical error ");
+			return (puterr(str));
+		}
+	}
+	return (0);
 }
