@@ -54,7 +54,7 @@ int			engine(t_corewar *vm)
 	while (vm->mh->pos > 0)
 	{
 		++(vm->cycle_count);
-	//	printf("Cycle %u\nProcesses %llu\n", vm->cycle_count, vm->total_proc);
+		printf("Cycle %u\nProcesses %llu\n", vm->cycle_count, vm->total_proc);
 		--(vm->cycle_to_die);
 
 		check_cycle_to_die(vm);

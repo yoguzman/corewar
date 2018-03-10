@@ -159,8 +159,6 @@ void	ft_fork(t_corewar *vm, t_proc *lol, t_instr *instr)
 		exit(EXIT_FAILURE);
 	ft_memcpy(child, lol, sizeof(*lol));
 	child->pc = (instr->save_pc + (instr->param[0] % IDX_MOD)) % MEM_SIZE;
-//	ft_putnbr(instr->param[0]);
-//	ft_putchar(' ');
 	insert(vm->mh, child);
 }
 
