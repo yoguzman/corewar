@@ -19,9 +19,11 @@ int		direct_is_correct(char *str)
 	int i;
 
 	i = 0;
+	if (str[0] == '-')
+		++i;
 	while (str[i])
 	{
-		if (ft_isdigit(str[i]) == 0 && str[i] != '-')
+		if (ft_isdigit(str[i]) == 0)
 			return (-1);
 		i++;
 	}
@@ -46,8 +48,8 @@ int		check_op_tab(int index_op, int nb_arg, int type, const t_op *op_tab)
 {
 	if ((op_tab[index_op].parameter_types[nb_arg] & type) == 0)
 	{
-		puterr_noend("Invalid parameter type ");
-		puterr_noend(ft_itoa(nb_arg));
+		puterr_noend("Invalid parameter ");
+		ft_putnbr(nb_arg + 1);
 		puterr_noend(" for instruction ");
 		puterr(op_tab[index_op].name);
 		return (-1);
@@ -77,29 +79,20 @@ int		arg_is_reg(char *str, int index_op, int nb_arg, const t_op *op_tab)
 
 int		arg_is_direct(char *str, int index_op, int nb_arg, const t_op *op_tab)
 {
+	int	i;
+	int	type;
+
+	i = 0;
+	type = 4;
 	if (str[0] == '%')
 	{
-		if (str[1])
-		{
-			if (str[1] == ':')
-			{
-				if (arg_is_labelchar(str + 2) == -1)
-				{
-					puterr_noend("Lexical error ");
-					return (puterr(str));
-				}
-			}
-			else
-			{
-				if (direct_is_correct(str + 1) == -1)
-				{
-					puterr_noend("Lexical error ");
-					return (puterr(str));
-				}
-			}
-		}
-		if (check_op_tab(index_op, nb_arg, T_DIR, op_tab) == -1)
-			return (-1);
+		++i;
+		type = 2;
 	}
+	if (str[i])
+		if (julien_pu_le_caca(str, i) == -1)
+			return (-1);
+	if (check_op_tab(index_op, nb_arg, type, op_tab) == -1)
+		return (-1);
 	return (0);
 }

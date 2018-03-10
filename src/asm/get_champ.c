@@ -100,6 +100,8 @@ int			get_info_file(char **file, t_header *champ, t_list **inf_line)
 		++i;
 	}
 	free(file);
+	if (*inf_line == NULL)
+		return (ft_puterr("Champ need intr\n"));
 	return (tmp->bytes_line + tmp->cost_line);
 }
 
