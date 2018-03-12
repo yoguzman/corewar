@@ -65,5 +65,6 @@ int		init_instr(t_instr *instr, t_corewar *vm)
 	}
 	vm->cycle_to_die_max = CYCLE_TO_DIE;
 	vm->cycle_to_die = vm->cycle_to_die_max;
+	vm->paused = 0;
 	return (0);
 }

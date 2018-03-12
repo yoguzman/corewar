@@ -62,7 +62,7 @@ SRCS_COREWAR	= main.c instr.c op.c print_usage.c print_error_and_exit.c \
 		ft_isdigitstr.c load_champion.c parse_argv.c \
 		print_mem.c switch_endianness.c clear_data.c print_players.c \
 		dump_arena.c engine.c process.c priority_queue.c \
-		print_ncurses.c print_breakdown.c check_live.c get_instr_data.c init_instr.c replace_cod_oct.c \
+		print_ncurses.c print_breakdown.c check_live.c get_instr_data.c init_instr.c replace_cod_oct.c visual.c \
 
 
 OBJS_ASM	= $(addprefix $(OBJ_DIR)/, $(SRCS_ASM:.c=.o))

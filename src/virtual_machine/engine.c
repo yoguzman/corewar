@@ -34,10 +34,16 @@ void			loop_instr(t_corewar *vm, t_mh *mh, t_instr *instr)
 	}
 }
 
-void		visual_option(t_corewar *vm)
+void		visual_option_last(t_corewar *vm)
 {
 	if (vm->visual == 1)
-		print_ncurses(vm);
+	{
+		attron(COLOR_PAIR(6));
+		mvprintw(7, 199 + 8, "%d", vm->cycle_count);
+		usleep(vm->cycles_sec);
+		vm->one_cycle = 0;
+		attroff(COLOR_PAIR(6));
+	}
 	if (vm->dump_limit > 0 && vm->dump_limit == vm->cycle_count)
 	{
 		dump_arena(vm->arena);
@@ -51,19 +57,33 @@ int			engine(t_corewar *vm)
 	t_instr	instr;
 
 	init_instr(&instr, vm);
+
+
+	if (vm->visual == 1)
+		print_ncurses(vm);
+
+
 	while (vm->mh->pos > 0)
 	{
-		++(vm->cycle_count);
-		printf("Cycle %u\nProcesses %llu\n", vm->cycle_count, vm->total_proc);
-		--(vm->cycle_to_die);
 
-		check_cycle_to_die(vm);
-		if (vm->mh->pos == 0)
-			break ;
 
-		loop_instr(vm, vm->mh, &instr);
-		visual_option(vm);
+		if (vm->visual == 1)
+			key_action(vm);
+
+		if (vm->paused == 0 || vm->one_cycle == 1)
+		{
+			++(vm->cycle_count);
+			--(vm->cycle_to_die);
+
+			check_cycle_to_die(vm);
+			if (vm->mh->pos == 0)
+				break ;
+
+			loop_instr(vm, vm->mh, &instr);
+
+			visual_option_last(vm);
+
+		}
 	}
-	getch();
 	return (0);
 }

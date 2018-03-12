@@ -41,8 +41,8 @@ void		init_print_data(t_corewar *vm)
 {
 	size_t		n;
 
-	initscr();
 	curs_set(0);
+	nodelay(initscr(), TRUE);
 	start_color();
 	init_color(42, 420, 420, 420);
 	init_pair(42, 42, 42);
@@ -52,6 +52,10 @@ void		init_print_data(t_corewar *vm)
 	init_pair(4, COLOR_RED, COLOR_BLACK);
 	init_pair(5, COLOR_CYAN, COLOR_BLACK);
 	init_pair(6, COLOR_WHITE, COLOR_BLACK);
+	init_pair(7, COLOR_BLACK, COLOR_GREEN);
+	init_pair(8, COLOR_BLACK, COLOR_BLUE);
+	init_pair(9,COLOR_BLACK, COLOR_RED);
+	init_pair(10, COLOR_BLACK, COLOR_CYAN);
 	n = 0;
 	while (n < vm->players)
 	{

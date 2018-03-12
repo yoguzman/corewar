@@ -91,7 +91,8 @@ int			load_champions_in_arena(t_corewar *vm)
 					vm->player_table[i].code,
 					vm->player_table[i].header.prog_size);
 			vm->player_table[i].load_address = i;
-			n = -1;
+			n = 0;
+			vm->print_data[n + offset] = i + 1 + 5;
 			while (++n < vm->player_table[i].header.prog_size)
 				vm->print_data[n + offset] = i + 1;
 			vm->player_table[i].load_address = offset;

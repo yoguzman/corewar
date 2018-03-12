@@ -120,6 +120,8 @@ typedef struct	s_min_heap
 typedef struct	s_corewar
 {
 	int			paused;
+	int			dec_sec;
+	int			one_cycle;
 	int			cycles_sec;
 	uint32_t	cycle_count;
 	int			nb_processes;
@@ -156,6 +158,7 @@ typedef struct			s_instr
 */
 
 int32_t		engine(t_corewar *vm);
+void		key_action(t_corewar *vm);
 void		print_ncurses(t_corewar *vm);
 void		print_breakdown(t_corewar *vm);
 

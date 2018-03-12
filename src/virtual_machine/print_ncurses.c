@@ -65,20 +65,16 @@ void		print_panel(t_corewar *vm)
 {
 	attron(A_BOLD);
 	attron(COLOR_PAIR(6));
-	if (vm->paused)
 		mvprintw(2, 199, "** PAUSED **");
-	else
-		mvprintw(2, 199, "** RUNNING **");
 	mvprintw(4, 199, "Cycles/second limit : %d", vm->cycles_sec);
 	mvprintw(7, 199, "Cycle : %d", vm->cycle_count);
-	mvprintw(9, 199, "Processes : %d", vm->nb_processes);
+	mvprintw(9, 199, "Processes : %d", vm->total_proc);
 	print_players_data(vm);
-	print_breakdown(vm);
 	attron(COLOR_PAIR(6));
-	mvprintw(33, 199, "CYCLE_TO_DIE : %d", 42);
-	mvprintw(35, 199, "CYCLE_DELTA : %d", 42);
-	mvprintw(37, 199, "NBR_LIVE : %d", 42);
-	mvprintw(39, 199, "MAX_CHECKS : %d", 42);
+	mvprintw(33, 199, "CYCLE_TO_DIE : %d", vm->cycle_to_die_max);
+	mvprintw(35, 199, "CYCLE_DELTA : %d", CYCLE_DELTA);
+	mvprintw(37, 199, "NBR_LIVE : %d", NBR_LIVE);
+	mvprintw(39, 199, "MAX_CHECKS : %d", MAX_CHECKS);
 	attroff(A_BOLD);
 }
 
@@ -95,5 +91,9 @@ void		print_ncurses(t_corewar *vm)
 	print_panel(vm);
 	print_arena(vm->arena, vm->print_data);
 	refresh();
-	sleep(1);
+	noecho();
+	vm->paused = 1;
+	vm->cycles_sec = 1000000 / 50;
+	vm->dec_sec = 50;
+	vm->one_cycle = 0;
 }
