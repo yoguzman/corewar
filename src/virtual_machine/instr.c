@@ -37,7 +37,7 @@ void	ld(t_corewar *vm, t_proc *lol, t_instr *instr)
 	lol->reg[instr->param[1] - 1] |= vm->arena[offset] << 8;
 	offset = (offset + 1) % MEM_SIZE;
 	lol->reg[instr->param[1] - 1] |= vm->arena[offset];
-    lol->carry = lol->reg[instr->param[1] - 1] == 0;
+	lol->carry = lol->reg[instr->param[1] - 1] == 0;
 }
 
 void	st(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -48,18 +48,24 @@ void	st(t_corewar *vm, t_proc *lol, t_instr *instr)
 		lol->reg[instr->param[1] - 1] = lol->reg[instr->param[0] - 1];
 	else
 	{
+		attron(COLOR_PAIR(lol->reg[0] + 2));
 		offset = (instr->save_pc + (instr->param[1] % IDX_MOD)) % MEM_SIZE;
 		vm->arena[offset] =
 			((char)(lol->reg[instr->param[0] - 1] & 0xFF000000) >> 24);
+		mvprintw((offset / 64) + 2, (offset % 64) * 3 + 3, "%.2x", vm->arena[offset]);
 		offset = (offset + 1) % MEM_SIZE;
 		vm->arena[offset] =
 			((char)(lol->reg[instr->param[0] - 1] & 0xFF0000) >> 16);
+		mvprintw((offset / 64) + 2, (offset % 64) * 3 + 3, "%.2x", vm->arena[offset]);
 		offset = (offset + 1) % MEM_SIZE;
 		vm->arena[offset] =
 			((char)(lol->reg[instr->param[0] - 1] & 0xFF00) >> 8);
+		mvprintw((offset / 64) + 2, (offset % 64) * 3 + 3, "%.2x", vm->arena[offset]);
 		offset = (offset + 1) % MEM_SIZE;
 		vm->arena[offset] =
 			((char)(lol->reg[instr->param[0] - 1] & 0xFF));
+		mvprintw((offset / 64) + 2, (offset % 64) * 3 + 3, "%.2x", vm->arena[offset]);
+		attroff(COLOR_PAIR(lol->reg[0] + 2));
 	}
 }
 
@@ -76,7 +82,7 @@ void	sub(t_corewar *vm, t_proc *lol, t_instr *instr)
 	(void)vm;
 	lol->reg[instr->param[2] - 1] =
 		lol->reg[instr->param[0] - 1] - lol->reg[instr->param[1] - 1];
-    lol->carry = lol->reg[instr->param[2] - 1] == 0;
+	lol->carry = lol->reg[instr->param[2] - 1] == 0;
 }
 
 int		reg_test(t_proc *lol, t_instr *instr, uint8_t i)
@@ -112,8 +118,8 @@ void	ft_xor(t_corewar *vm, t_proc *lol, t_instr *instr)
 void	zjmp(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	(void)vm;
-    if (lol->carry == 1)
-        lol->pc = lol->pc + (instr->param[0] % IDX_MOD);
+	if (lol->carry == 1)
+		lol->pc = lol->pc + (instr->param[0] % IDX_MOD);
 }
 
 void	ldi(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -121,7 +127,7 @@ void	ldi(t_corewar *vm, t_proc *lol, t_instr *instr)
 	int	offset;
 
 	offset = (instr->save_pc
-		+ ((reg_test(lol, instr, 0) + reg_test(lol, instr, 1)) % IDX_MOD))
+			+ ((reg_test(lol, instr, 0) + reg_test(lol, instr, 1)) % IDX_MOD))
 		% MEM_SIZE;
 	lol->reg[instr->param[2] - 1] = vm->arena[offset] << 24;
 	offset = (offset + 1) % MEM_SIZE;
@@ -136,21 +142,27 @@ void	ldi(t_corewar *vm, t_proc *lol, t_instr *instr)
 void	sti(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	int to_jump;
-	
+
 	to_jump = reg_test(lol, instr, 1);
 	to_jump += reg_test(lol, instr, 2);
 	to_jump = (instr->save_pc + (to_jump % IDX_MOD)) % MEM_SIZE;
+	attron(COLOR_PAIR(lol->reg[0] + 2));
 	vm->arena[to_jump] =
 		((char)(lol->reg[instr->param[0] - 1] & 0xFF000000) >> 24);
+	mvprintw((to_jump / 64) + 2, (to_jump % 64) * 3 + 3, "%.2x", vm->arena[to_jump]);
 	to_jump = (to_jump + 1) % MEM_SIZE;
 	vm->arena[to_jump] =
 		((char)(lol->reg[instr->param[0] - 1] & 0x00FF0000) >> 16);
+	mvprintw((to_jump / 64) + 2, (to_jump % 64) * 3 + 3, "%.2x", vm->arena[to_jump]);
 	to_jump = (to_jump + 1) % MEM_SIZE;
 	vm->arena[to_jump] =
 		((char)(lol->reg[instr->param[0] - 1] & 0x0000FF00) >> 8);
+	mvprintw((to_jump / 64) + 2, (to_jump % 64) * 3 + 3, "%.2x", vm->arena[to_jump]);
 	to_jump = (to_jump + 1) % MEM_SIZE;
 	vm->arena[to_jump] =
 		((char)(lol->reg[instr->param[0] - 1] & 0x000000FF));
+	mvprintw((to_jump / 64) + 2, (to_jump % 64) * 3 + 3, "%.2x", vm->arena[to_jump]);
+	attroff(COLOR_PAIR(lol->reg[0] + 2));
 }
 
 void	ft_fork(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -331,12 +343,12 @@ void	exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc)
 	{
 		proc->cycles_to_exec = instr->op_tab[instr->opcode].cycles_to_exec
 			+ vm->cycle_count;
-//			ft_putstr(" nouveau ");
-//		ft_putstr(" code instr = ");
-//		ft_putnbr(vm->arena[proc->pc]);
-//		ft_putstr(" cycle_to_exec : ");
-//		ft_putnbr(proc->cycles_to_exec - vm->mh->count);
-//		ft_putchar('\n');
+		//			ft_putstr(" nouveau ");
+		//		ft_putstr(" code instr = ");
+		//		ft_putnbr(vm->arena[proc->pc]);
+		//		ft_putstr(" cycle_to_exec : ");
+		//		ft_putnbr(proc->cycles_to_exec - vm->mh->count);
+		//		ft_putchar('\n');
 	}
 	else
 		proc->cycles_to_exec += 1;
