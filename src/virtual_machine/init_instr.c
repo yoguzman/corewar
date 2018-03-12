@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdlib.h>
+#include <errno.h>
 #include "op.h"
 #include "vm.h"
 
@@ -55,6 +58,11 @@ int		init_instr(t_instr *instr, t_corewar *vm)
 	init_op_tab(g_op_tab, instr);
 	init_tab_instr(instr->tab_instr);
 	vm->mh = init_heap(vm->player_table, &(vm->total_proc), vm, instr);
+	if (!vm->mh)
+	{
+		printf("%s%s\n", ERR_STR, strerror(errno));
+		exit(EXIT_FAILURE);
+	}
 	vm->cycle_to_die_max = CYCLE_TO_DIE;
 	vm->cycle_to_die = vm->cycle_to_die_max;
 	return (0);

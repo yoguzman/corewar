@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 04:53:22 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/27 18:23:28 by adauchy          ###   ########.fr       */
+/*   Updated: 2018/03/09 15:33:19 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "libft.h"
 #include "vm.h"
 
-int				get_empty_slot(t_player player_table[MAX_PLAYERS])
+int			get_empty_slot(t_player player_table[MAX_PLAYERS])
 {
 	int	i;
 
@@ -28,18 +28,18 @@ int				get_empty_slot(t_player player_table[MAX_PLAYERS])
 	return (i);
 }
 
-static int		check_extension(const char *path)
+static int	check_extension(const char *path)
 {
 	size_t	i;
 
 	i = ft_strlen(path) - 1;
-	if (path[i] == 'r' && path[i - 1] == 'o' && path[i - 2] == 'c'
+	if (i > 4 && path[i] == 'r' && path[i - 1] == 'o' && path[i - 2] == 'c'
 			&& path[i - 3] == '.')
 		return (1);
 	return (0);
 }
 
-static void		start(const char *argv[], t_corewar *vm, int *fd,
+static void	start(const char *argv[], t_corewar *vm, int *fd,
 		unsigned char buf[HEADER_SIZE])
 {
 	if (vm->players == MAX_PLAYERS)
@@ -53,7 +53,7 @@ static void		start(const char *argv[], t_corewar *vm, int *fd,
 		vm->player_id = get_empty_slot(vm->player_table);
 }
 
-const char		**load_champion(const char *argv[], t_corewar *vm)
+const char	**load_champion(const char *argv[], t_corewar *vm)
 {
 	int				fd;
 	unsigned char	buf[HEADER_SIZE];
@@ -67,7 +67,7 @@ const char		**load_champion(const char *argv[], t_corewar *vm)
 		clean_print_err_exit(E1, vm->player_table);
 	if (THIS_PLAYER.header.prog_size > CHAMP_MAX_SIZE)
 		clean_print_err_exit(E2, vm->player_table);
-	if (!(THIS_PLAYER.code = malloc(THIS_PLAYER.header.prog_size))
+	if (!(THIS_PLAYER.code = (uint8_t *)malloc(THIS_PLAYER.header.prog_size))
 			|| read(fd, THIS_PLAYER.code, THIS_PLAYER.header.prog_size) == -1
 			|| close(fd) == -1)
 		clean_print_err_exit(NULL, vm->player_table);
@@ -75,11 +75,11 @@ const char		**load_champion(const char *argv[], t_corewar *vm)
 	return (&argv[1]);
 }
 
-int				load_champions_in_arena(t_corewar *vm)
+int			load_champions_in_arena(t_corewar *vm)
 {
-	size_t	i;
-	size_t	offset;
-	size_t	n;
+	int				i;
+	int				offset;
+	unsigned int	n;
 
 	i = 0;
 	offset = 0;
@@ -87,7 +87,8 @@ int				load_champions_in_arena(t_corewar *vm)
 	{
 		if (vm->player_table[i].code != NULL)
 		{
-			ft_memcpy(&vm->arena[offset], vm->player_table[i].code,
+			ft_memcpy(vm->arena + offset,
+					vm->player_table[i].code,
 					vm->player_table[i].header.prog_size);
 			vm->player_table[i].load_address = i;
 			n = -1;

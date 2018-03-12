@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/07 19:33:40 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/09 19:34:02 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,12 @@
 # define OPT_STR "dvna"
 
 /*
-** Calculations
+** Heap Calculations
 */
 
 # define LCHILD(x) ((x << 1) + 1)
 # define RCHILD(x) ((x << 1) + 2)
 # define PARENT(x) ((x - 1) >> 1)
-# define SWP32A(nb) ((nb & 0xff000000) >> 24) | ((nb >> 0x00ff0000) >> 8)
-# define SWP32B(nb) ((nb & 0x0000ff00) << 8) | (nb << 24)
-# define SWAP32(nb) SWP32A(nb) | SWP32B(nb)
-# define SWAP16(nb) ((nb & 0xff) >> 8) | (nb << 8)
-# define INC_PC(pc, inc) ((pc + inc) % MEM_SIZE)
 
 /*
 ** 2.Typedefs
@@ -143,11 +138,13 @@ typedef struct	s_corewar
 
 typedef struct			s_instr
 {
-	void				(*tab_instr[17])(t_corewar *vm, t_proc *lol, struct s_instr *instr);
+	void				(*tab_instr[17])(t_corewar *vm, t_proc *lol,
+			struct s_instr *instr);
 	int					val_arg[3];
 	unsigned char		opcode;
 	unsigned long long	param[3];
 	const t_op			*op_tab;
+	uint32_t			save_pc;
 }						t_instr;
 
 /*
@@ -206,16 +203,12 @@ void		free_min_heap(t_mh **mh);
 
 void		check_cycle_to_die(t_corewar *vm);
 
-/* reset */
-
-void		reset_pc(uint32_t pc);
-
 /* Instructions */
 
 int			get_octet(char octet, t_instr *instr);
 void		la_balade(t_proc *lol, t_instr *instr);
 int			get_data(t_corewar *vm, t_proc *lol, t_instr *instr);
-void		exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc, uint64_t *i);
+void		exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc);
 void		live(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		ld(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		st(t_corewar *vm, t_proc *lol, t_instr *instr);
@@ -233,6 +226,7 @@ void		lldi(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		ft_lfork(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		aff(t_corewar *vm, t_proc *lol, t_instr *instr);
 void		get_one_arg(t_corewar *vm, t_proc *lol, t_instr *instr);
+int			reg_test(t_proc *lol, t_instr *instr, uint8_t i);
 
 /*
 ** priority_queue.c
@@ -243,6 +237,7 @@ t_mh		*init_heap(t_player player_table[MAX_PLAYERS],
 void		insert(t_mh *mh, t_proc *entry);
 void		heapify(t_mh *mh, uint32_t i);
 void		delete_any(t_mh *mh, uint32_t i);
+t_proc		*pop_min(t_mh *mh);
 
 /*
 ** process.c
