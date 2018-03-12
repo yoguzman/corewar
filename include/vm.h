@@ -144,7 +144,7 @@ typedef struct			s_instr
 			struct s_instr *instr);
 	int					val_arg[3];
 	unsigned char		opcode;
-	unsigned long long	param[3];
+	long long			param[3];
 	const t_op			*op_tab;
 	uint32_t			save_pc;
 }						t_instr;

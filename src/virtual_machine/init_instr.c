@@ -1,4 +1,4 @@
-#include <string.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
 #include "op.h"
@@ -60,7 +60,7 @@ int		init_instr(t_instr *instr, t_corewar *vm)
 	vm->mh = init_heap(vm->player_table, &(vm->total_proc), vm, instr);
 	if (!vm->mh)
 	{
-		printf("%s%s\n", ERR_STR, strerror(errno));
+		perror("Corewar: ");
 		exit(EXIT_FAILURE);
 	}
 	vm->cycle_to_die_max = CYCLE_TO_DIE;

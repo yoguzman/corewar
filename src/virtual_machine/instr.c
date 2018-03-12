@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:44:10 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/09 19:43:20 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/12 20:31:50 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,30 @@ void	live(t_corewar *vm, t_proc *lol, t_instr *instr)
 			;
 	}
 	++lol->current_live;
+	printf("P\t%u | live %lld\n", lol->pid, instr->param[0]);
 }
 
 void	ld(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	int	offset;
 
-	offset = (instr->save_pc + (instr->param[0] % IDX_MOD)) % MEM_SIZE;
-	lol->reg[instr->param[1] - 1] = vm->arena[offset] << 24;
-	offset = (offset + 1) % MEM_SIZE;
-	lol->reg[instr->param[1] - 1] |= vm->arena[offset] << 16;
-	offset = (offset + 1) % MEM_SIZE;
-	lol->reg[instr->param[1] - 1] |= vm->arena[offset] << 8;
-	offset = (offset + 1) % MEM_SIZE;
-	lol->reg[instr->param[1] - 1] |= vm->arena[offset];
+	if (instr->val_arg[0] == T_IND)
+	{
+		offset = (instr->save_pc + (instr->param[0] % IDX_MOD)) % MEM_SIZE;
+		lol->reg[instr->param[1] - 1] = vm->arena[offset] << 24;
+		offset = (offset + 1) % MEM_SIZE;
+		lol->reg[instr->param[1] - 1] |= vm->arena[offset] << 16;
+		offset = (offset + 1) % MEM_SIZE;
+		lol->reg[instr->param[1] - 1] |= vm->arena[offset] << 8;
+		offset = (offset + 1) % MEM_SIZE;
+		lol->reg[instr->param[1] - 1] |= vm->arena[offset];
+	}
+	else
+		lol->reg[instr->param[1] - 1] = instr->param[0];
 	lol->carry = lol->reg[instr->param[1] - 1] == 0;
+	printf("P\t%u | ld %.*s%lld r%lld\n", lol->pid,
+	(instr->val_arg[0] == T_DIR ? 1 : 0), "%", instr->param[0],
+	instr->param[1]);
 }
 
 void	st(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -52,21 +61,28 @@ void	st(t_corewar *vm, t_proc *lol, t_instr *instr)
 		offset = (instr->save_pc + (instr->param[1] % IDX_MOD)) % MEM_SIZE;
 		vm->arena[offset] =
 			((char)(lol->reg[instr->param[0] - 1] & 0xFF000000) >> 24);
-		mvprintw((offset / 64) + 2, (offset % 64) * 3 + 3, "%.2x", vm->arena[offset]);
+		mvprintw((offset / 64) + 2, (offset % 64) * 3 + 3, "%.2x",
+				vm->arena[offset]);
 		offset = (offset + 1) % MEM_SIZE;
 		vm->arena[offset] =
 			((char)(lol->reg[instr->param[0] - 1] & 0xFF0000) >> 16);
-		mvprintw((offset / 64) + 2, (offset % 64) * 3 + 3, "%.2x", vm->arena[offset]);
+		mvprintw((offset / 64) + 2, (offset % 64) * 3 + 3, "%.2x",
+				vm->arena[offset]);
 		offset = (offset + 1) % MEM_SIZE;
 		vm->arena[offset] =
 			((char)(lol->reg[instr->param[0] - 1] & 0xFF00) >> 8);
-		mvprintw((offset / 64) + 2, (offset % 64) * 3 + 3, "%.2x", vm->arena[offset]);
+		mvprintw((offset / 64) + 2, (offset % 64) * 3 + 3, "%.2x",
+				vm->arena[offset]);
 		offset = (offset + 1) % MEM_SIZE;
 		vm->arena[offset] =
 			((char)(lol->reg[instr->param[0] - 1] & 0xFF));
-		mvprintw((offset / 64) + 2, (offset % 64) * 3 + 3, "%.2x", vm->arena[offset]);
+		mvprintw((offset / 64) + 2, (offset % 64) * 3 + 3, "%.2x",
+				vm->arena[offset]);
 		attroff(COLOR_PAIR(lol->reg[0] + 2));
 	}
+	lol->carry = lol->reg[instr->param[0] - 1] == 0;
+	printf("P\t%u | st r%lld %.*s%lld\n", lol->pid, instr->param[0],
+	(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[1]);
 }
 
 void	add(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -75,6 +91,10 @@ void	add(t_corewar *vm, t_proc *lol, t_instr *instr)
 	lol->reg[instr->param[2] - 1] =
 		lol->reg[instr->param[0] - 1] + lol->reg[instr->param[1] - 1];
 	lol->carry = lol->reg[instr->param[2] - 1] == 0;
+	printf("P\t%u | add %.*s%lld %.*s%lld r%lld\n", lol->pid,
+	(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
+	(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
+	instr->param[2]);
 }
 
 void	sub(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -83,6 +103,10 @@ void	sub(t_corewar *vm, t_proc *lol, t_instr *instr)
 	lol->reg[instr->param[2] - 1] =
 		lol->reg[instr->param[0] - 1] - lol->reg[instr->param[1] - 1];
 	lol->carry = lol->reg[instr->param[2] - 1] == 0;
+	printf("P\t%u | sub %.*s%lld %.*s%lld r%lld\n", lol->pid,
+	(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
+	(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
+	instr->param[2]);
 }
 
 int		reg_test(t_proc *lol, t_instr *instr, uint8_t i)
@@ -97,6 +121,10 @@ void	ft_and(t_corewar *vm, t_proc *lol, t_instr *instr)
 	lol->reg[instr->param[2] - 1] =
 		reg_test(lol, instr, 0) & reg_test(lol, instr, 1);
 	lol->carry = lol->reg[instr->param[2] - 1] == 0;
+	printf("P\t%u | and %.*s%lld %.*s%lld r%lld\n", lol->pid,
+	(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
+	(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
+	instr->param[2]);
 }
 
 void	ft_or(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -105,6 +133,10 @@ void	ft_or(t_corewar *vm, t_proc *lol, t_instr *instr)
 	lol->reg[instr->param[2] - 1] =
 		reg_test(lol, instr, 0) | reg_test(lol, instr, 1);
 	lol->carry = lol->reg[instr->param[2] - 1] == 0;
+	printf("P\t%u | or %.*s%lld %.*s%lld r%lld\n", lol->pid,
+	(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
+	(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
+	instr->param[2]);
 }
 
 void	ft_xor(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -113,13 +145,22 @@ void	ft_xor(t_corewar *vm, t_proc *lol, t_instr *instr)
 	lol->reg[instr->param[2] - 1] =
 		reg_test(lol, instr, 0) ^ reg_test(lol, instr, 1);
 	lol->carry = lol->reg[instr->param[2] - 1] == 0;
+	printf("P\t%u | xor %.*s%lld %.*s%lld r%lld\n", lol->pid,
+	(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
+	(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
+	instr->param[2]);
 }
 
 void	zjmp(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	(void)vm;
 	if (lol->carry == 1)
-		lol->pc = lol->pc + (instr->param[0] % IDX_MOD);
+	{
+//		lol->pc = lol->pc + (instr->param[0] % IDX_MOD);
+		lol->pc = (instr->save_pc + (instr->param[0] % IDX_MOD)) % MEM_SIZE;
+	}
+	printf("P\t%u | zjmp %lld (%s)\n", lol->pid, instr->param[0],
+	(lol->carry == 1 ? "OK" : "FAILED"));
 }
 
 void	ldi(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -137,6 +178,10 @@ void	ldi(t_corewar *vm, t_proc *lol, t_instr *instr)
 	offset = (offset + 1) % MEM_SIZE;
 	lol->reg[instr->param[2] - 1] |= vm->arena[offset];
 	lol->carry = lol->reg[instr->param[2] - 1] == 0;
+	printf("P\t%u | ldi %.*s%lld %.*s%lld r%lld\n", lol->pid,
+			(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
+			(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
+			instr->param[2]);
 }
 
 void	sti(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -149,56 +194,83 @@ void	sti(t_corewar *vm, t_proc *lol, t_instr *instr)
 	attron(COLOR_PAIR(lol->reg[0] + 2));
 	vm->arena[to_jump] =
 		((char)(lol->reg[instr->param[0] - 1] & 0xFF000000) >> 24);
-	mvprintw((to_jump / 64) + 2, (to_jump % 64) * 3 + 3, "%.2x", vm->arena[to_jump]);
+	mvprintw((to_jump / 64) + 2, (to_jump % 64) * 3 + 3, "%.2x",
+			vm->arena[to_jump]);
 	to_jump = (to_jump + 1) % MEM_SIZE;
 	vm->arena[to_jump] =
 		((char)(lol->reg[instr->param[0] - 1] & 0x00FF0000) >> 16);
-	mvprintw((to_jump / 64) + 2, (to_jump % 64) * 3 + 3, "%.2x", vm->arena[to_jump]);
+	mvprintw((to_jump / 64) + 2, (to_jump % 64) * 3 + 3, "%.2x",
+			vm->arena[to_jump]);
 	to_jump = (to_jump + 1) % MEM_SIZE;
 	vm->arena[to_jump] =
 		((char)(lol->reg[instr->param[0] - 1] & 0x0000FF00) >> 8);
-	mvprintw((to_jump / 64) + 2, (to_jump % 64) * 3 + 3, "%.2x", vm->arena[to_jump]);
+	mvprintw((to_jump / 64) + 2, (to_jump % 64) * 3 + 3, "%.2x",
+			vm->arena[to_jump]);
 	to_jump = (to_jump + 1) % MEM_SIZE;
 	vm->arena[to_jump] =
 		((char)(lol->reg[instr->param[0] - 1] & 0x000000FF));
-	mvprintw((to_jump / 64) + 2, (to_jump % 64) * 3 + 3, "%.2x", vm->arena[to_jump]);
+	mvprintw((to_jump / 64) + 2, (to_jump % 64) * 3 + 3, "%.2x",
+			vm->arena[to_jump]);
 	attroff(COLOR_PAIR(lol->reg[0] + 2));
+	lol->carry = lol->reg[instr->param[0] - 1] == 0;
+	printf("P\t%u | sti r%lld %.*s%lld %.*s%lld\n", lol->pid, instr->param[0],
+			(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
+			(instr->val_arg[2] == T_REG ? 1 : 0), "r", instr->param[2]);
 }
 
 void	ft_fork(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	t_proc	*child;
+	if (!(child = (t_proc *)malloc(sizeof(*child))))
 
-	if (!(child = spawn_process(instr->save_pc + (instr->param[0] % IDX_MOD) % MEM_SIZE, lol->reg[0], &(vm->total_proc))))
 		exit(EXIT_FAILURE);
+//	if (!(child = spawn_process(instr->save_pc + (instr->param[0] % IDX_MOD) % MEM_SIZE, lol->reg[0], &(vm->total_proc))))
+//		exit(EXIT_FAILURE);
+	ft_memcpy(child, lol, sizeof(*lol));
+	child->current_live = 0;
+	child->pc = (instr->save_pc + (instr->param[0] % IDX_MOD)) % MEM_SIZE;
+	child->pid = vm->total_proc++;
 	child->cycles_to_exec = vm->cycle_count + 1;
 	if ((vm->arena[child->pc] - 1) <= 15)
-		child->cycles_to_exec = instr->op_tab[vm->arena[child->pc - 1]].cycles_to_exec + vm->cycle_count;
+		child->cycles_to_exec =
+			instr->op_tab[vm->arena[child->pc - 1]].cycles_to_exec
+			+ vm->cycle_count;
 	insert(vm->mh, child);
 	if (vm->visual == 1)
 	{
 		attron(COLOR_PAIR(lol->reg[0] + 2 + 5));
-		mvprintw((child->pc / 64) + 2, (child->pc % 64) * 3 + 3, "%.2x", vm->arena[child->pc]);
+		mvprintw((child->pc / 64) + 2, (child->pc % 64) * 3 + 3, "%.2x",
+				vm->arena[child->pc]);
 		attroff(COLOR_PAIR(lol->reg[0] + 2 + 5));
 		attron(COLOR_PAIR(6));
 		mvprintw(9, 199 + 12, "%d", vm->total_proc);
 		attroff(COLOR_PAIR(6));
 	}
+	printf("P\t%u | fork %lld (%lld)\n", lol->pid, instr->param[0],
+			(instr->save_pc + (instr->param[0] % IDX_MOD)) % MEM_SIZE);
 }
 
 void	lld(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	int	offset;
 
-	offset = (instr->save_pc + instr->param[0]) % MEM_SIZE;
-	lol->reg[instr->param[1] - 1] = vm->arena[offset] << 24;
-	offset = (offset + 1) % MEM_SIZE;
-	lol->reg[instr->param[1] - 1] |= vm->arena[offset] << 16;
-	offset = (offset + 1) % MEM_SIZE;
-	lol->reg[instr->param[1] - 1] |= vm->arena[offset] << 8;
-	offset = (offset + 1) % MEM_SIZE;
-	lol->reg[instr->param[1] - 1] |= vm->arena[offset];
-	lol->carry = lol->reg[instr->param[2] - 1] == 0;
+	if (instr->val_arg[0] == T_IND)
+	{
+		offset = (instr->save_pc + instr->param[0]) % MEM_SIZE;
+		lol->reg[instr->param[1] - 1] = vm->arena[offset] << 24;
+		offset = (offset + 1) % MEM_SIZE;
+		lol->reg[instr->param[1] - 1] |= vm->arena[offset] << 16;
+		offset = (offset + 1) % MEM_SIZE;
+		lol->reg[instr->param[1] - 1] |= vm->arena[offset] << 8;
+		offset = (offset + 1) % MEM_SIZE;
+		lol->reg[instr->param[1] - 1] |= vm->arena[offset];
+	}
+	else
+		lol->reg[instr->param[1] - 1] = instr->param[0];
+	lol->carry = lol->reg[instr->param[1] - 1] == 0;
+	printf("P\t%u | lld %.*s%lld r%lld\n", lol->pid,
+			(instr->val_arg[0] == T_DIR ? 1 : 0), "%", instr->param[0],
+			instr->param[1]);
 
 }
 
@@ -216,33 +288,50 @@ void	lldi(t_corewar *vm, t_proc *lol, t_instr *instr)
 	offset = (offset + 1) % MEM_SIZE;
 	lol->reg[instr->param[2] - 1] |= vm->arena[offset];
 	lol->carry = lol->reg[instr->param[2] - 1] == 0;
+	printf("P\t%u | lldi %.*s%lld %.*s%lld r%lld\n", lol->pid,
+			(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
+			(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
+			instr->param[2]);
 }
 
 void	ft_lfork(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	t_proc	*child;
 
-	if (!(child = spawn_process((instr->save_pc + instr->param[0]) % MEM_SIZE, lol->reg[0], &(vm->total_proc))))
+	if (!(child = (t_proc *)malloc(sizeof(*child))))
 		exit(EXIT_FAILURE);
+//	if (!(child = spawn_process((instr->save_pc + instr->param[0]) % MEM_SIZE, lol->reg[0], &(vm->total_proc))))
+//		exit(EXIT_FAILURE);
+	ft_memcpy(child, lol, sizeof(*lol));
+	child->current_live = 0;
+	child->pc = (instr->save_pc + instr->param[0]) % MEM_SIZE;
+	child->pid = vm->total_proc++;
 	child->cycles_to_exec = vm->cycle_count + 1;
 	if ((vm->arena[child->pc] - 1) <= 15)
-		child->cycles_to_exec = instr->op_tab[vm->arena[child->pc - 1]].cycles_to_exec + vm->cycle_count;
+		child->cycles_to_exec =
+			instr->op_tab[vm->arena[child->pc - 1]].cycles_to_exec
+			+ vm->cycle_count;
 	insert(vm->mh, child);
 	if (vm->visual == 1)
 	{
 		attron(COLOR_PAIR(lol->reg[0] + 2 + 5));
-		mvprintw((lol->pc / 64) + 2, (lol->pc % 64) * 3 + 3, "%.2x", vm->arena[lol->pc]);
+		mvprintw((lol->pc / 64) + 2, (lol->pc % 64) * 3 + 3, "%.2x",
+				vm->arena[lol->pc]);
 		attroff(COLOR_PAIR(lol->reg[0] + 2 + 5));
 		attron(COLOR_PAIR(6));
 		mvprintw(9, 199 + 12, "%d", vm->total_proc);
 		attroff(COLOR_PAIR(6));
 	}
+	printf("P\t%u | lfork %lld (%lld)\n", lol->pid, instr->param[0],
+			(instr->save_pc + (instr->param[0] % IDX_MOD)) % MEM_SIZE);
 }
 
 void	aff(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	(void)vm;
 	ft_putchar(lol->reg[instr->param[0] - 1] % 256);
+	printf("P\t%u | aff r%lld (%c)\n", lol->pid, instr->param[0],
+			lol->reg[instr->param[0] - 1] % 256);
 }
 
 int	check_params(unsigned char const parameter_type[3],

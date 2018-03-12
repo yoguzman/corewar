@@ -6,7 +6,7 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 14:22:57 by adauchy           #+#    #+#             */
-/*   Updated: 2018/03/09 19:49:22 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/12 19:35:33 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int			engine(t_corewar *vm)
 	while (vm->mh->pos > 0)
 	{
 
-
+		printf("It is now cycle %u\n", vm->cycle_count + 1);
 		if (vm->visual == 1)
 			key_action(vm);
 
