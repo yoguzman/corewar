@@ -33,7 +33,7 @@ void	get_param(t_corewar *vm, t_proc *lol, t_instr *instr,
 
 void	get_one_arg(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-	if (instr->opcode == 1)
+	if (instr->opcode == 0)
 		instr->val_arg[0] = 4;
 	else
 		instr->val_arg[0] = 2;

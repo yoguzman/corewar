@@ -67,7 +67,7 @@ void	add(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	(void)vm;
 	lol->reg[instr->param[2] - 1] =
-		lol->reg[instr->param[0]] + lol->reg[instr->param[1]];
+		lol->reg[instr->param[0] - 1] + lol->reg[instr->param[1] - 1];
 	lol->carry = lol->reg[instr->param[2] - 1] == 0;
 }
 
@@ -75,7 +75,7 @@ void	sub(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	(void)vm;
 	lol->reg[instr->param[2] - 1] =
-		lol->reg[instr->param[0]] - lol->reg[instr->param[1]];
+		lol->reg[instr->param[0] - 1] - lol->reg[instr->param[1] - 1];
     lol->carry = lol->reg[instr->param[2] - 1] == 0;
 }
 
@@ -241,7 +241,7 @@ int	check_params(unsigned char const parameter_type[3],
 	i = 0;
 	while (i < parameter_count)
 	{
-		if ((parameter_type[i] & val_arg[i]) == 0)
+		if ((parameter_type[i] | val_arg[i]) == 0)
 			return (-1);
 		i++;
 	}
