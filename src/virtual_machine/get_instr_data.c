@@ -6,25 +6,34 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 17:24:23 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/13 16:43:27 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/13 19:26:00 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include "op.h"
 #include "libft.h"
+#include <stdio.h>
 
 void	get_param(t_corewar *vm, t_proc *lol, t_instr *instr,
 					int i)
 {
 	int	j;
 
-	j = instr->val_arg[i];
-	while (--j >= 0)
+	j = 1;
+	instr->param[i] = vm->arena[lol->pc];
+	lol->pc = (lol->pc + 1) % MEM_SIZE;
+	while (j < instr->val_arg[i])
 	{
-		instr->param[i].c[j] += vm->arena[lol->pc];
+		++j;
+		instr->param[i] <<= 8;
+		instr->param[i] += vm->arena[lol->pc];
 		lol->pc = (lol->pc + 1) % MEM_SIZE;
 	}
+	if (!vm->visual)
+		printf("instr->param[%d] = %d\n", i, instr->param[i]);
+	if (instr->val_arg[i] == 2)
+		instr->param[i] = (int16_t)instr->param[i];
 }
 
 void	get_one_arg(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -48,7 +57,7 @@ int		get_data(t_corewar *vm, t_proc *lol, t_instr *instr)
 		return (-1);
 	}
 	tamer = replace_cod_oct(vm->arena[lol->pc], instr->opcode);
-	ft_bzero(instr->val_arg, 12);
+	ft_bzero(instr->val_arg, 3);
 	get_octet(tamer, instr);
 	lol->pc = (lol->pc + 1) % MEM_SIZE;
 	while (i < instr->op_tab[instr->opcode].parameter_count)

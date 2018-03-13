@@ -6,7 +6,7 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 14:22:57 by adauchy           #+#    #+#             */
-/*   Updated: 2018/03/12 19:35:33 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/13 18:09:18 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ int			engine(t_corewar *vm)
 
 		if (vm->paused == 0 || vm->one_cycle == 1)
 		{
-		printf("It is now cycle %u nb_proc %llu\n", vm->cycle_count + 1, vm->nb_processes);
+			if (!vm->visual)
+				printf("It is now cycle %u nb_proc %llu\n", vm->cycle_count + 1, vm->nb_processes);
 			++(vm->cycle_count);
 			--(vm->cycle_to_die);
 

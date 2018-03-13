@@ -50,7 +50,6 @@ void	init_tab_instr(void (*tab_instr[16])(t_corewar *vm,
 	tab_instr[13] = &lldi;
 	tab_instr[14] = &ft_lfork;
 	tab_instr[15] = &add;
-	tab_instr[16] = NULL;
 }
 
 int		init_instr(t_instr *instr, t_corewar *vm)
