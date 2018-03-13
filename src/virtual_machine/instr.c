@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:44:10 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/13 19:25:21 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/13 21:42:32 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ld(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	int	offset;
 
-	if (instr->val_arg[0] == T_DIR)
+	if (instr->val_arg[0] == DIR_SIZE)
 	{
 		lol->reg[instr->param[1] - 1] = instr->param[0];
 	}
