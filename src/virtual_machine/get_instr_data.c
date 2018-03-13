@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 17:24:23 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/13 19:26:00 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/13 20:05:25 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	get_param(t_corewar *vm, t_proc *lol, t_instr *instr,
 		instr->param[i] += vm->arena[lol->pc];
 		lol->pc = (lol->pc + 1) % MEM_SIZE;
 	}
-	if (!vm->visual)
-		printf("instr->param[%d] = %d\n", i, instr->param[i]);
 	if (instr->val_arg[i] == 2)
 		instr->param[i] = (int16_t)instr->param[i];
 }

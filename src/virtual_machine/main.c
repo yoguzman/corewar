@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:42:57 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/07 10:58:18 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/13 20:05:50 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 static int	init_vm(const char *argv[], t_corewar *vm)
 {
 	ft_bzero(vm, sizeof(*vm));
+	vm->total_proc = 1;
 	vm->players = 0;
 	vm->cycles_sec = 50;
 	vm->cycle_count = 0;

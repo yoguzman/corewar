@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 20:45:02 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/09 19:24:58 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/13 20:02:34 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ t_mh	*init_heap(t_player player_table[MAX_PLAYERS], uint64_t *total_proc,
 				process->cycles_to_exec =
 					instr->op_tab[vm->arena[process->pc] - 1].cycles_to_exec;
 			insert(mh, process);
-			heapify(mh, mh->pos);
 		}
 		++i;
 	}
@@ -82,7 +81,9 @@ void		insert(t_mh *mh, t_proc *entry)
 		ft_bzero(mh->tab + mh->pos, sizeof(void *) * mh->pos);
 	}
 	i = mh->pos++;
-	while (i != 0 && CTE(*(parent = mh->tab + PARENT(i))) > CTE(entry))
+	while (i != 0
+			&& (CTE(*(parent = mh->tab + PARENT(i))) > CTE(entry)
+			|| (CTE(*parent) == CTE(entry) && PID(entry) > PID(*parent))))
 	{
 		mh->tab[i] = *parent;
 		i = PARENT(i);
