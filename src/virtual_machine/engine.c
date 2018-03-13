@@ -17,13 +17,7 @@
 void			loop_instr(t_corewar *vm, t_mh *mh, t_instr *instr)
 {
 	t_proc	*proc;
-//	ft_putstr("\ncycle en cours = ");
-//	ft_putnbr(vm->cycle_count);
-//	ft_putstr("\ncheck loop instr pid = ");
-//	ft_putnbr(mh->tab[0]->pid);
-//	ft_putstr(" cycle_to_exec= ");
-//	ft_putnbr(mh->tab[0]->cycles_to_exec);
-//	ft_putchar('\n');
+
 	if (mh->tab[0]->cycles_to_exec - vm->cycle_count > 0)
 		return ;
 	while (mh->pos > 0 && mh->tab[0]->cycles_to_exec - vm->cycle_count == 0)
@@ -58,7 +52,6 @@ int			engine(t_corewar *vm)
 
 	init_instr(&instr, vm);
 
-
 	if (vm->visual == 1)
 		print_ncurses(vm);
 
@@ -66,12 +59,12 @@ int			engine(t_corewar *vm)
 	while (vm->mh->pos > 0)
 	{
 
-		printf("It is now cycle %u\n", vm->cycle_count + 1);
 		if (vm->visual == 1)
 			key_action(vm);
 
 		if (vm->paused == 0 || vm->one_cycle == 1)
 		{
+		printf("It is now cycle %u nb_proc %llu\n", vm->cycle_count + 1, vm->nb_processes);
 			++(vm->cycle_count);
 			--(vm->cycle_to_die);
 

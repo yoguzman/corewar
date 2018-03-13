@@ -20,7 +20,7 @@
 
 int			get_empty_slot(t_player player_table[MAX_PLAYERS])
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (player_table[i].code != NULL)

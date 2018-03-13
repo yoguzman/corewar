@@ -46,12 +46,14 @@ int		get_data(t_corewar *vm, t_proc *lol, t_instr *instr)
 	int i = 0;
 	unsigned char tamer;
 
-	tamer = replace_cod_oct(vm->arena[lol->pc], instr->opcode);
-	if (get_octet(tamer, instr) == -1)
+	if (get_octet(vm->arena[lol->pc], instr) == -1)
 	{
 		la_balade(lol, instr);
-		return (0);
+		return (-1);
 	}
+	tamer = replace_cod_oct(vm->arena[lol->pc], instr->opcode);
+	ft_bzero(instr->val_arg, 12);
+	get_octet(tamer, instr);
 	lol->pc = (lol->pc + 1) % MEM_SIZE;
 	while (i < instr->op_tab[instr->opcode].parameter_count)
 	{

@@ -104,7 +104,7 @@ typedef struct	s_process
 	uint32_t	pc;
 	uint8_t		carry;
 	int			current_live;
-	uint8_t		player_id;
+	int			player_id;
 	uint16_t	cycles_to_exec;
 	uint32_t	pid;
 }				t_proc;
@@ -124,13 +124,13 @@ typedef struct	s_corewar
 	int			one_cycle;
 	int			cycles_sec;
 	uint32_t	cycle_count;
-	int			nb_processes;
+	uint64_t	nb_processes;
 	int			cycle_to_die;
 	int			cycle_to_die_max;
 	char		*print_data;
 	t_player	player_table[MAX_PLAYERS];
 	uint8_t		*arena;
-	int32_t		player_id;
+	int	player_id;
 	uint32_t	players;
 	uint32_t	dump_limit;
 	t_mh		*mh;

@@ -113,7 +113,7 @@ SRCS_LIB	=		$(DIR_SRC_LIB)ft_putchar.c					\
 
 OBJS_LIB	=		$(SRCS_LIB:.c=.o)
 
-CFLAGS		+=		-Wall -Wextra -I../include
+CFLAGS		+=		-Wall -Wextra -I../include -g3
 
 RM			=		rm -f
 

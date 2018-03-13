@@ -33,7 +33,7 @@ static int	init_vm(const char *argv[], t_corewar *vm)
 		print_players(vm->player_table);
 	if (load_champions_in_arena(vm) == -1)
 		return (-1);
-	vm->nb_processes = vm->players + 1;
+	vm->nb_processes = vm->players;
 	return (0);
 }
 

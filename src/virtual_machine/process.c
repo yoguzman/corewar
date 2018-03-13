@@ -33,7 +33,8 @@ t_proc	*spawn_process(uint64_t load_address, uint8_t player_id,
 		return (NULL);
 	ft_bzero(new, sizeof(*new));
 	new->pc = load_address;
-	new->reg[0] = player_id;
+	new->reg[0] = UINT_MAX;
+	new->reg[0] -= player_id;
 	new->pid = *total_proc;
 	++*total_proc;
 	return (new);

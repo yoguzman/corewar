@@ -1,6 +1,6 @@
 #include "vm.h"
 
-void			check_live_process(t_mh *mh)
+void			check_live_process(t_mh *mh, t_corewar *vm)
 {
 	uint64_t	i;
 
@@ -8,7 +8,12 @@ void			check_live_process(t_mh *mh)
 	while (i < mh->pos)
 	{
 		if (mh->tab[i]->current_live == 0)
+		{
 			delete_any(mh, i);
+			--vm->nb_processes;
+			if (vm->visual == 1)
+				mvprintw(9, 199 + 12, "%15d", vm->nb_processes);
+		}
 		else
 		{
 				mh->tab[i]->current_live = 0;
@@ -50,7 +55,7 @@ void		check_cycle_to_die(t_corewar *vm)
 	if (vm->cycle_to_die == 0)
 	{
 		ret = check_live_player(vm->player_table);
-		check_live_process(vm->mh);
+		check_live_process(vm->mh, vm);
 		if (ret >= NBR_LIVE)
 			vm->cycle_to_die_max -= CYCLE_DELTA;
 		vm->cycle_to_die = vm->cycle_to_die_max;
