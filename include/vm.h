@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/09 19:34:02 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/13 17:04:22 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,13 +138,20 @@ typedef struct	s_corewar
 	uint64_t	total_proc;
 }				t_corewar;
 
+typedef union	u_param
+{
+	char		c[4];
+	int			i;
+	short		si;
+}				t_param;
+
 typedef struct			s_instr
 {
 	void				(*tab_instr[17])(t_corewar *vm, t_proc *lol,
 			struct s_instr *instr);
-	int					val_arg[3];
+	uint8_t				val_arg[3];
 	unsigned char		opcode;
-	long long			param[3];
+	t_param			param[3];
 	const t_op			*op_tab;
 	uint32_t			save_pc;
 }						t_instr;

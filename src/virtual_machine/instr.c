@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:44:10 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/12 20:31:50 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/13 17:04:18 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,42 @@
 
 void	live(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
-	if (instr->param[0] < MAX_PLAYERS)
+	uint32_t	player_nb;
+
+	player_nb = -1U - instr->param[0].i + 1;
+	if (player_nb <= MAX_PLAYERS)
 	{
-		++vm->player_table[instr->param[0]].current_live;
+		++vm->player_table[player_nb - 1].current_live;
 		if (vm->visual == 1)
 			;
 	}
 	++lol->current_live;
-	printf("P\t%u | live %lld\n", lol->pid, instr->param[0]);
+	if (!vm->visual)
+		printf("P\t%u | live %lld\n", lol->pid, instr->param[0]);
 }
 
 void	ld(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	int	offset;
 
-	lol->reg[instr->param[1] - 1] = instr->param[0];
+	if (instr->val_arg[0] == T_DIR)
+		lol->reg[instr->param[1].i - 1] = instr->param[0].i;
+	else
+	{
+		offset = (instr->save_pc + (instr->param[0].si % IDX_MOD)) % MEM_SIZE;
+		lol->reg[instr->param[1].i - 1] = vm->arena[offset];
+		offset = (offset + 1) % MEM_SIZE;
+		lol->reg[instr->param[1].i - 1] |= vm->arena[offset] << 8;
+		offset = (offset + 1) % MEM_SIZE;
+		lol->reg[instr->param[1].i - 1] |= vm->arena[offset] << 16;
+		offset = (offset + 1) % MEM_SIZE;
+		lol->reg[instr->param[1].i - 1] |= vm->arena[offset] << 24;
+	}
 	lol->carry = lol->reg[instr->param[1] - 1] == 0;
-	printf("P\t%u | ld %.*s%lld r%lld carry = %d r = %ud\n", lol->pid,
-	(instr->val_arg[0] == T_DIR ? 1 : 0), "%", instr->param[0],
-	instr->param[1], lol->carry, lol->reg[instr->param[1] - 1]);
+	if (!vm->visual)
+		printf("P\t%u | ld %.*s%lld r%lld carry = %d r = %ud\n", lol->pid,
+				(instr->val_arg[0] == T_DIR ? 1 : 0), "%", instr->param[0],
+				instr->param[1], lol->carry, lol->reg[instr->param[1] - 1]);
 }
 
 void	st(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -42,7 +59,7 @@ void	st(t_corewar *vm, t_proc *lol, t_instr *instr)
 	int	offset;
 
 	if (instr->val_arg[1] == T_REG)
-		lol->reg[instr->param[1] - 1] = lol->reg[instr->param[0] - 1];
+		lol->reg[instr->param[1] - 1] = lol->reg[instr->param[0].i - 1];
 	else
 	{
 		attron(COLOR_PAIR(lol->reg[0] + 2));
@@ -69,8 +86,9 @@ void	st(t_corewar *vm, t_proc *lol, t_instr *instr)
 		attroff(COLOR_PAIR(lol->reg[0] + 2));
 	}
 	lol->carry = lol->reg[instr->param[0] - 1] == 0;
-	printf("P\t%u | st r%lld %.*s%lld\n", lol->pid, instr->param[0],
-	(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[1]);
+	if (!vm->visual)
+		printf("P\t%u | st r%lld %.*s%lld\n", lol->pid, instr->param[0],
+				(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[1]);
 }
 
 void	add(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -79,10 +97,11 @@ void	add(t_corewar *vm, t_proc *lol, t_instr *instr)
 	lol->reg[instr->param[2] - 1] =
 		lol->reg[instr->param[0] - 1] + lol->reg[instr->param[1] - 1];
 	lol->carry = lol->reg[instr->param[2] - 1] == 0;
-	printf("P\t%u | add %.*s%lld %.*s%lld r%lld\n", lol->pid,
-	(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
-	(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
-	instr->param[2]);
+	if (!vm->visual)
+		printf("P\t%u | add %.*s%lld %.*s%lld r%lld\n", lol->pid,
+				(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
+				(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
+				instr->param[2]);
 }
 
 void	sub(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -91,10 +110,11 @@ void	sub(t_corewar *vm, t_proc *lol, t_instr *instr)
 	lol->reg[instr->param[2] - 1] =
 		lol->reg[instr->param[0] - 1] - lol->reg[instr->param[1] - 1];
 	lol->carry = lol->reg[instr->param[2] - 1] == 0;
-	printf("P\t%u | sub %.*s%lld %.*s%lld r%lld\n", lol->pid,
-	(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
-	(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
-	instr->param[2]);
+	if (!vm->visual)
+		printf("P\t%u | sub %.*s%lld %.*s%lld r%lld\n", lol->pid,
+				(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
+				(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
+				instr->param[2]);
 }
 
 int		reg_test(t_proc *lol, t_instr *instr, uint8_t i)
@@ -109,10 +129,11 @@ void	ft_and(t_corewar *vm, t_proc *lol, t_instr *instr)
 	lol->reg[instr->param[2] - 1] =
 		reg_test(lol, instr, 0) & reg_test(lol, instr, 1);
 	lol->carry = lol->reg[instr->param[2] - 1] == 0;
-	printf("P\t%u | and %.*s%lld %.*s%lld r%lld\n", lol->pid,
-	(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
-	(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
-	instr->param[2]);
+	if (!vm->visual)
+		printf("P\t%u | and %.*s%lld %.*s%lld r%lld\n", lol->pid,
+				(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
+				(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
+				instr->param[2]);
 }
 
 void	ft_or(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -121,10 +142,11 @@ void	ft_or(t_corewar *vm, t_proc *lol, t_instr *instr)
 	lol->reg[instr->param[2] - 1] =
 		reg_test(lol, instr, 0) | reg_test(lol, instr, 1);
 	lol->carry = lol->reg[instr->param[2] - 1] == 0;
-	printf("P\t%u | or %.*s%lld %.*s%lld r%lld\n", lol->pid,
-	(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
-	(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
-	instr->param[2]);
+	if (!vm->visual)
+		printf("P\t%u | or %.*s%lld %.*s%lld r%lld\n", lol->pid,
+				(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
+				(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
+				instr->param[2]);
 }
 
 void	ft_xor(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -133,10 +155,11 @@ void	ft_xor(t_corewar *vm, t_proc *lol, t_instr *instr)
 	lol->reg[instr->param[2] - 1] =
 		reg_test(lol, instr, 0) ^ reg_test(lol, instr, 1);
 	lol->carry = lol->reg[instr->param[2] - 1] == 0;
-	printf("P\t%u | xor %.*s%lld %.*s%lld r%lld\n", lol->pid,
-	(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
-	(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
-	instr->param[2]);
+	if (!vm->visual)
+		printf("P\t%u | xor %.*s%lld %.*s%lld r%lld\n", lol->pid,
+				(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
+				(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
+				instr->param[2]);
 }
 
 void	zjmp(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -144,11 +167,12 @@ void	zjmp(t_corewar *vm, t_proc *lol, t_instr *instr)
 	(void)vm;
 	if (lol->carry == 1)
 	{
-//		lol->pc = lol->pc + (instr->param[0] % IDX_MOD);
+		//		lol->pc = lol->pc + (instr->param[0] % IDX_MOD);
 		lol->pc = (instr->save_pc + (instr->param[0] % IDX_MOD)) % MEM_SIZE;
 	}
-	printf("P\t%u | zjmp %lld (%s)\n", lol->pid, instr->param[0],
-	(lol->carry == 1 ? "OK" : "FAILED"));
+	if (!vm->visual)
+		printf("P\t%u | zjmp %lld (%s)\n", lol->pid, instr->param[0],
+				(lol->carry == 1 ? "OK" : "FAILED"));
 }
 
 void	ldi(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -166,10 +190,11 @@ void	ldi(t_corewar *vm, t_proc *lol, t_instr *instr)
 	offset = (offset + 1) % MEM_SIZE;
 	lol->reg[instr->param[2] - 1] |= vm->arena[offset];
 	lol->carry = lol->reg[instr->param[2] - 1] == 0;
-	printf("P\t%u | ldi %.*s%lld %.*s%lld r%lld valeurs %d\n", lol->pid,
-			(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
-			(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
-			instr->param[2], offset);
+	if (!vm->visual)
+		printf("P\t%u | ldi %.*s%lld %.*s%lld r%lld valeurs %d\n", lol->pid,
+				(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
+				(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
+				instr->param[2], offset);
 }
 
 void	sti(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -201,9 +226,10 @@ void	sti(t_corewar *vm, t_proc *lol, t_instr *instr)
 			vm->arena[to_jump]);
 	attroff(COLOR_PAIR(lol->reg[0] + 2));
 	lol->carry = lol->reg[instr->param[0] - 1] == 0;
-	printf("P\t%u | sti r%lld %.*s%lld %.*s%lld\n", lol->pid, instr->param[0],
-			(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
-			(instr->val_arg[2] == T_REG ? 1 : 0), "r", instr->param[2]);
+	if (!vm->visual)
+		printf("P\t%u | sti r%lld %.*s%lld %.*s%lld\n", lol->pid, instr->param[0],
+				(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
+				(instr->val_arg[2] == T_REG ? 1 : 0), "r", instr->param[2]);
 }
 
 void	ft_fork(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -212,8 +238,8 @@ void	ft_fork(t_corewar *vm, t_proc *lol, t_instr *instr)
 	if (!(child = (t_proc *)malloc(sizeof(*child))))
 
 		exit(EXIT_FAILURE);
-//	if (!(child = spawn_process(instr->save_pc + (instr->param[0] % IDX_MOD) % MEM_SIZE, lol->reg[0], &(vm->total_proc))))
-//		exit(EXIT_FAILURE);
+	//	if (!(child = spawn_process(instr->save_pc + (instr->param[0] % IDX_MOD) % MEM_SIZE, lol->reg[0], &(vm->total_proc))))
+	//		exit(EXIT_FAILURE);
 	ft_memcpy(child, lol, sizeof(*lol));
 	child->pc = (instr->save_pc + (instr->param[0] % IDX_MOD)) % MEM_SIZE;
 	child->pid = vm->total_proc++;
@@ -234,8 +260,9 @@ void	ft_fork(t_corewar *vm, t_proc *lol, t_instr *instr)
 		mvprintw(9, 199 + 12, "%d", vm->nb_processes);
 		attroff(COLOR_PAIR(6));
 	}
-	printf("P\t%u | fork %lld (%lld) cycle_to_exec = %d pid = %u, pc = %u case = %d\n", lol->pid, instr->param[0],
-			(instr->save_pc + (instr->param[0] % IDX_MOD)) % MEM_SIZE, child->cycles_to_exec, child->pid, child->pc, vm->arena[child->pc] - 1);
+	if (!vm->visual)
+		printf("P\t%u | fork %lld (%lld) cycle_to_exec = %d pid = %u, pc = %u case = %d\n", lol->pid, instr->param[0],
+				(instr->save_pc + (instr->param[0] % IDX_MOD)) % MEM_SIZE, child->cycles_to_exec, child->pid, child->pc, vm->arena[child->pc] - 1);
 }
 
 void	lld(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -256,9 +283,10 @@ void	lld(t_corewar *vm, t_proc *lol, t_instr *instr)
 	else
 		lol->reg[instr->param[1] - 1] = instr->param[0];
 	lol->carry = lol->reg[instr->param[1] - 1] == 0;
-	printf("P\t%u | lld %.*s%lld r%lld\n", lol->pid,
-			(instr->val_arg[0] == T_DIR ? 1 : 0), "%", instr->param[0],
-			instr->param[1]);
+	if (!vm->visual)
+		printf("P\t%u | lld %.*s%lld r%lld\n", lol->pid,
+				(instr->val_arg[0] == T_DIR ? 1 : 0), "%", instr->param[0],
+				instr->param[1]);
 
 }
 
@@ -276,10 +304,11 @@ void	lldi(t_corewar *vm, t_proc *lol, t_instr *instr)
 	offset = (offset + 1) % MEM_SIZE;
 	lol->reg[instr->param[2] - 1] |= vm->arena[offset];
 	lol->carry = lol->reg[instr->param[2] - 1] == 0;
-	printf("P\t%u | lldi %.*s%lld %.*s%lld r%lld\n", lol->pid,
-			(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
-			(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
-			instr->param[2]);
+	if (!vm->visual)
+		printf("P\t%u | lldi %.*s%lld %.*s%lld r%lld\n", lol->pid,
+				(instr->val_arg[0] == T_REG ? 1 : 0), "r", instr->param[0],
+				(instr->val_arg[1] == T_REG ? 1 : 0), "r", instr->param[1],
+				instr->param[2]);
 }
 
 void	ft_lfork(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -288,8 +317,8 @@ void	ft_lfork(t_corewar *vm, t_proc *lol, t_instr *instr)
 
 	if (!(child = (t_proc *)malloc(sizeof(*child))))
 		exit(EXIT_FAILURE);
-//	if (!(child = spawn_process((instr->save_pc + instr->param[0]) % MEM_SIZE, lol->reg[0], &(vm->total_proc))))
-//		exit(EXIT_FAILURE);
+	//	if (!(child = spawn_process((instr->save_pc + instr->param[0]) % MEM_SIZE, lol->reg[0], &(vm->total_proc))))
+	//		exit(EXIT_FAILURE);
 	ft_memcpy(child, lol, sizeof(*lol));
 	child->pc = (instr->save_pc + instr->param[0]) % MEM_SIZE;
 	child->pid = vm->total_proc++;
@@ -310,16 +339,18 @@ void	ft_lfork(t_corewar *vm, t_proc *lol, t_instr *instr)
 		mvprintw(9, 199 + 12, "%d", vm->nb_processes);
 		attroff(COLOR_PAIR(6));
 	}
-	printf("P\t%u | lfork %lld (%lld)\n", lol->pid, instr->param[0],
-			(instr->save_pc + (instr->param[0] % IDX_MOD)) % MEM_SIZE);
+	if (!vm->visual)
+		printf("P\t%u | lfork %lld (%lld)\n", lol->pid, instr->param[0],
+				(instr->save_pc + (instr->param[0] % IDX_MOD)) % MEM_SIZE);
 }
 
 void	aff(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	(void)vm;
 	ft_putchar(lol->reg[instr->param[0] - 1] % 256);
-	printf("P\t%u | aff r%lld (%c)\n", lol->pid, instr->param[0],
-			lol->reg[instr->param[0] - 1] % 256);
+	if (!vm->visual)
+		printf("P\t%u | aff r%lld (%c)\n", lol->pid, instr->param[0],
+				lol->reg[instr->param[0] - 1] % 256);
 }
 
 int	check_params(unsigned char const parameter_type[3],

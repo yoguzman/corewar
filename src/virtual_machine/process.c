@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 16:15:57 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/06 18:09:50 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/13 16:15:51 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ t_proc	*spawn_process(uint64_t load_address, uint8_t player_id,
 		return (NULL);
 	ft_bzero(new, sizeof(*new));
 	new->pc = load_address;
-	new->reg[0] = UINT_MAX;
-	new->reg[0] -= player_id;
+	new->reg[0] = -1 - player_id;
 	new->pid = *total_proc;
 	++*total_proc;
 	return (new);
