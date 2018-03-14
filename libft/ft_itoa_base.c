@@ -79,7 +79,7 @@ char						*ft_itoa_base(long long int value, char *base)
 		div = div * size_b;
 		++len_buff;
 	}
-	if ((buff = malloc(sizeof(char) * (len_buff + 1))) == NULL)
+	if ((buff = malloc(sizeof(char) * (len_buff + 2))) == NULL)
 		return (NULL);
 	ft_memset(buff, 0, len_buff + 1);
 	put_neg(buff, neg, len_buff);
