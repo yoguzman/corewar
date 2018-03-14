@@ -136,6 +136,7 @@ typedef struct	s_corewar
 	t_mh		*mh;
 	int			visual;
 	uint64_t	total_proc;
+	int			max_check;
 }				t_corewar;
 
 typedef struct			s_instr

@@ -78,7 +78,8 @@ void		insert(t_mh *mh, t_proc *entry)
 		mh->size = (3 * mh->size) >> 1;
 		if (!(mh->tab = realloc(mh->tab, sizeof(void *) * mh->size)))
 			return ;
-		ft_bzero(mh->tab + mh->pos, sizeof(void *) * mh->pos);
+
+		ft_bzero(mh->tab + mh->pos, sizeof(void *) * (mh->size - mh->pos));
 	}
 	i = mh->pos++;
 	while (i != 0

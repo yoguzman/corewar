@@ -15,7 +15,7 @@
 #include "libft.h"
 #include <stdio.h>
 
-void	get_param(t_corewar *vm, t_proc *lol, t_instr *instr,
+int		get_param(t_corewar *vm, t_proc *lol, t_instr *instr,
 					int i)
 {
 	int	j;
@@ -30,8 +30,12 @@ void	get_param(t_corewar *vm, t_proc *lol, t_instr *instr,
 		instr->param[i] += vm->arena[lol->pc];
 		lol->pc = (lol->pc + 1) % MEM_SIZE;
 	}
+	if (instr->val_arg[i] == 1 && (instr->param[i] - 1) > 15)
+		return (-1);
+		
 	if (instr->val_arg[i] == 2)
 		instr->param[i] = (int16_t)instr->param[i];
+	return (0);
 }
 
 void	get_one_arg(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -60,7 +64,8 @@ int		get_data(t_corewar *vm, t_proc *lol, t_instr *instr)
 	lol->pc = (lol->pc + 1) % MEM_SIZE;
 	while (i < instr->op_tab[instr->opcode].parameter_count)
 	{
-		get_param(vm, lol, instr, i);
+		if (get_param(vm, lol, instr, i) == -1)
+			return (-1);
 		i++;
 	}
 	return (0);
