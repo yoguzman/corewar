@@ -324,7 +324,7 @@ void	ft_lfork(t_corewar *vm, t_proc *lol, t_instr *instr)
 	child->cycles_to_exec = vm->cycle_count + 1;
 	if ((vm->arena[child->pc] - 1) <= 15)
 		child->cycles_to_exec =
-			instr->op_tab[vm->arena[child->pc - 1]].cycles_to_exec
+			instr->op_tab[vm->arena[child->pc] - 1].cycles_to_exec
 			+ vm->cycle_count;
 	insert(vm->mh, child);
 	++vm->nb_processes;
