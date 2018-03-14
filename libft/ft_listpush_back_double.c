@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_listpush_back.c                                 :+:      :+:    :+:   */
+/*   ft_listpush_back_double.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yguzman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 17:27:19 by yguzman           #+#    #+#             */
-/*   Updated: 2017/01/30 17:18:33 by yguzman          ###   ########.fr       */
+/*   Updated: 2018/03/14 18:34:50 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-int					list_push_back_alloc_content(t_list **list, void *content, size_t size)
+int				list_push_back_alloc_content(t_list **list, void *content,
+		size_t size)
 {
 	t_list			*new;
 	t_list			*tmp;
@@ -39,7 +40,7 @@ int					list_push_back_alloc_content(t_list **list, void *content, size_t size)
 	return (0);
 }
 
-int					list_push_back(t_list **list, void *content, size_t size)
+int				list_push_back(t_list **list, void *content, size_t size)
 {
 	t_list			*new;
 	t_list			*tmp;

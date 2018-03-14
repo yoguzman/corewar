@@ -6,7 +6,7 @@
 #    By: yguzman <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 11:38:09 by yguzman           #+#    #+#              #
-#    Updated: 2018/03/08 16:05:29 by jcoutare         ###   ########.fr        #
+#    Updated: 2018/03/14 19:26:33 by abeauvoi         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -26,7 +26,8 @@ OBJ_DIR = obj
 SRC_DIR	= src
 ASM_DIR	= asm
 COREWAR_DIR	= virtual_machine
-VPATH	= $(addprefix $(SRC_DIR)/,$(COREWAR_DIR) $(ASM_DIR))
+VPATH 	= $(addprefix $(SRC_DIR)/,$(COREWAR_DIR) $(ASM_DIR))
+VPATH	+= $(addprefix $(SRC_DIR)/$(COREWAR_DIR)/,instructions engine output parsing)
 
 #
 # Sources
@@ -58,12 +59,12 @@ SRCS_ASM		=		main_a.c							\
 						tools3.c							\
 						replace_cod_oct.c					\
 
-SRCS_COREWAR	= main.c instr.c op.c print_usage.c print_error_and_exit.c \
-		ft_isdigitstr.c load_champion.c parse_argv.c \
-		print_mem.c switch_endianness.c clear_data.c print_players.c \
-		dump_arena.c engine.c process.c priority_queue.c \
-		print_ncurses.c print_breakdown.c check_live.c get_instr_data.c init_instr.c replace_cod_oct.c visual.c \
-
+SRCS_COREWAR	= main.c clear_data.c \
+		  check_live.c engine.c priority_queue.c process.c replace_cod_oct.c \
+		  calc_instr.c exec_instr.c get_instr_data.c init_instr.c ld_st_instr.c long_instr.c misc_instr.c \
+		  dump_arena.c print_error_and_exit.c print_ncurses.c print_usage.c print_breakdown.c print_mem.c \
+		  print_players.c visual.c key_events.c \
+		  ft_isdigitstr.c load_champion.c parse_argv.c switch_endianness.c
 
 OBJS_ASM	= $(addprefix $(OBJ_DIR)/, $(SRCS_ASM:.c=.o))
 OBJS_COREWAR	= $(addprefix $(OBJ_DIR)/, $(SRCS_COREWAR:.c=.o))
@@ -75,7 +76,7 @@ OBJS_COREWAR	= $(addprefix $(OBJ_DIR)/, $(SRCS_COREWAR:.c=.o))
 LFLAGS	= -L$(LIB_DIR) -lft -lncurses
 CFLAGS	+= -Iinclude
 CFLAGS	+= -Wall -Wextra -g -g3
-COMP	= $(CC) $(CFLAGS) -o $@ -c $<
+COMP	= $(CC) $(CFLAGS) -o $@ -c $< 
 LINK	= $(CC) $(LFLAGS) -o $@ $(filter-out $(LIB) $(OBJ_DIR), $^)
 LIB	= libft.a
 
@@ -96,6 +97,9 @@ all: $(ASM) $(COREWAR)
 
 debug: CFLAGS += -fsanitize=address -g3
 debug: all
+
+test:
+	@echo $(VPATH)
 
 $(LIB):
 	@make -C $(LIB_DIR)

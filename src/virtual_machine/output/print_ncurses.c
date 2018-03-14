@@ -6,7 +6,7 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 00:37:10 by adauchy           #+#    #+#             */
-/*   Updated: 2018/02/27 17:39:34 by adauchy          ###   ########.fr       */
+/*   Updated: 2018/03/14 20:10:08 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		print_panel(t_corewar *vm)
 {
 	attron(A_BOLD);
 	attron(COLOR_PAIR(6));
-		mvprintw(2, 199, "** PAUSED **");
+	mvprintw(2, 199, "** PAUSED **");
 	mvprintw(4, 199, "Cycles/second limit : %d", vm->cycles_sec);
 	mvprintw(7, 199, "Cycle : %d", vm->cycle_count);
 	mvprintw(9, 199, "Processes : %d", vm->total_proc);
@@ -96,4 +96,16 @@ void		print_ncurses(t_corewar *vm)
 	vm->cycles_sec = 1000000 / 50;
 	vm->dec_sec = 50;
 	vm->one_cycle = 0;
+}
+
+void		print_4b_in_arena(int offset, uint8_t *arena, t_proc *lol, int cnt)
+{
+	attron(COLOR_PAIR((-1U - lol->reg[0]) + 2));
+	while (cnt-- > 0)
+	{
+		mvprintw((offset / 64) + 2, (offset % 64) * 3 + 3, "%.2x",
+				arena[offset]);
+		offset = (offset + 1) % MEM_SIZE;
+	}
+	attroff(COLOR_PAIR((-1U - lol->reg[0]) + 2));
 }

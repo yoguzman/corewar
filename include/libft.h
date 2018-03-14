@@ -6,7 +6,7 @@
 /*   By: yguzman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 20:16:14 by yguzman           #+#    #+#             */
-/*   Updated: 2017/10/10 13:54:45 by yguzman          ###   ########.fr       */
+/*   Updated: 2018/03/14 18:33:32 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ char				*ft_itoa_base_u(unsigned long long int value,
 void				ft_putstr_null(char *str);
 char				**realloc_tab(char **tab, char *str);
 char				**get_input(int fd, int nb_lines);
-int					list_push_back_alloc_content(t_list **list, void *content, size_t size);
+int					list_push_back_alloc_content(t_list **list, void *content,
+		size_t size);
 
 #endif

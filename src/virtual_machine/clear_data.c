@@ -6,12 +6,22 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 20:04:52 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/02/27 18:27:35 by adauchy          ###   ########.fr       */
+/*   Updated: 2018/03/14 15:29:13 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include <errno.h>
 #include <stdlib.h>
 #include "vm.h"
+
+void	*fail_alloc(t_mh **mh)
+{
+	if ((*mh) != NULL)
+		free_min_heap(mh);
+	perror("Corewar :");
+	return (NULL);
+}
 
 void	free_champions(t_player player_table[MAX_PLAYERS])
 {
@@ -39,7 +49,8 @@ void	free_processes(t_mh *mh)
 
 void	free_min_heap(t_mh **mh)
 {
-	free_processes(*mh);
+	if ((*mh)->tab)
+		free_processes(*mh);
 	free((*mh)->tab);
 	free(*mh);
 	*mh = NULL;

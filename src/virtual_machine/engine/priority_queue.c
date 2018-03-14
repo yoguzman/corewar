@@ -6,10 +6,11 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 20:45:02 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/13 20:02:34 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/14 15:29:13 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
 #include "libft.h"
@@ -19,25 +20,7 @@
 ** Processes are initially spawned in descending order
 */
 
-static void	*fail_alloc(t_mh *mh)
-{
-	uint64_t	i;
-
-	if (mh->tab)
-	{
-		i = 0;
-		while (i < mh->pos)
-		{
-			free(mh->tab[i]);
-			++i;
-		}
-		free(mh->tab);
-	}
-	free(mh);
-	return (NULL);
-}
-
-t_mh	*init_heap(t_player player_table[MAX_PLAYERS], uint64_t *total_proc,
+t_mh		*init_heap(t_player player_table[MAX_PLAYERS], uint64_t *total_proc,
 		t_corewar *vm, t_instr *instr)
 {
 	t_mh	*mh;
@@ -45,25 +28,24 @@ t_mh	*init_heap(t_player player_table[MAX_PLAYERS], uint64_t *total_proc,
 	int32_t	i;
 
 	if (!(mh = (t_mh *)malloc(sizeof(*mh))))
-		return (NULL);
+		return (fail_alloc(&mh));
 	ft_bzero(mh, sizeof(*mh));
-	if (!(mh->tab = (t_proc **)malloc(sizeof(void *) * START_HEAP_SIZE)))
-		return (fail_alloc(mh));
 	mh->size = START_HEAP_SIZE;
-	i = 0;
-	while (i < MAX_PLAYERS)
+	if (!(mh->tab = (t_proc **)malloc(sizeof(void *) * mh->size)))
+		return (fail_alloc(&mh));
+	i = -1;
+	while (++i < MAX_PLAYERS)
 	{
 		if (player_table[i].code != NULL)
 		{
 			if (!(process = spawn_process(player_table[i].load_address, i,
 							total_proc)))
-				return (fail_alloc(mh));
+				return (fail_alloc(&mh));
 			if (vm->arena[process->pc] - 1 <= 15)
 				process->cycles_to_exec =
 					instr->op_tab[vm->arena[process->pc] - 1].cycles_to_exec;
 			insert(mh, process);
 		}
-		++i;
 	}
 	return (mh);
 }
@@ -77,8 +59,11 @@ void		insert(t_mh *mh, t_proc *entry)
 	{
 		mh->size = (3 * mh->size) >> 1;
 		if (!(mh->tab = realloc(mh->tab, sizeof(void *) * mh->size)))
-			return ;
-
+		{
+			perror("Corewar :");
+			free_min_heap(&mh);
+			exit(EXIT_FAILURE);
+		}
 		ft_bzero(mh->tab + mh->pos, sizeof(void *) * (mh->size - mh->pos));
 	}
 	i = mh->pos++;

@@ -1,6 +1,16 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_instr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/14 14:47:33 by abeauvoi          #+#    #+#             */
+/*   Updated: 2018/03/14 19:32:39 by abeauvoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
-#include <errno.h>
 #include "op.h"
 #include "vm.h"
 
@@ -32,7 +42,7 @@ static const t_op		g_op_tab[17] =
 };
 
 void	init_tab_instr(void (*tab_instr[16])(t_corewar *vm,
-					 t_proc *lol, t_instr *instr))
+			t_proc *lol, t_instr *instr))
 {
 	tab_instr[0] = &live;
 	tab_instr[1] = &ld;
@@ -58,13 +68,15 @@ int		init_instr(t_instr *instr, t_corewar *vm)
 	init_tab_instr(instr->tab_instr);
 	vm->mh = init_heap(vm->player_table, &(vm->total_proc), vm, instr);
 	if (!vm->mh)
-	{
-		perror("Corewar: ");
 		exit(EXIT_FAILURE);
-	}
 	vm->cycle_to_die_max = CYCLE_TO_DIE;
 	vm->cycle_to_die = vm->cycle_to_die_max;
 	vm->paused = 0;
 	vm->max_check = MAX_CHECKS;
 	return (0);
+}
+
+void	init_op_tab(const t_op g_op_tab[17], t_instr *instr)
+{
+	instr->op_tab = g_op_tab;
 }

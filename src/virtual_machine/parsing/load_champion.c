@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 04:53:22 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/13 17:03:57 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/14 20:02:36 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	start(const char *argv[], t_corewar *vm, int *fd,
 	if (!check_extension(argv[0]))
 		clean_print_err_exit(E3, vm->player_table);
 	if ((*fd = open(argv[0], O_RDONLY)) == -1 ||
-			read(*fd, buf, HEADER_SIZE) == - 1)
+			read(*fd, buf, HEADER_SIZE) == -1)
 		clean_print_err_exit(NULL, vm->player_table);
 	if (vm->player_id == -1)
 		vm->player_id = get_empty_slot(vm->player_table);

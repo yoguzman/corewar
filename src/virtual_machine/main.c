@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:42:57 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/13 20:05:50 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/14 20:09:15 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		init_print_data(t_corewar *vm)
 	init_pair(6, COLOR_WHITE, COLOR_BLACK);
 	init_pair(7, COLOR_BLACK, COLOR_GREEN);
 	init_pair(8, COLOR_BLACK, COLOR_BLUE);
-	init_pair(9,COLOR_BLACK, COLOR_RED);
+	init_pair(9, COLOR_BLACK, COLOR_RED);
 	init_pair(10, COLOR_BLACK, COLOR_CYAN);
 	n = 0;
 	while (n < vm->players)

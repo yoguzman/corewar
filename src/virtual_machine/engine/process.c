@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 16:15:57 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/13 17:31:51 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/14 19:02:50 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,15 @@ t_proc	*spawn_process(uint64_t load_address, uint8_t player_id,
 	return (new);
 }
 
-void	kill_process(t_mh *mh, uint32_t index)
+void	init_child(t_corewar *vm, t_proc *lol, t_proc *child, t_instr *instr)
 {
-	free(mh->tab[index]);
-	mh->tab[index] = NULL;
-}
-
-void	print_processes(t_mh *mh)
-{
-	uint32_t	i;
-
-	i = 0;
-	while (i < mh->pos)
-	{
-		printf("Process #%u: Owned by player %u\n", i, mh->tab[i]->reg[0] + 1);
-		++i;
-	}
+	ft_memcpy(child, lol, sizeof(*lol));
+	child->pid = vm->total_proc++;
+	child->cycles_to_exec = vm->cycle_count + 1;
+	if ((vm->arena[child->pc] - 1) <= 15)
+		child->cycles_to_exec =
+			instr->op_tab[vm->arena[child->pc] - 1].cycles_to_exec
+			+ vm->cycle_count;
+	insert(vm->mh, child);
+	++vm->nb_processes;
 }
