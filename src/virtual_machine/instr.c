@@ -26,8 +26,8 @@ void	live(t_corewar *vm, t_proc *lol, t_instr *instr)
 			;
 	}
 	++lol->current_live;
-//	if (!vm->visual)
-//		printf("P\t%u | live %d\n", lol->pid, instr->param[0]);
+	if (!vm->visual)
+		ft_printf("P\t%u | live %d\n", lol->pid, instr->param[0]);
 }
 
 void	ld(t_corewar *vm, t_proc *lol, t_instr *instr)
