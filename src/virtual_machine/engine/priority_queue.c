@@ -41,9 +41,7 @@ t_mh		*init_heap(t_player player_table[MAX_PLAYERS], uint64_t *total_proc,
 			if (!(process = spawn_process(player_table[i].load_address, i,
 							total_proc)))
 				return (fail_alloc(&mh));
-			if (vm->arena[process->pc] - 1 <= 15)
-				process->cycles_to_exec =
-					instr->op_tab[vm->arena[process->pc] - 1].cycles_to_exec;
+			fill_ins_proc(vm, instr, process);
 			insert(mh, process);
 		}
 	}

@@ -32,7 +32,7 @@ int		check_params(unsigned char const parameter_type[3],
 	return (0);
 }
 
-int		get_octet(char octet, t_instr *instr)
+int		get_octet(char octet, t_inv *inv, t_instr *instr)
 {
 	char	mask;
 	int		ret;
@@ -46,61 +46,63 @@ int		get_octet(char octet, t_instr *instr)
 		ret = octet & mask;
 		if (ret == 3)
 			ret = ret + 1;
-		instr->val_arg[i] = ret;
+		inv->val_arg[i] = ret;
 		i--;
 	}
-	if (check_params(instr->op_tab[instr->opcode].parameter_types,
-				instr->op_tab[instr->opcode].parameter_count,
-				instr->val_arg) == -1)
+	if (check_params(instr->op_tab[inv->opcode].parameter_types,
+				instr->op_tab[inv->opcode].parameter_count,
+				inv->val_arg) == -1)
 		return (-1);
 	return (0);
 }
 
-void	la_balade(t_proc *lol, t_instr *instr)
+void	la_balade(t_proc *lol, t_instr *instr, t_inv *inv)
 {
 	int tojump;
 	int i;
 
 	tojump = 0;
 	i = 0;
-	while (i < instr->op_tab[instr->opcode].parameter_count)
+	while (i < instr->op_tab[inv->opcode].parameter_count)
 	{
-		if (instr->val_arg[i] == T_REG)
+		if (inv->val_arg[i] == T_REG)
 			lol->pc += T_REG;
-		else if (instr->val_arg[i] == T_DIR)
+		else if (inv->val_arg[i] == T_DIR)
 			lol->pc += DIR_SIZE;
-		else if (instr->val_arg[i] == T_IND)
+		else if (inv->val_arg[i] == T_IND)
 			lol->pc += IND_SIZE;
 		i++;
 	}
 	lol->pc++;
 }
 
-void	exec_instr(t_corewar *vm, t_instr *ins, t_proc *proc)
+void	fill_ins_proc(t_corewar *vm, t_instr *ins, t_proc *proc)
 {
-	int	ret;
-
-	ret = 0;
-	if (vm->visual == 1)
-		exec_instr_update_window(proc, vm, 2);
-	ins->opcode = vm->arena[proc->pc] - 1;
-	ins->save_pc = proc->pc;
+	proc->inv.ret = 0;
+	proc->inv.opcode = vm->arena[proc->pc] - 1;
+	proc->inv.save_pc = proc->pc;
 	proc->pc = (proc->pc + 1) % MEM_SIZE;
-	if (ins->opcode <= 15)
+	if (proc->inv.opcode <= 15)
 	{
-		if (ins->op_tab[ins->opcode].parameter_count != 1 || ins->opcode == 15)
-			ret = get_data(vm, proc, ins);
+		if (ins->op_tab[proc->inv.opcode].parameter_count != 1 || proc->inv.opcode == 15)
+			proc->inv.ret = get_data(vm, proc, &(proc->inv), ins);
 		else
-			get_one_arg(vm, proc, ins);
-		if (ret != -1)
-			ins->tab_instr[ins->opcode](vm, proc, ins);
-	}
-	ins->opcode = vm->arena[proc->pc] - 1;
-	if (ins->opcode <= 15)
-		proc->cycles_to_exec = ins->op_tab[ins->opcode].cycles_to_exec
+			proc->inv.ret = get_one_arg(vm, proc, &(proc->inv));
+		proc->cycles_to_exec = ins->op_tab[proc->inv.opcode].cycles_to_exec
 			+ vm->cycle_count;
+	}
 	else
 		proc->cycles_to_exec += 1;
+
+}
+
+void	exec_instr(t_corewar *vm, t_instr *ins, t_proc *proc)
+{
 	if (vm->visual == 1)
-		exec_instr_update_window(proc, vm, 7);
+		exec_instr_update_window(proc, vm, 2, proc->inv.save_pc);
+	if (proc->inv.opcode <= 15 && proc->inv.ret == 0)
+		ins->tab_instr[proc->inv.opcode](vm, proc, ins);
+	if (vm->visual == 1)
+		exec_instr_update_window(proc, vm, 7, proc->pc);
+	fill_ins_proc(vm, ins, proc);
 }

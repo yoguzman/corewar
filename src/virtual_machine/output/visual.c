@@ -42,10 +42,10 @@ void			fork_update_window(t_proc *lol, t_corewar *vm)
 	attroff(COLOR_PAIR(6));
 }
 
-void			exec_instr_update_window(t_proc *proc, t_corewar *vm, char add)
+void			exec_instr_update_window(t_proc *proc, t_corewar *vm, char add, int value)
 {
 	attron(COLOR_PAIR((-1U - proc->reg[0]) + add));
-	mvprintw((proc->pc / 64) + 2, (proc->pc % 64) * 3 + 3, "%.2x",
+	mvprintw((value / 64) + 2, (value % 64) * 3 + 3, "%.2x",
 			vm->arena[proc->pc]);
 	attroff(COLOR_PAIR((-1U - proc->reg[0]) + add));
 }

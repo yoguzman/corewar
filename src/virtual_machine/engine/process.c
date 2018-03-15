@@ -34,6 +34,7 @@ t_proc	*spawn_process(uint64_t load_address, uint8_t player_id,
 	ft_bzero(new, sizeof(*new));
 	new->pc = load_address;
 	new->reg[0] = -1U - player_id;
+	ft_putnbr(new->reg[0]);
 	new->pid = *total_proc;
 	++*total_proc;
 	return (new);
@@ -41,13 +42,8 @@ t_proc	*spawn_process(uint64_t load_address, uint8_t player_id,
 
 void	init_child(t_corewar *vm, t_proc *lol, t_proc *child, t_instr *instr)
 {
-	ft_memcpy(child, lol, sizeof(*lol));
 	child->pid = vm->total_proc++;
-	child->cycles_to_exec = vm->cycle_count + 1;
-	if ((vm->arena[child->pc] - 1) <= 15)
-		child->cycles_to_exec =
-			instr->op_tab[vm->arena[child->pc] - 1].cycles_to_exec
-			+ vm->cycle_count;
+	fill_ins_proc(vm, instr, child);
 	insert(vm->mh, child);
 	++vm->nb_processes;
 }

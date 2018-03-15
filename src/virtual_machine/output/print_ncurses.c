@@ -27,11 +27,9 @@ void		print_arena(unsigned char *arena, char *color)
 		m = 0;
 		while (m < 64)
 		{
-			if (!color[n + m])
-				attron(A_BOLD);
-			attron(COLOR_PAIR(color[n + m] + 1));
-			mvprintw(pos, (m * 3) + 3, "%.2x", arena[n + m]);
-			attroff(A_BOLD);
+				attron(COLOR_PAIR(color[n + m] + 1));
+				mvprintw(pos, (m * 3) + 3, "%.2x", arena[n + m]);
+				attroff(COLOR_PAIR(color[n + m] + 1));
 			m += 1;
 		}
 		n += 64;

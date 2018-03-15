@@ -98,6 +98,15 @@ typedef	struct			s_player
 	char		die;
 }						t_player;
 
+typedef struct			s_inv
+{
+	uint8_t				val_arg[3];
+	unsigned char		opcode;
+	unsigned int		param[3];
+	uint32_t			save_pc;
+	int					ret;
+}						t_inv;
+
 typedef struct			s_process
 {
 	uint32_t	reg[REG_NUMBER];
@@ -107,6 +116,7 @@ typedef struct			s_process
 	int			player_id;
 	uint16_t	cycles_to_exec;
 	uint32_t	pid;
+	t_inv		inv;
 }						t_proc;
 
 typedef struct			s_min_heap
@@ -158,6 +168,7 @@ typedef struct			s_instr
 ** Engine
 */
 
+void	fill_ins_proc(t_corewar *vm, t_instr *ins, t_proc *proc);
 int32_t					engine(t_corewar *vm);
 void					key_action(t_corewar *vm);
 void					toggle_pause(t_corewar *vm);
@@ -165,7 +176,7 @@ void					dec_speed(t_corewar *vm);
 void					inc_speed(t_corewar *vm);
 void					one_cycle(t_corewar *vm);
 void					fork_update_window(t_proc *lol, t_corewar *vm);
-void					exec_instr_update_window(t_proc *proc, t_corewar *vm, char add);
+void					exec_instr_update_window(t_proc *proc, t_corewar *vm, char add, int value);
 void					print_ncurses(t_corewar *vm);
 void					print_breakdown(t_corewar *vm);
 
@@ -223,9 +234,9 @@ void					check_cycle_to_die(t_corewar *vm);
 
 int						replace_cod_oct(uint8_t octet, uint8_t op_code,
 					const t_op g_op_tab[17]);
-int						get_octet(char octet, t_instr *instr);
-void					la_balade(t_proc *lol, t_instr *instr);
-int						get_data(t_corewar *vm, t_proc *lol, t_instr *instr);
+int						get_octet(char octet, t_inv *inv, t_instr *instr);
+void					la_balade(t_proc *lol, t_instr *instr, t_inv *inv);
+int						get_data(t_corewar *vm, t_proc *lol, t_inv *inv, t_instr *instr);
 void					exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc);
 void					live(t_corewar *vm, t_proc *lol, t_instr *instr);
 void					ld(t_corewar *vm, t_proc *lol, t_instr *instr);
@@ -243,7 +254,7 @@ void					lld(t_corewar *vm, t_proc *lol, t_instr *instr);
 void					lldi(t_corewar *vm, t_proc *lol, t_instr *instr);
 void					ft_lfork(t_corewar *vm, t_proc *lol, t_instr *instr);
 void					aff(t_corewar *vm, t_proc *lol, t_instr *instr);
-void					get_one_arg(t_corewar *vm, t_proc *lol, t_instr *instr);
+int						get_one_arg(t_corewar *vm, t_proc *lol, t_inv *inv);
 int						reg_test(t_proc *lol, t_instr *instr, uint8_t i);
 
 /*

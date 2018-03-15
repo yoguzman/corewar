@@ -21,7 +21,8 @@ void	live(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	uint32_t	player_nb;
 
-	player_nb = -1U - instr->param[0];
+	(void)instr;
+	player_nb = -1U - lol->inv.param[0];
 	if (player_nb < MAX_PLAYERS)
 	{
 		++vm->player_table[player_nb].current_live;
@@ -30,14 +31,15 @@ void	live(t_corewar *vm, t_proc *lol, t_instr *instr)
 	}
 	++lol->current_live;
 	if (!vm->visual)
-		ft_printf("P\t%u | live %d\n", lol->pid, instr->param[0]);
+		ft_printf("P\t%u | live %d\n", lol->pid, lol->inv.param[0]);
 }
 
 int		reg_test(t_proc *lol, t_instr *instr, uint8_t i)
 {
-	if (instr->val_arg[i] == T_REG)
-		return (lol->reg[instr->param[i] - 1]);
-	return (instr->param[i]);
+	(void)instr;
+	if (lol->inv.val_arg[i] == T_REG)
+		return (lol->reg[lol->inv.param[i] - 1]);
+	return (lol->inv.param[i]);
 }
 
 void	ft_fork(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -50,35 +52,38 @@ void	ft_fork(t_corewar *vm, t_proc *lol, t_instr *instr)
 		free_min_heap(&vm->mh);
 		exit(EXIT_FAILURE);
 	}
-	init_child(vm, lol, child, instr);
-	child->pc = (instr->save_pc + ((short)instr->param[0] % IDX_MOD))
+	ft_memcpy(child, lol, sizeof(*lol));
+	child->pc = (lol->inv.save_pc + ((short)lol->inv.param[0] % IDX_MOD))
 		% MEM_SIZE;
+	init_child(vm, lol, child, instr);
 	if (vm->visual == 1)
 		fork_update_window(lol, vm);
 	if (!vm->visual)
-		ft_printf("P\t%u | fork %d (%d)\n", lol->pid, instr->param[0],
-				(instr->save_pc + ((short)instr->param[0] % IDX_MOD))
+		ft_printf("P\t%u | fork %d (%d)\n", lol->pid, lol->inv.param[0],
+				(lol->inv.save_pc + ((short)lol->inv.param[0] % IDX_MOD))
 				% MEM_SIZE);
 }
 
 void	zjmp(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
+	(void)instr;
 	(void)vm;
 	if (lol->carry == 1)
 	{
-		lol->pc = (instr->save_pc + ((short)instr->param[0] % IDX_MOD))
+		lol->pc = (lol->inv.save_pc + ((short)lol->inv.param[0] % IDX_MOD))
 			% MEM_SIZE;
 	}
 	if (!vm->visual)
-		ft_printf("P\t%u | zjmp %d (%s)\n", lol->pid, instr->param[0],
+		ft_printf("P\t%u | zjmp %d (%s)\n", lol->pid, lol->inv.param[0],
 				(lol->carry == 1 ? "OK" : "FAILED"));
 }
 
 void	aff(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
+	(void)instr;
 	(void)vm;
-	ft_putchar(lol->reg[instr->param[0] - 1] % 256);
+	ft_putchar(lol->reg[lol->inv.param[0] - 1] % 256);
 	if (!vm->visual)
-		ft_printf("P\t%u | aff r%d (%c)\n", lol->pid, instr->param[0],
-				lol->reg[instr->param[0] - 1] % 256);
+		ft_printf("P\t%u | aff r%d (%c)\n", lol->pid, lol->inv.param[0],
+				lol->reg[lol->inv.param[0] - 1] % 256);
 }
