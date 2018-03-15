@@ -61,7 +61,7 @@ int			engine(t_corewar *vm)
 		if (vm->paused == 0 || vm->one_cycle == 1)
 		{
 			if (!vm->visual)
-				printf("It is now cycle %u nb_proc %llu\n", vm->cycle_count + 1,
+				ft_printf("It is now cycle %u nb_proc %llu\n", vm->cycle_count + 1,
 						vm->nb_processes);
 			++(vm->cycle_count);
 			--(vm->cycle_to_die);

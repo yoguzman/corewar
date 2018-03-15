@@ -82,7 +82,7 @@ void	exec_instr(t_corewar *vm, t_instr *ins, t_proc *proc)
 
 	ret = 0;
 	if (vm->visual == 1)
-		exec_instr_update_window(proc, vm);
+		exec_instr_update_window(proc, vm, 2);
 	ins->opcode = vm->arena[proc->pc] - 1;
 	ins->save_pc = proc->pc;
 	proc->pc = (proc->pc + 1) % MEM_SIZE;
@@ -102,5 +102,5 @@ void	exec_instr(t_corewar *vm, t_instr *ins, t_proc *proc)
 	else
 		proc->cycles_to_exec += 1;
 	if (vm->visual == 1)
-		exec_instr_update_window(proc, vm);
+		exec_instr_update_window(proc, vm, 7);
 }

@@ -68,7 +68,7 @@ void		print_panel(t_corewar *vm)
 	mvprintw(2, 199, "** PAUSED **");
 	mvprintw(4, 199, "Cycles/second limit : %d", vm->cycles_sec);
 	mvprintw(7, 199, "Cycle : %d", vm->cycle_count);
-	mvprintw(9, 199, "Processes : %d", vm->total_proc);
+	mvprintw(9, 199, "Processes : %d", vm->nb_processes);
 	print_players_data(vm);
 	attron(COLOR_PAIR(6));
 	mvprintw(33, 199, "CYCLE_TO_DIE : %d", vm->cycle_to_die_max);
@@ -98,7 +98,7 @@ void		print_ncurses(t_corewar *vm)
 	vm->one_cycle = 0;
 }
 
-void		print_4b_in_arena(int offset, uint8_t *arena, t_proc *lol, int cnt)
+void		print_4b_in_arena(uint32_t offset, uint8_t *arena, t_proc *lol, int cnt)
 {
 	attron(COLOR_PAIR((-1U - lol->reg[0]) + 2));
 	while (cnt-- > 0)

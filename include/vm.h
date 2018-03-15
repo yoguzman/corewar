@@ -165,7 +165,7 @@ void					dec_speed(t_corewar *vm);
 void					inc_speed(t_corewar *vm);
 void					one_cycle(t_corewar *vm);
 void					fork_update_window(t_proc *lol, t_corewar *vm);
-void					exec_instr_update_window(t_proc *proc, t_corewar *vm);
+void					exec_instr_update_window(t_proc *proc, t_corewar *vm, char add);
 void					print_ncurses(t_corewar *vm);
 void					print_breakdown(t_corewar *vm);
 
@@ -190,7 +190,7 @@ void					clean_print_err_exit(const char *msg,
 void					print_mem(void *mem, uint64_t mem_size);
 void					print_players(t_player player_table[MAX_PLAYERS]);
 void					dump_arena(uint8_t arena[MEM_SIZE]);
-void					print_4b_in_arena(int offset, uint8_t *arena,
+void					print_4b_in_arena(uint32_t offset, uint8_t *arena,
 		t_proc *proc, int i);
 
 /*
