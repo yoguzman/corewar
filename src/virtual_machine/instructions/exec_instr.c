@@ -71,10 +71,10 @@ void	la_balade(t_proc *lol, t_instr *instr, t_inv *inv)
 			tojump = (instr->op_tab[inv->opcode].uses_index == 1 ? 2 : 4);
 		else if (inv->val_arg[i] == T_IND)
 			tojump = 2;
-		lol->pc += tojump;
+		lol->pc = (lol->pc + tojump) % MEM_SIZE;
 		i++;
 	}
-	lol->pc += 1;
+	lol->pc = (lol->pc + 1) % MEM_SIZE;
 }
 
 void	fill_ins_proc(t_corewar *vm, t_instr *ins, t_proc *proc)

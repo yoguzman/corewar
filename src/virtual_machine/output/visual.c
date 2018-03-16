@@ -38,7 +38,7 @@ void			fork_update_window(t_proc *lol, t_corewar *vm)
 			vm->arena[lol->pc]);
 	attroff(COLOR_PAIR((-1U - lol->reg[0]) + 2 + 5));
 	attron(COLOR_PAIR(6));
-	mvprintw(9, 199 + 12, "%d", vm->nb_processes);
+	mvprintw(9, 199 + 12, "%-10d", vm->nb_processes);
 	attroff(COLOR_PAIR(6));
 }
 

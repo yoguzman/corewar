@@ -29,11 +29,12 @@ void		loop_instr(t_corewar *vm, t_mh *mh, t_instr *instr)
 	}
 		uint64_t i;
 		i = 0;
-		while (i < vm->mh->pos)
-		{
-			exec_instr_update_window(mh->tab[i], vm, 7, mh->tab[i]->inv.save_pc);
-			++i;
-		}
+		if (vm->visual == 1)
+			while (i < vm->mh->pos)
+			{
+				exec_instr_update_window(mh->tab[i], vm, 7, mh->tab[i]->inv.save_pc);
+				++i;
+			}
 }
 
 void		visual_option_last(t_corewar *vm)
@@ -59,6 +60,7 @@ int			engine(t_corewar *vm)
 	t_instr	instr;
 
 	init_instr(&instr, vm);
+
 	if (vm->visual == 1)
 		print_ncurses(vm);
 	while (vm->mh->pos > 0)

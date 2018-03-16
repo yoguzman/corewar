@@ -1,0 +1,174 @@
+src/virtual_machine/clear_data.c:	free_champions(vm->player_table);
+src/virtual_machine/clear_data.c:	if (vm->mh)
+src/virtual_machine/clear_data.c:		free_min_heap(&(vm->mh));
+src/virtual_machine/clear_data.c:	free(vm->print_data);
+src/virtual_machine/clear_data.c:	free(vm->arena);
+src/virtual_machine/engine/check_live.c:			if (vm->visual == 1)
+src/virtual_machine/engine/check_live.c:			--vm->nb_processes;
+src/virtual_machine/engine/check_live.c:			if (vm->visual == 1)
+src/virtual_machine/engine/check_live.c:				mvprintw(9, 199 + 12, "%-10d", vm->nb_processes);
+src/virtual_machine/engine/check_live.c:	if (vm->cycle_to_die == 0)
+src/virtual_machine/engine/check_live.c:		ret = check_live_player(vm->player_table);
+src/virtual_machine/engine/check_live.c:		check_live_process(vm->mh, vm);
+src/virtual_machine/engine/check_live.c:		--vm->max_check;
+src/virtual_machine/engine/check_live.c:			vm->cycle_to_die_max -= CYCLE_DELTA;
+src/virtual_machine/engine/check_live.c:			vm->max_check = MAX_CHECKS;
+src/virtual_machine/engine/check_live.c:		if (vm->max_check == 0)
+src/virtual_machine/engine/check_live.c:			vm->cycle_to_die_max -= CYCLE_DELTA;
+src/virtual_machine/engine/check_live.c:		vm->cycle_to_die = vm->cycle_to_die_max;
+src/virtual_machine/engine/engine.c:	if (mh->tab[0]->cycles_to_exec - vm->cycle_count > 0)
+src/virtual_machine/engine/engine.c:	while (mh->pos > 0 && mh->tab[0]->cycles_to_exec - vm->cycle_count == 0)
+src/virtual_machine/engine/engine.c://		if (vm->visual == 1)
+src/virtual_machine/engine/engine.c:			while (i < vm->mh->pos)
+src/virtual_machine/engine/engine.c:	if (vm->visual == 1)
+src/virtual_machine/engine/engine.c:		mvprintw(7, 199 + 8, "%d", vm->cycle_count);
+src/virtual_machine/engine/engine.c:		usleep(vm->cycles_sec);
+src/virtual_machine/engine/engine.c:		vm->one_cycle = 0;
+src/virtual_machine/engine/engine.c:	if (vm->dump_limit > 0 && vm->dump_limit == vm->cycle_count)
+src/virtual_machine/engine/engine.c:		dump_arena(vm->arena);
+src/virtual_machine/engine/engine.c:	if (vm->visual == 1)
+src/virtual_machine/engine/engine.c:	while (vm->mh->pos > 0)
+src/virtual_machine/engine/engine.c:		if (vm->visual == 1)
+src/virtual_machine/engine/engine.c:		if (vm->paused == 0 || vm->one_cycle == 1)
+src/virtual_machine/engine/engine.c:			if (!vm->visual)
+src/virtual_machine/engine/engine.c:				ft_printf("It is now cycle %u nb_proc %llu\n", vm->cycle_count + 1,
+src/virtual_machine/engine/engine.c:						vm->nb_processes);
+src/virtual_machine/engine/engine.c:			++(vm->cycle_count);
+src/virtual_machine/engine/engine.c:			--(vm->cycle_to_die);
+src/virtual_machine/engine/engine.c:			if (vm->mh->pos == 0)
+src/virtual_machine/engine/engine.c:			loop_instr(vm, vm->mh, &instr);
+src/virtual_machine/engine/process.c:	child->pid = vm->total_proc++;
+src/virtual_machine/engine/process.c:	insert(vm->mh, child);
+src/virtual_machine/engine/process.c:	++vm->nb_processes;
+src/virtual_machine/instructions/calc_instr.c:	if (!vm->visual)
+src/virtual_machine/instructions/calc_instr.c:	if (!vm->visual)
+src/virtual_machine/instructions/calc_instr.c:	if (!vm->visual)
+src/virtual_machine/instructions/calc_instr.c:	if (!vm->visual)
+src/virtual_machine/instructions/calc_instr.c:	if (!vm->visual)
+src/virtual_machine/instructions/exec_instr.c:	proc->inv.opcode = vm->arena[proc->pc] - 1;
+src/virtual_machine/instructions/exec_instr.c:			+ vm->cycle_count;
+src/virtual_machine/instructions/exec_instr.c://	if (vm->visual == 1)
+src/virtual_machine/instructions/exec_instr.c://	if (vm->visual == 1)
+src/virtual_machine/instructions/get_instr_data.c:	inv->param[i] = vm->arena[lol->pc];
+src/virtual_machine/instructions/get_instr_data.c:		inv->param[i] += vm->arena[lol->pc];
+src/virtual_machine/instructions/get_instr_data.c:	if (get_octet(vm->arena[lol->pc], inv, ins) == -1)
+src/virtual_machine/instructions/get_instr_data.c:	tamer = replace_cod_oct(vm->arena[lol->pc], inv->opcode, ins->op_tab);
+src/virtual_machine/instructions/init_instr.c:	vm->mh = init_heap(vm->player_table, &(vm->total_proc), vm, instr);
+src/virtual_machine/instructions/init_instr.c:	if (!vm->mh)
+src/virtual_machine/instructions/init_instr.c:	vm->cycle_to_die_max = CYCLE_TO_DIE;
+src/virtual_machine/instructions/init_instr.c:	vm->cycle_to_die = vm->cycle_to_die_max;
+src/virtual_machine/instructions/init_instr.c:	vm->paused = 0;
+src/virtual_machine/instructions/init_instr.c:	vm->max_check = MAX_CHECKS;
+src/virtual_machine/instructions/ld_st_instr.c:				vm->arena[((uint32_t)offset + i) % MEM_SIZE] << ((3 - i) << 3);
+src/virtual_machine/instructions/ld_st_instr.c:	if (!vm->visual)
+src/virtual_machine/instructions/ld_st_instr.c:			vm->arena[((uint32_t)offset + i) % MEM_SIZE] << ((3 - i) << 3);
+src/virtual_machine/instructions/ld_st_instr.c:	if (!vm->visual)
+src/virtual_machine/instructions/ld_st_instr.c:			vm->arena[((uint32_t)offset + i) % MEM_SIZE] =
+src/virtual_machine/instructions/ld_st_instr.c:		if (vm->visual == 1)
+src/virtual_machine/instructions/ld_st_instr.c:			print_4b_in_arena((uint32_t)offset % MEM_SIZE, vm->arena, lol, i);
+src/virtual_machine/instructions/ld_st_instr.c:	if (!vm->visual)
+src/virtual_machine/instructions/ld_st_instr.c:		vm->arena[((uint32_t)to_jump + i) % MEM_SIZE] =
+src/virtual_machine/instructions/ld_st_instr.c:	if (vm->visual == 1)
+src/virtual_machine/instructions/ld_st_instr.c:		print_4b_in_arena((uint32_t)to_jump % MEM_SIZE, vm->arena, lol, i);
+src/virtual_machine/instructions/ld_st_instr.c:	if (!vm->visual)
+src/virtual_machine/instructions/long_instr.c:				vm->arena[(offset + i) % MEM_SIZE] << ((3 - i) << 3);
+src/virtual_machine/instructions/long_instr.c:	if (!vm->visual)
+src/virtual_machine/instructions/long_instr.c:			vm->arena[(offset + i) % MEM_SIZE] << ((3 - i) << 3);
+src/virtual_machine/instructions/long_instr.c:	if (!vm->visual)
+src/virtual_machine/instructions/long_instr.c:		free_min_heap(&vm->mh);
+src/virtual_machine/instructions/long_instr.c://	if (vm->visual == 1)
+src/virtual_machine/instructions/long_instr.c:	if (!vm->visual)
+src/virtual_machine/instructions/misc_instr.c:		++vm->player_table[player_nb].current_live;
+src/virtual_machine/instructions/misc_instr.c:		if (vm->visual == 1)
+src/virtual_machine/instructions/misc_instr.c:	if (!vm->visual)
+src/virtual_machine/instructions/misc_instr.c:		free_min_heap(&vm->mh);
+src/virtual_machine/instructions/misc_instr.c:	//if (vm->visual == 1)
+src/virtual_machine/instructions/misc_instr.c:	if (!vm->visual)
+src/virtual_machine/instructions/misc_instr.c:	if (!vm->visual)
+src/virtual_machine/instructions/misc_instr.c:	if (!vm->visual)
+src/virtual_machine/main.c:	vm->total_proc = 1;
+src/virtual_machine/main.c:	vm->players = 0;
+src/virtual_machine/main.c:	vm->cycles_sec = 50;
+src/virtual_machine/main.c:	vm->cycle_count = 0;
+src/virtual_machine/main.c:	if (!(vm->arena = (unsigned char*)malloc(MEM_SIZE)))
+src/virtual_machine/main.c:	if (!(vm->print_data = (char*)malloc(MEM_SIZE)))
+src/virtual_machine/main.c:	ft_bzero(vm->arena, MEM_SIZE);
+src/virtual_machine/main.c:	ft_bzero(vm->print_data, MEM_SIZE);
+src/virtual_machine/main.c:	ft_bzero(vm->player_table, sizeof(vm->player_table));
+src/virtual_machine/main.c:	vm->paused = 1;
+src/virtual_machine/main.c:	vm->player_id = -1;
+src/virtual_machine/main.c:	if (vm->visual == 0)
+src/virtual_machine/main.c:		print_players(vm->player_table);
+src/virtual_machine/main.c:	vm->nb_processes = vm->players;
+src/virtual_machine/main.c:	while (n < vm->players)
+src/virtual_machine/main.c:		vm->player_table[n].current_live = 20;
+src/virtual_machine/main.c:		vm->player_table[n].last_live = 12;
+src/virtual_machine/output/key_events.c:	if (vm->paused)
+src/virtual_machine/output/key_events.c:	vm->paused = !vm->paused;
+src/virtual_machine/output/key_events.c:	if (vm->dec_sec > 10)
+src/virtual_machine/output/key_events.c:		vm->dec_sec -= 10;
+src/virtual_machine/output/key_events.c:	vm->cycles_sec = 1000000 / vm->dec_sec;
+src/virtual_machine/output/key_events.c:	mvprintw(4, 199 + 22, "%-4d", vm->dec_sec);
+src/virtual_machine/output/key_events.c:	if (vm->dec_sec < 1000)
+src/virtual_machine/output/key_events.c:		vm->dec_sec += 10;
+src/virtual_machine/output/key_events.c:	vm->cycles_sec = 1000000 / vm->dec_sec;
+src/virtual_machine/output/key_events.c:	mvprintw(4, 199 + 22, "%-4d", vm->dec_sec);
+src/virtual_machine/output/key_events.c:	vm->paused = 1;
+src/virtual_machine/output/key_events.c:	vm->one_cycle = 1;
+src/virtual_machine/output/print_breakdown.c:	while (n < vm->players)
+src/virtual_machine/output/print_breakdown.c:		total_last_live += vm->player_table[n].last_live;
+src/virtual_machine/output/print_breakdown.c:		total_current_live += vm->player_table[n].current_live;
+src/virtual_machine/output/print_breakdown.c:	while (n < vm->players)
+src/virtual_machine/output/print_breakdown.c:		vm->player_table[n].last_breakdown =
+src/virtual_machine/output/print_breakdown.c:			vm->player_table[n].last_live * 50 / total_last_live;
+src/virtual_machine/output/print_breakdown.c:		vm->player_table[n].current_breakdown =
+src/virtual_machine/output/print_breakdown.c:			vm->player_table[n].current_live * 50 / total_current_live;
+src/virtual_machine/output/print_breakdown.c:	while (n < vm->players)
+src/virtual_machine/output/print_breakdown.c:		printf("curr ==> %d\n", vm->player_table[n].current_breakdown);
+src/virtual_machine/output/print_breakdown.c:		printf("last ==> %d\n", vm->player_table[n].last_breakdown);
+src/virtual_machine/output/print_breakdown.c:		mvprintw(28, i, "%.*s", vm->player_table[n].current_breakdown,
+src/virtual_machine/output/print_breakdown.c:		i += vm->player_table[n].current_breakdown;
+src/virtual_machine/output/print_breakdown.c:		mvprintw(31, j, "%.*s", vm->player_table[n].last_breakdown, breakdown);
+src/virtual_machine/output/print_breakdown.c:		j += vm->player_table[n].last_breakdown;
+src/virtual_machine/output/print_ncurses.c:	while (count < vm->players)
+src/virtual_machine/output/print_ncurses.c:		mvprintw(pos, 211, "%s", vm->player_table[count].header.prog_name);
+src/virtual_machine/output/print_ncurses.c:	mvprintw(4, 199, "Cycles/second limit : %d", vm->cycles_sec);
+src/virtual_machine/output/print_ncurses.c:	mvprintw(7, 199, "Cycle : %d", vm->cycle_count);
+src/virtual_machine/output/print_ncurses.c:	mvprintw(9, 199, "Processes : %d", vm->nb_processes);
+src/virtual_machine/output/print_ncurses.c:	mvprintw(33, 199, "CYCLE_TO_DIE : %d", vm->cycle_to_die_max);
+src/virtual_machine/output/print_ncurses.c:	print_arena(vm->arena, vm->print_data);
+src/virtual_machine/output/print_ncurses.c:	vm->paused = 1;
+src/virtual_machine/output/print_ncurses.c:	vm->cycles_sec = 1000000 / 50;
+src/virtual_machine/output/print_ncurses.c:	vm->dec_sec = 50;
+src/virtual_machine/output/print_ncurses.c:	vm->one_cycle = 0;
+src/virtual_machine/output/visual.c:			vm->arena[lol->pc]);
+src/virtual_machine/output/visual.c:	mvprintw(9, 199 + 12, "%-10d", vm->nb_processes);
+src/virtual_machine/output/visual.c:			vm->arena[value]);
+src/virtual_machine/parsing/load_champion.c:	if (vm->players == MAX_PLAYERS)
+src/virtual_machine/parsing/load_champion.c:		clean_print_err_exit(E4, vm->player_table);
+src/virtual_machine/parsing/load_champion.c:		clean_print_err_exit(E3, vm->player_table);
+src/virtual_machine/parsing/load_champion.c:		clean_print_err_exit(NULL, vm->player_table);
+src/virtual_machine/parsing/load_champion.c:	if (vm->player_id == -1)
+src/virtual_machine/parsing/load_champion.c:		vm->player_id = get_empty_slot(vm->player_table);
+src/virtual_machine/parsing/load_champion.c:	++vm->players;
+src/virtual_machine/parsing/load_champion.c:		clean_print_err_exit(E1, vm->player_table);
+src/virtual_machine/parsing/load_champion.c:		clean_print_err_exit(E2, vm->player_table);
+src/virtual_machine/parsing/load_champion.c:		clean_print_err_exit(NULL, vm->player_table);
+src/virtual_machine/parsing/load_champion.c:	vm->player_id = -1;
+src/virtual_machine/parsing/load_champion.c:		if (vm->player_table[i].code != NULL)
+src/virtual_machine/parsing/load_champion.c:			ft_memcpy(vm->arena + offset,
+src/virtual_machine/parsing/load_champion.c:					vm->player_table[i].code,
+src/virtual_machine/parsing/load_champion.c:					vm->player_table[i].header.prog_size);
+src/virtual_machine/parsing/load_champion.c:			vm->player_table[i].load_address = i;
+src/virtual_machine/parsing/load_champion.c:			vm->print_data[n + offset] = i + 1 + 5;
+src/virtual_machine/parsing/load_champion.c:			while (++n < vm->player_table[i].header.prog_size)
+src/virtual_machine/parsing/load_champion.c:				vm->print_data[n + offset] = i + 1;
+src/virtual_machine/parsing/load_champion.c:			vm->player_table[i].load_address = offset;
+src/virtual_machine/parsing/load_champion.c:			offset += (MEM_SIZE / vm->players);
+src/virtual_machine/parsing/parse_argv.c:	vm->dump_limit = ft_atoi(argv[1]);
+src/virtual_machine/parsing/parse_argv.c:	if (vm->dump_limit > INT_MAX)
+src/virtual_machine/parsing/parse_argv.c:		vm->dump_limit = DUMP_DEFAULT;
+src/virtual_machine/parsing/parse_argv.c:	vm->visual = 1;
+src/virtual_machine/parsing/parse_argv.c:	vm->player_id = ft_atoi(argv[1]) - 1;
+src/virtual_machine/parsing/parse_argv.c:	if (vm->player_id > MAX_PLAYERS - 1 || THIS_PLAYER.code != NULL)
+src/virtual_machine/parsing/parse_argv.c:		vm->player_id = get_empty_slot(vm->player_table);

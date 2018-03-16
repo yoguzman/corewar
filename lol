@@ -1,3 +1,8 @@
+!!!!!!! AND TODAY'S MATCHUP IS ... !!!!!!!
+>> Player 1 :
+	\__ Name : "Celebration Funebre v0.99pl42"
+	\__ Size : 325 bytes
+	\__ Comment : ("Jour J")
 -1It is now cycle 1 nb_proc 1
 It is now cycle 2 nb_proc 1
 It is now cycle 3 nb_proc 1
@@ -252,7 +257,7 @@ It is now cycle 237 nb_proc 1
 It is now cycle 238 nb_proc 1
 It is now cycle 239 nb_proc 1
 It is now cycle 240 nb_proc 1
-P	1 | add s1 s129247793 r4
+P	1 | add s1 s39490 r4
 It is now cycle 241 nb_proc 1
 It is now cycle 242 nb_proc 1
 It is now cycle 243 nb_proc 1
@@ -263,7 +268,7 @@ It is now cycle 247 nb_proc 1
 It is now cycle 248 nb_proc 1
 It is now cycle 249 nb_proc 1
 It is now cycle 250 nb_proc 1
-P	1 | sub s1 s129247793 r10
+P	1 | sub s1 s39490 r10
 It is now cycle 251 nb_proc 1
 It is now cycle 252 nb_proc 1
 It is now cycle 253 nb_proc 1
@@ -1134,7 +1139,7 @@ It is now cycle 1112 nb_proc 2
 It is now cycle 1113 nb_proc 2
 It is now cycle 1114 nb_proc 2
 It is now cycle 1115 nb_proc 2
-P	2 | add s1 s129247793 r4
+P	2 | add s1 s39490 r4
 It is now cycle 1116 nb_proc 2
 It is now cycle 1117 nb_proc 2
 It is now cycle 1118 nb_proc 2
@@ -1145,7 +1150,7 @@ It is now cycle 1122 nb_proc 2
 It is now cycle 1123 nb_proc 2
 It is now cycle 1124 nb_proc 2
 It is now cycle 1125 nb_proc 2
-P	2 | sub s1 s129247793 r10
+P	2 | sub s1 s39490 r10
 It is now cycle 1126 nb_proc 2
 It is now cycle 1127 nb_proc 2
 It is now cycle 1128 nb_proc 2
@@ -2019,7 +2024,7 @@ It is now cycle 1987 nb_proc 4
 It is now cycle 1988 nb_proc 4
 It is now cycle 1989 nb_proc 4
 It is now cycle 1990 nb_proc 4
-P	4 | add s1 s129247793 r4
+P	4 | add s1 s39490 r4
 It is now cycle 1991 nb_proc 4
 It is now cycle 1992 nb_proc 4
 It is now cycle 1993 nb_proc 4
@@ -2030,7 +2035,7 @@ It is now cycle 1997 nb_proc 4
 It is now cycle 1998 nb_proc 4
 It is now cycle 1999 nb_proc 4
 It is now cycle 2000 nb_proc 4
-P	4 | sub s1 s129247793 r10
+P	4 | sub s1 s39490 r10
 It is now cycle 2001 nb_proc 4
 It is now cycle 2002 nb_proc 4
 It is now cycle 2003 nb_proc 4
@@ -2946,7 +2951,7 @@ It is now cycle 2862 nb_proc 8
 It is now cycle 2863 nb_proc 8
 It is now cycle 2864 nb_proc 8
 It is now cycle 2865 nb_proc 8
-P	8 | add s1 s129247793 r4
+P	8 | add s1 s39490 r4
 P	6 | sti r15 0 -182 to_jump = 3775 write = 4281860607
 P	5 | sti r15 0 -194 to_jump = 3763 write = 33554431
 P	3 | sti r15 0 -190 to_jump = 3767 write = 4278936591
@@ -2961,7 +2966,7 @@ It is now cycle 2872 nb_proc 8
 It is now cycle 2873 nb_proc 8
 It is now cycle 2874 nb_proc 8
 It is now cycle 2875 nb_proc 8
-P	8 | sub s1 s129247793 r10
+P	8 | sub s1 s39490 r10
 It is now cycle 2876 nb_proc 8
 It is now cycle 2877 nb_proc 8
 It is now cycle 2878 nb_proc 8
@@ -4065,7 +4070,7 @@ It is now cycle 3737 nb_proc 12
 It is now cycle 3738 nb_proc 12
 It is now cycle 3739 nb_proc 12
 It is now cycle 3740 nb_proc 12
-P	12 | add s1 s129247793 r4
+P	12 | add s1 s39490 r4
 P	10 | sti r15 0 -182 to_jump = 3789 write = 4281860607
 P	9 | sti r15 0 -194 to_jump = 3777 write = 33554431
 P	7 | sti r15 0 -190 to_jump = 3781 write = 4278936591
@@ -4084,7 +4089,7 @@ It is now cycle 3747 nb_proc 12
 It is now cycle 3748 nb_proc 12
 It is now cycle 3749 nb_proc 12
 It is now cycle 3750 nb_proc 12
-P	12 | sub s1 s129247793 r10
+P	12 | sub s1 s39490 r10
 It is now cycle 3751 nb_proc 12
 It is now cycle 3752 nb_proc 12
 It is now cycle 3753 nb_proc 12
@@ -5267,7 +5272,7 @@ It is now cycle 4547 nb_proc 15
 It is now cycle 4548 nb_proc 15
 It is now cycle 4549 nb_proc 15
 It is now cycle 4550 nb_proc 15
-  70     77     70     77     70     77     70     77   It is now cycle 4551 nb_proc 15
+It is now cycle 4551 nb_proc 15
 It is now cycle 4552 nb_proc 15
 It is now cycle 4553 nb_proc 15
 It is now cycle 4554 nb_proc 15
@@ -5463,7 +5468,7 @@ It is now cycle 4668 nb_proc 16
 It is now cycle 4669 nb_proc 16
 It is now cycle 4670 nb_proc 16
 It is now cycle 4671 nb_proc 16
-  190     191   It is now cycle 4672 nb_proc 16
+It is now cycle 4672 nb_proc 16
 It is now cycle 4673 nb_proc 16
 It is now cycle 4674 nb_proc 16
 It is now cycle 4675 nb_proc 16
@@ -5727,7 +5732,7 @@ It is now cycle 4827 nb_proc 16
 It is now cycle 4828 nb_proc 16
 It is now cycle 4829 nb_proc 16
 It is now cycle 4830 nb_proc 16
-  179     182     179     182     179     182     179     182   It is now cycle 4831 nb_proc 16
+It is now cycle 4831 nb_proc 16
 It is now cycle 4832 nb_proc 16
 It is now cycle 4833 nb_proc 16
 It is now cycle 4834 nb_proc 16
@@ -6147,7 +6152,7 @@ P	5 | zjmp -200 (OK)
 P	3 | zjmp -200 (OK)
 P	1 | zjmp -200 (OK)
 It is now cycle 5086 nb_proc 16
-  3931     3934     3931     3934     3931     3934     3931     3934   It is now cycle 5087 nb_proc 16
+It is now cycle 5087 nb_proc 16
 It is now cycle 5088 nb_proc 16
 It is now cycle 5089 nb_proc 16
 It is now cycle 5090 nb_proc 16
@@ -6734,7 +6739,7 @@ It is now cycle 5422 nb_proc 19
 It is now cycle 5423 nb_proc 19
 P	18 | sti r15 0 -182 to_jump = 3713 write = 4281860607
 It is now cycle 5424 nb_proc 19
-  315     316   It is now cycle 5425 nb_proc 19
+It is now cycle 5425 nb_proc 19
 P	6 | live -1
 P	5 | live -1
 P	3 | live -1
@@ -6754,7 +6759,7 @@ It is now cycle 5431 nb_proc 19
 It is now cycle 5432 nb_proc 19
 It is now cycle 5433 nb_proc 19
 It is now cycle 5434 nb_proc 19
-  322     323   It is now cycle 5435 nb_proc 19
+It is now cycle 5435 nb_proc 19
 It is now cycle 5436 nb_proc 19
 It is now cycle 5437 nb_proc 19
 P	19 | zjmp -220 (OK)
@@ -8217,7 +8222,7 @@ It is now cycle 6153 nb_proc 20
 P	19 | zjmp 0 (OK)
 It is now cycle 6154 nb_proc 20
 It is now cycle 6155 nb_proc 20
-  557     560     557     560     557     560     557     560   It is now cycle 6156 nb_proc 20
+It is now cycle 6156 nb_proc 20
 P	15 | zjmp 0 (OK)
 P	8 | zjmp 0 (OK)
 It is now cycle 6157 nb_proc 20
@@ -8343,9 +8348,9 @@ It is now cycle 6218 nb_proc 20
 P	17 | live -1
 It is now cycle 6219 nb_proc 20
 It is now cycle 6220 nb_proc 20
-  571     574     571     574     571     574   P	6 | sti r15 0 -182 to_jump = 438 write = 4281860607
+P	6 | sti r15 0 -182 to_jump = 438 write = 4281860607
 P	5 | sti r15 0 -194 to_jump = 426 write = 33554431
-  571     574   P	3 | sti r15 0 -190 to_jump = 430 write = 4278936591
+P	3 | sti r15 0 -190 to_jump = 430 write = 4278936591
 P	1 | sti r15 0 -186 to_jump = 434 write = 3593
 It is now cycle 6221 nb_proc 20
 It is now cycle 6222 nb_proc 20
@@ -8683,7 +8688,7 @@ P	1 | sti r15 0 -186 to_jump = -133 write = 3593
 It is now cycle 6386 nb_proc 20
 It is now cycle 6387 nb_proc 20
 It is now cycle 6388 nb_proc 20
-  684     687   It is now cycle 6389 nb_proc 20
+It is now cycle 6389 nb_proc 20
 It is now cycle 6390 nb_proc 20
 It is now cycle 6391 nb_proc 20
 P	20 | live -1
@@ -8808,7 +8813,7 @@ P	12 | zjmp 0 (OK)
 It is now cycle 6452 nb_proc 20
 It is now cycle 6453 nb_proc 20
 P	19 | zjmp 0 (OK)
-  698     701   It is now cycle 6454 nb_proc 20
+It is now cycle 6454 nb_proc 20
 It is now cycle 6455 nb_proc 20
 P	10 | zjmp -200 (OK)
 P	9 | zjmp -200 (OK)
@@ -8851,7 +8856,7 @@ P	5 | live -1
 P	3 | live -1
 P	1 | live -1
 It is now cycle 6471 nb_proc 20
-  868     869   P	12 | zjmp 0 (OK)
+P	12 | zjmp 0 (OK)
 It is now cycle 6472 nb_proc 20
 It is now cycle 6473 nb_proc 20
 P	19 | zjmp 0 (OK)
@@ -8954,7 +8959,7 @@ It is now cycle 6522 nb_proc 20
 It is now cycle 6523 nb_proc 20
 P	17 | zjmp -200 (FAILED)
 It is now cycle 6524 nb_proc 20
-  873     876   P	16 | zjmp 0 (OK)
+P	16 | zjmp 0 (OK)
 It is now cycle 6525 nb_proc 20
 P	6 | live -1
 P	5 | live -1
@@ -9019,7 +9024,7 @@ It is now cycle 6556 nb_proc 20
 P	15 | zjmp 0 (OK)
 P	8 | zjmp 0 (OK)
 It is now cycle 6557 nb_proc 20
-  746     749   It is now cycle 6558 nb_proc 20
+It is now cycle 6558 nb_proc 20
 It is now cycle 6559 nb_proc 20
 It is now cycle 6560 nb_proc 20
 It is now cycle 6561 nb_proc 20
@@ -9079,7 +9084,7 @@ It is now cycle 6586 nb_proc 20
 It is now cycle 6587 nb_proc 20
 It is now cycle 6588 nb_proc 20
 It is now cycle 6589 nb_proc 20
-  887     890   It is now cycle 6590 nb_proc 20
+It is now cycle 6590 nb_proc 20
 It is now cycle 6591 nb_proc 20
 P	12 | zjmp 0 (OK)
 It is now cycle 6592 nb_proc 20
@@ -9144,7 +9149,7 @@ P	7 | zjmp -200 (OK)
 P	2 | zjmp -200 (OK)
 It is now cycle 6621 nb_proc 20
 It is now cycle 6622 nb_proc 20
-  760     763   It is now cycle 6623 nb_proc 20
+It is now cycle 6623 nb_proc 20
 It is now cycle 6624 nb_proc 20
 P	16 | zjmp 0 (OK)
 It is now cycle 6625 nb_proc 20
@@ -9291,7 +9296,7 @@ It is now cycle 6691 nb_proc 20
 P	12 | zjmp 0 (OK)
 It is now cycle 6692 nb_proc 20
 It is now cycle 6693 nb_proc 20
-  935     938   P	19 | zjmp 0 (OK)
+P	19 | zjmp 0 (OK)
 It is now cycle 6694 nb_proc 20
 It is now cycle 6695 nb_proc 20
 It is now cycle 6696 nb_proc 20
@@ -9354,7 +9359,7 @@ It is now cycle 6726 nb_proc 20
 It is now cycle 6727 nb_proc 20
 It is now cycle 6728 nb_proc 20
 It is now cycle 6729 nb_proc 20
-  811     814   It is now cycle 6730 nb_proc 20
+It is now cycle 6730 nb_proc 20
 P	10 | zjmp -200 (OK)
 P	9 | zjmp -200 (OK)
 P	7 | zjmp -200 (OK)
@@ -9418,7 +9423,7 @@ P	13 | zjmp -200 (OK)
 P	11 | zjmp -200 (OK)
 P	4 | zjmp -200 (OK)
 It is now cycle 6758 nb_proc 20
-  949     952   It is now cycle 6759 nb_proc 20
+It is now cycle 6759 nb_proc 20
 It is now cycle 6760 nb_proc 20
 It is now cycle 6761 nb_proc 20
 It is now cycle 6762 nb_proc 20
@@ -9590,7 +9595,7 @@ P	3 | zjmp -200 (OK)
 P	1 | zjmp -200 (OK)
 It is now cycle 6846 nb_proc 20
 It is now cycle 6847 nb_proc 20
-  873     876   P	14 | sti r15 0 -186 to_jump = 2640 write = 3593
+P	14 | sti r15 0 -186 to_jump = 2640 write = 3593
 P	13 | sti r15 0 -186 to_jump = 2640 write = 3593
 P	11 | sti r15 0 -186 to_jump = 2640 write = 3593
 P	4 | sti r15 0 -186 to_jump = 2640 write = 3593
@@ -9627,7 +9632,7 @@ It is now cycle 6863 nb_proc 20
 It is now cycle 6864 nb_proc 20
 P	16 | zjmp 0 (OK)
 It is now cycle 6865 nb_proc 20
-  1000     1003   It is now cycle 6866 nb_proc 20
+It is now cycle 6866 nb_proc 20
 It is now cycle 6867 nb_proc 20
 P	14 | zjmp -200 (OK)
 P	13 | zjmp -200 (OK)
@@ -9724,7 +9729,7 @@ P	1 | live -1
 It is now cycle 6911 nb_proc 20
 P	12 | zjmp 0 (OK)
 It is now cycle 6912 nb_proc 20
-  887     890   P	17 | sti r15 0 0 to_jump = 1074 write = 0
+P	17 | sti r15 0 0 to_jump = 1074 write = 0
 It is now cycle 6913 nb_proc 20
 P	19 | zjmp 0 (OK)
 It is now cycle 6914 nb_proc 20
@@ -9860,7 +9865,7 @@ It is now cycle 6981 nb_proc 20
 P	17 | live -1
 It is now cycle 6982 nb_proc 20
 It is now cycle 6983 nb_proc 20
-  1062     1065   It is now cycle 6984 nb_proc 20
+It is now cycle 6984 nb_proc 20
 P	16 | zjmp 0 (OK)
 It is now cycle 6985 nb_proc 20
 P	10 | sti r15 0 -182 to_jump = 830 write = 4281860607
@@ -9931,7 +9936,7 @@ P	9 | live -1
 P	7 | live -1
 P	2 | live -1
 It is now cycle 7016 nb_proc 20
-  935     938   P	15 | zjmp 0 (OK)
+P	15 | zjmp 0 (OK)
 P	8 | zjmp 0 (OK)
 It is now cycle 7017 nb_proc 20
 It is now cycle 7018 nb_proc 20
@@ -9994,7 +9999,7 @@ P	1 | sti r15 0 -186 to_jump = 1695 write = 3593
 It is now cycle 7046 nb_proc 20
 It is now cycle 7047 nb_proc 20
 It is now cycle 7048 nb_proc 20
-  1076     1079   It is now cycle 7049 nb_proc 20
+It is now cycle 7049 nb_proc 20
 It is now cycle 7050 nb_proc 20
 It is now cycle 7051 nb_proc 20
 P	12 | zjmp 0 (OK)
@@ -10058,7 +10063,7 @@ It is now cycle 7078 nb_proc 20
 It is now cycle 7079 nb_proc 20
 It is now cycle 7080 nb_proc 20
 It is now cycle 7081 nb_proc 20
-  949     952   P	17 | zjmp -200 (FAILED)
+P	17 | zjmp -200 (FAILED)
 It is now cycle 7082 nb_proc 20
 It is now cycle 7083 nb_proc 20
 It is now cycle 7084 nb_proc 20
@@ -10196,7 +10201,7 @@ P	2 | sti r15 0 -186 to_jump = 259 write = 3593
 It is now cycle 7151 nb_proc 20
 P	12 | zjmp 0 (OK)
 It is now cycle 7152 nb_proc 20
-  1124     1127   P	14 | live -1
+P	14 | live -1
 P	13 | live -1
 P	11 | live -1
 P	4 | live -1
@@ -10272,7 +10277,7 @@ P	1 | live -1
 It is now cycle 7186 nb_proc 20
 It is now cycle 7187 nb_proc 20
 It is now cycle 7188 nb_proc 20
-  1000     1003   P	17 | live -1
+P	17 | live -1
 It is now cycle 7189 nb_proc 20
 It is now cycle 7190 nb_proc 20
 It is now cycle 7191 nb_proc 20
@@ -10329,7 +10334,7 @@ It is now cycle 7216 nb_proc 20
 P	15 | zjmp 0 (OK)
 P	8 | zjmp 0 (OK)
 It is now cycle 7217 nb_proc 20
-  1138     1141   It is now cycle 7218 nb_proc 20
+It is now cycle 7218 nb_proc 20
 It is now cycle 7219 nb_proc 20
 It is now cycle 7220 nb_proc 20
 It is now cycle 7221 nb_proc 20
@@ -10545,7 +10550,7 @@ It is now cycle 7321 nb_proc 20
 It is now cycle 7322 nb_proc 20
 It is now cycle 7323 nb_proc 20
 It is now cycle 7324 nb_proc 20
-  1189     1192   P	16 | zjmp 0 (OK)
+P	16 | zjmp 0 (OK)
 It is now cycle 7325 nb_proc 20
 It is now cycle 7326 nb_proc 20
 It is now cycle 7327 nb_proc 20
@@ -10671,7 +10676,7 @@ It is now cycle 7387 nb_proc 20
 It is now cycle 7388 nb_proc 20
 P	18 | sti r15 0 -182 to_jump = 263 write = 4281860607
 It is now cycle 7389 nb_proc 20
-  1203     1206   It is now cycle 7390 nb_proc 20
+It is now cycle 7390 nb_proc 20
 P	10 | zjmp -200 (OK)
 P	9 | zjmp -200 (OK)
 P	7 | zjmp -200 (OK)
@@ -10885,7 +10890,7 @@ It is now cycle 7491 nb_proc 20
 P	12 | zjmp 0 (OK)
 It is now cycle 7492 nb_proc 20
 It is now cycle 7493 nb_proc 20
-  1251     1254   P	19 | zjmp 0 (OK)
+P	19 | zjmp 0 (OK)
 It is now cycle 7494 nb_proc 20
 It is now cycle 7495 nb_proc 20
 It is now cycle 7496 nb_proc 20
@@ -10986,7 +10991,7 @@ P	5 | sti r15 0 -194 to_jump = -14 write = 33554431
 P	3 | sti r15 0 -190 to_jump = -10 write = 4278936591
 P	1 | sti r15 0 -186 to_jump = -6 write = 3593
 It is now cycle 7541 nb_proc 20
-  1327     1330   It is now cycle 7542 nb_proc 20
+It is now cycle 7542 nb_proc 20
 It is now cycle 7543 nb_proc 20
 It is now cycle 7544 nb_proc 20
 P	16 | zjmp 0 (OK)
@@ -11014,7 +11019,7 @@ P	15 | zjmp 0 (OK)
 P	8 | zjmp 0 (OK)
 It is now cycle 7557 nb_proc 20
 It is now cycle 7558 nb_proc 20
-  1265     1268   It is now cycle 7559 nb_proc 20
+It is now cycle 7559 nb_proc 20
 It is now cycle 7560 nb_proc 20
 P	6 | zjmp -200 (OK)
 P	5 | zjmp -200 (OK)
@@ -11227,7 +11232,7 @@ P	18 | sti r15 0 -182 to_jump = 3414 write = 4281860607
 It is now cycle 7664 nb_proc 20
 P	16 | zjmp 0 (OK)
 It is now cycle 7665 nb_proc 20
-  1316     1319   P	10 | zjmp -200 (OK)
+P	10 | zjmp -200 (OK)
 P	9 | zjmp -200 (OK)
 P	7 | zjmp -200 (OK)
 P	2 | zjmp -200 (OK)
@@ -11344,7 +11349,7 @@ P	3 | zjmp -200 (OK)
 P	1 | zjmp -200 (OK)
 It is now cycle 7726 nb_proc 15
 It is now cycle 7727 nb_proc 15
-  1327     1330   P	14 | sti r15 0 -186 to_jump = 3712 write = 3593
+P	14 | sti r15 0 -186 to_jump = 3712 write = 3593
 P	13 | sti r15 0 -186 to_jump = 3712 write = 3593
 P	11 | sti r15 0 -186 to_jump = 3712 write = 3593
 P	4 | sti r15 0 -186 to_jump = 3712 write = 3593
@@ -11532,7 +11537,7 @@ It is now cycle 7831 nb_proc 15
 It is now cycle 7832 nb_proc 15
 It is now cycle 7833 nb_proc 15
 It is now cycle 7834 nb_proc 15
-  1378     1381   It is now cycle 7835 nb_proc 15
+It is now cycle 7835 nb_proc 15
 P	6 | zjmp -200 (OK)
 P	5 | zjmp -200 (OK)
 P	3 | zjmp -200 (OK)
@@ -11652,7 +11657,7 @@ It is now cycle 7896 nb_proc 15
 It is now cycle 7897 nb_proc 15
 It is now cycle 7898 nb_proc 15
 It is now cycle 7899 nb_proc 15
-  1392     1395   It is now cycle 7900 nb_proc 15
+It is now cycle 7900 nb_proc 15
 P	6 | live -1
 P	5 | live -1
 P	3 | live -1
@@ -11829,13 +11834,13 @@ P	5 | zjmp -200 (OK)
 P	3 | zjmp -200 (OK)
 P	1 | zjmp -200 (OK)
 It is now cycle 8001 nb_proc 15
-  1516     1517   It is now cycle 8002 nb_proc 15
+It is now cycle 8002 nb_proc 15
 P	14 | sti r15 0 -186 to_jump = 2767 write = 3593
 P	13 | sti r15 0 -186 to_jump = 2767 write = 3593
 P	11 | sti r15 0 -186 to_jump = 2767 write = 3593
 P	4 | sti r15 0 -186 to_jump = 2767 write = 3593
 It is now cycle 8003 nb_proc 15
-  1440     1443   It is now cycle 8004 nb_proc 15
+It is now cycle 8004 nb_proc 15
 It is now cycle 8005 nb_proc 15
 P	10 | live -1
 P	9 | live -1
@@ -11916,7 +11921,7 @@ P	7 | zjmp -200 (OK)
 P	2 | zjmp -200 (OK)
 It is now cycle 8051 nb_proc 15
 It is now cycle 8052 nb_proc 15
-  1519     1522   It is now cycle 8053 nb_proc 15
+It is now cycle 8053 nb_proc 15
 It is now cycle 8054 nb_proc 15
 It is now cycle 8055 nb_proc 15
 P	6 | zjmp -200 (OK)
@@ -11949,7 +11954,7 @@ P	1 | live -1
 It is now cycle 8066 nb_proc 15
 It is now cycle 8067 nb_proc 15
 It is now cycle 8068 nb_proc 15
-  1454     1457   P	18 | zjmp -200 (OK)
+P	18 | zjmp -200 (OK)
 It is now cycle 8069 nb_proc 15
 It is now cycle 8070 nb_proc 15
 It is now cycle 8071 nb_proc 15
@@ -12136,7 +12141,7 @@ It is now cycle 8172 nb_proc 15
 It is now cycle 8173 nb_proc 15
 It is now cycle 8174 nb_proc 15
 It is now cycle 8175 nb_proc 15
-  1505     1508   P	6 | live -1
+P	6 | live -1
 P	5 | live -1
 P	3 | live -1
 P	1 | live -1
@@ -12311,7 +12316,7 @@ It is now cycle 8272 nb_proc 15
 It is now cycle 8273 nb_proc 15
 It is now cycle 8274 nb_proc 15
 It is now cycle 8275 nb_proc 15
-  1624     1631   P	6 | zjmp -200 (OK)
+P	6 | zjmp -200 (OK)
 P	5 | zjmp -200 (OK)
 P	3 | zjmp -200 (OK)
 P	1 | zjmp -200 (OK)
@@ -12399,7 +12404,7 @@ It is now cycle 8323 nb_proc 15
 P	18 | sti r15 0 -182 to_jump = 1146 write = 4281860607
 It is now cycle 8324 nb_proc 15
 It is now cycle 8325 nb_proc 15
-  1632     1635   P	10 | zjmp -200 (OK)
+P	10 | zjmp -200 (OK)
 P	9 | zjmp -200 (OK)
 P	7 | zjmp -200 (OK)
 P	2 | zjmp -200 (OK)
@@ -12512,7 +12517,7 @@ P	3 | zjmp -200 (OK)
 P	1 | zjmp -200 (OK)
 It is now cycle 8386 nb_proc 15
 It is now cycle 8387 nb_proc 15
-  1643     1646   P	14 | sti r15 0 -186 to_jump = 1444 write = 3593
+P	14 | sti r15 0 -186 to_jump = 1444 write = 3593
 P	13 | sti r15 0 -186 to_jump = 1444 write = 3593
 P	11 | sti r15 0 -186 to_jump = 1444 write = 3593
 P	4 | sti r15 0 -186 to_jump = 1444 write = 3593
@@ -13342,7 +13347,7 @@ It is now cycle 8845 nb_proc 15
 P	20 | live -1
 It is now cycle 8846 nb_proc 15
 It is now cycle 8847 nb_proc 15
-  1832     1835   P	14 | zjmp -200 (OK)
+P	14 | zjmp -200 (OK)
 P	13 | zjmp -200 (OK)
 P	11 | zjmp -200 (OK)
 P	4 | zjmp -200 (OK)
@@ -14240,7 +14245,7 @@ P	13 | zjmp -200 (OK)
 P	11 | zjmp -200 (OK)
 P	4 | zjmp -200 (OK)
 It is now cycle 9343 nb_proc 15
-  2024     2027   It is now cycle 9344 nb_proc 15
+It is now cycle 9344 nb_proc 15
 It is now cycle 9345 nb_proc 15
 It is now cycle 9346 nb_proc 15
 P	17 | live -65025
@@ -14424,7 +14429,7 @@ It is now cycle 9444 nb_proc 15
 It is now cycle 9445 nb_proc 15
 It is now cycle 9446 nb_proc 15
 It is now cycle 9447 nb_proc 15
-  2072     2075   It is now cycle 9448 nb_proc 15
+It is now cycle 9448 nb_proc 15
 It is now cycle 9449 nb_proc 15
 P	17 | zjmp -200 (FAILED)
 It is now cycle 9450 nb_proc 15
@@ -14537,7 +14542,7 @@ It is now cycle 9509 nb_proc 15
 It is now cycle 9510 nb_proc 15
 It is now cycle 9511 nb_proc 15
 It is now cycle 9512 nb_proc 15
-  2086     2089   It is now cycle 9513 nb_proc 15
+It is now cycle 9513 nb_proc 15
 It is now cycle 9514 nb_proc 15
 It is now cycle 9515 nb_proc 15
 P	10 | sti r15 0 -182 to_jump = 328 write = 4281860607
@@ -14711,7 +14716,7 @@ P	1 | live -1
 It is now cycle 9606 nb_proc 15
 It is now cycle 9607 nb_proc 15
 It is now cycle 9608 nb_proc 15
-  2148     2151   It is now cycle 9609 nb_proc 15
+It is now cycle 9609 nb_proc 15
 It is now cycle 9610 nb_proc 15
 It is now cycle 9611 nb_proc 15
 It is now cycle 9612 nb_proc 15
@@ -14728,7 +14733,7 @@ P	4 | zjmp -200 (OK)
 It is now cycle 9618 nb_proc 15
 P	17 | live -16777216
 It is now cycle 9619 nb_proc 15
-  2137     2140   It is now cycle 9620 nb_proc 15
+It is now cycle 9620 nb_proc 15
 It is now cycle 9621 nb_proc 15
 It is now cycle 9622 nb_proc 15
 It is now cycle 9623 nb_proc 15
@@ -14835,7 +14840,7 @@ P	9 | sti r15 0 -194 to_jump = 3845 write = 33554431
 P	7 | sti r15 0 -190 to_jump = 3849 write = 4278936591
 P	2 | sti r15 0 -186 to_jump = 3853 write = 3593
 It is now cycle 9681 nb_proc 15
-  2148     2151   It is now cycle 9682 nb_proc 15
+It is now cycle 9682 nb_proc 15
 P	14 | live -1
 P	13 | live -1
 P	11 | live -1
@@ -15024,7 +15029,7 @@ It is now cycle 9785 nb_proc 15
 It is now cycle 9786 nb_proc 15
 It is now cycle 9787 nb_proc 15
 It is now cycle 9788 nb_proc 15
-  2199     2202   It is now cycle 9789 nb_proc 15
+It is now cycle 9789 nb_proc 15
 It is now cycle 9790 nb_proc 15
 P	10 | sti r15 0 -182 to_jump = 3479 write = 4281860607
 P	9 | sti r15 0 -194 to_jump = 3467 write = 33554431
@@ -15143,7 +15148,7 @@ P	1 | sti r15 0 -186 to_jump = 248 write = 3593
 It is now cycle 9851 nb_proc 15
 It is now cycle 9852 nb_proc 15
 It is now cycle 9853 nb_proc 15
-  2213     2216   It is now cycle 9854 nb_proc 15
+It is now cycle 9854 nb_proc 15
 P	17 | zjmp -200 (FAILED)
 It is now cycle 9855 nb_proc 15
 It is now cycle 9856 nb_proc 15
@@ -15324,7 +15329,7 @@ P	7 | sti r15 0 -190 to_jump = 2904 write = 4278936591
 P	2 | sti r15 0 -186 to_jump = 2908 write = 3593
 It is now cycle 9956 nb_proc 15
 It is now cycle 9957 nb_proc 15
-  2261     2264   P	14 | live -1
+P	14 | live -1
 P	13 | live -1
 P	11 | live -1
 P	4 | live -1
@@ -15441,7 +15446,7 @@ It is now cycle 10019 nb_proc 15
 It is now cycle 10020 nb_proc 15
 It is now cycle 10021 nb_proc 15
 It is now cycle 10022 nb_proc 15
-  2275     2278   It is now cycle 10023 nb_proc 15
+It is now cycle 10023 nb_proc 15
 It is now cycle 10024 nb_proc 15
 It is now cycle 10025 nb_proc 15
 P	20 | sti r15 0 -182 to_jump = 3290 write = 4281860607
@@ -15523,7 +15528,7 @@ P	13 | live -1
 P	11 | live -1
 P	4 | live -1
 It is now cycle 10068 nb_proc 15
-  2337     2340   It is now cycle 10069 nb_proc 15
+It is now cycle 10069 nb_proc 15
 It is now cycle 10070 nb_proc 15
 P	6 | sti r15 0 -182 to_jump = 3592 write = 4281860607
 P	5 | sti r15 0 -194 to_jump = 3580 write = 33554431
@@ -15630,7 +15635,7 @@ It is now cycle 10126 nb_proc 15
 It is now cycle 10127 nb_proc 15
 It is now cycle 10128 nb_proc 15
 It is now cycle 10129 nb_proc 15
-  2326     2329   It is now cycle 10130 nb_proc 15
+It is now cycle 10130 nb_proc 15
 It is now cycle 10131 nb_proc 15
 It is now cycle 10132 nb_proc 15
 It is now cycle 10133 nb_proc 15
@@ -16900,7 +16905,7 @@ It is now cycle 10831 nb_proc 15
 It is now cycle 10832 nb_proc 15
 It is now cycle 10833 nb_proc 15
 It is now cycle 10834 nb_proc 15
-  2653     2656   It is now cycle 10835 nb_proc 15
+It is now cycle 10835 nb_proc 15
 P	10 | sti r15 0 -182 to_jump = -112 write = 4281860607
 P	9 | sti r15 0 -194 to_jump = -124 write = 33554431
 P	7 | sti r15 0 -190 to_jump = -120 write = 4278936591
@@ -17979,7 +17984,7 @@ It is now cycle 11428 nb_proc 15
 It is now cycle 11429 nb_proc 15
 P	18 | sti r15 0 -182 to_jump = 1905 write = 4281860607
 It is now cycle 11430 nb_proc 15
-  2845     2848   It is now cycle 11431 nb_proc 15
+It is now cycle 11431 nb_proc 15
 It is now cycle 11432 nb_proc 15
 P	14 | zjmp -200 (OK)
 P	13 | zjmp -200 (OK)
@@ -18167,7 +18172,7 @@ It is now cycle 11531 nb_proc 15
 It is now cycle 11532 nb_proc 15
 It is now cycle 11533 nb_proc 15
 It is now cycle 11534 nb_proc 15
-  2893     2896   It is now cycle 11535 nb_proc 15
+It is now cycle 11535 nb_proc 15
 It is now cycle 11536 nb_proc 15
 It is now cycle 11537 nb_proc 15
 It is now cycle 11538 nb_proc 15
@@ -18271,19 +18276,19 @@ It is now cycle 11596 nb_proc 15
 It is now cycle 11597 nb_proc 15
 It is now cycle 11598 nb_proc 15
 It is now cycle 11599 nb_proc 15
-  2907     2910   It is now cycle 11600 nb_proc 15
+It is now cycle 11600 nb_proc 15
 It is now cycle 11601 nb_proc 15
 It is now cycle 11602 nb_proc 15
 It is now cycle 11603 nb_proc 15
 It is now cycle 11604 nb_proc 15
 It is now cycle 11605 nb_proc 15
-  2969     2972   P	10 | sti r15 0 -182 to_jump = 1338 write = 4281860607
+P	10 | sti r15 0 -182 to_jump = 1338 write = 4281860607
 P	9 | sti r15 0 -194 to_jump = 1326 write = 33554431
 P	7 | sti r15 0 -190 to_jump = 1330 write = 4278936591
 P	2 | sti r15 0 -186 to_jump = 1334 write = 3593
 It is now cycle 11606 nb_proc 15
 It is now cycle 11607 nb_proc 15
-  2958     2961     2958     2961     2958     2961     2958     2961   It is now cycle 11608 nb_proc 15
+It is now cycle 11608 nb_proc 15
 It is now cycle 11609 nb_proc 15
 P	20 | live -16777216
 It is now cycle 11610 nb_proc 15
@@ -18387,7 +18392,7 @@ It is now cycle 11667 nb_proc 15
 It is now cycle 11668 nb_proc 15
 It is now cycle 11669 nb_proc 15
 P	18 | zjmp -200 (OK)
-  2969     2972     2969     2972     2969     2972     2969     2972   It is now cycle 11670 nb_proc 15
+It is now cycle 11670 nb_proc 15
 It is now cycle 11671 nb_proc 15
 It is now cycle 11672 nb_proc 15
 It is now cycle 11673 nb_proc 15
@@ -18453,7 +18458,7 @@ It is now cycle 11708 nb_proc 15
 It is now cycle 11709 nb_proc 15
 It is now cycle 11710 nb_proc 15
 It is now cycle 11711 nb_proc 15
-  2958     2961   It is now cycle 11712 nb_proc 15
+It is now cycle 11712 nb_proc 15
 It is now cycle 11713 nb_proc 15
 It is now cycle 11714 nb_proc 15
 It is now cycle 11715 nb_proc 15
@@ -18559,7 +18564,7 @@ It is now cycle 11771 nb_proc 15
 It is now cycle 11772 nb_proc 15
 P	17 | live -16777216
 It is now cycle 11773 nb_proc 15
-  2969     2972   It is now cycle 11774 nb_proc 15
+It is now cycle 11774 nb_proc 15
 It is now cycle 11775 nb_proc 15
 P	6 | sti r15 0 -182 to_jump = 1829 write = 4281860607
 P	5 | sti r15 0 -194 to_jump = 1817 write = 33554431
@@ -18572,7 +18577,7 @@ It is now cycle 11779 nb_proc 15
 P	18 | zjmp -200 (OK)
 It is now cycle 11780 nb_proc 15
 It is now cycle 11781 nb_proc 15
-  3020     3023     3020     3023     3020     3023     3020     3023   It is now cycle 11782 nb_proc 15
+It is now cycle 11782 nb_proc 15
 It is now cycle 11783 nb_proc 15
 P	20 | live -16777216
 It is now cycle 11784 nb_proc 15
@@ -18678,7 +18683,7 @@ P	9 | zjmp -200 (OK)
 P	7 | zjmp -200 (OK)
 P	2 | zjmp -200 (OK)
 It is now cycle 11846 nb_proc 15
-  3034     3037     3034     3037     3034     3037     3034     3037   It is now cycle 11847 nb_proc 15
+It is now cycle 11847 nb_proc 15
 It is now cycle 11848 nb_proc 15
 It is now cycle 11849 nb_proc 15
 It is now cycle 11850 nb_proc 15
@@ -18740,7 +18745,7 @@ It is now cycle 11882 nb_proc 15
 It is now cycle 11883 nb_proc 15
 It is now cycle 11884 nb_proc 15
 It is now cycle 11885 nb_proc 15
-  3020     3023   P	6 | sti r15 0 -182 to_jump = 1451 write = 4281860607
+P	6 | sti r15 0 -182 to_jump = 1451 write = 4281860607
 P	5 | sti r15 0 -194 to_jump = 1439 write = 33554431
 P	3 | sti r15 0 -190 to_jump = 1443 write = 4278936591
 P	1 | sti r15 0 -186 to_jump = 1447 write = 3593
@@ -18845,7 +18850,7 @@ It is now cycle 11947 nb_proc 15
 It is now cycle 11948 nb_proc 15
 It is now cycle 11949 nb_proc 15
 It is now cycle 11950 nb_proc 15
-  3034     3037     3082     3085     3082     3085     3082     3085     3082     3085   It is now cycle 11951 nb_proc 15
+It is now cycle 11951 nb_proc 15
 It is now cycle 11952 nb_proc 15
 It is now cycle 11953 nb_proc 15
 It is now cycle 11954 nb_proc 15
@@ -18952,9 +18957,9 @@ It is now cycle 12013 nb_proc 15
 P	17 | zjmp -200 (FAILED)
 It is now cycle 12014 nb_proc 15
 It is now cycle 12015 nb_proc 15
-  3096     3099     3096     3099     3096     3099   P	6 | zjmp -200 (OK)
+P	6 | zjmp -200 (OK)
 P	5 | zjmp -200 (OK)
-  3096     3099   P	3 | zjmp -200 (OK)
+P	3 | zjmp -200 (OK)
 P	1 | zjmp -200 (OK)
 It is now cycle 12016 nb_proc 15
 It is now cycle 12017 nb_proc 15
@@ -19017,7 +19022,7 @@ It is now cycle 12051 nb_proc 15
 It is now cycle 12052 nb_proc 15
 It is now cycle 12053 nb_proc 15
 It is now cycle 12054 nb_proc 15
-  3082     3085   P	18 | zjmp -200 (OK)
+P	18 | zjmp -200 (OK)
 It is now cycle 12055 nb_proc 15
 It is now cycle 12056 nb_proc 15
 It is now cycle 12057 nb_proc 15
@@ -19057,7 +19062,7 @@ P	4 | live -1
 It is now cycle 12073 nb_proc 15
 It is now cycle 12074 nb_proc 15
 It is now cycle 12075 nb_proc 15
-  3158     3161   P	10 | live -1
+P	10 | live -1
 P	9 | live -1
 P	7 | live -1
 P	2 | live -1
@@ -19120,7 +19125,7 @@ It is now cycle 12116 nb_proc 15
 It is now cycle 12117 nb_proc 15
 It is now cycle 12118 nb_proc 15
 It is now cycle 12119 nb_proc 15
-  3096     3099   P	18 | live -1
+P	18 | live -1
 It is now cycle 12120 nb_proc 15
 P	10 | zjmp -200 (OK)
 P	9 | zjmp -200 (OK)
@@ -19138,7 +19143,7 @@ P	3 | zjmp -200 (OK)
 P	1 | zjmp -200 (OK)
 It is now cycle 12126 nb_proc 15
 It is now cycle 12127 nb_proc 15
-  3147     3150     3147     3150     3147     3150     3147     3150   It is now cycle 12128 nb_proc 15
+It is now cycle 12128 nb_proc 15
 It is now cycle 12129 nb_proc 15
 P	20 | live -16777216
 It is now cycle 12130 nb_proc 15
@@ -19242,7 +19247,7 @@ It is now cycle 12187 nb_proc 15
 P	17 | live -1
 It is now cycle 12188 nb_proc 15
 It is now cycle 12189 nb_proc 15
-  3158     3161     3158     3161     3158     3161     3158     3161   It is now cycle 12190 nb_proc 15
+It is now cycle 12190 nb_proc 15
 P	6 | live -1
 P	5 | live -1
 P	3 | live -1
@@ -19308,7 +19313,7 @@ P	9 | zjmp -200 (OK)
 P	7 | zjmp -200 (OK)
 P	2 | zjmp -200 (OK)
 It is now cycle 12231 nb_proc 15
-  3147     3150   It is now cycle 12232 nb_proc 15
+It is now cycle 12232 nb_proc 15
 P	17 | zjmp -200 (FAILED)
 It is now cycle 12233 nb_proc 15
 It is now cycle 12234 nb_proc 15
@@ -19413,7 +19418,7 @@ P	1 | zjmp -200 (OK)
 It is now cycle 12291 nb_proc 15
 It is now cycle 12292 nb_proc 15
 It is now cycle 12293 nb_proc 15
-  3158     3159   It is now cycle 12294 nb_proc 15
+It is now cycle 12294 nb_proc 15
 It is now cycle 12295 nb_proc 15
 P	10 | live -1
 P	9 | live -1
@@ -19429,7 +19434,7 @@ P	5 | live -1
 P	3 | live -1
 P	1 | live -1
 It is now cycle 12301 nb_proc 15
-  3209     3212     3209     3212     3209     3212     3209     3212   It is now cycle 12302 nb_proc 15
+It is now cycle 12302 nb_proc 15
 It is now cycle 12303 nb_proc 15
 It is now cycle 12304 nb_proc 15
 It is now cycle 12305 nb_proc 15
@@ -19494,7 +19499,7 @@ It is now cycle 12341 nb_proc 15
 It is now cycle 12342 nb_proc 15
 It is now cycle 12343 nb_proc 15
 It is now cycle 12344 nb_proc 15
-  3161     3164   It is now cycle 12345 nb_proc 15
+It is now cycle 12345 nb_proc 15
 P	6 | zjmp -200 (OK)
 P	5 | zjmp -200 (OK)
 P	3 | zjmp -200 (OK)
@@ -19531,7 +19536,7 @@ It is now cycle 12364 nb_proc 15
 P	18 | sti r15 0 -182 to_jump = 2788 write = 4281860607
 It is now cycle 12365 nb_proc 15
 It is now cycle 12366 nb_proc 15
-  3223     3226     3223     3226     3223     3226     3223     3226   It is now cycle 12367 nb_proc 15
+It is now cycle 12367 nb_proc 15
 It is now cycle 12368 nb_proc 15
 It is now cycle 12369 nb_proc 15
 It is now cycle 12370 nb_proc 15
@@ -19673,7 +19678,7 @@ P	2 | zjmp -200 (OK)
 It is now cycle 12451 nb_proc 15
 It is now cycle 12452 nb_proc 15
 It is now cycle 12453 nb_proc 15
-  3209     3212   It is now cycle 12454 nb_proc 15
+It is now cycle 12454 nb_proc 15
 It is now cycle 12455 nb_proc 15
 P	6 | zjmp -200 (OK)
 P	5 | zjmp -200 (OK)
@@ -19704,7 +19709,7 @@ It is now cycle 12467 nb_proc 15
 It is now cycle 12468 nb_proc 15
 It is now cycle 12469 nb_proc 15
 It is now cycle 12470 nb_proc 15
-  3271     3274     3271     3274     3271     3274     3271     3274   It is now cycle 12471 nb_proc 15
+It is now cycle 12471 nb_proc 15
 It is now cycle 12472 nb_proc 15
 It is now cycle 12473 nb_proc 15
 It is now cycle 12474 nb_proc 15
@@ -19781,7 +19786,7 @@ P	2 | live -1
 It is now cycle 12516 nb_proc 15
 It is now cycle 12517 nb_proc 15
 It is now cycle 12518 nb_proc 15
-  3223     3226   P	17 | sti r15 0 0 to_jump = 3348 write = 0
+P	17 | sti r15 0 0 to_jump = 3348 write = 0
 It is now cycle 12519 nb_proc 15
 It is now cycle 12520 nb_proc 15
 P	6 | live -1
@@ -19805,7 +19810,7 @@ It is now cycle 12532 nb_proc 15
 It is now cycle 12533 nb_proc 15
 It is now cycle 12534 nb_proc 15
 It is now cycle 12535 nb_proc 15
-  3285     3288     3285     3288     3285     3288     3285     3288   It is now cycle 12536 nb_proc 15
+It is now cycle 12536 nb_proc 15
 It is now cycle 12537 nb_proc 15
 It is now cycle 12538 nb_proc 15
 P	17 | zjmp -200 (FAILED)
@@ -19995,7 +20000,7 @@ It is now cycle 12645 nb_proc 15
 It is now cycle 12646 nb_proc 15
 It is now cycle 12647 nb_proc 15
 P	17 | live -1
-  3336     3339     3336     3339     3336     3339     3336     3339   It is now cycle 12648 nb_proc 15
+It is now cycle 12648 nb_proc 15
 It is now cycle 12649 nb_proc 15
 It is now cycle 12650 nb_proc 15
 P	10 | sti r15 0 -182 to_jump = 1843 write = 4281860607
@@ -20106,7 +20111,7 @@ P	3 | sti r15 0 -190 to_jump = 2704 write = 4278936591
 P	1 | sti r15 0 -186 to_jump = 2708 write = 3593
 It is now cycle 12711 nb_proc 15
 It is now cycle 12712 nb_proc 15
-  3350     3353     3350     3353     3350     3353     3350     3353   It is now cycle 12713 nb_proc 15
+It is now cycle 12713 nb_proc 15
 It is now cycle 12714 nb_proc 15
 P	18 | zjmp -200 (OK)
 It is now cycle 12715 nb_proc 15
@@ -20292,7 +20297,7 @@ P	5 | sti r15 0 -194 to_jump = 2322 write = 33554431
 P	3 | sti r15 0 -190 to_jump = 2326 write = 4278936591
 P	1 | sti r15 0 -186 to_jump = 2330 write = 3593
 It is now cycle 12821 nb_proc 15
-  3398     3401     3398     3401     3398     3401     3398     3401   It is now cycle 12822 nb_proc 15
+It is now cycle 12822 nb_proc 15
 It is now cycle 12823 nb_proc 15
 It is now cycle 12824 nb_proc 15
 P	18 | zjmp -200 (OK)
@@ -20351,7 +20356,7 @@ It is now cycle 12853 nb_proc 15
 It is now cycle 12854 nb_proc 15
 It is now cycle 12855 nb_proc 15
 It is now cycle 12856 nb_proc 15
-  3474     3477   It is now cycle 12857 nb_proc 15
+It is now cycle 12857 nb_proc 15
 It is now cycle 12858 nb_proc 15
 It is now cycle 12859 nb_proc 15
 P	18 | sti r15 0 -182 to_jump = 1087 write = 4281860607
@@ -20393,7 +20398,7 @@ It is now cycle 12883 nb_proc 15
 It is now cycle 12884 nb_proc 15
 It is now cycle 12885 nb_proc 15
 It is now cycle 12886 nb_proc 15
-  3412     3415     3412     3415     3412     3415     3412     3415   It is now cycle 12887 nb_proc 15
+It is now cycle 12887 nb_proc 15
 It is now cycle 12888 nb_proc 15
 It is now cycle 12889 nb_proc 15
 P	18 | live -1
@@ -20583,7 +20588,7 @@ It is now cycle 12995 nb_proc 15
 It is now cycle 12996 nb_proc 15
 It is now cycle 12997 nb_proc 15
 It is now cycle 12998 nb_proc 15
-  3463     3466     3463     3466     3463     3466     3463     3466   It is now cycle 12999 nb_proc 15
+It is now cycle 12999 nb_proc 15
 P	18 | live -1
 It is now cycle 13000 nb_proc 15
 P	10 | zjmp -200 (OK)
@@ -20688,9 +20693,9 @@ It is now cycle 13058 nb_proc 15
 It is now cycle 13059 nb_proc 15
 It is now cycle 13060 nb_proc 15
 P	20 | zjmp -200 (OK)
-  3474     3477     3474     3477     3474     3477   P	6 | zjmp -200 (OK)
+P	6 | zjmp -200 (OK)
 P	5 | zjmp -200 (OK)
-  3474     3477   P	3 | zjmp -200 (OK)
+P	3 | zjmp -200 (OK)
 P	1 | zjmp -200 (OK)
 It is now cycle 13061 nb_proc 15
 It is now cycle 13062 nb_proc 15
@@ -20882,7 +20887,7 @@ P	3 | zjmp -200 (OK)
 P	1 | zjmp -200 (OK)
 It is now cycle 13171 nb_proc 15
 It is now cycle 13172 nb_proc 15
-  3525     3528     3525     3528     3525     3528     3525     3528   It is now cycle 13173 nb_proc 15
+It is now cycle 13173 nb_proc 15
 It is now cycle 13174 nb_proc 15
 It is now cycle 13175 nb_proc 15
 P	10 | live -1
@@ -20993,7 +20998,7 @@ P	3 | live -1
 P	1 | live -1
 It is now cycle 13236 nb_proc 15
 It is now cycle 13237 nb_proc 15
-  3539     3542     3539     3542     3539     3542     3539     3542   It is now cycle 13238 nb_proc 15
+It is now cycle 13238 nb_proc 15
 It is now cycle 13239 nb_proc 15
 It is now cycle 13240 nb_proc 15
 It is now cycle 13241 nb_proc 15
@@ -21148,7 +21153,7 @@ P	9 | zjmp -200 (OK)
 P	7 | zjmp -200 (OK)
 P	2 | zjmp -200 (OK)
 It is now cycle 13331 nb_proc 15
-  3663     3664   It is now cycle 13332 nb_proc 15
+It is now cycle 13332 nb_proc 15
 It is now cycle 13333 nb_proc 15
 It is now cycle 13334 nb_proc 15
 It is now cycle 13335 nb_proc 15
@@ -21177,7 +21182,7 @@ P	5 | live -1
 P	3 | live -1
 P	1 | live -1
 It is now cycle 13346 nb_proc 15
-  3587     3590     3587     3590     3587     3590     3587     3590   It is now cycle 13347 nb_proc 15
+It is now cycle 13347 nb_proc 15
 It is now cycle 13348 nb_proc 15
 It is now cycle 13349 nb_proc 15
 It is now cycle 13350 nb_proc 15
@@ -21228,7 +21233,7 @@ It is now cycle 13379 nb_proc 15
 It is now cycle 13380 nb_proc 15
 It is now cycle 13381 nb_proc 15
 It is now cycle 13382 nb_proc 15
-  3666     3669   It is now cycle 13383 nb_proc 15
+It is now cycle 13383 nb_proc 15
 It is now cycle 13384 nb_proc 15
 P	18 | live -1
 It is now cycle 13385 nb_proc 15
@@ -21278,7 +21283,7 @@ It is now cycle 13409 nb_proc 15
 P	18 | sti r15 0 -182 to_jump = 3293 write = 4281860607
 It is now cycle 13410 nb_proc 15
 It is now cycle 13411 nb_proc 15
-  3601     3604     3601     3604     3601     3604     3601     3604   It is now cycle 13412 nb_proc 15
+It is now cycle 13412 nb_proc 15
 It is now cycle 13413 nb_proc 15
 It is now cycle 13414 nb_proc 15
 It is now cycle 13415 nb_proc 15
@@ -21468,7 +21473,7 @@ It is now cycle 13520 nb_proc 15
 It is now cycle 13521 nb_proc 15
 It is now cycle 13522 nb_proc 15
 It is now cycle 13523 nb_proc 15
-  3652     3655     3652     3655     3652     3655     3652     3655   It is now cycle 13524 nb_proc 15
+It is now cycle 13524 nb_proc 15
 It is now cycle 13525 nb_proc 15
 It is now cycle 13526 nb_proc 15
 It is now cycle 13527 nb_proc 15
@@ -21853,7 +21858,7 @@ It is now cycle 13733 nb_proc 15
 It is now cycle 13734 nb_proc 15
 It is now cycle 13735 nb_proc 15
 It is now cycle 13736 nb_proc 15
-  3790     3793   It is now cycle 13737 nb_proc 15
+It is now cycle 13737 nb_proc 15
 It is now cycle 13738 nb_proc 15
 It is now cycle 13739 nb_proc 15
 P	18 | sti r15 0 -182 to_jump = 2159 write = 4281860607
@@ -22775,7 +22780,7 @@ P	7 | sti r15 0 -190 to_jump = 450 write = 4278936591
 P	2 | sti r15 0 -186 to_jump = 454 write = 3593
 It is now cycle 14246 nb_proc 15
 It is now cycle 14247 nb_proc 15
-  3979     3982   It is now cycle 14248 nb_proc 15
+It is now cycle 14248 nb_proc 15
 P	14 | live -1
 P	13 | live -1
 P	11 | live -1
@@ -24645,7 +24650,7 @@ It is now cycle 15304 nb_proc 16
 It is now cycle 15305 nb_proc 16
 It is now cycle 15306 nb_proc 16
 It is now cycle 15307 nb_proc 16
-  3991     3994   It is now cycle 15308 nb_proc 16
+It is now cycle 15308 nb_proc 16
 It is now cycle 15309 nb_proc 16
 P	18 | live -1
 It is now cycle 15310 nb_proc 16
@@ -26426,7 +26431,7 @@ P	3 | zjmp -200 (OK)
 P	1 | zjmp -200 (OK)
 It is now cycle 16306 nb_proc 17
 It is now cycle 16307 nb_proc 17
-  3991     3994   It is now cycle 16308 nb_proc 17
+It is now cycle 16308 nb_proc 17
 P	14 | sti r15 0 -186 to_jump = 2220 write = 3593
 P	13 | sti r15 0 -186 to_jump = 2220 write = 3593
 P	11 | sti r15 0 -186 to_jump = 2220 write = 3593
@@ -26703,7 +26708,7 @@ It is now cycle 16459 nb_proc 17
 It is now cycle 16460 nb_proc 17
 It is now cycle 16461 nb_proc 17
 It is now cycle 16462 nb_proc 17
-  4044     4047   It is now cycle 16463 nb_proc 17
+It is now cycle 16463 nb_proc 17
 It is now cycle 16464 nb_proc 17
 P	18 | live -1
 It is now cycle 16465 nb_proc 17
@@ -26903,7 +26908,7 @@ It is now cycle 16571 nb_proc 18
 It is now cycle 16572 nb_proc 18
 It is now cycle 16573 nb_proc 18
 It is now cycle 16574 nb_proc 18
-  4095     4098   P	18 | live -1
+P	18 | live -1
 It is now cycle 16575 nb_proc 18
 P	10 | zjmp -200 (OK)
 P	9 | zjmp -200 (OK)
@@ -26988,7 +26993,7 @@ P	5 | sti r15 0 -194 to_jump = 1569 write = 33554431
 P	3 | sti r15 0 -190 to_jump = 1573 write = 4278936591
 P	1 | sti r15 0 -186 to_jump = 1577 write = 3593
 It is now cycle 16616 nb_proc 18
-  13     16   It is now cycle 16617 nb_proc 18
+It is now cycle 16617 nb_proc 18
 It is now cycle 16618 nb_proc 18
 It is now cycle 16619 nb_proc 18
 P	18 | zjmp -200 (OK)
@@ -27096,7 +27101,7 @@ It is now cycle 16675 nb_proc 18
 It is now cycle 16676 nb_proc 18
 It is now cycle 16677 nb_proc 18
 It is now cycle 16678 nb_proc 18
-  24     27   It is now cycle 16679 nb_proc 18
+It is now cycle 16679 nb_proc 18
 It is now cycle 16680 nb_proc 18
 It is now cycle 16681 nb_proc 18
 It is now cycle 16682 nb_proc 18
@@ -27120,7 +27125,7 @@ P	5 | zjmp -200 (OK)
 P	3 | zjmp -200 (OK)
 P	1 | zjmp -200 (OK)
 It is now cycle 16691 nb_proc 18
-  24     27   It is now cycle 16692 nb_proc 18
+It is now cycle 16692 nb_proc 18
 It is now cycle 16693 nb_proc 18
 P	14 | sti r15 0 -186 to_jump = 897 write = 3593
 P	13 | sti r15 0 -186 to_jump = 897 write = 3593
@@ -27188,7 +27193,7 @@ P	5 | sti r15 0 -194 to_jump = 1191 write = 33554431
 P	3 | sti r15 0 -190 to_jump = 1195 write = 4278936591
 P	1 | sti r15 0 -186 to_jump = 1199 write = 3593
 It is now cycle 16726 nb_proc 18
-  33     34   It is now cycle 16727 nb_proc 18
+It is now cycle 16727 nb_proc 18
 It is now cycle 16728 nb_proc 18
 It is now cycle 16729 nb_proc 18
 P	18 | zjmp -200 (OK)
@@ -27281,7 +27286,7 @@ P	13 | live -1
 P	11 | live -1
 P	4 | live -1
 It is now cycle 16779 nb_proc 18
-  38     41   It is now cycle 16780 nb_proc 18
+It is now cycle 16780 nb_proc 18
 P	20 | sti r15 0 -182 to_jump = 1014 write = 4281860607
 P	6 | sti r15 0 -182 to_jump = 1014 write = 4281860607
 P	5 | sti r15 0 -194 to_jump = 1002 write = 33554431
@@ -30384,8 +30389,3 @@ It is now cycle 19815 nb_proc 1
 It is now cycle 19816 nb_proc 1
 It is now cycle 19817 nb_proc 1
 It is now cycle 19818 nb_proc 1
-!!!!!!! AND TODAY'S MATCHUP IS ... !!!!!!!
->> Player 1 :
-	\__ Name : "Celebration Funebre v0.99pl42"
-	\__ Size : 325 bytes
-	\__ Comment : ("Jour J")

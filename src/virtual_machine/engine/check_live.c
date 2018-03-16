@@ -21,10 +21,12 @@ void		check_live_process(t_mh *mh, t_corewar *vm)
 	{
 		if (mh->tab[i]->current_live == 0)
 		{
+			if (vm->visual == 1)
+				exec_instr_update_window(mh->tab[i], vm, 2, mh->tab[i]->inv.save_pc);
 			delete_any(mh, i);
 			--vm->nb_processes;
 			if (vm->visual == 1)
-				mvprintw(9, 199 + 12, "%15d", vm->nb_processes);
+				mvprintw(9, 199 + 12, "%-10d", vm->nb_processes);
 		}
 		else
 		{
