@@ -62,23 +62,19 @@ void	la_balade(t_proc *lol, t_instr *instr, t_inv *inv)
 	int i;
 
 	i = 0;
-	ft_printf("  %d   ", lol->pc);
 	while (i < instr->op_tab[inv->opcode].parameter_count)
 	{
 		tojump = 0;
 		if (inv->val_arg[i] == T_REG)
-			tojump = T_REG;
+			tojump = 1;
 		else if (inv->val_arg[i] == T_DIR)
-			tojump = T_DIR;
+			tojump = (instr->op_tab[inv->opcode].uses_index == 1 ? 2 : 4);
 		else if (inv->val_arg[i] == T_IND)
-			tojump = T_IND;
-		while (((tojump & instr->op_tab[inv->opcode].parameter_types[i]) == 0) && tojump != 4)
-				tojump += (tojump == 2 ? 2 : 1);
-		while (((tojump & instr->op_tab[inv->opcode].parameter_types[i]) == 0) && tojump != 1)
-				tojump -= (tojump == 4 ? 2 : 1);
+			tojump = 2;
 		lol->pc += tojump;
 		i++;
 	}
+	lol->pc += 1;
 }
 
 void	fill_ins_proc(t_corewar *vm, t_instr *ins, t_proc *proc)
