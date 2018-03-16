@@ -61,45 +61,50 @@ void	la_balade(t_proc *lol, t_instr *instr, t_inv *inv)
 	int tojump;
 	int i;
 
-	tojump = 0;
 	i = 0;
+	ft_printf("  %d   ", lol->pc);
 	while (i < instr->op_tab[inv->opcode].parameter_count)
 	{
+		tojump = 0;
 		if (inv->val_arg[i] == T_REG)
-			lol->pc += T_REG;
+			tojump = T_REG;
 		else if (inv->val_arg[i] == T_DIR)
-			lol->pc += DIR_SIZE;
+			tojump = T_DIR;
 		else if (inv->val_arg[i] == T_IND)
-			lol->pc += IND_SIZE;
+			tojump = T_IND;
+		while (((tojump & instr->op_tab[inv->opcode].parameter_types[i]) == 0) && tojump != 4)
+				tojump += (tojump == 2 ? 2 : 1);
+		while (((tojump & instr->op_tab[inv->opcode].parameter_types[i]) == 0) && tojump != 1)
+				tojump -= (tojump == 4 ? 2 : 1);
+		lol->pc += tojump;
 		i++;
 	}
-	lol->pc++;
 }
 
 void	fill_ins_proc(t_corewar *vm, t_instr *ins, t_proc *proc)
 {
-	proc->inv.ret = 0;
 	proc->inv.opcode = vm->arena[proc->pc] - 1;
 	proc->inv.save_pc = proc->pc;
 	proc->pc = (proc->pc + 1) % MEM_SIZE;
 	if (proc->inv.opcode <= 15)
-	{
-		if (ins->op_tab[proc->inv.opcode].parameter_count != 1 || proc->inv.opcode == 15)
-			proc->inv.ret = get_data(vm, proc, &(proc->inv), ins);
-		else
-			proc->inv.ret = get_one_arg(vm, proc, &(proc->inv));
 		proc->cycles_to_exec = ins->op_tab[proc->inv.opcode].cycles_to_exec
 			+ vm->cycle_count;
-	}
 	else
 		proc->cycles_to_exec += 1;
-
 }
 
 void	exec_instr(t_corewar *vm, t_instr *ins, t_proc *proc)
 {
 	if (vm->visual == 1)
 		exec_instr_update_window(proc, vm, 2, proc->inv.save_pc);
+	proc->inv.ret = 0;
+	if (proc->inv.opcode <= 15)
+	{
+		if (ins->op_tab[proc->inv.opcode].parameter_count != 1 || proc->inv.opcode == 15)
+			proc->inv.ret = get_data(vm, proc, &(proc->inv), ins);
+		else
+			proc->inv.ret = get_one_arg(vm, proc, &(proc->inv));
+	}
 	if (proc->inv.opcode <= 15 && proc->inv.ret == 0)
 		ins->tab_instr[proc->inv.opcode](vm, proc, ins);
 	if (vm->visual == 1)
