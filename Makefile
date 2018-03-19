@@ -6,7 +6,7 @@
 #    By: yguzman <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 11:38:09 by yguzman           #+#    #+#              #
-#    Updated: 2018/03/14 19:26:33 by abeauvoi         ###   ########.fr        #
+#    Updated: 2018/03/19 18:56:25 by abeauvoi         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -60,7 +60,7 @@ SRCS_ASM		=		main_a.c							\
 						replace_cod_oct.c					\
 
 SRCS_COREWAR	= main.c clear_data.c \
-		  check_live.c engine.c priority_queue.c process.c replace_cod_oct.c \
+		  check_live.c engine.c priority_queue.c priority_queue2.c process.c replace_cod_oct.c \
 		  calc_instr.c exec_instr.c get_instr_data.c init_instr.c ld_st_instr.c long_instr.c misc_instr.c \
 		  dump_arena.c print_error_and_exit.c print_ncurses.c print_usage.c print_breakdown.c print_mem.c \
 		  print_players.c visual.c key_events.c \

@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 20:45:02 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/14 15:29:13 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/19 19:24:13 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,6 @@ t_mh		*init_heap(t_player player_table[MAX_PLAYERS], uint64_t *total_proc,
 
 void		insert(t_mh *mh, t_proc *entry)
 {
-	uint32_t	i;
-	t_proc		**parent;
-
 	if (mh->pos == mh->size)
 	{
 		mh->size = (3 * mh->size) >> 1;
@@ -64,15 +61,8 @@ void		insert(t_mh *mh, t_proc *entry)
 		}
 		ft_bzero(mh->tab + mh->pos, sizeof(void *) * (mh->size - mh->pos));
 	}
-	i = mh->pos++;
-	while (i != 0
-			&& (CTE(*(parent = mh->tab + PARENT(i))) > CTE(entry)
-			|| (CTE(*parent) == CTE(entry) && PID(entry) > PID(*parent))))
-	{
-		mh->tab[i] = *parent;
-		i = PARENT(i);
-	}
-	mh->tab[i] = entry;
+	bubble_up(mh, mh->pos, entry);
+	++mh->pos;
 }
 
 void		heapify(t_mh *mh, uint32_t i)
@@ -104,11 +94,28 @@ void		heapify(t_mh *mh, uint32_t i)
 
 void		delete_any(t_mh *mh, uint32_t i)
 {
+	t_proc	*ptr1;
+	t_proc	*ptr2;
+	int		p;
+
 	if (mh->pos)
 	{
 		free(mh->tab[i]);
-		mh->tab[i] = mh->tab[--(mh->pos)];
-		heapify(mh, i);
+		if (--(mh->pos) == 0)
+			return ;
+		mh->tab[i] = mh->tab[mh->pos];
+		if ((p = PARENT((int)i)) < 0)
+		{
+			heapify(mh, 0);
+			return ;
+		}
+		ptr1 = mh->tab[p];
+		ptr2 = mh->tab[i];
+		if (i > 0 && (CTE(ptr1) > CTE(ptr2)
+					|| (CTE(ptr1) == CTE(ptr2) && PID(ptr1) < PID(ptr2))))
+			bubble_up(mh, i, ptr2);
+		else
+			heapify(mh, i);
 	}
 	else
 		free(mh->tab);
