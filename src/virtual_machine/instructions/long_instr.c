@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 14:09:09 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/14 19:17:51 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/19 18:48:50 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void		ft_lfork(t_corewar *vm, t_proc *lol, t_instr *instr)
 	}
 	ft_memcpy(child, lol, sizeof(*lol));
 	child->pc = (lol->inv.save_pc + (short)lol->inv.param[0]) % MEM_SIZE;
-	init_child(vm, lol, child, instr);
+	init_child(vm, child, instr);
 	if (vm->visual == 1)
 		fork_update_window(lol, vm);
 	if (!vm->visual)

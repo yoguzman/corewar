@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/14 19:39:46 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/19 18:48:12 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,7 +275,7 @@ t_proc					*pop_min(t_mh *mh);
 void					swap_process(t_proc **a, t_proc **b);
 t_proc					*spawn_process(uint64_t load_address, uint8_t player_id,
 					uint64_t *total_proc);
-void					init_child(t_corewar *vm, t_proc *lol, t_proc *child,
-					t_instr *instr);
+void					init_child(t_corewar *vm, t_proc *child,
+		t_instr *instr);
 
 #endif

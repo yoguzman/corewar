@@ -6,14 +6,14 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:42:57 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/14 20:09:15 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/19 18:46:58 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "vm.h"
 
-static int	init_vm(const char *argv[], t_corewar *vm)
+static int		init_vm(const char *argv[], t_corewar *vm)
 {
 	ft_bzero(vm, sizeof(*vm));
 	vm->total_proc = 1;
@@ -38,7 +38,7 @@ static int	init_vm(const char *argv[], t_corewar *vm)
 	return (0);
 }
 
-void		init_print_data(t_corewar *vm)
+void		init_print_data(void)
 {
 	curs_set(0);
 	nodelay(initscr(), TRUE);
@@ -57,7 +57,7 @@ void		init_print_data(t_corewar *vm)
 	init_pair(10, COLOR_BLACK, COLOR_CYAN);
 }
 
-int			main(int argc, const char *argv[])
+int				main(int argc, const char *argv[])
 {
 	t_corewar	vm;
 
@@ -71,7 +71,7 @@ int			main(int argc, const char *argv[])
 		if (init_vm(argv, &vm) == -1)
 			return (-1);
 		if (vm.visual == 1)
-			init_print_data(&vm);
+			init_print_data();
 		engine(&vm);
 		clear_data(&vm);
 	}

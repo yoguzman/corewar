@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 16:15:57 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/14 19:02:50 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/19 18:47:27 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_proc	*spawn_process(uint64_t load_address, uint8_t player_id,
 	return (new);
 }
 
-void	init_child(t_corewar *vm, t_proc *lol, t_proc *child, t_instr *instr)
+void	init_child(t_corewar *vm, t_proc *child, t_instr *instr)
 {
 	child->pid = vm->total_proc++;
 	fill_ins_proc(vm, instr, child);
