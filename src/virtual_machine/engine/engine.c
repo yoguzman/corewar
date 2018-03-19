@@ -29,10 +29,11 @@ void		loop_instr(t_corewar *vm, t_mh *mh, t_instr *instr)
 	}
 		uint64_t i;
 		i = 0;
-		if (vm->visual == 1)
+	//	if (vm->visual == 1)
 			while (i < vm->mh->pos)
 			{
-				exec_instr_update_window(mh->tab[i], vm, 7, mh->tab[i]->inv.save_pc);
+
+			//	exec_instr_update_window(mh->tab[i], vm, 7, mh->tab[i]->inv.save_pc);
 				++i;
 			}
 }
@@ -63,6 +64,7 @@ int			engine(t_corewar *vm)
 
 	if (vm->visual == 1)
 		print_ncurses(vm);
+	mvprintw(33, 199, "CYCLE_TO_DIE : %-5d %-5d", vm->cycle_to_die_max, vm->player_table[0].current_live);
 	while (vm->mh->pos > 0)
 	{
 		if (vm->visual == 1)

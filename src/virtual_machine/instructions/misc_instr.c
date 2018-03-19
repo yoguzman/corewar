@@ -25,7 +25,7 @@ void	live(t_corewar *vm, t_proc *lol, t_instr *instr)
 	player_nb = -1U - lol->inv.param[0];
 	if (player_nb < MAX_PLAYERS)
 	{
-		++vm->player_table[player_nb].current_live;
+		++(vm->player_table[player_nb].current_live);
 		if (vm->visual == 1)
 			;
 	}

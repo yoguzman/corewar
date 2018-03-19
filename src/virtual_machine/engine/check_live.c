@@ -12,11 +12,13 @@
 
 #include "vm.h"
 
-void		check_live_process(t_mh *mh, t_corewar *vm)
+int				check_live_process(t_mh *mh, t_corewar *vm)
 {
 	uint64_t	i;
+	int			ret;
 
 	i = 0;
+	ret = 0;
 	while (i < mh->pos)
 	{
 		if (mh->tab[i]->current_live == 0)
@@ -30,19 +32,19 @@ void		check_live_process(t_mh *mh, t_corewar *vm)
 		}
 		else
 		{
+			ret += mh->tab[i]->current_live;
 			mh->tab[i]->current_live = 0;
 			++i;
 		}
 	}
+	return (ret);
 }
 
-int			check_live_player(t_player player_table[MAX_PLAYERS])
+void		check_live_player(t_player player_table[MAX_PLAYERS])
 {
 	int			i;
-	int			count_live;
 
 	i = 0;
-	count_live = 0;
 	while (i < MAX_PLAYERS)
 	{
 		if (player_table[i].code != NULL && player_table[i].die == 0)
@@ -52,13 +54,10 @@ int			check_live_player(t_player player_table[MAX_PLAYERS])
 				player_table[i].die = 1;
 				continue ;
 			}
-			else
-				count_live += player_table[i].current_live;
 			player_table[i].current_live = 0;
 		}
 		++i;
 	}
-	return (count_live);
 }
 
 void		check_cycle_to_die(t_corewar *vm)
@@ -67,8 +66,8 @@ void		check_cycle_to_die(t_corewar *vm)
 
 	if (vm->cycle_to_die == 0)
 	{
-		ret = check_live_player(vm->player_table);
-		check_live_process(vm->mh, vm);
+		check_live_player(vm->player_table);
+		ret = check_live_process(vm->mh, vm);
 		--vm->max_check;
 		if (ret >= NBR_LIVE)
 		{
@@ -78,5 +77,7 @@ void		check_cycle_to_die(t_corewar *vm)
 		if (vm->max_check == 0)
 			vm->cycle_to_die_max -= CYCLE_DELTA;
 		vm->cycle_to_die = vm->cycle_to_die_max;
+		if (vm->visual == 1)
+			mvprintw(33, 199, "CYCLE_TO_DIE : %-5d", vm->cycle_to_die_max);
 	}
 }

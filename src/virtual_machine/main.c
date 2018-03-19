@@ -26,7 +26,7 @@ static int	init_vm(const char *argv[], t_corewar *vm)
 		return (-1);
 	ft_bzero(vm->arena, MEM_SIZE);
 	ft_bzero(vm->print_data, MEM_SIZE);
-	ft_bzero(vm->player_table, sizeof(vm->player_table));
+	ft_bzero(vm->player_table, sizeof(t_player) * MAX_PLAYERS);
 	vm->paused = 1;
 	vm->player_id = -1;
 	parse_argv(argv + 1, vm);
@@ -40,8 +40,6 @@ static int	init_vm(const char *argv[], t_corewar *vm)
 
 void		init_print_data(t_corewar *vm)
 {
-	size_t		n;
-
 	curs_set(0);
 	nodelay(initscr(), TRUE);
 	start_color();
@@ -57,13 +55,6 @@ void		init_print_data(t_corewar *vm)
 	init_pair(8, COLOR_BLACK, COLOR_BLUE);
 	init_pair(9, COLOR_BLACK, COLOR_RED);
 	init_pair(10, COLOR_BLACK, COLOR_CYAN);
-	n = 0;
-	while (n < vm->players)
-	{
-		vm->player_table[n].current_live = 20;
-		vm->player_table[n].last_live = 12;
-		n += 1;
-	}
 }
 
 int			main(int argc, const char *argv[])
