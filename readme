@@ -1,4 +1,4 @@
--label vide
+-label vide ( c est ok )
 -load_adress
 -passer par un pointeur sur fonction pour faire les sorties d output
 			-refaire l affichage standard
@@ -9,6 +9,7 @@
 
 
 a la fin :
+-derniere verif et valgrind
 -mise au propre
 -leaks
 -norme
