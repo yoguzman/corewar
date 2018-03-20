@@ -153,5 +153,7 @@ int					del_comment(char *file);
 void				puterr_header(char *msg_err, int i);
 void				puterr_size_header(char *msg_err, int i);
 int					del_comment_check(char *file);
+void				free_head(char **tab, char *line);
+void				free_line_head_and_incr(char **line, int *i);
 
 #endif

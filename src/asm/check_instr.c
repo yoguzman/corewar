@@ -90,6 +90,13 @@ int				bordel(t_if *info, char **t_str)
 	return (0);
 }
 
+int				print_err_size(int line)
+{
+	ft_puterr("Syntax error at token ENDLINE at line ");
+	ft_putnbr_fd(line, 2);
+	return (ft_puterr("\n"));
+}
+
 int				pars_instr(char *instr, t_if *info, int line)
 {
 	char		**t_str;
@@ -102,11 +109,7 @@ int				pars_instr(char *instr, t_if *info, int line)
 	if (!(t_str = ft_strsplit(instr, "\t ,")))
 		return (puterr(ERR_SPLIT));
 	if (ft_tablen(t_str) == 1)
-	{
-		ft_puterr("Syntax error at token ENDLINE at line ");
-		ft_putnbr_fd(line, 2);
-		return (ft_puterr("\n"));
-	}
+		return (print_err_size(line));
 	if ((i_op = check_name(t_str[i++], g_op_tab)) == -1)
 		return (print_error_name(t_str, line, i));
 	if (check_nb_arg(t_str, i_op, g_op_tab) == -1)

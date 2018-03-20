@@ -12,6 +12,8 @@
 
 #include "asm.h"
 #include "libft.h"
+#include <fcntl.h>
+#include <unistd.h>
 
 int				to_neg(unsigned short neg)
 {
@@ -35,7 +37,6 @@ void			puterr_size_header(char *msg_err, int i)
 	ft_puterr(msg_err);
 	ft_puterr(" is too long\n");
 	exit(EXIT_FAILURE);
-
 }
 
 void			puterr_header(char *msg_err, int i)
@@ -49,4 +50,32 @@ void			puterr_header(char *msg_err, int i)
 		ft_puterr(msg_err);
 	ft_puterr("\n");
 	exit(EXIT_FAILURE);
+}
+
+int				get_nb_lines(char *file)
+{
+	int			fd;
+	int			count;
+	char		*line;
+	int			ret;
+
+	if ((fd = open(file, O_RDONLY)) == -1)
+		return (-1);
+	count = 0;
+	while ((ret = get_next_line(fd, &line)) == 1)
+	{
+		free(line);
+		count += 1;
+	}
+	if (ret == -1)
+		return (-1);
+	close(fd);
+	return (count);
+}
+
+void			free_head(char **tab, char *line)
+{
+	free(tab[0]);
+	free(tab);
+	free(line);
 }

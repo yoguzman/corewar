@@ -15,27 +15,6 @@
 #include <fcntl.h>
 #include "asm.h"
 
-int			get_nb_lines(char *file)
-{
-	int		fd;
-	int		count;
-	char	*line;
-	int		ret;
-
-	if ((fd = open(file, O_RDONLY)) == -1)
-		return (-1);
-	count = 0;
-	while ((ret = get_next_line(fd, &line)) == 1)
-	{
-		free(line);
-		count += 1;
-	}
-	if (ret == -1)
-		return (-1);
-	close(fd);
-	return (count);
-}
-
 int			get_header(char **instr, t_header *header, int *i)
 {
 	if (instr[1] == NULL)
@@ -69,18 +48,18 @@ int			loop_get_header(char **file, t_header *header, int *i)
 		if (del_comment(file[*i]) == 1 || file[*i][0] == 0 ||
 				check_blank_line(file[*i]) == 0)
 		{
-			free(file[*i]);
-			file[*i] = NULL;
-			++*i;
+			free_line_head_and_incr(&(file[*i]), i);
 			continue ;
 		}
 		if ((tab = ft_strsplit(file[*i], "\"")) == NULL)
 			puterr_header(".name or .comment nedded in header", *i);
 		epur_space(tab[0]);
-		if (ft_strcmp(tab[0], ".name") == 0 || ft_strcmp(tab[0], ".comment") == 0)
+		if (ft_strcmp(tab[0], ".name") == 0 ||
+			ft_strcmp(tab[0], ".comment") == 0)
 			get_header(tab, header, i);
 		else
 			puterr_header(tab[0], *i);
+		free_head(tab, file[*i]);
 		++*i;
 	}
 	return (0);
@@ -92,11 +71,6 @@ void		init_info_file(char **file, int *i, t_if **tmp, t_header *champ)
 	if (loop_get_header(file, champ, i) == -1)
 		exit(EXIT_FAILURE);
 	*tmp = NULL;
-}
-
-int			redifine_label()
-{
-
 }
 
 int			get_info_file(char **file, t_header *champ, t_list **inf_line)
@@ -124,9 +98,6 @@ int			get_info_file(char **file, t_header *champ, t_list **inf_line)
 		free(file[i]);
 		++i;
 	}
-	free(file);
-	if (*inf_line == NULL)
-		return (ft_puterr("Champ need intsruction\n"));
 	return (tmp->bytes_line + tmp->cost_line);
 }
 
@@ -149,6 +120,9 @@ int			get_champ(char *name, t_header *champ, t_list **inf_line)
 		return (-1);
 	if ((ret = get_info_file(file, champ, inf_line)) == -1)
 		return (-1);
+	free(file);
+	if (*inf_line == NULL)
+		return (ft_puterr("Champ need intsruction\n"));
 	champ->prog_size = ret;
 	return (0);
 }

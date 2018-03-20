@@ -88,14 +88,14 @@ typedef enum			e_limits
 
 typedef	struct			s_player
 {
-	t_header	header;
-	uint8_t		*code;
-	uint32_t	load_address;
-	int			last_live;
-	int			current_live;
-	int			last_breakdown;
-	int			current_breakdown;
-	char		die;
+	t_header			header;
+	uint8_t				*code;
+	uint32_t			load_address;
+	int					last_live;
+	int					current_live;
+	int					last_breakdown;
+	int					current_breakdown;
+	char				die;
 }						t_player;
 
 typedef struct			s_inv
@@ -109,44 +109,44 @@ typedef struct			s_inv
 
 typedef struct			s_process
 {
-	uint32_t	reg[REG_NUMBER];
-	uint32_t	pc;
-	uint8_t		carry;
-	int			current_live;
-	int			player_id;
-	uint16_t	cycles_to_exec;
-	uint32_t	pid;
-	t_inv		inv;
+	uint32_t			reg[REG_NUMBER];
+	uint32_t			pc;
+	uint8_t				carry;
+	int					current_live;
+	int					player_id;
+	uint16_t			cycles_to_exec;
+	uint32_t			pid;
+	t_inv				inv;
 }						t_proc;
 
 typedef struct			s_min_heap
 {
-	t_proc		**tab;
-	uint64_t	size;
-	uint64_t	pos;
-	uint64_t	count;
+	t_proc				**tab;
+	uint64_t			size;
+	uint64_t			pos;
+	uint64_t			count;
 }						t_mh;
 
 typedef struct			s_corewar
 {
-	int			paused;
-	int			dec_sec;
-	int			one_cycle;
-	int			cycles_sec;
-	uint32_t	cycle_count;
-	uint64_t	nb_processes;
-	int			cycle_to_die;
-	int			cycle_to_die_max;
-	char		*print_data;
-	t_player	player_table[MAX_PLAYERS];
-	uint8_t		*arena;
-	int			player_id;
-	uint32_t	players;
-	uint32_t	dump_limit;
-	t_mh		*mh;
-	int			visual;
-	uint64_t	total_proc;
-	int			max_check;
+	int					paused;
+	int					dec_sec;
+	int					one_cycle;
+	int					cycles_sec;
+	uint32_t			cycle_count;
+	uint64_t			nb_processes;
+	int					cycle_to_die;
+	int					cycle_to_die_max;
+	char				*print_data;
+	t_player			player_table[MAX_PLAYERS];
+	uint8_t				*arena;
+	int					player_id;
+	uint32_t			players;
+	uint32_t			dump_limit;
+	t_mh				*mh;
+	int					visual;
+	uint64_t			total_proc;
+	int					max_check;
 }						t_corewar;
 
 typedef struct			s_instr
@@ -168,7 +168,8 @@ typedef struct			s_instr
 ** Engine
 */
 
-void	fill_ins_proc(t_corewar *vm, t_instr *ins, t_proc *proc);
+void					fill_ins_proc(t_corewar *vm, t_instr *ins,
+										t_proc *proc);
 int32_t					engine(t_corewar *vm);
 void					key_action(t_corewar *vm);
 void					toggle_pause(t_corewar *vm);
@@ -176,7 +177,8 @@ void					dec_speed(t_corewar *vm);
 void					inc_speed(t_corewar *vm);
 void					one_cycle(t_corewar *vm);
 void					fork_update_window(t_proc *lol, t_corewar *vm);
-void					exec_instr_update_window(t_proc *proc, t_corewar *vm, char add, int value);
+void					exec_instr_update_window(t_proc *proc, t_corewar *vm,
+													char add, int value);
 void					print_ncurses(t_corewar *vm);
 void					print_breakdown(t_corewar *vm);
 
@@ -197,12 +199,12 @@ int						init_instr(t_instr *instr, t_corewar *vm);
 void					print_usage(void);
 void					print_error_and_exit(const char *msg);
 void					clean_print_err_exit(const char *msg,
-					t_player player_table[MAX_PLAYERS]);
+										t_player player_table[MAX_PLAYERS]);
 void					print_mem(void *mem, uint64_t mem_size);
 void					print_players(t_player player_table[MAX_PLAYERS]);
 void					dump_arena(uint8_t arena[MEM_SIZE]);
 void					print_4b_in_arena(uint32_t offset, uint8_t *arena,
-		t_proc *proc, int i);
+											t_proc *proc, int i);
 
 /*
 ** Utils
@@ -233,10 +235,11 @@ void					check_cycle_to_die(t_corewar *vm);
 */
 
 int						replace_cod_oct(uint8_t octet, uint8_t op_code,
-					const t_op g_op_tab[17]);
+										const t_op g_op_tab[17]);
 int						get_octet(char octet, t_inv *inv, t_instr *instr);
 void					la_balade(t_proc *lol, t_instr *instr, t_inv *inv);
-int						get_data(t_corewar *vm, t_proc *lol, t_inv *inv, t_instr *instr);
+int						get_data(t_corewar *vm, t_proc *lol, t_inv *inv,
+								t_instr *instr);
 void					exec_instr(t_corewar *vm, t_instr *instr, t_proc *proc);
 void					live(t_corewar *vm, t_proc *lol, t_instr *instr);
 void					ld(t_corewar *vm, t_proc *lol, t_instr *instr);
@@ -275,8 +278,8 @@ t_proc					*pop_min(t_mh *mh);
 
 void					swap_process(t_proc **a, t_proc **b);
 t_proc					*spawn_process(uint64_t load_address, uint8_t player_id,
-					uint64_t *total_proc);
+									uint64_t *total_proc);
 void					init_child(t_corewar *vm, t_proc *child,
-		t_instr *instr);
+									t_instr *instr);
 
 #endif

@@ -63,3 +63,10 @@ int		julien_pu_le_caca(char *str, int i)
 	}
 	return (0);
 }
+
+void	free_line_head_and_incr(char **line, int *i)
+{
+	free(*line);
+	*line = NULL;
+	++*i;
+}

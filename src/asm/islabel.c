@@ -61,25 +61,24 @@ int			is_label(t_if *here, t_list *list, int line)
 	int		i[3];
 
 	ft_bzero(i, 12);
-	if (here->arg)
-		while (here->arg[i[1]] && ((i[0] = 0) == 0))
+	while (here->arg && here->arg[i[1]] && ((i[0] = 0) == 0))
+	{
+		tmp = go_first(list, &str_tmp, here, i);
+		if (here->arg[i[1]][i[0]] == ':')
 		{
-			tmp = go_first(list, &str_tmp, here, i);
-			if (here->arg[i[1]][i[0]] == ':')
+			while (tmp)
 			{
-				while (tmp)
-				{
-					if ((i[2] = modif_label(here, str_tmp, i, tmp)) == -1)
-						return (-1);
-					else if (i[2] == 1)
-						break ;
-					tmp = tmp->next;
-				}
-				if (tmp == NULL)
-					return (print_error_label(here->name_instr, line));
+				if ((i[2] = modif_label(here, str_tmp, i, tmp)) == -1)
+					return (-1);
+				else if (i[2] == 1)
+					break ;
+				tmp = tmp->next;
 			}
-			free(str_tmp);
-			++i[1];
+			if (tmp == NULL)
+				return (print_error_label(here->name_instr, line));
 		}
+		free(str_tmp);
+		++i[1];
+	}
 	return (0);
 }
