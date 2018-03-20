@@ -17,7 +17,6 @@ void			key_action(t_corewar *vm)
 	int		ret;
 
 	ret = 0;
-	attron(A_BOLD);
 	attron(COLOR_PAIR(6));
 	ret = getch();
 	if (ret == ' ')
@@ -28,7 +27,7 @@ void			key_action(t_corewar *vm)
 		inc_speed(vm);
 	else if (ret == 's')
 		one_cycle(vm);
-	attron(A_BOLD);
+	attroff(COLOR_PAIR(6));
 }
 
 void			fork_update_window(t_proc *lol, t_corewar *vm)
@@ -44,8 +43,14 @@ void			fork_update_window(t_proc *lol, t_corewar *vm)
 
 void			exec_instr_update_window(t_proc *proc, t_corewar *vm, char add, int value)
 {
-	attron(COLOR_PAIR((-1U - proc->reg[0]) + add));
+	if ((-1U - proc->reg[0]) > 4)
+		attron(COLOR_PAIR(1 + (add == 2 ? 0 : 10)));
+	else
+		attron(COLOR_PAIR((-1U - proc->reg[0]) + add));
 	mvprintw((value / 64) + 2, (value % 64) * 3 + 3, "%.2x",
 			vm->arena[value]);
-	attroff(COLOR_PAIR((-1U - proc->reg[0]) + add));
+	if ((-1U - proc->reg[0]) > 4)
+		attron(COLOR_PAIR(1 + (add == 2 ? 0 : 10)));
+	else
+		attroff(COLOR_PAIR((-1U - proc->reg[0]) + add));
 }

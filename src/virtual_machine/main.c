@@ -57,6 +57,7 @@ void		init_print_data(void)
 	init_pair(8, COLOR_BLACK, COLOR_BLUE);
 	init_pair(9, COLOR_BLACK, COLOR_RED);
 	init_pair(10, COLOR_BLACK, COLOR_CYAN);
+	init_pair(11, COLOR_WHITE, 42);
 }
 
 int				main(int argc, const char *argv[])
