@@ -26,3 +26,27 @@ int				to_neg(unsigned short neg)
 	lol.bneg[1] = first_octet;
 	return (lol.neg);
 }
+
+void			puterr_size_header(char *msg_err, int i)
+{
+	ft_puterr("Syntax error line ");
+	ft_putnbr_fd(i + 1, 2);
+	ft_puterr(" This ");
+	ft_puterr(msg_err);
+	ft_puterr(" is too long\n");
+	exit(EXIT_FAILURE);
+
+}
+
+void			puterr_header(char *msg_err, int i)
+{
+	ft_puterr("Syntax error line ");
+	ft_putnbr_fd(i + 1, 2);
+	ft_puterr(" INSTRUCTION  ");
+	if (msg_err == NULL)
+		ft_puterr("(null)");
+	else
+		ft_puterr(msg_err);
+	ft_puterr("\n");
+	exit(EXIT_FAILURE);
+}

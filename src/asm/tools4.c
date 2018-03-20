@@ -18,7 +18,7 @@ int		print_error_label(char *str, int line)
 {
 	puterr_noend("Invalid label at token instruction ");
 	puterr_noend(str);
-	puterr_noend(" at line ");
+	puterr_noend(" at instruction ");
 	ft_putnbr(line);
 	puterr_noend("\n");
 	return (-1);

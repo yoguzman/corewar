@@ -66,13 +66,13 @@ int					is_label(t_if *here, t_list *list, int line);
 int					modif_label(t_if *here, char *str_tmp, int i[3],
 		t_list *tmp);
 int					get_file2(char *new, int *dest);
-int					get_info_file_loop2(t_list **tmp_list, t_list **inf_line,
+int					get_info_file_loop2(t_list **inf_line,
 					t_if *info_line, t_if **tmp);
 int					get_info_file_loop(char **file, int *i, t_if *info_line);
 int					print_error_nb_arg(char *instr, int line);
 void				write_string(int dest, char *prog_name, int lenght);
 int					print_error_name(char **t_str, int line, int i);
-char				*check_label(char *line, t_if *info_line, int j);
+char				*check_label(char *line, t_if *info_line);
 int					arg_is_direct(char *str, int index_op, int nb_arg,
 		const t_op *op_tab);
 int					arg_is_reg(char *str, int index_op, int nb_arg,
@@ -149,5 +149,9 @@ int					get_nb_lines(char *name);
 int					print_error_label(char *str, int line);
 int					julien_pu_le_caca(char *str, int i);
 int					replace_cod_oct(uint8_t octet, uint8_t op_code);
+int					del_comment(char *file);
+void				puterr_header(char *msg_err, int i);
+void				puterr_size_header(char *msg_err, int i);
+int					del_comment_check(char *file);
 
 #endif

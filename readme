@@ -1,1 +1,14 @@
-instruction inviolable a faire
+-label vide
+-load_adress
+-passer par un pointeur sur fonction pour faire les sorties d output
+			-refaire l affichage standard
+			-finir l affichage graphique 
+				--stealth
+			-mode texte
+			-et voir le mode binaire
+
+
+a la fin :
+-mise au propre
+-leaks
+-norme

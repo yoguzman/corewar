@@ -56,11 +56,12 @@ int				write_instr(t_list *inf_line, int dest)
 		++j;
 		while (g_write_tab[i].name)
 		{
-			if (ft_strcmp(g_write_tab[i].name, info_line->name_instr) == 0)
-			{
-				g_write_tab[i].f(info_line, dest);
-				break ;
-			}
+			if (info_line->name_instr)
+				if (ft_strcmp(g_write_tab[i].name, info_line->name_instr) == 0)
+				{
+					g_write_tab[i].f(info_line, dest);
+					break ;
+				}
 			++i;
 		}
 		inf_line = inf_line->next;

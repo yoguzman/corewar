@@ -30,7 +30,7 @@ int				ft_islabel(int c)
 	return (0);
 }
 
-char			*check_label(char *line, t_if *info_line, int j)
+char			*check_label(char *line, t_if *info_line)
 {
 	char		*tmp;
 	int			i;
@@ -43,13 +43,10 @@ char			*check_label(char *line, t_if *info_line, int j)
 			if (line[i] == ':')
 			{
 				if (info_line->label != NULL)
-				{
-					ft_printf("Redefinition Label in line %d", j);
-					return (ft_puterr_null("\n"));
-				}
+					return (NULL);
 				if (!(tmp = ft_strsub(line, i + 1, ft_strlen(line) - (i + 1)))
 			|| (!(info_line->label = ft_strsub(line, 0, i))))
-					return (NULL);
+					exit(EXIT_FAILURE);
 				free(line);
 				return (tmp);
 			}

@@ -1,4 +1,4 @@
-.name		"Celebration Funebre v0.99pl42"
+.name		"Celebration Funebre v0.99pl42"  lol
 .comment	"Jour J"
 
 

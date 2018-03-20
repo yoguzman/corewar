@@ -36,55 +36,78 @@ int			get_nb_lines(char *file)
 	return (count);
 }
 
-int			get_header(char **file, t_header *header)
+int			get_header(char **instr, t_header *header, int *i)
 {
-	char	**tab;
-
-	if ((tab = ft_strsplit(file[0], "\"")) == NULL)
-		return (ft_puterr("function ft_splited fail in get header\n"));
-	epur_space(tab[0]);
-	if (tab == NULL || tab[0] == NULL || ft_strcmp(tab[0], ".name"))
-		return (ft_puterr(".name needed in header\n"));
-	if (tab[1] == NULL || tab[2] != NULL)
-		return (ft_puterr(".name needed just one name\n"));
-	if (ft_strlen(tab[1]) > PROG_NAME_LENGTH || ft_strlen(tab[1]) < 1)
-		return (ft_puterr("Name need char between 1 to PROG_NAME_LENGTH\n"));
-	ft_strcpy(header->prog_name, tab[1]);
-	free(tab[0]);
-	free(tab);
-	if ((tab = ft_strsplit(file[1], "\t\"")) == NULL)
-		return (ft_puterr("function ft_split failed in get header\n"));
-	epur_space(tab[0]);
-	if (tab == NULL || tab[0] == NULL || ft_strcmp(tab[0], ".comment"))
-		return (ft_puterr(".comment needed in header\n"));
-	if (ft_strlen(tab[1]) > COMMENT_LENGTH || ft_strlen(tab[1]) < 1)
-		return (ft_puterr("Comment need char between 1 to COMMENT_LENGTH\n"));
-	ft_strcpy(header->comment, tab[1]);
-	free(tab[0]);
-	free(tab);
+	if (instr[1] == NULL)
+		puterr_header(NULL, *i);
+	if (instr[2] != NULL &&
+		(del_comment_check(instr[2]) == 1))
+		puterr_header(instr[2], *i);
+	if (ft_strcmp(instr[0], ".name") == 0)
+	{
+		if (ft_strlen(instr[1]) > PROG_NAME_LENGTH)
+			puterr_size_header(instr[0], *i);
+		ft_strcpy(header->prog_name, instr[1]);
+	}
+	else if (ft_strcmp(instr[0], ".comment") == 0)
+	{
+		if (ft_strlen(instr[1]) > COMMENT_LENGTH)
+			puterr_size_header(instr[0], *i);
+		ft_strcpy(header->comment, instr[1]);
+	}
 	return (0);
 }
 
-void		*init_info_file(char **file, int *i, t_if **tmp, t_header *champ)
+int			loop_get_header(char **file, t_header *header, int *i)
 {
-	if (get_header(file, champ) == -1)
+	char	**tab;
+
+	ft_bzero(header->prog_name, PROG_NAME_LENGTH);
+	ft_bzero(header->comment, COMMENT_LENGTH);
+	while (file[*i] && (header->prog_name[0] == 0 || header->comment[0] == 0))
+	{
+		if (del_comment(file[*i]) == 1 || file[*i][0] == 0 ||
+				check_blank_line(file[*i]) == 0)
+		{
+			free(file[*i]);
+			file[*i] = NULL;
+			++*i;
+			continue ;
+		}
+		if ((tab = ft_strsplit(file[*i], "\"")) == NULL)
+			puterr_header(".name or .comment nedded in header", *i);
+		epur_space(tab[0]);
+		if (ft_strcmp(tab[0], ".name") == 0 || ft_strcmp(tab[0], ".comment") == 0)
+			get_header(tab, header, i);
+		else
+			puterr_header(tab[0], *i);
+		++*i;
+	}
+	return (0);
+}
+
+void		init_info_file(char **file, int *i, t_if **tmp, t_header *champ)
+{
+	*i = 0;
+	if (loop_get_header(file, champ, i) == -1)
 		exit(EXIT_FAILURE);
-	free(file[0]);
-	free(file[1]);
-	*i = 2;
 	*tmp = NULL;
-	return (NULL);
+}
+
+int			redifine_label()
+{
+
 }
 
 int			get_info_file(char **file, t_header *champ, t_list **inf_line)
 {
 	int		tab[2];
-	t_list	*tmp_list;
 	t_if	info_line;
 	t_if	*tmp;
 	int		i;
 
-	tmp_list = (t_list *)init_info_file(file, &i, &tmp, champ);
+	init_info_file(file, &i, &tmp, champ);
+	ft_bzero(&info_line, sizeof(info_line));
 	while (file[i])
 	{
 		if ((tab[0] = get_info_file_loop(file, &i, &info_line)) == -1)
@@ -94,14 +117,16 @@ int			get_info_file(char **file, t_header *champ, t_list **inf_line)
 		tab[1] = (tmp == NULL ? 0 : tab[1] + tmp->cost_line);
 		fill_cost_line(&info_line);
 		info_line.bytes_line = tab[1];
-		if (get_info_file_loop2(&tmp_list, inf_line, &info_line, &tmp) == -1)
+		if (get_info_file_loop2(inf_line, &info_line, &tmp) == -1)
 			return (-1);
+		if (info_line.name_instr == NULL)
+			continue ;
 		free(file[i]);
 		++i;
 	}
 	free(file);
 	if (*inf_line == NULL)
-		return (ft_puterr("Champ need intr\n"));
+		return (ft_puterr("Champ need intsruction\n"));
 	return (tmp->bytes_line + tmp->cost_line);
 }
 

@@ -49,11 +49,12 @@ void			free_lesbails(t_list *inf_line)
 		free(blbl->label);
 		free(blbl->name_instr);
 		i = 0;
-		while (blbl->arg[i])
-		{
-			free(blbl->arg[i]);
-			++i;
-		}
+		if (blbl->arg)
+			while (blbl->arg[i])
+			{
+				free(blbl->arg[i]);
+				++i;
+			}
 		free(blbl->arg);
 		free(blbl);
 		free(inf_line);

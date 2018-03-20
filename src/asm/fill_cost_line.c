@@ -43,6 +43,11 @@ int			fill_cost_line(t_if *info_line)
 	int		i;
 
 	i = 0;
+	if (info_line->name_instr == NULL)
+	{
+		info_line->cost_line = 0;
+		return (0);
+	}
 	while (g_cost_tab[i].name)
 	{
 		if (ft_strcmp(g_cost_tab[i].name, info_line->name_instr) == 0)

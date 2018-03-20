@@ -48,47 +48,50 @@ void					print_info_begin(t_if *info)
 	ft_printf("%-5d(%-3d) :        %-10s", info->bytes_line,
 			info->cost_line, info->name_instr);
 	count = -1;
-	while (info->arg[++count])
-		ft_printf("%-18s", info->arg[count]);
+	if (info->arg)
+		while (info->arg[++count])
+			ft_printf("%-18s", info->arg[count]);
 	ft_printf("\n");
 	ft_printf("%20s%-4d", " ", get_instruction_code(info->name_instr) + 1);
 }
 
 int						truc(t_if *info)
 {
-	if (ft_strcmp("live", info->name_instr)
-		&& ft_strcmp("zjmp", info->name_instr) &&
-			ft_strcmp("fork", info->name_instr) &&
-		ft_strcmp("lfork", info->name_instr))
-	{
-		info->op_code = get_op_code(info->arg);
-		ft_printf("%-6d", info->op_code);
-		info->op_code = replace_cod_oct(info->op_code,
-										get_instruction_code(info->name_instr));
-		print_oct_arg(info);
-		ft_printf("                    %-2d  %-6d",
-				get_instruction_code(info->name_instr) + 1,
-				get_op_code(info->arg));
-		print_arg(info);
-		return (1);
-	}
+	if (info->name_instr)
+		if (ft_strcmp("live", info->name_instr)
+				&& ft_strcmp("zjmp", info->name_instr) &&
+				ft_strcmp("fork", info->name_instr) &&
+				ft_strcmp("lfork", info->name_instr))
+		{
+			info->op_code = get_op_code(info->arg);
+			ft_printf("%-6d", info->op_code);
+			info->op_code = replace_cod_oct(info->op_code,
+					get_instruction_code(info->name_instr));
+			print_oct_arg(info);
+			ft_printf("                    %-2d  %-6d",
+					get_instruction_code(info->name_instr) + 1,
+					get_op_code(info->arg));
+			print_arg(info);
+			return (1);
+		}
 	return (0);
 }
 
 void					print_info_arg(t_if *info)
 {
-	if (truc(info) == 0)
-	{
-		printf("%6s", " ");
-		if (ft_strcmp("live", info->name_instr) == 0)
-			info->op_code = (3 << 6);
-		else
-			info->op_code = (T_DIR << 6);
-		print_oct_arg(info);
-		ft_printf("                    %-2d  %-6s",
-				get_instruction_code(info->name_instr) + 1, " ");
-		print_arg(info);
-	}
+	if (info->name_instr)
+		if (truc(info) == 0)
+		{
+			printf("%6s", " ");
+			if (ft_strcmp("live", info->name_instr) == 0)
+				info->op_code = (3 << 6);
+			else
+				info->op_code = (T_DIR << 6);
+			print_oct_arg(info);
+			ft_printf("                    %-2d  %-6s",
+					get_instruction_code(info->name_instr) + 1, " ");
+			print_arg(info);
+		}
 }
 
 int						print_champ(t_header *champ, t_list *inf_line)
