@@ -12,25 +12,6 @@
 
 #include "vm.h"
 
-void			key_action(t_corewar *vm)
-{
-	int		ret;
-
-	ret = 0;
-	attron(A_BOLD);
-	attron(COLOR_PAIR(6));
-	ret = getch();
-	if (ret == ' ')
-		toggle_pause(vm);
-	else if (ret == ',')
-		dec_speed(vm);
-	else if (ret == '.')
-		inc_speed(vm);
-	else if (ret == 's')
-		one_cycle(vm);
-	attron(A_BOLD);
-}
-
 void			fork_update_window(t_proc *lol, t_corewar *vm)
 {
 	attron(COLOR_PAIR((-1U - lol->reg[0]) + 2 + 5));
@@ -48,4 +29,16 @@ void			exec_instr_update_window(t_proc *proc, t_corewar *vm, char add, int value
 	mvprintw((value / 64) + 2, (value % 64) * 3 + 3, "%.2x",
 			vm->arena[value]);
 	attroff(COLOR_PAIR((-1U - proc->reg[0]) + add));
+}
+
+void		print_4b_in_arena(uint32_t offset, uint8_t *arena, t_proc *lol, int cnt)
+{
+	attron(COLOR_PAIR((-1U - lol->reg[0]) + 2));
+	while (cnt-- > 0)
+	{
+		mvprintw((offset / 64) + 2, (offset % 64) * 3 + 3, "%.2x",
+				arena[offset]);
+		offset = (offset + 1) % MEM_SIZE;
+	}
+	attroff(COLOR_PAIR((-1U - lol->reg[0]) + 2));
 }

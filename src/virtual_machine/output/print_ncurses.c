@@ -96,14 +96,3 @@ void		print_ncurses(t_corewar *vm)
 	vm->one_cycle = 0;
 }
 
-void		print_4b_in_arena(uint32_t offset, uint8_t *arena, t_proc *lol, int cnt)
-{
-	attron(COLOR_PAIR((-1U - lol->reg[0]) + 2));
-	while (cnt-- > 0)
-	{
-		mvprintw((offset / 64) + 2, (offset % 64) * 3 + 3, "%.2x",
-				arena[offset]);
-		offset = (offset + 1) % MEM_SIZE;
-	}
-	attroff(COLOR_PAIR((-1U - lol->reg[0]) + 2));
-}

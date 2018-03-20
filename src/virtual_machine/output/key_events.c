@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "vm.h"
+#include <stdlib.h>
 
 void	toggle_pause(t_corewar *vm)
 {
@@ -42,4 +43,28 @@ void	one_cycle(t_corewar *vm)
 	vm->paused = 1;
 	mvprintw(2, 199, "** PAUSED **");
 	vm->one_cycle = 1;
+}
+
+void			key_action(t_corewar *vm)
+{
+	int		ret;
+
+	ret = 0;
+	attron(A_BOLD);
+	attron(COLOR_PAIR(6));
+	ret = getch();
+	if (ret == ' ')
+		toggle_pause(vm);
+	else if (ret == ',')
+		dec_speed(vm);
+	else if (ret == '.')
+		inc_speed(vm);
+	else if (ret == 's')
+		one_cycle(vm);
+	else if (ret == 27)
+	{
+		clear_data(vm);
+		exit(EXIT_SUCCESS);
+	}
+	attron(A_BOLD);
 }
