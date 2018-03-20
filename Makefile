@@ -108,12 +108,12 @@ $(OBJ_DIR):
 	@mkdir -p $@
 
 $(ASM): $(LIB) $(OBJ_DIR) $(OBJS_ASM)
-	@$(ECHO) $(NAME) 
-	@$(LINK) && $(ECHO) $(SUCCESS) || $(ECHO) $(FAILURE)
+	@$(ECHO) "\n" && $(ECHO) $(NAME)	
+	@$(LINK) && ($(ECHO) $(SUCCESS) || $(ECHO) $(FAILURE)) && $(ECHO) "\n"
 
 $(COREWAR): $(LIB) $(OBJ_DIR) $(OBJS_COREWAR)
-	@$(ECHO) $(NAME) 
-	@$(LINK) && $(ECHO) $(SUCCESS) || $(ECHO) $(FAILURE)
+	@$(ECHO) "\n" && $(ECHO) $(NAME)
+	@$(LINK) && ($(ECHO) $(SUCCESS) || $(ECHO) $(FAILURE)) && $(ECHO) "\n"
 
 $(OBJ_DIR)/%.o: %.c
 	@$(ECHO) $(NAME)
