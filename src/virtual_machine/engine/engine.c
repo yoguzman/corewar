@@ -64,7 +64,6 @@ int			engine(t_corewar *vm)
 
 	if (vm->visual == 1)
 		print_ncurses(vm);
-	mvprintw(33, 199, "CYCLE_TO_DIE : %-5d %-5d", vm->cycle_to_die_max, vm->player_table[0].current_live);
 	while (vm->mh->pos > 0)
 	{
 		if (vm->visual == 1)
