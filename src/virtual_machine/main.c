@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:42:57 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/19 18:46:58 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/20 19:13:36 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,25 @@ static int		init_vm(const char *argv[], t_corewar *vm)
 {
 	ft_bzero(vm, sizeof(*vm));
 	vm->total_proc = 1;
+	vm->load_address = -1;
 	vm->players = 0;
 	vm->cycles_sec = 50;
 	vm->cycle_count = 0;
-	if (!(vm->arena = (unsigned char*)malloc(MEM_SIZE)))
-		return (-1);
-	if (!(vm->print_data = (char*)malloc(MEM_SIZE)))
+	if (!(vm->arena = (unsigned char *)malloc(MEM_SIZE))
+			|| !(vm->print_data = (char *)malloc(MEM_SIZE)))
 		return (-1);
 	ft_bzero(vm->arena, MEM_SIZE);
 	ft_bzero(vm->print_data, MEM_SIZE);
 	ft_bzero(vm->player_table, sizeof(t_player) * MAX_PLAYERS);
 	vm->paused = 1;
 	vm->player_id = -1;
+	vm->player_table[0].load_address = -1;
+	vm->player_table[1].load_address = -1;
+	vm->player_table[2].load_address = -1;
+	vm->player_table[3].load_address = -1;
 	parse_argv(argv + 1, vm);
 	if (vm->visual == 0)
 		print_players(vm->player_table);
-	if (load_champions_in_arena(vm) == -1)
-		return (-1);
 	vm->nb_processes = vm->players;
 	return (0);
 }

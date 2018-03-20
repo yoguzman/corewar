@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/19 18:57:14 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/20 19:15:14 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 # define U_1 "Usage: ./corewar [-d N | -v --hidden] [-n N <champ1.cor> ] ...\n"
 # define U_2 "\t-d N\t\t:	Dump memory after N cycles then exit\n"
-# define U_5 "\t-n N\t\t:	Set the next champion's id (1..4)\n"
+# define U_5 "\t-n [1-4]\t:	Set the next champion's id\n"
 # define U_6 "### VISUAL MODE ###############################################\n"
 # define U_3 "\t-v\t\t:	Enter visual mode\n"
 # define U_4 "\t--hidden\t:	Hidden memory layout\n"
@@ -45,7 +45,7 @@
 */
 
 # define ERR_STR "Corewar: Error: "
-# define E0 "Unrecognized option"
+# define E0 "Invalid option"
 # define E1 "Invalid player's magic"
 # define E2 "Prog_size is superior to MAX_CHAMP_SIZE"
 # define E3 "Invalid file extension"
@@ -75,7 +75,7 @@
 */
 
 /*
-** 2 ints are used to terminate the program name and the comment
+** The compiler pads the unsigned int + buffer + 1 with 3 chars
 */
 
 typedef enum			e_limits
@@ -83,14 +83,15 @@ typedef enum			e_limits
 	OPTIONS = 4,
 	DUMP_DEFAULT = 80000,
 	START_HEAP_SIZE = 10000,
-	HEADER_SIZE = 4 * sizeof(int32_t) + PROG_NAME_LENGTH + COMMENT_LENGTH
+	HEADER_SIZE = 2 * sizeof(int32_t) + PROG_NAME_LENGTH + 1 + 3
+		+ COMMENT_LENGTH + 1 + 3
 }						t_limits;
 
 typedef	struct			s_player
 {
 	t_header	header;
 	uint8_t		*code;
-	uint32_t	load_address;
+	int32_t		load_address;
 	int			last_live;
 	int			current_live;
 	int			last_breakdown;
@@ -129,6 +130,7 @@ typedef struct			s_min_heap
 
 typedef struct			s_corewar
 {
+	int			load_address;
 	int			paused;
 	int			dec_sec;
 	int			one_cycle;
@@ -185,8 +187,14 @@ void					print_breakdown(t_corewar *vm);
 */
 
 void					parse_argv(const char *argv[], t_corewar *vm);
+int						count_players(const char *argv[]);
+uint32_t				get_load_address(t_corewar *vm, int32_t load_address,
+		uint32_t prog_size);
 const char				**load_champion(const char *argv[], t_corewar *vm);
-int						load_champions_in_arena(t_corewar *vm);
+void					safe_memcpy(void *dest, const void *src, size_t n,
+		uint32_t start);
+void					load_champion_in_arena(t_corewar *vm,
+		uint8_t player_id);
 void					init_op_tab(const t_op g_op_tab[17], t_instr *instr);
 int						init_instr(t_instr *instr, t_corewar *vm);
 

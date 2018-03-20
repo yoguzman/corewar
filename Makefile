@@ -6,7 +6,7 @@
 #    By: yguzman <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 11:38:09 by yguzman           #+#    #+#              #
-#    Updated: 2018/03/19 18:56:25 by abeauvoi         ###   ########.fr        #
+#    Updated: 2018/03/20 15:45:11 by abeauvoi         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -64,7 +64,7 @@ SRCS_COREWAR	= main.c clear_data.c \
 		  calc_instr.c exec_instr.c get_instr_data.c init_instr.c ld_st_instr.c long_instr.c misc_instr.c \
 		  dump_arena.c print_error_and_exit.c print_ncurses.c print_usage.c print_breakdown.c print_mem.c \
 		  print_players.c visual.c key_events.c \
-		  ft_isdigitstr.c load_champion.c parse_argv.c switch_endianness.c
+		  ft_isdigitstr.c load_champion.c parse_argv.c switch_endianness.c utils.c
 
 OBJS_ASM	= $(addprefix $(OBJ_DIR)/, $(SRCS_ASM:.c=.o))
 OBJS_COREWAR	= $(addprefix $(OBJ_DIR)/, $(SRCS_COREWAR:.c=.o))

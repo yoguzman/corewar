@@ -6,7 +6,7 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 00:37:10 by adauchy           #+#    #+#             */
-/*   Updated: 2018/03/14 20:10:08 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/20 17:12:18 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,19 @@ void		print_players_data(t_corewar *vm)
 
 	count = 0;
 	pos = 11;
-	while (count < vm->players)
+	while (count < MAX_PLAYERS)
 	{
-		attron(COLOR_PAIR(6));
-		mvprintw(pos, 199, "Player -%d :", count + 1);
-		attron(COLOR_PAIR(count + 2));
-		mvprintw(pos, 211, "%s", vm->player_table[count].header.prog_name);
-		attron(COLOR_PAIR(6));
-		mvprintw(pos + 1, 201, "Last live                       %d", 0);
-		mvprintw(pos + 2, 201, "Lives in current period :       %d", 0);
-		pos += 4;
+		if (vm->player_table[count].code != NULL)
+		{
+			attron(COLOR_PAIR(6));
+			mvprintw(pos, 199, "Player %d :", count + 1);
+			attron(COLOR_PAIR(count + 2));
+			mvprintw(pos, 211, "%s", vm->player_table[count].header.prog_name);
+			attron(COLOR_PAIR(6));
+			mvprintw(pos + 1, 201, "Last live                       %d", 0);
+			mvprintw(pos + 2, 201, "Lives in current period :       %d", 0);
+			pos += 4;
+		}
 		count += 1;
 	}
 }
