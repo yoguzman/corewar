@@ -6,7 +6,7 @@
 #    By: yguzman <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 11:38:09 by yguzman           #+#    #+#              #
-#    Updated: 2018/03/22 16:55:29 by jcoutare         ###   ########.fr        #
+#    Updated: 2018/03/23 16:37:38 by abeauvoi         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -95,29 +95,24 @@ FAILURE	= "\033[31m["$@"]\n\033[0m"
 # Rules
 #
 
-all: $(LIB) $(OBJ_DIR) $(ASM) $(COREWAR)
+all: $(LIB) $(ASM) $(COREWAR)
 
 debug: CFLAGS += -g3
 debug: all
 
-test:
-	@echo $(VPATH)
-
 $(LIB):
 	@make -C $(LIB_DIR)
-
-$(OBJ_DIR):
-	@mkdir -p $@
 
 $(ASM): $(OBJS_ASM)
 	@$(ECHO) "\n" && $(ECHO) $(NAME)
 	@$(LINK) && ($(ECHO) $(SUCCESS) || $(ECHO) $(FAILURE)) && $(ECHO) "\n"
 
-$(COREWAR): $(OBJS_COREWAR)
+$(COREWAR): $(OBJS_COREWAR) 
 	@$(ECHO) "\n" && $(ECHO) $(NAME)
 	@$(LINK) && ($(ECHO) $(SUCCESS) || $(ECHO) $(FAILURE)) && $(ECHO) "\n"
 
 $(OBJ_DIR)/%.o: %.c $(HEADER)
+	@mkdir -p $(OBJ_DIR)
 	@$(ECHO) $(NAME)
 	@$(COMP) && $(ECHO) $(SUCCESS) || $(ECHO) $(FAILURE)
 
