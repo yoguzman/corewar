@@ -6,7 +6,7 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 05:08:25 by adauchy           #+#    #+#             */
-/*   Updated: 2018/03/22 17:24:00 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/23 13:07:10 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char			*create_new_file(char *name)
 	if (!ft_strstr(name, ".s"))
 	{
 		if ((new = ft_strdup(".cor")) == NULL)
-			return ((char *)ft_puterr_null("Malloc fail in func get_file\n"));
+			exit(EXIT_FAILURE);
 	}
 	else
 	{
@@ -53,7 +53,7 @@ char			*create_new_file(char *name)
 			n -= 1;
 		m = n;
 		if (!(new = (char*)malloc(n + 5)))
-			return (ft_puterr_null("malloc failed"));
+			exit(EXIT_FAILURE);
 		while (n--)
 			new[n] = name[n];
 		ft_strcpy(&new[m], ".cor");

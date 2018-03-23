@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 14:27:43 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/21 16:33:44 by adauchy          ###   ########.fr       */
+/*   Updated: 2018/03/23 13:05:07 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ int				bordel(t_if *info, char **t_str)
 
 	i = 1;
 	if ((info->arg = malloc(sizeof(char *) * 4)) == NULL)
-		return (-1);
+		exit(EXIT_FAILURE);
 	while (t_str[i])
 	{
 		if ((info->arg[i - 1] = ft_strdup(t_str[i])) == NULL)
-			return (-1);
+			exit(EXIT_FAILURE);
 		++i;
 	}
 	free(t_str[0]);
@@ -95,7 +95,7 @@ int				print_err_size(int line)
 	ft_puterr("Syntax error at token ENDLINE at line ");
 	ft_putnbr_fd(line, 2);
 	ft_puterr("\n");
-	exit(0);
+	exit(EXIT_FAILURE);
 }
 
 int				pars_instr(char *instr, t_if *info, int line)
@@ -108,7 +108,10 @@ int				pars_instr(char *instr, t_if *info, int line)
 	if (!(instr))
 		return (puterr(ERR_INSTR_VIDE));
 	if (!(t_str = ft_strsplit(instr, "\t ,")))
-		return (puterr(ERR_SPLIT));
+	{
+		puterr(ERR_SPLIT);
+		exit(EXIT_FAILURE);
+	}
 	if (ft_tablen(t_str) == 1)
 		return (print_err_size(line));
 	if ((i_op = check_name(t_str[i++], g_op_tab)) == -1)
@@ -118,7 +121,7 @@ int				pars_instr(char *instr, t_if *info, int line)
 	if (check_arg(t_str, i_op, i) == -1)
 		return (-1);
 	if ((info->name_instr = ft_strdup(t_str[0])) == NULL)
-		return (-1);
+		exit(EXIT_FAILURE);
 	if (bordel(info, t_str) == -1)
 		return (-1);
 	return (0);

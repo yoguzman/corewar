@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 16:15:57 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/20 19:18:38 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/23 12:55:43 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_proc	*spawn_process(uint64_t load_address, uint8_t player_id,
 	t_proc	*new;
 
 	if (!(new = (t_proc *)malloc(sizeof(*new))))
-		return (NULL);
+		exit(EXIT_FAILURE);
 	ft_bzero(new, sizeof(*new));
 	new->pc = load_address;
 	new->reg[0] = -1U - player_id;

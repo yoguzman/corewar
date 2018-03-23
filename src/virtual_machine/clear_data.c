@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 20:04:52 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/22 16:55:38 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/23 13:02:14 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	*fail_alloc(t_mh **mh)
 	if ((*mh) != NULL)
 		free_min_heap(mh);
 	perror("Corewar :");
+	exit(EXIT_FAILURE);
 	return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:42:57 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/21 16:31:38 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/23 13:29:01 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int		init_vm(const char *argv[], t_corewar *vm)
 	vm->cycle_count = 0;
 	if (!(vm->arena = (unsigned char *)malloc(MEM_SIZE))
 			|| !(vm->print_data = (char *)malloc(MEM_SIZE)))
-		return (-1);
+		exit(EXIT_FAILURE);
 	ft_bzero(vm->arena, MEM_SIZE);
 	ft_bzero(vm->print_data, MEM_SIZE);
 	ft_bzero(vm->player_table, sizeof(t_player) * MAX_PLAYERS);

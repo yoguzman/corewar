@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 15:04:26 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/22 19:20:29 by adauchy          ###   ########.fr       */
+/*   Updated: 2018/03/23 13:08:14 by jcoutare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int			modif_label(t_if *here, char *str_tmp, int i[3], t_list *tmp)
 	{
 		free(here->arg[i[1]]);
 		if ((here->arg[i[1]] =
-				ft_itoa(inf->bytes_line - here->bytes_line)) == NULL)
-			return (-1);
+			 ft_itoa(inf->bytes_line - here->bytes_line)) == NULL)
+			exit(EXIT_FAILURE);
 		if (str_tmp[0] == '%')
 		{
 			str_tmp[1] = 0;
 			if ((save = ft_strjoin(str_tmp, here->arg[i[1]])) == NULL)
-				return (-1);
+				exit(EXIT_FAILURE);
 			free(here->arg[i[1]]);
 			here->arg[i[1]] = save;
 		}
@@ -41,7 +41,7 @@ int			modif_label(t_if *here, char *str_tmp, int i[3], t_list *tmp)
 int			init_while_label(char **str_tmp, t_if *here, int i[3])
 {
 	if ((*str_tmp = ft_strdup(here->arg[i[1]])) == NULL)
-		return (-1);
+		exit(EXIT_FAILURE);
 	i[0] = (here->arg[i[1]][0] == '%' ? i[0] + 1 : i[0]);
 	return (0);
 }
