@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 15:01:02 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/08 15:01:04 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/23 11:27:29 by yguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		lldi_cost(t_if *info_line)
 		if (info_line->arg[i][0] == 'r')
 			info_line->cost_line += 1;
 		else if (info_line->arg[i][0] == '%')
-			info_line->cost_line += 4;
+			info_line->cost_line += 2;
 		else
 			info_line->cost_line += 2;
 		++i;

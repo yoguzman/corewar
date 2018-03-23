@@ -6,7 +6,7 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 05:03:44 by adauchy           #+#    #+#             */
-/*   Updated: 2018/03/21 17:00:37 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/23 11:50:05 by yguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int			get_info_file(char **file, t_header *champ, t_list **inf_line)
 		free(file[i]);
 		++i;
 	}
-	if (get_info_file_end(inf_line, &info_line, &tmp, tab) == -1)
+	if (get_info_file_end(inf_line, &info_line, &tmp) == -1)
 		return (-1);
 	return (tmp->bytes_line + tmp->cost_line);
 }

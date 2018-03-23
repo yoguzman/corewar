@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:02:00 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/21 15:47:39 by adauchy          ###   ########.fr       */
+/*   Updated: 2018/03/23 12:13:24 by yguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void					print_arg(t_if *info)
 		decal -= 2;
 		++i;
 	}
-	printf("\n");
+	ft_printf("\n");
 }
 
 int						get_instruction_code(char *instruction)
@@ -87,7 +87,7 @@ void					mabite(int buff, t_if *info)
 		--buff;
 	}
 	while (++j < 4)
-		printf("%-4c", ' ');
+		ft_printf("%-4c", ' ');
 }
 
 void					print_oct_arg(t_if *info)

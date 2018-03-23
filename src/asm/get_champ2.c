@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_champ2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yguzman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/08 15:04:15 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/21 17:03:02 by abeauvoi         ###   ########.fr       */
+/*   Created: 2018/03/23 11:50:25 by yguzman           #+#    #+#             */
+/*   Updated: 2018/03/23 12:24:15 by yguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,16 @@ int			get_info_file_loop(char **file, int *i, t_if *info_line)
 	return (0);
 }
 
-int			get_info_file_end(t_list **inf_line, t_if *info_line, t_if **tmp,
-		int tab[2])
+int			get_info_file_end(t_list **inf_line, t_if *info_line, t_if **tmp)
 {
-	if (info_line->label != NULL)
-		if (get_info_file_loop2(inf_line, info_line, tmp, tab[1]) == -1)
+	if (*inf_line && info_line->label != NULL)
+	{
+		info_line->bytes_line = (*tmp)->bytes_line + (*tmp)->cost_line;
+		info_line->cost_line = 0;
+		if (get_info_file_loop2(inf_line, info_line, tmp, info_line->bytes_line)
+				== -1)
 			return (-1);
+	}
 	if (*inf_line == NULL)
 	{
 		ft_printf("Champ need instruction\n");

@@ -6,7 +6,7 @@
 /*   By: jcoutare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 15:51:44 by jcoutare          #+#    #+#             */
-/*   Updated: 2018/03/08 15:51:46 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/23 11:35:48 by yguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,14 @@ void		lldi_write(t_if *info_line, int dest)
 	int		i;
 
 	i = 0;
-	info_line->cost_line = 3;
+	ft_putchar_fd(14, dest);
+	write_op_code(info_line->arg, 3, dest);
 	while (i != 2)
 	{
 		if (info_line->arg[i][0] == 'r')
 			ft_putchar_fd(ft_atoi(info_line->arg[i] + 1), dest);
 		else if (info_line->arg[i][0] == '%')
-			write_int(dest, ft_atoi(info_line->arg[i] + 1));
+			write_short(dest, ft_atoi(info_line->arg[i] + 1));
 		else
 			write_short(dest, ft_atoi(info_line->arg[i]));
 		++i;

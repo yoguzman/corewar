@@ -6,7 +6,7 @@
 /*   By: abeauvoi <abeauvoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 19:25:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/22 16:46:08 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/23 11:49:29 by yguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int					get_file2(char *new, int *dest);
 int					get_info_file_loop2(t_list **inf_line,
 					t_if *info_line, t_if **tmp, int a);
 int					get_info_file_end(t_list **inf_line, t_if *info_line,
-		t_if **tmp, int tab[2]);
+		t_if **tmp);
 int					get_info_file_loop(char **file, int *i, t_if *info_line);
 int					print_error_nb_arg(char *instr, int line);
 void				write_string(int dest, char *prog_name, int lenght);

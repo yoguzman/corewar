@@ -6,7 +6,7 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 05:06:41 by adauchy           #+#    #+#             */
-/*   Updated: 2018/03/08 16:21:47 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/23 12:20:51 by yguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ void					print_info_begin(t_if *info)
 	int					count;
 
 	if (info->label)
-		ft_printf("%-11d:    %s:\n", info->bytes_line, info->label);
-	ft_printf("%-5d(%-3d) :        %-10s", info->bytes_line,
+		ft_printf("%-11d:    %s:", info->bytes_line, info->label);
+	if (info->name_instr == NULL)
+		return ;
+	ft_printf("\n%-5d(%-3d) :        %-10s", info->bytes_line,
 			info->cost_line, info->name_instr);
 	count = -1;
 	if (info->arg)
@@ -82,7 +84,7 @@ void					print_info_arg(t_if *info)
 	if (info->name_instr)
 		if (truc(info) == 0)
 		{
-			printf("%6s", " ");
+			ft_printf("%6s", " ");
 			if (ft_strcmp("live", info->name_instr) == 0)
 				info->op_code = (3 << 6);
 			else
