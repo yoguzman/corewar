@@ -6,7 +6,7 @@
 #    By: yguzman <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 11:38:09 by yguzman           #+#    #+#              #
-#    Updated: 2018/03/23 16:37:38 by abeauvoi         ###   ########.fr        #
+#    Updated: 2018/03/23 16:45:12 by abeauvoi         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -77,7 +77,7 @@ LFLAGS	= -L$(LIB_DIR) -lft -lncurses
 CFLAGS	+= -Iinclude
 CFLAGS	+= -Wall -Wextra
 COMP	= $(CC) $(CFLAGS) -o $@ -c $<
-LINK	= $(CC) $(LFLAGS) -o $@ $(filter-out $(LIB) $(OBJ_DIR), $^)
+LINK	= $(CC) $(LFLAGS) -o $@ $^
 LIB	= libft.a
 
 #
@@ -95,19 +95,19 @@ FAILURE	= "\033[31m["$@"]\n\033[0m"
 # Rules
 #
 
-all: $(LIB) $(ASM) $(COREWAR)
+all: $(LIB_DIR)/$(LIB) $(ASM) $(COREWAR)
 
 debug: CFLAGS += -g3
 debug: all
 
-$(LIB):
+$(LIB_DIR)/$(LIB):
 	@make -C $(LIB_DIR)
 
-$(ASM): $(OBJS_ASM)
+$(ASM): $(LIB_DIR)/$(LIB) $(OBJS_ASM)
 	@$(ECHO) "\n" && $(ECHO) $(NAME)
 	@$(LINK) && ($(ECHO) $(SUCCESS) || $(ECHO) $(FAILURE)) && $(ECHO) "\n"
 
-$(COREWAR): $(OBJS_COREWAR) 
+$(COREWAR): $(LIB_DIR)/$(LIB) $(OBJS_COREWAR) 
 	@$(ECHO) "\n" && $(ECHO) $(NAME)
 	@$(LINK) && ($(ECHO) $(SUCCESS) || $(ECHO) $(FAILURE)) && $(ECHO) "\n"
 
