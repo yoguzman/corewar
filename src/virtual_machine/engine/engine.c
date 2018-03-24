@@ -6,7 +6,7 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 14:22:57 by adauchy           #+#    #+#             */
-/*   Updated: 2018/03/22 16:28:22 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/24 15:18:47 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		print_winner(t_corewar *vm)
 	}
 	if (wins == -1)
 		wins = save;
-	ft_printf("le joueur %d(%s) a gagne\n",
+	ft_printf("le joueur %d (%s) a gagne\n",
 		wins + 1, vm->player_table[wins].header.prog_name);
 }
 
