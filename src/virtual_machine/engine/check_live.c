@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 14:52:47 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/22 16:16:25 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/25 17:10:22 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int			check_live_process(t_mh *mh, t_corewar *vm)
 	ret = 0;
 	while (i < mh->pos)
 	{
-		if (mh->tab[i]->current_live == 0)
+		if (mh->tab[i].current_live == 0)
 		{
 			if (vm->visual == 1)
-				exec_instr_update_window(mh->tab[i], vm, 2,
-						mh->tab[i]->inv.save_pc);
+				exec_instr_update_window(mh->tab + i, vm, 2,
+						mh->tab[i].inv.save_pc);
 			delete_any(mh, i);
 			--vm->nb_processes;
 			if (vm->visual == 1)
@@ -33,8 +33,8 @@ int			check_live_process(t_mh *mh, t_corewar *vm)
 		}
 		else
 		{
-			ret += mh->tab[i]->current_live;
-			mh->tab[i]->current_live = 0;
+			ret += mh->tab[i].current_live;
+			mh->tab[i].current_live = 0;
 			++i;
 		}
 	}
@@ -84,6 +84,8 @@ void		check_cycle_to_die(t_corewar *vm)
 		if (vm->max_check == 0)
 		{
 			vm->cycle_to_die_max -= CYCLE_DELTA;
+			if (!vm->visual)
+				ft_printf("Cycle to die is now %d\n", vm->cycle_to_die_max);
 			vm->max_check = MAX_CHECKS;
 		}
 		vm->cycle_to_die = vm->cycle_to_die_max;

@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 12:25:36 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/22 14:34:19 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/25 16:54:37 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		ld(t_corewar *vm, t_proc *p, t_instr *instr)
 		p->carry = p->reg[p->inv.param[1] - 1] == 0;
 	}
 	if (!vm->visual)
-		ft_printf("P\t%u | ld %d r%d\n",
+		ft_printf("P%7u | ld %d r%d\n",
 				p->pid,
 				p->reg[p->inv.param[1] - 1],
 				p->inv.param[1]);
@@ -92,7 +92,7 @@ void		st(t_corewar *vm, t_proc *lol, t_instr *instr)
 			print_4b_in_arena((uint32_t)offset % MEM_SIZE, vm->arena, lol, i);
 	}
 	if (!vm->visual)
-		ft_printf("P\t%u | st r%d %d\n",
+		ft_printf("P%7u | st r%d %d\n",
 				lol->pid,
 				lol->inv.param[0],
 				lol->inv.val_arg[1] == T_REG ? lol->reg[lol->inv.param[1] - 1] :
@@ -101,7 +101,7 @@ void		st(t_corewar *vm, t_proc *lol, t_instr *instr)
 
 static void	sti_text_output(t_proc *lol, int to_jump)
 {
-	ft_printf("P\t%u | sti r%d %d %d to_jump = %d write = %u\n",
+	ft_printf("P%7u | sti r%d %d %d to_jump = %d write = %u\n",
 			lol->pid,
 			lol->inv.param[0],
 			lol->inv.val_arg[1] == T_REG ? lol->reg[lol->inv.param[1] - 1] :

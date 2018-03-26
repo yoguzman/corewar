@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 12:59:05 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/22 19:01:58 by adauchy          ###   ########.fr       */
+/*   Updated: 2018/03/25 17:02:55 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void	ft_and(t_corewar *vm, t_proc *lol, t_instr *instr)
 		++j;
 	}
 	text_output_instr(vm, "and", lol);
+	lol->carry = (reg_test(lol, instr, 0) & reg_test(lol, instr, 1)) == 0;
 	if (lol->inv.param[2] != 1)
 	{
 		lol->reg[lol->inv.param[2] - 1] =
 			reg_test(lol, instr, 0) & reg_test(lol, instr, 1);
 	}
-	lol->carry = (reg_test(lol, instr, 0) & reg_test(lol, instr, 1)) == 0;
 }
 
 void	ft_or(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -64,12 +64,12 @@ void	ft_or(t_corewar *vm, t_proc *lol, t_instr *instr)
 		++j;
 	}
 	text_output_instr(vm, "or", lol);
+	lol->carry = (reg_test(lol, instr, 0) & reg_test(lol, instr, 1)) == 0;
 	if (lol->inv.param[2] != 1)
 	{
 		lol->reg[lol->inv.param[2] - 1] =
 			reg_test(lol, instr, 0) | reg_test(lol, instr, 1);
 	}
-	lol->carry = (reg_test(lol, instr, 0) & reg_test(lol, instr, 1)) == 0;
 }
 
 void	ft_xor(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -93,47 +93,46 @@ void	ft_xor(t_corewar *vm, t_proc *lol, t_instr *instr)
 		++j;
 	}
 	text_output_instr(vm, "xor", lol);
+	lol->carry = (reg_test(lol, instr, 0) & reg_test(lol, instr, 1)) == 0;
 	if (lol->inv.param[2] != 1)
 	{
 		lol->reg[lol->inv.param[2] - 1] =
 			reg_test(lol, instr, 0) ^ reg_test(lol, instr, 1);
 	}
-	lol->carry = (reg_test(lol, instr, 0) & reg_test(lol, instr, 1)) == 0;
 }
 
 void	add(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	(void)vm;
 	(void)instr;
+	lol->carry = lol->reg[lol->inv.param[0] - 1] + 
+		lol->reg[lol->inv.param[1] - 1] == 0;
 	if (lol->inv.param[2] != 1)
 	{
 		lol->reg[lol->inv.param[2] - 1] =
 			lol->reg[lol->inv.param[0] - 1] + lol->reg[lol->inv.param[1] - 1];
 	}
-	lol->carry = lol->reg[lol->inv.param[0] - 1] -
-		lol->reg[lol->inv.param[1] - 1] == 0;
 	if (!vm->visual)
-		ft_printf("P\t%u | add %d %d r%d\n",
+		ft_printf("P%7u | add r%d r%d r%d\n",
 				lol->pid,
 				lol->inv.param[0],
 				lol->inv.param[1],
-				lol->reg[lol->inv.param[2] - 1]);
+				lol->inv.param[2]);
 }
 
 void	sub(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	(void)vm;
 	(void)instr;
+	lol->carry = lol->reg[lol->inv.param[0] - 1] -
+		lol->reg[lol->inv.param[1] - 1] == 0;
 	if (lol->inv.param[2] != 1)
 	{
 		lol->reg[lol->inv.param[2] - 1] =
 			lol->reg[lol->inv.param[0] - 1] - lol->reg[lol->inv.param[1] - 1];
-		lol->carry = lol->reg[lol->inv.param[2] - 1] == 0;
 	}
-	lol->carry = lol->reg[lol->inv.param[0] - 1] -
-		lol->reg[lol->inv.param[1] - 1] == 0;
 	if (!vm->visual)
-		ft_printf("P\t%u | sub %d %d r%d\n",
+		ft_printf("P%7u | sub r%d r%d r%d\n",
 				lol->pid,
 				lol->inv.param[0],
 				lol->inv.param[1],

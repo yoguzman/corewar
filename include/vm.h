@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/23 16:53:01 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/24 22:10:34 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@
 
 # define THIS_PLAYER vm->player_table[vm->player_id]
 # define PT(x)	player_table[x]
-# define CTE(x) (x)->cycles_to_exec
-# define PID(x) (x)->pid
+# define CTE(x) (x).cycles_to_exec
+# define PID(x) (x).pid
 # define DIGITS "0123456789abcdef"
 # define OPT_STR "dvnat"
 # define SHIFTBYTE(x) ((3 - x) << 3)
@@ -127,10 +127,9 @@ typedef struct			s_process
 
 typedef struct			s_min_heap
 {
-	t_proc				**tab;
-	uint64_t			size;
-	uint64_t			pos;
-	uint64_t			count;
+	t_proc				*tab;
+	uint32_t			size;
+	uint32_t			pos;
 }						t_mh;
 
 typedef struct			s_corewar
@@ -283,19 +282,19 @@ int						reg_test(t_proc *lol, t_instr *instr, uint8_t i);
 
 t_mh					*init_heap(t_player player_table[MAX_PLAYERS],
 					uint64_t *total_proc, t_corewar *vm, t_instr *instr);
-void					insert(t_mh *mh, t_proc *entry);
+void					insert(t_mh *mh, t_proc entry);
 void					heapify(t_mh *mh, uint32_t i);
 void					delete_any(t_mh *mh, uint32_t i);
-void					bubble_up(t_mh *mh, uint32_t index, t_proc *entry);
-t_proc					*pop_min(t_mh *mh);
+void					bubble_up(t_mh *mh, uint32_t index);
+t_proc					pop_min(t_mh *mh);
 
 /*
 ** process.c
 */
 
-void					swap_process(t_proc **a, t_proc **b);
-t_proc					*spawn_process(uint64_t load_address, uint8_t player_id,
-									uint64_t *total_proc);
+void					swap_process(t_proc *a, t_proc *b);
+void					spawn_process(uint32_t load_address, uint8_t player_id,
+									uint64_t *total_proc, t_proc *new_proc);
 void					init_child(t_corewar *vm, t_proc *child,
 									t_instr *instr);
 

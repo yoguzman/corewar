@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 20:04:52 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/23 13:02:14 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/26 17:07:26 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,8 @@ void	free_champions(t_player player_table[MAX_PLAYERS])
 	}
 }
 
-void	free_processes(t_mh *mh)
-{
-	uint32_t	i;
-
-	i = 0;
-	while (i < mh->pos)
-	{
-		free(mh->tab[i]);
-		++i;
-	}
-}
-
 void	free_min_heap(t_mh **mh)
 {
-	if ((*mh)->tab)
-		free_processes(*mh);
 	free((*mh)->tab);
 	free(*mh);
 	*mh = NULL;

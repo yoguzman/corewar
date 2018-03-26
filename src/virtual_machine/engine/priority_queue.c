@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 20:45:02 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/19 19:24:13 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/24 22:48:20 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,96 +24,86 @@ t_mh		*init_heap(t_player player_table[MAX_PLAYERS], uint64_t *total_proc,
 		t_corewar *vm, t_instr *instr)
 {
 	t_mh	*mh;
-	t_proc	*process;
 	int32_t	i;
 
 	if (!(mh = (t_mh *)malloc(sizeof(*mh))))
 		return (fail_alloc(&mh));
 	ft_bzero(mh, sizeof(*mh));
 	mh->size = START_HEAP_SIZE;
-	if (!(mh->tab = (t_proc **)malloc(sizeof(void *) * mh->size)))
+	if (!(mh->tab = (t_proc *)malloc(sizeof(*mh->tab) * mh->size)))
 		return (fail_alloc(&mh));
+	ft_bzero(mh->tab, sizeof(t_proc) * mh->size);
 	i = -1;
 	while (++i < MAX_PLAYERS)
 	{
 		if (player_table[i].code != NULL)
 		{
-			if (!(process = spawn_process(player_table[i].load_address, i,
-							total_proc)))
-				return (fail_alloc(&mh));
-			fill_ins_proc(vm, instr, process);
-			insert(mh, process);
+			spawn_process(player_table[i].load_address, i, total_proc,
+					mh->tab + mh->pos);
+			fill_ins_proc(vm, instr, mh->tab + mh->pos);
+			bubble_up(mh, mh->pos++);
 		}
 	}
 	return (mh);
 }
 
-void		insert(t_mh *mh, t_proc *entry)
+void		insert(t_mh *mh, t_proc entry)
 {
 	if (mh->pos == mh->size)
 	{
 		mh->size = (3 * mh->size) >> 1;
-		if (!(mh->tab = realloc(mh->tab, sizeof(void *) * mh->size)))
+		if (!(mh->tab = realloc(mh->tab, sizeof(t_proc) * mh->size)))
 		{
 			perror("Corewar :");
 			free_min_heap(&mh);
 			exit(EXIT_FAILURE);
 		}
-		ft_bzero(mh->tab + mh->pos, sizeof(void *) * (mh->size - mh->pos));
+		ft_bzero(mh->tab + mh->pos, sizeof(t_proc) * (mh->size - mh->pos));
 	}
-	bubble_up(mh, mh->pos, entry);
-	++mh->pos;
+	mh->tab[mh->pos] = entry;
+	bubble_up(mh, mh->pos++);
 }
 
 void		heapify(t_mh *mh, uint32_t i)
 {
-	t_proc	**smallest;
-	t_proc	**left;
-	t_proc	**right;
-	t_proc	**parent;
+	t_proc		lchild;
+	t_proc		rchild;
+	t_proc		root;
+	uint32_t	smallest;
 
-	left = mh->tab + LCHILD(i);
-	right = mh->tab + RCHILD(i);
-	parent = mh->tab + i;
+	lchild = mh->tab[LCHILD(i)];
+	rchild = mh->tab[RCHILD(i)];
+	root = mh->tab[i];
 	if (LCHILD(i) < (long)mh->pos
-			&& (CTE(*left) < CTE(*parent)
-			|| (CTE(*left) == CTE(*parent) && PID(*left) > PID(*parent))))
-		smallest = left;
+			&& (CTE(lchild) < CTE(root)
+			|| (CTE(lchild) == CTE(root) && PID(lchild) > PID(root))))
+		smallest = LCHILD(i);
 	else
-		smallest = parent;
+		smallest = i;
 	if (RCHILD(i) < (long)mh->pos
-			&& (CTE(*right) < CTE(*smallest)
-			|| (CTE(*right) == CTE(*smallest) && PID(*right) > PID(*smallest))))
-		smallest = right;
-	if (smallest - mh->tab != i)
+			&& (CTE(rchild) < CTE(mh->tab[smallest])
+			|| (CTE(rchild) == CTE(mh->tab[smallest])
+				&& PID(rchild) > PID(mh->tab[smallest]))))
+		smallest = RCHILD(i);
+	if (smallest != i)
 	{
-		swap_process(parent, smallest);
-		heapify(mh, smallest - mh->tab);
+		swap_process(mh->tab + i, mh->tab + smallest);
+		heapify(mh, smallest);
 	}
 }
 
 void		delete_any(t_mh *mh, uint32_t i)
 {
-	t_proc	*ptr1;
-	t_proc	*ptr2;
-	int		p;
-
 	if (mh->pos)
 	{
-		free(mh->tab[i]);
-		if (--(mh->pos) == 0)
+		mh->tab[i] = mh->tab[--(mh->pos)];
+		if (mh->pos == i || mh->pos <= 1)
 			return ;
-		mh->tab[i] = mh->tab[mh->pos];
-		if ((p = PARENT((int)i)) < 0)
-		{
-			heapify(mh, 0);
-			return ;
-		}
-		ptr1 = mh->tab[p];
-		ptr2 = mh->tab[i];
-		if (i > 0 && (CTE(ptr1) > CTE(ptr2)
-					|| (CTE(ptr1) == CTE(ptr2) && PID(ptr1) < PID(ptr2))))
-			bubble_up(mh, i, ptr2);
+		if (PARENT((int)i) >= 0
+				&& (CTE(mh->tab[i]) < CTE(mh->tab[PARENT(i)])
+					|| (CTE(mh->tab[i]) == CTE(mh->tab[PARENT(i)])
+						&& PID(mh->tab[i]) > PID(mh->tab[PARENT(i)]))))
+			bubble_up(mh, i);
 		else
 			heapify(mh, i);
 	}
@@ -121,9 +111,9 @@ void		delete_any(t_mh *mh, uint32_t i)
 		free(mh->tab);
 }
 
-t_proc		*pop_min(t_mh *mh)
+t_proc		pop_min(t_mh *mh)
 {
-	t_proc	*p;
+	t_proc	p;
 
 	p = mh->tab[0];
 	mh->tab[0] = mh->tab[--(mh->pos)];
