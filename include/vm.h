@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/24 22:10:34 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/28 10:40:12 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,10 @@ void					print_4b_in_arena(uint32_t offset, uint8_t *arena,
 											t_proc *proc, int i);
 void					text_output_instr(t_corewar *vm, const char *instr_name,
 		t_proc *p);
+void					ldi_text_output(t_corewar *vm, t_proc *lol, int offset);
+void					sti_text_output(t_proc *lol, int offset);
+void					print_winner_msg(t_corewar *vm, int wins);
+
 /*
 ** Utils
 */

@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 14:19:10 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/25 16:54:09 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/28 09:36:01 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	live(t_corewar *vm, t_proc *lol, t_instr *instr)
 	}
 	++lol->current_live;
 	if (!vm->visual)
-		ft_printf("P%7u | live %d\n", lol->pid, lol->inv.param[0]);
+		ft_printf("P%5u | live %d\n", lol->pid, lol->inv.param[0]);
 }
 
 int		reg_test(t_proc *lol, t_instr *instr, uint8_t i)
@@ -65,7 +65,7 @@ void	ft_fork(t_corewar *vm, t_proc *lol, t_instr *instr)
 	if (vm->visual == 1)
 		fork_update_window(lol, vm);
 	if (!vm->visual)
-		ft_printf("P%7u | fork %d (%d)\n",
+		ft_printf("P%5u | fork %d (%d)\n",
 				lol->pid,
 				lol->inv.param[0],
 				(lol->inv.save_pc + ((short)lol->inv.param[0] % IDX_MOD))
@@ -82,7 +82,7 @@ void	zjmp(t_corewar *vm, t_proc *lol, t_instr *instr)
 			% MEM_SIZE;
 	}
 	if (!vm->visual)
-		ft_printf("P%7u | zjmp %d %s\n",
+		ft_printf("P%5u | zjmp %d %s\n",
 				lol->pid,
 				lol->inv.param[0],
 				(lol->carry == 1 ? "OK" : "FAILED"));
@@ -94,7 +94,7 @@ void	aff(t_corewar *vm, t_proc *lol, t_instr *instr)
 	(void)vm;
 	ft_putchar(lol->reg[lol->inv.param[0] - 1] & 0xFF);
 	if (!vm->visual)
-		ft_printf("P%7u | aff r%d (%c)\n",
+		ft_printf("P%5u | aff r%d (%c)\n",
 				lol->pid,
 				lol->inv.param[0],
 				lol->reg[lol->inv.param[0] - 1] & 0xFF);

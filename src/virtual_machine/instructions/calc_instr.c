@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 12:59:05 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/25 17:02:55 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/28 09:35:42 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	add(t_corewar *vm, t_proc *lol, t_instr *instr)
 			lol->reg[lol->inv.param[0] - 1] + lol->reg[lol->inv.param[1] - 1];
 	}
 	if (!vm->visual)
-		ft_printf("P%7u | add r%d r%d r%d\n",
+		ft_printf("P%5u | add r%d r%d r%d\n",
 				lol->pid,
 				lol->inv.param[0],
 				lol->inv.param[1],
@@ -132,7 +132,7 @@ void	sub(t_corewar *vm, t_proc *lol, t_instr *instr)
 			lol->reg[lol->inv.param[0] - 1] - lol->reg[lol->inv.param[1] - 1];
 	}
 	if (!vm->visual)
-		ft_printf("P%7u | sub r%d r%d r%d\n",
+		ft_printf("P%5u | sub r%d r%d r%d\n",
 				lol->pid,
 				lol->inv.param[0],
 				lol->inv.param[1],

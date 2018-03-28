@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 12:25:36 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/25 16:54:37 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/28 10:01:41 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void		ld(t_corewar *vm, t_proc *p, t_instr *instr)
 			i = -1;
 			p->reg[p->inv.param[1] - 1] = 0;
 			while (++i < 4)
-				p->reg[p->inv.param[1] - 1] +=
+				p->reg[p->inv.param[1] - 1] |=
 					vm->arena[((uint32_t)jump + i) % MEM_SIZE] << SHIFTBYTE(i);
 		}
 		p->carry = p->reg[p->inv.param[1] - 1] == 0;
 	}
 	if (!vm->visual)
-		ft_printf("P%7u | ld %d r%d\n",
+		ft_printf("P%5u | ld %d r%d\n",
 				p->pid,
 				p->reg[p->inv.param[1] - 1],
 				p->inv.param[1]);
@@ -68,7 +68,7 @@ void		ldi(t_corewar *vm, t_proc *p, t_instr *instr)
 			p->reg[p->inv.param[2] - 1] |=
 				vm->arena[((uint32_t)jump + i) % MEM_SIZE] << SHIFTBYTE(i);
 	}
-	text_output_instr(vm, "ldi", p);
+	ldi_text_output(vm, p, jump);
 }
 
 void		st(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -92,24 +92,11 @@ void		st(t_corewar *vm, t_proc *lol, t_instr *instr)
 			print_4b_in_arena((uint32_t)offset % MEM_SIZE, vm->arena, lol, i);
 	}
 	if (!vm->visual)
-		ft_printf("P%7u | st r%d %d\n",
+		ft_printf("P%5u | st r%d %d\n",
 				lol->pid,
 				lol->inv.param[0],
 				lol->inv.val_arg[1] == T_REG ? lol->reg[lol->inv.param[1] - 1] :
 				lol->inv.param[1]);
-}
-
-static void	sti_text_output(t_proc *lol, int to_jump)
-{
-	ft_printf("P%7u | sti r%d %d %d to_jump = %d write = %u\n",
-			lol->pid,
-			lol->inv.param[0],
-			lol->inv.val_arg[1] == T_REG ? lol->reg[lol->inv.param[1] - 1] :
-			lol->inv.param[1],
-			lol->inv.val_arg[2] == T_REG ? lol->reg[lol->inv.param[2] - 1] :
-			lol->inv.param[2],
-			to_jump % MEM_SIZE,
-			lol->reg[lol->inv.param[0] - 1]);
 }
 
 void		sti(t_corewar *vm, t_proc *lol, t_instr *instr)
@@ -138,5 +125,5 @@ void		sti(t_corewar *vm, t_proc *lol, t_instr *instr)
 	if (vm->visual == 1)
 		print_4b_in_arena((uint32_t)to_jump % MEM_SIZE, vm->arena, lol, i);
 	if (!vm->visual)
-		sti_text_output(lol, to_jump + i);
+		sti_text_output(lol, to_jump);
 }

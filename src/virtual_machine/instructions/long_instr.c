@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 14:09:09 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/25 16:54:19 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/28 10:09:33 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void		lld(t_corewar *vm, t_proc *lol, t_instr *instr)
 		lol->carry = lol->reg[lol->inv.param[1] - 1] == 0;
 	}
 	if (!vm->visual)
-		ft_printf("P%7u | lld %d r%d\n",
+		ft_printf("P%5u | lld %d r%d\n",
 				lol->pid,
 				lol->inv.param[0],
 				lol->inv.param[1]);
@@ -84,8 +84,8 @@ void		ft_lfork(t_corewar *vm, t_proc *lol, t_instr *instr)
 	if (vm->visual == 1)
 		fork_update_window(lol, vm);
 	if (!vm->visual)
-		ft_printf("P%7u | lfork %d (%d)\n",
+		ft_printf("P%5u | lfork %d (%d)\n",
 				lol->pid,
 				lol->inv.param[0],
-				(lol->inv.save_pc + (lol->inv.param[0] % IDX_MOD)) % MEM_SIZE);
+				(lol->inv.save_pc + (short)lol->inv.param[0]) % MEM_SIZE);
 }

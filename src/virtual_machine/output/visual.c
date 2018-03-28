@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 18:14:05 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/25 16:55:07 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/28 09:36:38 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void		text_output_instr(t_corewar *vm, const char *instr_name, t_proc *p)
 {
 	if (!vm->visual)
 	{
-		ft_printf("P%7u | %s %d %d r%d\n",
+		ft_printf("P%5u | %s %d %d r%d\n",
 				p->pid,
 				instr_name,
 				(p->inv.val_arg[0] == T_REG ? p->reg[p->inv.param[0] - 1] :
