@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 20:45:02 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/28 15:09:51 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/28 16:58:53 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,14 @@ void		heapify(t_mh *mh, uint32_t i)
 	lchild = mh->tab[LCHILD(i)];
 	rchild = mh->tab[RCHILD(i)];
 	root = mh->tab[i];
-	if (LCHILD(i) < (long)mh->pos && (CTE(lchild) < CTE(root)
-			|| (CTE(lchild) == CTE(root) && PID(lchild) > PID(root))))
+	if (CTE(lchild) < CTE(root)
+			|| (CTE(lchild) == CTE(root) && PID(lchild) > PID(root)))
 		smallest = LCHILD(i);
 	else
 		smallest = i;
-	if (RCHILD(i) < (long)mh->pos && (CTE(rchild) < CTE(mh->tab[smallest])
+	if (CTE(rchild) < CTE(mh->tab[smallest])
 			|| (CTE(rchild) == CTE(mh->tab[smallest])
-				&& PID(rchild) > PID(mh->tab[smallest]))))
+				&& PID(rchild) > PID(mh->tab[smallest])))
 		smallest = RCHILD(i);
 	if (smallest != i)
 	{
