@@ -6,7 +6,7 @@
 /*   By: adauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 00:37:10 by adauchy           #+#    #+#             */
-/*   Updated: 2018/03/21 18:58:07 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/28 14:31:27 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		print_panel(t_corewar *vm)
 	mvprintw(2, 199, "** PAUSED **");
 	mvprintw(4, 199, "Cycles/second limit : %d", vm->cycles_sec);
 	mvprintw(7, 199, "Cycle : %d", vm->cycle_count);
-	mvprintw(9, 199, "Processes : %d", vm->nb_processes);
+	mvprintw(9, 199, "Processes : %d", vm->mh->pos);
 	print_players_data(vm);
 	attron(COLOR_PAIR(6));
 	mvprintw(33, 199, "CYCLE_TO_DIE : %d", vm->cycle_to_die_max);

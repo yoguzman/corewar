@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 18:14:05 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/28 09:36:38 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/28 14:31:43 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		fork_update_window(t_proc *lol, t_corewar *vm)
 			vm->arena[lol->pc]);
 	attroff(COLOR_PAIR((-1U - lol->reg[0]) + 2 + 5));
 	attron(COLOR_PAIR(6));
-	mvprintw(9, 199 + 12, "%-10d", vm->nb_processes);
+	mvprintw(9, 199 + 12, "%-10d", vm->mh->pos);
 	attroff(COLOR_PAIR(6));
 }
 

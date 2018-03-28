@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/28 11:27:32 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/28 15:10:23 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@
 ** 1.Macros
 */
 
-# define U_1 "Usage: ./corewar [-d N | -v --hidden] [-n N <champ1.cor> ] ...\n"
-# define U_2 "\t-d N\t\t:	Dump memory after N cycles then exit\n"
-# define U_5 "\t-n [1-4]\t:	Set the next champion's id\n"
-# define U_6 "### VISUAL MODE ###############################################\n"
-# define U_3 "\t-v\t\t:	Enter visual mode\n"
-# define U_4 "\t--hidden\t:	Hidden memory layout\n"
-# define USAGE U_1 U_2 U_5 U_6 U_3 U_4
+# define U_1 "Usage: ./corewar [-d N | -v | -t ] [-n N | -a N <champ1.cor> ] "
+# define U_7 "...\n"
+# define U_2 "\t-d N\t: Dump memory after N cycles then exit\n"
+# define U_5 "\t-n [1-4]\t: Set the next champion's id\n"
+# define U_3 "\t-v\t: Enter visual mode\n"
+# define U_6 "\t-v\t: Enter textual mode\n"
+# define U_4 "\t-a N\t: Set next champion's load address (% MEM_SIZE)\n"
+# define USAGE U_1 U_7 U_2 U_5 U_4 U_3 U_6
 
 /*
 ** Error messages
@@ -140,7 +141,6 @@ typedef struct			s_corewar
 	int					one_cycle;
 	int					cycles_sec;
 	uint32_t			cycle_count;
-	uint64_t			nb_processes;
 	int					cycle_to_die;
 	int					cycle_to_die_max;
 	char				*print_data;
@@ -288,7 +288,7 @@ t_mh					*init_heap(t_player player_table[MAX_PLAYERS],
 					uint64_t *total_proc, t_corewar *vm, t_instr *instr);
 void					insert(t_mh *mh, t_proc entry);
 void					heapify(t_mh *mh, uint32_t i);
-void					delete_any(t_mh *mh, uint32_t i);
+void					delete_any(t_corewar *vm, t_mh *mh, uint32_t i);
 void					bubble_up(t_mh *mh, uint32_t index);
 t_proc					pop_min(t_mh *mh);
 

@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 20:45:02 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/28 12:56:41 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/28 15:09:51 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,12 @@ void		heapify(t_mh *mh, uint32_t i)
 	}
 }
 
-void		delete_any(t_mh *mh, uint32_t i)
+void		delete_any(t_corewar *vm, t_mh *mh, uint32_t i)
 {
 	if (mh->pos)
 	{
+		if (!vm->visual)
+			ft_printf("Process %u has been terminated ", mh->tab[i].pid);
 		mh->tab[i] = mh->tab[--(mh->pos)];
 		if (mh->pos == i || mh->pos <= 1)
 			return ;

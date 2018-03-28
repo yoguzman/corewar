@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 16:15:57 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/24 22:06:24 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/28 14:30:56 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,4 @@ void	init_child(t_corewar *vm, t_proc *child, t_instr *instr)
 	child->pid = vm->total_proc++;
 	fill_ins_proc(vm, instr, child);
 	insert(vm->mh, *child);
-	++vm->nb_processes;
 }

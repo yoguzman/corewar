@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:42:57 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/23 13:29:01 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/03/28 14:31:06 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static int		init_vm(const char *argv[], t_corewar *vm)
 	parse_argv(argv + 1, vm);
 	if (vm->visual == 0 || vm->visual == 2)
 		print_players(vm->player_table);
-	vm->nb_processes = vm->players;
 	return (0);
 }
 

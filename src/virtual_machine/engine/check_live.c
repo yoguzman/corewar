@@ -6,20 +6,19 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 14:52:47 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/28 10:24:41 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/28 15:11:30 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include "libft.h"
 
-static void	michel(t_corewar *vm, uint64_t i)
+static void	michel(t_corewar *vm)
 {
 	if (!vm->visual)
-		ft_printf("Process %u has been terminated (CTD %u)\n",
-				vm->mh->tab[i].pid, vm->cycle_to_die_max);
+		ft_printf("(CTD %d)\n", vm->cycle_to_die_max);
 	if (vm->visual == 1)
-		mvprintw(9, 199 + 12, "%-10d", vm->nb_processes);
+		mvprintw(9, 199 + 12, "%-10d", vm->mh->pos);
 }
 
 int			check_live_process(t_mh *mh, t_corewar *vm)
@@ -36,9 +35,8 @@ int			check_live_process(t_mh *mh, t_corewar *vm)
 			if (vm->visual == 1)
 				exec_instr_update_window(mh->tab + i, vm, 2,
 						mh->tab[i].inv.save_pc);
-			delete_any(mh, i);
-			--vm->nb_processes;
-			michel(vm, i);
+			delete_any(vm, mh, i);
+			michel(vm);
 		}
 		else
 		{
@@ -88,19 +86,14 @@ void		check_cycle_to_die(t_corewar *vm)
 		check_live_player(vm, vm->player_table);
 		ret = check_live_process(vm->mh, vm);
 		--vm->max_check;
-		if (ret >= NBR_LIVE)
+		if (ret >= NBR_LIVE || vm->max_check == 0)
 		{
 			vm->cycle_to_die_max -= CYCLE_DELTA;
 			vm->max_check = MAX_CHECKS;
-		}
-		if (vm->max_check == 0)
-		{
-			vm->cycle_to_die_max -= CYCLE_DELTA;
-			vm->max_check = MAX_CHECKS;
+			if (!vm->visual)
+				ft_printf("Cycle to die is now %d\n", vm->cycle_to_die_max);
 		}
 		vm->cycle_to_die = vm->cycle_to_die_max;
-		if (!vm->visual)
-			ft_printf("Cycle to die is now %d\n", vm->cycle_to_die);
 		if (vm->visual == 1)
 			mvprintw(33, 199, "CYCLE_TO_DIE : %-5d", vm->cycle_to_die_max);
 	}
