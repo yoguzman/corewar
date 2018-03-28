@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "vm.h"
+#include "libft.h"
 
 int			check_live_process(t_mh *mh, t_corewar *vm)
 {
@@ -80,7 +81,10 @@ void		check_cycle_to_die(t_corewar *vm)
 		ret = check_live_process(vm->mh, vm);
 		--vm->max_check;
 		if (ret >= NBR_LIVE)
+		{
 			vm->cycle_to_die_max -= CYCLE_DELTA;
+			vm->max_check = MAX_CHECKS;
+		}
 		if (vm->max_check == 0)
 		{
 			vm->cycle_to_die_max -= CYCLE_DELTA;

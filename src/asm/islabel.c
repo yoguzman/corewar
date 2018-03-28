@@ -23,7 +23,7 @@ int			modif_label(t_if *here, char *str_tmp, int i[3], t_list *tmp)
 	{
 		free(here->arg[i[1]]);
 		if ((here->arg[i[1]] =
-			 ft_itoa(inf->bytes_line - here->bytes_line)) == NULL)
+			ft_itoa(inf->bytes_line - here->bytes_line)) == NULL)
 			exit(EXIT_FAILURE);
 		if (str_tmp[0] == '%')
 		{

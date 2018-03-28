@@ -105,7 +105,7 @@ void	add(t_corewar *vm, t_proc *lol, t_instr *instr)
 {
 	(void)vm;
 	(void)instr;
-	lol->carry = lol->reg[lol->inv.param[0] - 1] + 
+	lol->carry = lol->reg[lol->inv.param[0] - 1] +
 		lol->reg[lol->inv.param[1] - 1] == 0;
 	if (lol->inv.param[2] != 1)
 	{

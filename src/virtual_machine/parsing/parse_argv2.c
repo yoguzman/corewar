@@ -15,7 +15,7 @@
 
 const char	**save_dump_limit(const char *argv[], t_corewar *vm)
 {
-	if (!ft_isdigitstr(argv[1]))
+	if (argv[1] == NULL || !ft_isdigitstr(argv[1]))
 		return (&argv[1]);
 	vm->dump_limit = ft_atoi(argv[1]);
 	if (vm->dump_limit > INT_MAX)
