@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 14:47:33 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/14 19:32:39 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/28 12:57:12 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	init_tab_instr(void (*tab_instr[16])(t_corewar *vm,
 	tab_instr[12] = &lld;
 	tab_instr[13] = &lldi;
 	tab_instr[14] = &ft_lfork;
-	tab_instr[15] = &add;
+	tab_instr[15] = &aff;
 }
 
 int		init_instr(t_instr *instr, t_corewar *vm)
