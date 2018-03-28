@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 00:38:24 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/03/28 10:40:12 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/03/28 11:27:32 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@
 # define DIGITS "0123456789abcdef"
 # define OPT_STR "dvnat"
 # define SHIFTBYTE(x) ((3 - x) << 3)
-# define LIVE_FMT "Un processus dit que le joueur %d (%s) est en vie\n"
+# define LIVE_FMT "A process shows that player %d (\"%s\") is alive\n"
 
 /*
 ** Heap Calculations
