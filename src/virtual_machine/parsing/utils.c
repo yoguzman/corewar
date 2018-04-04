@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 21:33:05 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/04/04 16:20:21 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/04/04 18:07:27 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ void		safe_memcpy(void *dest, const void *src, size_t n, uint32_t start)
 	while (i < n)
 	{
 		buff1[(i + start) % MEM_SIZE] = buff[i];
-		ft_putnbr((i + start) % MEM_SIZE);
-		ft_putchar(' ');
 		++i;
 	}
 }

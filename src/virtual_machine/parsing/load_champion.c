@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 04:53:22 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/04/04 16:12:53 by jcoutare         ###   ########.fr       */
+/*   Updated: 2018/04/04 18:05:32 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,10 @@ const char	**load_champion(const char *argv[], t_corewar *vm)
 			(vm->load_address != -1 && vm->load_address < MEM_SIZE ?
 			vm->load_address : (vm->player_id * MEM_SIZE) / vm->players),
 			THIS_PLAYER.header.prog_size);
-	if ((!(THIS_PLAYER.code = (uint8_t *)malloc(THIS_PLAYER.header.prog_size))
-		  && ft_bzero(THIS_PLAYER.code, THIS_PLAYER.header.prog_size))
-		|| read(fd, THIS_PLAYER.code, THIS_PLAYER.header.prog_size) == -1
+	if (!(THIS_PLAYER.code = (uint8_t *)malloc(THIS_PLAYER.header.prog_size)))
+		clean_print_err_exit(NULL, vm->player_table);
+	ft_bzero(THIS_PLAYER.code, THIS_PLAYER.header.prog_size);
+	if (read(fd, THIS_PLAYER.code, THIS_PLAYER.header.prog_size) == -1
 			|| close(fd) == -1)
 		clean_print_err_exit(NULL, vm->player_table);
 	load_champion_in_arena(vm, vm->player_id);
