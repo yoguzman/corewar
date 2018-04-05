@@ -24,7 +24,7 @@ echo "$YELLOW $file $NC";
 echo "$PURPLE MINE ==> $NC"
 ../asm $file
 echo "$PURPLE RESSOURCE ==> $NC"
-../ressources/VM/asm ./files_test2/$file
+../ressources/asm ./files_test2/$file
 echo "\n\n"
 done
 
